@@ -15,7 +15,7 @@ deploy:
   on:
     branch: master
 before_install:
-- openssl aes-256-cbc -K $encrypted_687158784e62_key -iv $encrypted_687158784e62_iv
+- openssl aes-256-cbc -K $encrypted_0cdbee2b9960_key -iv $encrypted_0cdbee2b9960_iv
   -in deploy_key.enc -out deploy_key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 ./deploy_key

@@ -40,7 +40,9 @@ HTTP status codes:
 
 > Пример
 
-> **GET**
+> **Request:** 
+
+> **PUT**
 > https://online.moyslad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
 
 > Body 
@@ -50,8 +52,13 @@ HTTP status codes:
   "status": "Activating"
 }
 ```
+> ---
+
+> **Response:** 
 
 > Response 200
+
+> Content-Type: **application/json**
 
 ### Получение контекста пользователя для iframe-приложений
 
@@ -85,10 +92,18 @@ HTTP status codes:
 
 > Пример
 
-> **GET**
+> **Request:** 
+
+> **POST**
 > https://online.moysklad.ru/api/vendor/1.0/context/6S3BQLsaSRNdEnhPCoW9lplY2LozRUOq6S3BQLsaSRNdEnh
 
+> ---
+
+> **Response:** 
+
 > Response 200
+
+> Content-Type: **application/json**
 
 > Response body
 

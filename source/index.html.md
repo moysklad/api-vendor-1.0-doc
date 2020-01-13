@@ -6,11 +6,12 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 
 toc_footers:
-  - <a href='https://moysklad.github.io/'>Workbook API</a>
+  - <a href='https://dev.moysklad.ru/workbook/apps/cml/index.html/'>Workbook API</a>
   - <a href='https://github.com/moysklad/api-vendor-1.0-doc/issues'>Сообщите об ошибке</a>
 
 includes:
   - general
+  - jwt
   - vendorside
   - moyskladside
   - errors

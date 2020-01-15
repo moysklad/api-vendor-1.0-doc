@@ -1,13 +1,24 @@
-## REST-эндпоинты на стороны МоегоСклада 
+## REST-эндпоинты на стороне МоегоСклада 
 
+Rest-эндпоинты на стороне МоегоСклада позволяют Вендору ограниченно управлять состояние установки приложения для конкретного 
+аккаунта, а также позволяют узнать информацию о пользователе, который загружает iframe-приложение в UI МоегоСклада.
+ 
 Базовый URL REST-эндпоинтов со стороны МоегоСклада (далее будем называть его `MARKETPLACE-ENDPOINT`):
+
+* Продакшн: [https://online.moysklad.ru/api/vendor/1.0](https://online.moysklad.ru/api/vendor/1.0)
+* Песочница: [https://marketplace.sandbox.moysklad.ru/api/vendor/1.0](https://marketplace.sandbox.moysklad.ru/api/vendor/1.0)
 
 На текущий момент со стороны МоегоСклада есть следующие эндпоинты:
 
-+ эндпоинт для обратного вызова по изменению статуса приложения на аккаунте
-+ получение контекста пользователя для iframe-приложений
++ [эндпоинт для обратного вызова по изменению статуса приложения на аккаунте](#obratnyj-wyzow-izmeneniq-statusa-prilozheniq-na-akkaunte)
++ [получение контекста пользователя для iframe-приложений](#poluchenie-kontexta-pol-zowatelq-dlq-iframe-prilozhenij)
 
 ### Обратный вызов изменения статуса приложения на аккаунте
+
+С помощью этого эндпоинта вендор может изменить статус устанавливающегося приложения пользователя. При [активации 
+приложения со стороны вендора](#aktiwaciq-prilozheniq-na-akkaunte), вендор может ответить одним из статусов **Activated**, 
+**Activating**, **Settings**. Если вендор перевел в статусы **Activating** и **Settings**, то МойСклад ожидает, что 
+вендор с помощью обратного вызова оповестит МойСклад о том, что активация на его стороне завершена.
 
 **Resource**: `MARKETPLACE-ENDPOINT/apps/{appId}/{accountId}/status`
 
@@ -63,9 +74,11 @@ HTTP status codes:
 ### Получение контекста пользователя для iframe-приложений
 
 Через этот эндпоинт можно получить информацию по пользователю, который загружает iframe-приложение в UI МоегоСклада. 
-В URL, по которому загружается Iframe-приложение, добавляется GET-параметр `contextKey` - это одноразовый ключ, который 
-может быть использован не более одного раза для получения контекста пользователя через данный эндпоинт. В случае 
-повторного использования `contextKey` - эндпоинт вернет ошибку.
+В URL, по которому загружается Iframe-приложение, добавляется GET-параметр `contextKey`. 
+Пример того, что будет загружаться в Iframe, при условии, что в [дескрипторе приложения](https://dev.moysklad.ru/workbook/api/vendor/1.0/technical.html)
+Iframe имеет значение `https://yoursite.ru/moysklad`: `https://yoursite.ru/moysklad?contextKey=1c14e98cd272239c03bf3d9697f167699743292c`.
+ `contextKey` - это одноразовый ключ, который может быть использован не более одного раза для получения контекста 
+ пользователя через данный эндпоинт. В случае повторного использования `contextKey` - эндпоинт вернет ошибку.
 
 **Resource**: `MARKETPLACE-ENDPOINT/context/{contextKey}`
 
@@ -81,14 +94,14 @@ HTTP-метод: **POST**
 
 В случае успешного ответа возвращается такое же по структуре содержимое как в `https://online.moysklad.ru/api/remap/1.2/context/employee`
 
-В случае ошибок - JSON-объект с ошибкой.
+В случае ошибок - JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#obrabotka-oshibok-na-storone-moegosklada).
 
 HTTP status codes:
 
 + **200 OK** - все в порядке, в ответе отдается контекст пользователя
 + **403 Forbidden** - приложение не авторизовано на доступ по данному contextKey
 + **404 Not Found** - contextKey не найден
-+ **409 Conflict** - приложение авторизовано, но данный contextKey уже отработал свой один раз
++ **409 Conflict** - приложение авторизовано, но данный contextKey уже был использован
 
 > Пример
 
@@ -109,7 +122,491 @@ HTTP status codes:
 
 ```json
 {
-  "status": "SettingsRequired"
+  "meta": {
+    "href": "https://online.moysklad.ru/api/remap/1.2/entity/employee/b0a02321-13e3-11e9-912f-f3d4002516e3?expand=cashier.retailStore",
+    "metadataHref": "https://online.moysklad.ru/api/remap/1.2/entity/employee/metadata",
+    "type": "employee",
+    "mediaType": "application/json",
+    "uuidHref": "https://online.moysklad.ru/app/#employee/edit?id=b0a02321-13e3-11e9-912f-f3d4002516e3"
+  },
+  "id": "b0a02321-13e3-11e9-912f-f3d4002516e3",
+  "accountId": "b0b309ee-13e3-11e9-9109-f8fc0001f188",
+  "owner": {
+    "meta": {
+      "href": "https://online.moysklad.ru/api/remap/1.2/entity/employee/b0a02321-13e3-11e9-912f-f3d4002516e3",
+      "metadataHref": "https://online.moysklad.ru/api/remap/1.2/entity/employee/metadata",
+      "type": "employee",
+      "mediaType": "application/json",
+      "uuidHref": "https://online.moysklad.ru/app/#employee/edit?id=b0a02321-13e3-11e9-912f-f3d4002516e3"
+    }
+  },
+  "shared": true,
+  "group": {
+    "meta": {
+      "href": "https://online.moysklad.ru/api/remap/1.2/entity/group/b0b3c289-13e3-11e9-9109-f8fc0001f189",
+      "metadataHref": "https://online.moysklad.ru/api/remap/1.2/entity/group/metadata",
+      "type": "group",
+      "mediaType": "application/json"
+    }
+  },
+  "updated": "2019-12-10 18:37:25.786",
+  "name": "Кожевников",
+  "externalCode": "Exh56G1wiRTPHpYBc-nx12",
+  "archived": false,
+  "created": "2019-01-09 10:53:45.202",
+  "uid": "admin@bkozhevnikov",
+  "email": "bkozhevnikov@moysklad.ru",
+  "lastName": "Кожевников",
+  "fullName": "Кожевников",
+  "shortFio": "Кожевников",
+  "cashiers": [
+    {
+      "meta": {
+        "href": "https://online.moysklad.ru/api/remap/1.2/entity/retailstore/b0b7cd8d-13e3-11e9-912f-f3d400251724/cashiers/b0b7d387-13e3-11e9-912f-f3d400251725",
+        "type": "cashier",
+        "mediaType": "application/json"
+      }
+    }
+  ],
+  "permissions": {
+    "currency": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "uom": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "productfolder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "product": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "bundle": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "service": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "consignment": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "variant": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "store": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "counterparty": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "organization": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "employee": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "contract": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "project": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "country": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "customentity": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "demand": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "customerorder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "internalorder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "invoiceout": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "invoicein": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "paymentin": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "paymentout": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "cashin": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "cashout": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "supply": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "salesreturn": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "purchasereturn": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "retailstore": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "receipttemplate": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "retailshift": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "retaildemand": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "retailsalesreturn": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "retaildrawercashin": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "retaildrawercashout": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "prepayment": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "prepaymentreturn": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "purchaseorder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "move": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "enter": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "loss": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "facturein": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "factureout": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "commissionreportin": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "commissionreportout": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "pricelist": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "processingplanfolder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "processingplan": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "processing": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "processingorder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "assortment": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "inventory": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "print": "ALL"
+    },
+    "bonustransaction": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "crptorder": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "approve": "ALL",
+      "print": "ALL"
+    },
+    "webhook": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL"
+    },
+    "task": {
+      "view": "ALL",
+      "create": "ALL",
+      "update": "ALL",
+      "delete": "ALL",
+      "done": "ALL"
+    },
+    "dashboard": {
+      "view": "ALL"
+    },
+    "stock": {
+      "view": "ALL"
+    },
+    "customAttributes": {
+      "view": "ALL"
+    },
+    "pnl": {
+      "view": "ALL"
+    },
+    "company_crm": {
+      "view": "ALL"
+    },
+    "tariff_crm": {
+      "view": "ALL"
+    },
+    "audit_dashboard": {
+      "view": "ALL"
+    },
+    "admin": {
+      "view": "ALL"
+    },
+    "dashboardMoney": {
+      "view": "ALL"
+    }
+  }
 }
 ```
 

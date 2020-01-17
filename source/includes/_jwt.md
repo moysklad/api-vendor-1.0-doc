@@ -119,7 +119,7 @@ JWT-payload должен содержать следующие поля (все 
 Обработка ошибок аутентификации и авторизации на стороне МоегоСклада осуществляется аналогично тому 
 как это сделано в JSON API 1.2:
 
-[https://moysklad.github.io/api-remap-1.2-doc/api/remap/1.2/ru/#obrabotka-oshibok](https://moysklad.github.io/api-remap-1.2-doc/api/remap/1.2/ru/#obrabotka-oshibok)
+[https://dev.moysklad.ru/doc/api/remap/1.2/](https://dev.moysklad.ru/doc/api/remap/1.2/)
 
 То есть при возникновении ошибок возвращается аналогичный объект error и заголовки HTTP-ответа X-Lognex-Auth 
 и X-Lognex-Auth-Message.

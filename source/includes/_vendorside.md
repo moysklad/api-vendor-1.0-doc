@@ -9,7 +9,7 @@
 
 `https://<VENDOR-SERVER-ENDPOINT>/api/moysklad/vendor/1.0/apps/{appId}/{accountId}` 
 
-где *VENDOR-SERVER-ENDPOINT* - тот URL, который указан в [дескрипторе приложения](https://dev.moysklad.ru/workbook/api/vendor/1.0/technical.html).
+где *VENDOR-SERVER-ENDPOINT* - тот URL, который указан в [дескрипторе приложения](#deskriptor-prilozheniq).
 
 Здесь
 

@@ -10,13 +10,18 @@ toc_footers:
   - <a href='https://github.com/moysklad/api-vendor-1.0-doc/issues'>Сообщите об ошибке</a>
 
 includes:
+  - wb_general
+  - wb_base_infromation
+  - wb_descriptor
+  - wb_glossology
+  - wb_instruction
+  - wb_remap
   - general
   - jwt
   - vendorside
   - moyskladside
   - errors
   - retry
-
 
 search: true
 ---

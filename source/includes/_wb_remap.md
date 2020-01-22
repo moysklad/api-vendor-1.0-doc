@@ -25,7 +25,7 @@ Authorization: Bearer 6ab89be1ae6ff147755625ee8da948e42612233b
 
 #### Диаграмма последовательности отзыва доступа при отключении приложения
 
-![useful image](diag_install.png)
+![useful image](diag_uninstall.png)
 
 
 ### Vendor API

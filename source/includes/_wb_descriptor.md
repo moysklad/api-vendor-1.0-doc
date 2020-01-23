@@ -158,22 +158,6 @@
 </application>
 ```
 
-
-Можно добавить блок **vendorApi** (тогда будет выполняться активация и деактивация приложения по Vendor API):
-
-```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
-    <iframe>
-        <sourceUrl>https://example.com/iframe.html</sourceUrl>
-    </iframe>
-    <vendorApi>
-        <endpointBase>https://example.com/dummy-app</endpointBase>
-    </vendorApi>
-</application>
-```
-
 #### Для серверных приложений
 
 Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 

@@ -77,7 +77,7 @@ HTTP status codes:
 В URL, по которому загружается Iframe-приложение, добавляется GET-параметр **contextKey**. 
 Пример того, что будет загружаться в Iframe, при условии, что в [дескрипторе приложения](#deskriptor-prilozheniq)
 Iframe имеет значение `https://yoursite.ru/moysklad`: `https://yoursite.ru/moysklad?contextKey=1c14e98cd272239c03bf3d9697f167699743292c`.
- `contextKey` - это одноразовый ключ, который может быть использован не более одного раза для получения контекста 
+ **contextKey** - это одноразовый ключ, который может быть использован не более одного раза для получения контекста 
  пользователя через данный эндпоинт. В случае повторного использования **contextKey** - эндпоинт вернет ошибку.
 
 **Resource**: `MARKETPLACE-ENDPOINT/context/{contextKey}`

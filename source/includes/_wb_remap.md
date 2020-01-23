@@ -83,4 +83,5 @@ Vendor API предназначено для взаимодействия Мар
 * Перед процессом приостановки приложения (для платных приложений) вебхуки будут отключены, а после возобновления - 
 включены.
 
-Подробную информацию о работе с вебхуками можно получить по ссылке https://dev.moysklad.ru/workbook/api/remap/1.1/ru/webhooks.html
+Подробную информацию о работе с вебхуками можно получить по ссылке
+[https://dev.moysklad.ru/workbook/api/remap/1.1/ru/webhooks.html](https://dev.moysklad.ru/workbook/api/remap/1.1/ru/webhooks.html) 

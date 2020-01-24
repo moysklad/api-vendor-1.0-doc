@@ -91,6 +91,6 @@ Vendor API предназначено для взаимодействия Мар
 
 На данный момент для приложений существует ряд ограничений в работе со следующими сущностями JSON API 1.2:
 
-+ приложение не может быть автором Задач (https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-zadacha)
-+ приложения не могут работать с Событиями Контрагентов (https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-sobytiq-kontragenta)
-+ приложения пока не могут использовать Шаблоны документов ()https://moysklad.github.io/api-remap-1.2-doc/api/remap/1.2/ru/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow
++ приложение не может быть автором Задач [https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-zadacha](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-zadacha)
++ приложение не может работать с Событиями Контрагентов [https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-sobytiq-kontragenta](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-sobytiq-kontragenta)
++ приложение не может использовать Шаблоны документов [https://moysklad.github.io/api-remap-1.2-doc/api/remap/1.2/ru/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow](https://moysklad.github.io/api-remap-1.2-doc/api/remap/1.2/ru/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow)

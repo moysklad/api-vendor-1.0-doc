@@ -21,6 +21,7 @@ includes:
   - moyskladside
   - errors
   - retry
+  - demo_app
 
 search: true
 ---

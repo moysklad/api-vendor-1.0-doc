@@ -43,6 +43,9 @@ Content-Type: **application/json**
 для разбора непонятных ситуаций и/или логирования)
 + **accountName** `String` - имя аккаунта, на который осуществляется подключение приложения (тоже полезно видеть не
  только UUID аккаунта, но и *accountName*)
++ **cause** `String` (есть только у **платных приложений**) - основание (причина) активации, возможные значения:
+    + **Install** - установка приложения на аккаунт
+    + **Resume** - возобновление работы приложения на аккаунте после приостановки
 + **access** `Array`- доступы ресурсам, требуемым в дескрипторе приложения (например, к JSON API). Если ваше приложение
 не требует доступа к АПИ, то данный объект не придёт.
     + **resource** `String` - ресурс, к которому предоставлен доступ. Сейчас из ресурсов для приложений доступно 
@@ -70,7 +73,7 @@ HTTP status codes:
 становится установленным на аккаунт (переходит в специальное состояние **ActivationFailed**).
 + **прочие статусы** обрабатываются как ошибка - запускается механизм [Retry](#mehanizm-retry)
 
-> Пример
+> Пример активации **бесплатного** приложения:
 
 > **Request:** 
 
@@ -107,12 +110,55 @@ HTTP status codes:
   "status": "SettingsRequired"
 }
 ``` 
+> Пример активации **платного** приложения:
+
+> **Request:** 
+
+> **PUT**
+> https://example.com/baseurl/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
+
+> Body
+
+```json
+{
+  "appUid": "example-app.example-vendor",
+  "accountName": "dummyaccount",
+  "cause": "Install",
+  "access": [
+    {
+      "resource": "https://online.moysklad.ru/api/remap/1.2",
+      "scope": ["admin"],
+      "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
+    }
+  ]
+}
+```
+> ---
+
+> **Response:**
+
+> Response 200
+
+> Content-Type: **application/json**
+
+> Body: 
+
+```json
+{
+  "status": "SettingsRequired"
+}
+``` 
+
 
 ### Деактивация приложения на аккаунте
 
+
 HTTP-метод: **DELETE**
 
-Тело запроса: **пустое**
+Тело запроса: 
++ **cause** `String` (есть только у **платных приложений**) - основание (причина) активации, возможные значения:
+    + **Uninstall** - удаление приложения на аккаунт
+    + **Suspend** - приостановка работы приложения на аккаунте 
 
 Тело ответа: **пустое**
 
@@ -123,12 +169,38 @@ HTTP status codes:
 + **551 Lifecycle Processing Failed** (кастомный статус) - внешняя система не смогла выполнить деактивацию приложения для аккаунта
 + прочие статусы обрабатываются как ошибка - запускается механизм [Retry](#mehanizm-retry)
 
-> Пример
+> Пример деактивации **бесплатного** приложения:
 
 > **Request:** 
 
 > **DELETE**
 > https://example.com/baseurl/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
+
+> ---
+
+> **Response:**
+
+> Response 200
+
+> Content-Type: **application/json**
+
+> ---
+
+
+> Пример деактивации **платного** приложения:
+
+> **Request:** 
+
+> **DELETE**
+> https://example.com/baseurl/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
+
+> Body
+
+```json
+{
+  "cause": "Suspend"
+}
+```
 
 > ---
 

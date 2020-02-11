@@ -95,7 +95,7 @@ JSON API (если в дескрипторе приложения таковой
 включены.
 
 Подробную информацию о работе с вебхуками можно получить по ссылке
-[https://dev.moysklad.ru/workbook/api/remap/1.1/ru/webhooks.html](https://dev.moysklad.ru/workbook/api/remap/1.1/ru/webhooks.html) 
+[https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-veb-huki](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-veb-huki) 
 
 ### Особенности доступа к некоторым функциям JSON API 1.2
 

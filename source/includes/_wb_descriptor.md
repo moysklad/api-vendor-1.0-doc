@@ -134,7 +134,7 @@
 
 #### Для iframe-приложений
 
-Дескриптор для iframe-приложения:
+> Дескриптор для iframe-приложения:
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -146,6 +146,8 @@
     </iframe>
 </application>
 ```
+
+> Дескриптор для iframe-приложения с расширением окна (expand):
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -161,8 +163,8 @@
 
 #### Для серверных приложений
 
-Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 
-МоегоСклада, так как у приложения отсутствует iframe-часть):
+> Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 
+МоегоСклада, так как у приложения отсутствует iframe-часть)
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -179,7 +181,7 @@
 </application>
 ```
 
-Полный дескриптор для серверных приложений (с iframe-частью):
+> Полный дескриптор для серверных приложений (с iframe-частью)
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"

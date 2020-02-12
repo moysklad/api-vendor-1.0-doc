@@ -105,20 +105,17 @@ Iframe имеет значение `https://yoursite.ru/moysklad`: `https://your
 
 > Пример
 
+```shell
+
 > **Request:** 
 
 > **POST**
 > https://online.moysklad.ru/api/vendor/1.0/context/6S3BQLsaSRNdEnhPCoW9lplY2LozRUOq6S3BQLsaSRNdEnh
-
+```
 > ---
 
-> **Response:** 
-
-> Response 200
-
-> Content-Type: **application/json**
-
-> Response body
+> Response 200 (application/json).
+  Успешный запрос.
 
 ```json
 {

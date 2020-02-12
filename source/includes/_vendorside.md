@@ -17,17 +17,6 @@
 + **appId** `UUID` - идентификатор приложения в Маркетплейсе 
 + **accountId** `UUID` - идентификатор аккаунта в МоемСкладе
 
-> Пример: 
-
-> **Request:** 
-
-> **PUT** https://example.com/baseurl/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> ---
-
-> **Response:**
-
-> Response 200
 
 ### Активация приложения на аккаунте
 

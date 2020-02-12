@@ -8,7 +8,7 @@
 Токен аннулируется при удалении и приостановке приложения. На момент деактивации приложения через Vendor API токен уже 
 нерабочий (аннулирован).
 
-Токен при доступе к JSON API 1.2 следует передавать как [Bearer-токен](https://tools.ietf.org/html/rfc6750#section-2.1),
+Токен при доступе к JSON API 1.2 следует передавать как [Bearer-токен](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-autentifikaciq),
  а именно в виде заголовка HTTP-запроса:
  
  ```text

@@ -9,4 +9,4 @@
 * Получение контекста пользователя для iframe (отображение информации по пользователю, проверка прав администратора).
 * Получение информации из МоегоСклада по JSON API 1.2 с доступом по токену.
 
-Более подробную информацию и исходный код приложения можно получить по ссылке: [https://github.com/moysklad/php-dummyapp-marketplace-1.0/tree/master/src/php](https://github.com/moysklad/php-dummyapp-marketplace-1.0/tree/master/src/php)
+Более подробную информацию и исходный код приложения можно получить по ссылке: [https://github.com/moysklad/php-dummyapp-marketplace-1.0](https://github.com/moysklad/php-dummyapp-marketplace-1.0)

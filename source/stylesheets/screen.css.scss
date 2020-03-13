@@ -372,7 +372,7 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 25px;
+    font-size: 27px;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
@@ -390,7 +390,7 @@ html, body {
 
   h2 {
     @extend %header-font;
-    font-size: 19px;
+    font-size: 25px;
     margin-top: 4em;
     margin-bottom: 0;
     border-top: 1px solid #ccc;

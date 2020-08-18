@@ -7,6 +7,14 @@
 
 Сейчас рассмотрим дескриптор приложения на примерах.
 
+### Версии XSD-схемы дескриптора
+
+| Версия | Описание  | Разрешенное содержимое дескриптора  |  
+|----|----|----|
+|[1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)|Серверные и iFrame-приложения | vendorApi, access, iframe
+|[1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)|Расширение iFrame (флаг expand) |  vendorApi, access, iframe(c expand)
+|[2.0.0]|Виджеты |vendorApi, access, iframe(c expand), widgets
+
 ### Содержимое дескриптора приложения
 
 ```xml
@@ -28,15 +36,15 @@
 </application>
 ```
 
-На текущий момент в дескрипторе приложения есть три блока: **iframe**, **vendorApi**, **access**. Порядок расположения 
-этих блоков относительно друг друга в дескрипторе может быть произвольный.
+На текущий момент в актуальной версии дескриптора приложения есть четыре блока: **iframe**, **vendorApi**, **access**, **widgets**. 
+Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольный.
 
 |Блок|Назначение|Доступно для типов приложений|Требует наличия других блоков|
 |----|----------|-----------------------------|-----------------------------|
 |iframe|Описывает iframe-часть приложения.|iframe-приложения, серверные приложения|Не требует|
 |vendorApi|Описывает взаимодействие по Vendor API.|серверные приложения|Не требует|
 |access|Описывает требуемый доступ приложения к ресурсам пользовательского аккаунта.|серверные приложения|vendorApi|
-
+|widgets|Описывает виджеты.|серверные приложения|Не требует|
 #### Блок iframe
 
 В теге **iframe/sourceUrl** указывается URL, по которому будет загружаться содержимое iframe внутри UI МоегоСклада. 
@@ -130,6 +138,24 @@
 </access>
 ```
 
+### Блок widgets
+
+
+Сначала необходимо определить в блоке **widgets** точку расширения - указать страницу, где будет 
+расположен виджет. 
+
+Сейчас доступна одна точка расширения **entity.counterparty.view** - карточка контрагента. 
+В перспективе их может быть указано несколько, но одно приложение может создать только по одному 
+виджету для каждой точки расширения.
+
+#### Теги entity.counterparty.view
+
+Тег **sourceUrl** - обязательный. Содержит URL, по которому загружается код виджета в iframe.
+В URL допускается использование только протокола HTTPS.
+
+Тег **height** - обязательный.  В теге **height/fixed** задается фиксированная высота виджета
+в пикселях, в формате **150px**.
+
 ### Примеры дескрипторов
 
 #### Для iframe-приложений
@@ -181,7 +207,7 @@
 </application>
 ```
 
-> Полный дескриптор для серверных приложений (с iframe-частью)
+> Дескриптор для серверных приложений с iframe-частью
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -200,6 +226,35 @@
     </access>
 </application>
 ```
+> Дескриптор для серверных приложений с виджетом в карточке КА и протоколом openfeedback
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>            
+            <supports><open-feedback/></supports>        
+        </entity.counterparty.view>    
+    </widgets>
+</ServerApplication>
+```
+
 
 #### Для телефонии
 

@@ -10,9 +10,9 @@
 
 | Версия | Описание  | Разрешенное содержимое дескриптора  |  Поддерживаемые типы приложений  |  
 |----|----|----|----|
-|[1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)|Серверные и простые iFrame-приложения | vendorApi, access, iframe | Iframe, Серверные
-|[1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)|Расширение iFrame (тег expand) |  vendorApi, access, iframe(c expand) | Iframe, Серверные
-|[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты. Прекращена поддержка приложений с типом Iframe.  |vendorApi, access, iframe(c expand), widgets | Серверные
+|[1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)|Серверные и простые iFrame-приложения | vendorApi, access, iframe | iFrame, Серверные
+|[1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)|Расширение iFrame (тег expand) |  vendorApi, access, iframe(c expand) | iFrame, Серверные
+|[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты. Прекращена поддержка приложений с типом iFrame.  |vendorApi, access, iframe(c expand), widgets | Серверные
 
 
 Сейчас рассмотрим дескриптор приложения на примерах.
@@ -152,11 +152,11 @@
 - **entity.counterparty.view** - карточка контрагента. 
 
 В перспективе точек расширения может быть указано несколько, то есть одно приложение сможет создать
- сразу несколько виджетов - на разных страницах. При этом одно приложение создает только по 
- одному виджету для каждой точки расширения. 
+ сразу несколько виджетов - на разных страницах. В то же время для приложения действует правило:
+ одна страница - один виджет. То есть, в дескрипторе может быть указано только по 
+  одной точке расширения каждого типа.
  
-Тем не менее, в итоге на одной странице может оказаться 
-несколько виджетов (от разных приложений)
+Тем не менее, в итоге на одной странице может оказаться несколько виджетов (от разных приложений).
 
 <u>Теги entity.counterparty.view:</u>
 

@@ -87,7 +87,7 @@
 
 
 
-#### Блок vendorApi
+### Блок vendorApi
 
 В теге **vendorApi/endpointBase**  указывается базовый URL эндпоинта на стороне вендора, к которому будет обращаться 
 МойСклад. В URL допускается использование только протокола HTTPS.
@@ -184,7 +184,7 @@
             <height>
                 <fixed>200px</fixed>
             </height>
-            <supports><open-feedback></open-feedback></supports>
+            <supports><open-feedback/></supports>
         </entity.counterparty.view>
     </widgets>
 ```

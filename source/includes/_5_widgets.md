@@ -140,6 +140,18 @@
  виджета (только что загруженный или ранее закэшированный) и передает в
 этот iframe виджета сообщение `Open` через [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
+
+
+    {
+      "name": "Open",
+      "messageId": 12345,
+      "extensionPoint": "entity.counterparty.view",
+      "objectId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c",
+      "displayMode": "expanded"
+    }
+
+
+
 Здесь `objectId` - это в данном случае идентификатор контрагента, так как 
 точка расширения `entity.counterparty.view`. 
 

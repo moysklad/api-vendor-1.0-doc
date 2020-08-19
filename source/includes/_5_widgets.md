@@ -193,7 +193,7 @@
 
 > Cообщение OpenFeedback
 
-```text/plain
+```text\plain
 {
   "name": "OpenFeedback",
   "correlationId": 12345

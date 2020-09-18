@@ -214,7 +214,7 @@
 
 #### Для iframe-приложений
 
-> Дескриптор для iframe-приложения, версия 1.1.0:
+> Дескриптор для iframe-приложения, версия 1.1.0
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -227,7 +227,7 @@
 </application>
 ```
 
-> Дескриптор для iframe-приложения с расширением окна (expand), версия 1.1.0:
+> Дескриптор для iframe-приложения с расширением окна (expand), версия 1.1.0
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"

@@ -214,7 +214,7 @@
 
 #### Для iframe-приложений
 
-> Дескриптор для iframe-приложения, версия 1.1.0
+> Дескриптор для iframe-приложения
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -227,7 +227,7 @@
 </application>
 ```
 
-> Дескриптор для iframe-приложения с расширением окна (expand), версия 1.1.0
+> Дескриптор для iframe-приложения с расширением окна (expand)
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -244,7 +244,7 @@
 #### Для серверных приложений
 
 > Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 
-МоегоСклада, так как у приложения отсутствует iframe-часть), версия 1.1.0
+МоегоСклада, так как у приложения отсутствует iframe-часть)
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -261,7 +261,7 @@
 </application>
 ```
 
-> Дескриптор для серверных приложений с iframe-частью, версия 1.1.0
+> Дескриптор для серверных приложений с iframe-частью
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -280,7 +280,7 @@
     </access>
 </application>
 ```
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, версия v2
+> Дескриптор для серверных приложений с виджетом в карточке контрагента
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -307,7 +307,7 @@
     </widgets>
 </ServerApplication>
 ```
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback, версия v2
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             

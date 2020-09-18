@@ -4,7 +4,7 @@
 приложения вендора в МойСклад.
 
 Содержимое дескриптора должно соответствовать версии XSD-схемы.
-Актуальной версией считается [2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd).
+Актуальной версией считается [v2](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd).
 
 ### История версий XSD-схемы дескриптора
 
@@ -159,7 +159,7 @@
 
 Сейчас доступны следующие точки расширения:
  
-- **entity.counterparty.view** - карточка контрагента. 
+- **entity.counterparty.view** - карточка контрагента 
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.edit** - документ "Отгрузка"
 
@@ -214,7 +214,7 @@
 
 #### Для iframe-приложений
 
-> Дескриптор для iframe-приложения:
+> Дескриптор для iframe-приложения, версия 1.1.0:
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
@@ -227,7 +227,7 @@
 </application>
 ```
 
-> Дескриптор для iframe-приложения с расширением окна (expand):
+> Дескриптор для iframe-приложения с расширением окна (expand), версия 1.1.0:
 
 ```xml
 <application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"

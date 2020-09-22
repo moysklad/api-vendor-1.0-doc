@@ -4,7 +4,7 @@
 приложения вендора в МойСклад.
 
 Содержимое дескриптора должно соответствовать версии XSD-схемы.
-Актуальной версией считается [v2](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd).
+Актуальной версией считается [v2](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd).
 
 ### История версий XSD-схемы дескриптора
 
@@ -12,7 +12,8 @@
 |----|----|----|----|
 |[1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)|Серверные и простые iFrame-приложения | vendorApi, access, iframe | iFrame, Серверные
 |[1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)|Расширение iFrame (тег expand) |  vendorApi, access, iframe(c expand) | iFrame, Серверные
-|[v2](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd)|Виджеты. Прекращена поддержка приложений с типом iFrame.  |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты в карточке контрагента. Прекращена поддержка приложений с типом iFrame  |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)|Виджеты в Заказе покупателя и Отгрузке |vendorApi, access, iframe(c expand), widgets | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 

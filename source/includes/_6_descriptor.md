@@ -30,11 +30,12 @@
 
 Рассмотрим дескриптор приложения на примерах.
 
+
 ```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
     <iframe>
         <sourceUrl>https://example.com/iframe.html</sourceUrl>
         <expand>true</expand>
@@ -46,8 +47,17 @@
         <resource>https://online.moysklad.ru/api/remap/1.2</resource>
         <scope>admin</scope>
     </access>
-</application>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>                  
+        </entity.counterparty.view>    
+    </widgets>
+</ServerApplication>
 ```
+
 
 На текущий момент в [актуальной](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd) версии дескриптора 
 приложения есть четыре блока: **iframe**, **vendorApi**, **access**, **widgets**. 
@@ -213,45 +223,20 @@
 
 ### Примеры дескрипторов
 
-#### Для iframe-приложений
 
-> Дескриптор для iframe-приложения, версия 1.1.0
+#### Для серверных приложений (актуальная версия схемы дескриптора v2)
 
-```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
-    <iframe>
-        <sourceUrl>https://example.com/iframe.html</sourceUrl>
-    </iframe>
-</application>
-```
-
-> Дескриптор для iframe-приложения с расширением окна (expand), версия 1.1.0
+> Дескриптор для серверных приложений с iframe-частью и расширением окна (expand)
 
 ```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
     <iframe>
         <sourceUrl>https://example.com/iframe.html</sourceUrl>
         <expand>true</expand>
     </iframe>
-</application>
-```
-
-#### Для серверных приложений
-
-> Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 
-МоегоСклада, так как у приложения отсутствует iframe-часть), версия 1.1.0
-
-```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
     <vendorApi>
         <endpointBase>https://example.com/dummy-app</endpointBase>
     </vendorApi>
@@ -259,29 +244,20 @@
         <resource>https://online.moysklad.ru/api/remap/1.2</resource>
         <scope>admin</scope>
     </access>
-</application>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>                  
+        </entity.counterparty.view>    
+    </widgets>
+</ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с iframe-частью, версия 1.1.0
 
-```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
-    <iframe>
-        <sourceUrl>https://example.com/iframe.html</sourceUrl>
-    </iframe>
-    <vendorApi>
-        <endpointBase>https://example.com/dummy-app</endpointBase>
-    </vendorApi>
-    <access>
-        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
-        <scope>admin</scope>
-    </access>
-</application>
-```
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, версия v2
+
+> Дескриптор для серверных приложений с виджетом в карточке контрагента
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -308,7 +284,7 @@
     </widgets>
 </ServerApplication>
 ```
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback, версия v2
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -355,6 +331,49 @@
     </widgets>
 </ServerApplication>
 ```
+
+
+#### Для серверных приложений (устаревшие версии схемы дескриптора 1.x.x)
+
+> Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 
+МоегоСклада, так как у приложения отсутствует iframe-часть)
+
+```xml
+<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
+      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
+      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+</application>
+```
+
+> Дескриптор для серверных приложений с iframe-частью
+
+```xml
+<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
+      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
+      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+</application>
+```
+
+
 
 #### Для телефонии
 

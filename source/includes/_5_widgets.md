@@ -9,9 +9,9 @@
 
 На данный момент для встраивания виджетов доступны страницы:
 
-- Контрагент - старая и новая карточки (entity.counterparty.view)
-- Заказ покупателя (document.customerorder.edit)
-- Отгрузка (document.demand.edit)
+- Контрагент - старая и новая карточки (_entity.counterparty.view_)
+- Заказ покупателя (_document.customerorder.edit_)
+- Отгрузка (_document.demand.edit_)
 
 Во всех точках расширения виджеты имеют одинаковый функционал.
 

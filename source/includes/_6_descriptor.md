@@ -244,14 +244,6 @@
         <resource>https://online.moysklad.ru/api/remap/1.2</resource>
         <scope>admin</scope>
     </access>
-    <widgets>        
-        <entity.counterparty.view>            
-            <sourceUrl>https://example.com/widget.php</sourceUrl>            
-            <height>                
-                <fixed>150px</fixed>            
-            </height>                  
-        </entity.counterparty.view>    
-    </widgets>
 </ServerApplication>
 ```
 
@@ -325,8 +317,6 @@
             </height>
             <supports><open-feedback/></supports>  
         </document.demand.edit>
-
-
 
     </widgets>
 </ServerApplication>

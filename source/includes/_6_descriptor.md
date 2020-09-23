@@ -4,7 +4,7 @@
 приложения вендора в МойСклад.
 
 Содержимое дескриптора должно соответствовать версии XSD-схемы.
-Актуальной версией считается [2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd).
+Актуальной версией считается [v2](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd).
 
 ### История версий XSD-схемы дескриптора
 
@@ -12,16 +12,16 @@
 |----|----|----|----|
 |[1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)|Серверные и простые iFrame-приложения | vendorApi, access, iframe | iFrame, Серверные
 |[1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)|Расширение iFrame (тег expand) |  vendorApi, access, iframe(c expand) | iFrame, Серверные
-|[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты. Прекращена поддержка приложений с типом iFrame.  |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты в карточке контрагента. Прекращена поддержка приложений с типом iFrame  |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)|Виджеты в Заказе покупателя и Отгрузке |vendorApi, access, iframe(c expand), widgets | Серверные
 
-Основные отличия линейки дескрипторов 2.x.x от дескрипторов версий 1.x.x:
+Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
 - Изменение корневого тега - теперь каждый тип приложений представлен своим корневым тегом. 
-  В версии 2.0.0 есть только один тип приложений - ServerApplication (iframe-приложения 
+  В версии v2 есть только один тип приложений - ServerApplication (iframe-приложения 
   объявлены deprecated и с отменой поддержки дескрипторов версий 1.x.x станут недоступны).
   
-- Добавлен блок widgets для указания конфигурации виджетов приложения.
-  В версии 2.0.0 поддерживается только виджет в карточке контаргента (entity.counterparty.view).
+- Добавлен блок widgets (необязательный) для указания конфигурации виджетов приложения.
 
 Дескрипторы версий 1.x.x некоторое время будут продолжать поддерживаться.
 
@@ -30,11 +30,12 @@
 
 Рассмотрим дескриптор приложения на примерах.
 
+
 ```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
     <iframe>
         <sourceUrl>https://example.com/iframe.html</sourceUrl>
         <expand>true</expand>
@@ -46,11 +47,21 @@
         <resource>https://online.moysklad.ru/api/remap/1.2</resource>
         <scope>admin</scope>
     </access>
-</application>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>                  
+        </entity.counterparty.view>    
+    </widgets>
+</ServerApplication>
 ```
 
-На текущий момент в актуальной версии дескриптора приложения есть четыре блока: **iframe**, **vendorApi**, **access**, **widgets**. 
-Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольный.
+
+На текущий момент в [актуальной](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd) версии дескриптора 
+приложения есть четыре блока: **iframe**, **vendorApi**, **access**, **widgets**. 
+Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольным.
 
 |Блок|Назначение|Доступно для типов приложений|Требует наличия других блоков|
 |----|----------|-----------------------------|-----------------------------|
@@ -157,18 +168,21 @@
 Сначала необходимо определить в блоке **widgets** точку расширения - указать страницу, где будет 
 расположен виджет. 
 
-Сейчас доступна только одна точка расширения:
+Сейчас доступны следующие точки расширения:
  
-- **entity.counterparty.view** - карточка контрагента. 
+- **entity.counterparty.view** - карточка Контрагента 
+- **document.customerorder.edit** - документ "Заказ покупателя"
+- **document.demand.edit** - документ "Отгрузка"
 
-В перспективе точек расширения может быть указано несколько, то есть одно приложение сможет создать
+В одном дескрипторе может быть указано несколько точек расширения, то есть одно приложение сможет создать
  сразу несколько виджетов - на разных страницах. В то же время для приложения действует правило:
  одна страница - один виджет. То есть, в дескрипторе может быть указано только по 
   одной точке расширения каждого типа.
  
 Тем не менее, в итоге на одной странице может оказаться несколько виджетов (от разных приложений).
 
-<u>Теги entity.counterparty.view:</u>
+Сейчас виджеты во всех точках расширения обладают одинаковым функционалом, поэтому ниже приведен универсальный список 
+тегов для любой из точек расширения:
 
 Тег **sourceUrl** - обязательный. Содержит URL, по которому загружается код виджета в iframe.
 В URL допускается использование только протокола HTTPS.
@@ -184,53 +198,132 @@
 
 Пример заполненного блока **widgets**:
 
-> Блок widgets
+> Блок widgets с точками расширения в контрагенте и заказе покупателя
 
 
 ```xml
     <widgets>
         <entity.counterparty.view>
-            <sourceUrl>https://example.com/widget.php</sourceUrl>
+            <sourceUrl>https://example.com/widget-counterparty.php</sourceUrl>
             <height>
                 <fixed>200px</fixed>
             </height>
             <supports><open-feedback/></supports>
         </entity.counterparty.view>
+
+        <document.customerorder.edit>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+        </document.customerorder.edit>
+
     </widgets>
 ```
 
 ### Примеры дескрипторов
 
-#### Для iframe-приложений
 
-> Дескриптор для iframe-приложения:
+#### Для серверных приложений (актуальная версия схемы дескриптора v2)
 
-```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
-    <iframe>
-        <sourceUrl>https://example.com/iframe.html</sourceUrl>
-    </iframe>
-</application>
-```
-
-> Дескриптор для iframe-приложения с расширением окна (expand):
+> Дескриптор для серверных приложений с iframe-частью и расширением окна (expand)
 
 ```xml
-<application xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v1"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"                                  
-      xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v1 
-      https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd">
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
     <iframe>
         <sourceUrl>https://example.com/iframe.html</sourceUrl>
         <expand>true</expand>
     </iframe>
-</application>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+</ServerApplication>
 ```
 
-#### Для серверных приложений
+
+
+> Дескриптор для серверных приложений с виджетом в карточке контрагента
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>                  
+        </entity.counterparty.view>    
+    </widgets>
+</ServerApplication>
+```
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>            
+            <supports><open-feedback/></supports>        
+        </entity.counterparty.view>    
+
+        <document.customerorder.edit>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+            <supports><open-feedback/></supports>  
+        </document.customerorder.edit>
+
+        <document.demand.edit>
+            <sourceUrl>https://example.com/widget-demand.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+            <supports><open-feedback/></supports>  
+        </document.demand.edit>
+
+    </widgets>
+</ServerApplication>
+```
+
+
+#### Для серверных приложений (устаревшие версии схемы дескриптора 1.x.x)
 
 > Минимальный дескриптор для серверных приложений (без возможности настройки параметров приложения пользователем 
 МоегоСклада, так как у приложения отсутствует iframe-часть)
@@ -269,34 +362,7 @@
     </access>
 </application>
 ```
-> Дескриптор для серверных приложений с виджетом в карточке КА и протоколом openfeedback
 
-```xml
-<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
-                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
-                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd">
-    <iframe>
-        <sourceUrl>https://example.com/iframe.html</sourceUrl>
-    </iframe>
-    <vendorApi>
-        <endpointBase>https://example.com/dummy-app</endpointBase>
-    </vendorApi>
-    <access>
-        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
-        <scope>admin</scope>
-    </access>
-    <widgets>        
-        <entity.counterparty.view>            
-            <sourceUrl>https://example.com/widget.php</sourceUrl>            
-            <height>                
-                <fixed>150px</fixed>            
-            </height>            
-            <supports><open-feedback/></supports>        
-        </entity.counterparty.view>    
-    </widgets>
-</ServerApplication>
-```
 
 
 #### Для телефонии

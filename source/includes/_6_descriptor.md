@@ -211,7 +211,6 @@
 
 > Блок widgets с точками расширения в контрагенте и заказе покупателя
 
-
 ```xml
     <widgets>
         <entity.counterparty.view>
@@ -231,7 +230,6 @@
                 <good-folder-selector/>
             </uses>
         </document.customerorder.edit>
-
     </widgets>
 ```
 
@@ -331,7 +329,6 @@
             </height>
             <supports><open-feedback/></supports>  
         </document.demand.edit>
-
     </widgets>
 </ServerApplication>
 ```
@@ -383,7 +380,6 @@
                 <good-folder-selector/>
             </uses>
         </document.demand.edit>
-
     </widgets>
 </ServerApplication>
 ```

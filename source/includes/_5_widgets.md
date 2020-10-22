@@ -100,6 +100,9 @@
                <supports>
                    <open-feedback/>
                </supports>
+                <uses>
+                    <good-folder-selector/>
+                </uses>
            </entity.counterparty.view>
        </widgets>
    </ServerApplication>
@@ -216,3 +219,92 @@
 
 Хост-окно, получив сообщение `OpenFeedback`, отображает содержимое виджета пользователю 
 (убирает ненавязчивый лоадер).
+
+### Сервисы хост-окна
+#### Селектор группы товаров
+
+> Дескриптор с виджетом, использующим селектор группы товаров
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+        <expand>true</expand>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>
+            <uses>
+                <good-folder-selector/>
+            </uses>                  
+        </entity.counterparty.view>    
+    </widgets>
+</ServerApplication>
+```
+
+Позволяет виджетам приложений переиспользовать существующий в МоемСкладе селектор группы товаров с получением виджетом 
+результата выбора пользователя.
+Чтобы виджет начал поддерживать селектор в дескрипторе необходимо добавить блок:
+```
+<uses>
+    <good-folder-selector/>
+</uses>
+```
+
+Когда виджет отправляет хост-окну сообщение `SelectGoodFolderRequest`(через Window.postMessage), 
+хост-окно запрашивает у пользователя выбор группы товаров, используя встроенный в МойСклад попап-селектор:
+![useful image](good-folder-selector.png)
+
+> Cообщение SelectGoodFolderRequest
+
+```json 
+{
+  "name": "SelectGoodFolderRequest",
+  "messageId": 12345
+}
+```
+
+Здесь `messageId` - целочисленный идентификатор сообщения, уникальный в рамках текущего взаимодействия виджет - 
+хост-окно. Назначается виджетом.
+
+После совершения пользователем выбора группы товаров или отказа от него хост-окно передает виджету результат 
+действий пользователя в сообщении `SelectGoodFolderResponse`. 
+
+> Cообщение SelectGoodFolderResponse(Пользователь выбрал группу товаров, имеющую идентификатор 8e9512f3-111b-11ea-0a80-02a2000a3c9c)
+
+```json 
+{
+  "name": "SelectGoodFolderResponse",
+  "correlationId": 12345,
+  "selected": true,
+  "goodFolderId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c"
+}
+```
+
+Здесь:
++ `correlationId` - идентификатор соответствующего сообщения `SelectGoodFolderRequest`;
++ `selected` - признак наличия выбора;
++ `goodFolderId` - идентификатор выбранной группы товаров.
+
+> Cообщение SelectGoodFolderResponse(Пользователь отменил выбор)
+
+```json 
+{
+  "name": "SelectGoodFolderResponse",
+  "correlationId": 12345,
+  "selected": false
+}
+```

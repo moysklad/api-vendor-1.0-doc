@@ -14,6 +14,7 @@
 |[1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)|Расширение iFrame (тег expand) |  vendorApi, access, iframe(c expand) | iFrame, Серверные
 |[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты в карточке контрагента. Прекращена поддержка приложений с типом iFrame  |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)|Виджеты в Заказе покупателя и Отгрузке |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.2.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)|Виджеты с поддержкой селектора групп товаров |vendorApi, access, iframe(c expand), widgets | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -52,7 +53,10 @@
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
-            </height>                  
+            </height>
+            <uses>
+                <good-folder-selector/>
+            </uses>                  
         </entity.counterparty.view>    
     </widgets>
 </ServerApplication>
@@ -195,11 +199,17 @@
 скрытие содержимого виджета до явного уведомления от виджета о готовности. Подробнее 
 про протокол **open-feedback** можно прочитать в разделе [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
  Параметры у протокола отсутствуют.
+ 
+Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых виджетом. 
+На данный момент в нем можно указать только протокол **uses/good-folder-selector**. 
+Он позволяет виджетам приложений переиспользовать существующий в МоемСкладе селектор группы товаров с получением 
+виджетом результата выбора пользователя. 
+Подробнее про протокол можно прочитать в разделе [Селектор группы товаров](#serwisy-host-okna). 
+Параметры у протокола отсутствуют.
 
 Пример заполненного блока **widgets**:
 
 > Блок widgets с точками расширения в контрагенте и заказе покупателя
-
 
 ```xml
     <widgets>
@@ -216,8 +226,10 @@
             <height>
                 <fixed>50px</fixed>
             </height>
+            <uses>
+                <good-folder-selector/>
+            </uses>
         </document.customerorder.edit>
-
     </widgets>
 ```
 
@@ -317,11 +329,60 @@
             </height>
             <supports><open-feedback/></supports>  
         </document.demand.edit>
-
     </widgets>
 </ServerApplication>
 ```
 
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом good-folder-selector
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.view>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>            
+            <uses>
+                <good-folder-selector/>
+            </uses>      
+        </entity.counterparty.view>    
+
+        <document.customerorder.edit>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+            <uses>
+                <good-folder-selector/>
+            </uses>
+        </document.customerorder.edit>
+
+        <document.demand.edit>
+            <sourceUrl>https://example.com/widget-demand.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+            <uses>
+                <good-folder-selector/>
+            </uses>
+        </document.demand.edit>
+    </widgets>
+</ServerApplication>
+```
 
 #### Для серверных приложений (устаревшие версии схемы дескриптора 1.x.x)
 

@@ -15,6 +15,8 @@
 |[2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)|Виджеты в карточке контрагента. Прекращена поддержка приложений с типом iFrame  |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)|Виджеты в Заказе покупателя и Отгрузке |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.2.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)|Виджеты с поддержкой селектора групп товаров |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.3.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)|Виджеты с поддержкой селектора групп товаров |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)|Виджеты в новой карточке Контрагента
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -175,6 +177,7 @@
 Сейчас доступны следующие точки расширения:
  
 - **entity.counterparty.view** - карточка Контрагента 
+- **entity.counterparty.edit** - новая карточка Контрагента
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.edit** - документ "Отгрузка"
 
@@ -261,7 +264,7 @@
 
 
 
-> Дескриптор для серверных приложений с виджетом в карточке контрагента
+> Дескриптор для серверных приложений с виджетом в старой карточке контрагента
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -288,7 +291,7 @@
     </widgets>
 </ServerApplication>
 ```
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback
+> Дескриптор для серверных приложений с виджетом в старой карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -333,7 +336,7 @@
 </ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколом good-folder-selector
+> Дескриптор для серверных приложений с виджетом в новой карточке контрагента, заказе покупателя и отгрузке и протоколом good-folder-selector
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -351,7 +354,7 @@
         <scope>admin</scope>
     </access>
     <widgets>        
-        <entity.counterparty.view>            
+        <entity.counterparty.edit>            
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
@@ -359,7 +362,7 @@
             <uses>
                 <good-folder-selector/>
             </uses>      
-        </entity.counterparty.view>    
+        </entity.counterparty.edit>    
 
         <document.customerorder.edit>
             <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>

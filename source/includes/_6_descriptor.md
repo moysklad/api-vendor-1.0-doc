@@ -263,7 +263,7 @@
 
 
 
-> Дескриптор для серверных приложений с виджетом в карточке контрагента и счете покупателя
+> Дескриптор для серверных приложений с виджетом в карточке контрагента
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -287,12 +287,6 @@
                 <fixed>150px</fixed>            
             </height>                  
         </entity.counterparty.view>    
-        <document.invoiceout.edit>
-            <sourceUrl>https://example.com/widget-invoiceout.php</sourceUrl>
-            <height>
-                <fixed>110px</fixed>
-            </height>
-        </document.invoiceout.edit>
     </widgets>
 </ServerApplication>
 ```
@@ -388,6 +382,39 @@
                 <good-folder-selector/>
             </uses>
         </document.demand.edit>
+    </widgets>
+</ServerApplication>
+```
+> Дескриптор для серверных приложений с виджетом в заказе покупателя и счете покупателю
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <document.customerorder.edit>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>150px</fixed>
+            </height>
+        </document.customerorder.edit>
+        <document.invoiceout.edit>
+            <sourceUrl>https://example.com/widget-invoiceout.php</sourceUrl>
+            <height>
+                <fixed>110px</fixed>
+            </height>
+        </document.invoiceout.edit>
     </widgets>
 </ServerApplication>
 ```

@@ -16,7 +16,7 @@
 |[2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)|Виджеты в Заказе покупателя и Отгрузке |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.2.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)|Виджеты с поддержкой селектора групп товаров |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.3.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.3.0.xsd)|Виджеты в Счете покупателю |vendorApi, access, iframe(c expand), widgets | Серверные
-|[2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)|Виджеты в новой карточке Контрагента
+|[2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)|Виджеты в новой карточке Контрагента |vendorApi, access, iframe(c expand), widgets | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -51,7 +51,7 @@
         <scope>admin</scope>
     </access>
     <widgets>        
-        <entity.counterparty.view>            
+        <entity.counterparty.edit>            
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
@@ -59,7 +59,7 @@
             <uses>
                 <good-folder-selector/>
             </uses>                  
-        </entity.counterparty.view>    
+        </entity.counterparty.edit>    
     </widgets>
 </ServerApplication>
 ```
@@ -217,13 +217,13 @@
 
 ```xml
     <widgets>
-        <entity.counterparty.view>
+        <entity.counterparty.edit>
             <sourceUrl>https://example.com/widget-counterparty.php</sourceUrl>
             <height>
                 <fixed>200px</fixed>
             </height>
             <supports><open-feedback/></supports>
-        </entity.counterparty.view>
+        </entity.counterparty.edit>
 
         <document.customerorder.edit>
             <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>

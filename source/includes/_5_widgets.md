@@ -12,6 +12,7 @@
 - Контрагент - старая и новая карточки (_entity.counterparty.view_)
 - Заказ покупателя (_document.customerorder.edit_)
 - Отгрузка (_document.demand.edit_)
+- Счет покупателю (_document.invoiceout.edit_)
 
 Во всех точках расширения виджеты имеют одинаковый функционал.
 

@@ -162,7 +162,7 @@
     {
       "name": "Open",
       "messageId": 12345,
-      "extensionPoint": "entity.counterparty.view",
+      "extensionPoint": "entity.counterparty.edit",
       "objectId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c",
       "displayMode": "expanded"
     }

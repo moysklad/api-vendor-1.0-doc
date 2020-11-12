@@ -9,7 +9,8 @@
 
 На данный момент для встраивания виджетов доступны страницы:
 
-- Контрагент - старая и новая карточки (_entity.counterparty.view_)
+- Контрагент - новая карточка (_entity.counterparty.edit_)
+- Контрагент - старая карточка (скоро перестанет поддерживаться) (_entity.counterparty.view_)
 - Заказ покупателя (_document.customerorder.edit_)
 - Отгрузка (_document.demand.edit_)
 - Счет покупателю (_document.invoiceout.edit_)
@@ -79,9 +80,9 @@
 
 Виджеты доступны для серверных приложений с дескриптором версии v2. 
 
-Пример дескриптора приложения с виджетом в карточке контрагента расположен в правой части экрана.
+Пример дескриптора приложения с виджетом в новой карточке контрагента расположен в правой части экрана.
 
-> Дескриптор приложения с виджетом в карточке контрагента
+> Дескриптор приложения с виджетом в новой карточке контрагента
 
 
 ```xml
@@ -93,7 +94,7 @@
        <vendorApi>...</vendorApi>
        <access>...</access>
        <widgets>
-           <entity.counterparty.view>
+           <entity.counterparty.edit>
                <sourceUrl>https://b2b.moysklad.ru/widget/counter-party</sourceUrl>
                <height>
                    <fixed>28px</fixed>
@@ -104,7 +105,7 @@
                 <uses>
                     <good-folder-selector/>
                 </uses>
-           </entity.counterparty.view>
+           </entity.counterparty.edit>
        </widgets>
    </ServerApplication>
 ```
@@ -162,7 +163,7 @@
     {
       "name": "Open",
       "messageId": 12345,
-      "extensionPoint": "entity.counterparty.view",
+      "extensionPoint": "entity.counterparty.edit",
       "objectId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c",
       "displayMode": "expanded"
     }
@@ -170,7 +171,7 @@
 
 
 Здесь `objectId` - это в данном случае идентификатор контрагента, так как 
-точка расширения `entity.counterparty.view`. 
+точка расширения `entity.counterparty.edit`. 
 
 Виджет при получении сообщения `Open` может, например, обратиться на сервер 
 за данными для указанного объекта `objectId` и отобразить их пользователю.
@@ -243,7 +244,7 @@
         <scope>admin</scope>
     </access>
     <widgets>        
-        <entity.counterparty.view>            
+        <entity.counterparty.edit>            
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
@@ -251,7 +252,7 @@
             <uses>
                 <good-folder-selector/>
             </uses>                  
-        </entity.counterparty.view>    
+        </entity.counterparty.edit>    
     </widgets>
 </ServerApplication>
 ```

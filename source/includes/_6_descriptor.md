@@ -17,6 +17,7 @@
 |[2.2.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)|Виджеты с поддержкой селектора групп товаров |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.3.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.3.0.xsd)|Виджеты в Счете покупателю |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)|Виджеты в новой карточке Контрагента |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.5.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.5.0.xsd)|Виджеты с поддержкой протокола save-handler |vendorApi, access, iframe(c expand), widgets | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -199,10 +200,19 @@
 в пикселях, в формате **150px**.
 
 Тег **supports** - опциональный. Предназначен для  дополнительных протоколов, поддерживаемых 
-виджетом. На данный момент в нем можно указать только протокол **supports/open-feedback**. При открытии экрана обеспечивает 
-скрытие содержимого виджета до явного уведомления от виджета о готовности. Подробнее 
-про протокол **open-feedback** можно прочитать в разделе [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
- Параметры у протокола отсутствуют.
+виджетом. На данный момент в нем можно указать протоколы:
+ 
+ - **open-feedback** 
+ 
+ При открытии экрана обеспечивает 
+скрытие содержимого виджета до явного уведомления от виджета о готовности. Параметры у протокола отсутствуют.
+ 
+ - **save-handler**
+ 
+ При сохранении сущности или объекта позволяет уведомить об этом виджет. Параметры у протокола отсутствуют.
+ 
+ Подробнее про дополнительные протоколы **open-feedback**, **save-handler** можно прочитать в разделе
+  [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
  
 Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых виджетом. 
 На данный момент в нем можно указать только протокол **uses/good-folder-selector**. 
@@ -292,7 +302,7 @@
     </widgets>
 </ServerApplication>
 ```
-> Дескриптор для серверных приложений с виджетом в старой карточке контрагента, заказе покупателя и отгрузке и протоколом openfeedback
+> Дескриптор для серверных приложений с виджетом в старой карточке контрагента, заказе покупателя и отгрузке и протоколами openfeedback и save-handler
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -323,7 +333,10 @@
             <height>
                 <fixed>50px</fixed>
             </height>
-            <supports><open-feedback/></supports>  
+            <supports>
+                <open-feedback/>
+                <save-handler/>
+            </supports>  
         </document.customerorder.edit>
 
         <document.demand.edit>

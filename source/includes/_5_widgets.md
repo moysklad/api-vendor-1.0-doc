@@ -263,9 +263,9 @@
  ```json
      {
        "name": "Save",
+       "messageId": 32109,
        "extensionPoint": "entity.counterparty.edit",
-       "objectId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c",
-       "messageId": 32109
+       "objectId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c"
      }
  ```
 

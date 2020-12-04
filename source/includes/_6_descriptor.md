@@ -19,6 +19,7 @@
 |[2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)|Виджеты в новой карточке Контрагента |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.5.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.5.0.xsd)|Виджеты с поддержкой протокола save-handler |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.6.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.6.0.xsd)|Виджеты с поддержкой протокола dirty-state |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.7.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.7.0.xsd)|Виджеты в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке |vendorApi, access, iframe(c expand), widgets | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -183,6 +184,10 @@
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.edit** - документ "Отгрузка"
 - **document.invoiceout.edit** - документ "Счет покупателю"
+- **document.processingorder.edit** - документ "Заказ на производство"
+- **document.purchaseorder.edit** - документ "Заказ поставщику"
+- **document.invoicein.edit** - документ "Счет поcтавщика"
+- **document.supply.edit** - документ "Приемка"
 
 В одном дескрипторе может быть указано несколько точек расширения, то есть одно приложение сможет создать
  сразу несколько виджетов - на разных страницах. В то же время для приложения действует правило:

@@ -14,6 +14,10 @@
 - Заказ покупателя (_document.customerorder.edit_)
 - Отгрузка (_document.demand.edit_)
 - Счет покупателю (_document.invoiceout.edit_)
+- Заказ на производство (_document.processingorder.edit_)
+- Заказ поставщику (_document.purchaseorder.edit_)
+- Счет поставщика (_document.invoicein.edit_)
+- Приемка (_document.supply.edit_)
 
 Во всех точках расширения виджеты имеют одинаковый функционал.
 

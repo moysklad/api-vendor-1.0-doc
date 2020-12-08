@@ -213,9 +213,10 @@
  
  - **save-handler** - при сохранении сущности или объекта позволяет уведомить об этом виджет. Параметры у протокола отсутствуют.
  
- - **dirty-state** - при наличии несохраненных изменений в виджете позволяет отобразить диалог подтверждения сохранения изменений.
+ - **dirty-state** - при наличии несохраненных изменений в виджете позволяет отобразить 
+   диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
  
- Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **set-dirty** можно прочитать в разделе
+ Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **dirty-state** можно прочитать в разделе
   [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
  
 Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых виджетом. 
@@ -354,7 +355,7 @@
 </ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с виджетом в новой карточке контрагента, заказе покупателя и отгрузке и протоколами good-folder-selector и set-dirty
+> Дескриптор для серверных приложений с виджетом в новой карточке контрагента, заказе покупателя и отгрузке и протоколами good-folder-selector и dirty-state
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -376,10 +377,12 @@
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
-            </height>            
+            </height>       
+            <supports>
+                <dirty-state/>  
+            </supports>
             <uses>
                 <good-folder-selector/>
-                <set-dirty/>
             </uses>      
         </entity.counterparty.edit>    
 
@@ -398,9 +401,11 @@
             <height>
                 <fixed>50px</fixed>
             </height>
+            <supports>
+                <dirty-state/>
+            </supports>
             <uses>
                 <good-folder-selector/>
-                <set-dirty/>
             </uses>
         </document.demand.edit>
     </widgets>

@@ -386,6 +386,9 @@
             <height>
                 <fixed>50px</fixed>
             </height>
+            <supports>
+                <dirty-state/>  
+            </supports>
             <uses>
                 <good-folder-selector/>
             </uses>

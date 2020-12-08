@@ -18,6 +18,7 @@
 |[2.3.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.3.0.xsd)|Виджеты в Счете покупателю |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)|Виджеты в новой карточке Контрагента |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.5.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.5.0.xsd)|Виджеты с поддержкой протокола save-handler |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.6.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.6.0.xsd)|Виджеты с поддержкой протокола dirty-state |vendorApi, access, iframe(c expand), widgets | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -207,7 +208,10 @@
  
  - **save-handler** - при сохранении сущности или объекта позволяет уведомить об этом виджет. Параметры у протокола отсутствуют.
  
- Подробнее про дополнительные протоколы **open-feedback**, **save-handler** можно прочитать в разделе
+ - **dirty-state** - при наличии несохраненных изменений в виджете позволяет отобразить 
+   диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
+ 
+ Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **dirty-state** можно прочитать в разделе
   [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
  
 Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых виджетом. 
@@ -346,7 +350,7 @@
 </ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с виджетом в новой карточке контрагента, заказе покупателя и отгрузке и протоколом good-folder-selector
+> Дескриптор для серверных приложений с виджетом в новой карточке контрагента, заказе покупателя и отгрузке и протоколами good-folder-selector и dirty-state
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -368,7 +372,10 @@
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
-            </height>            
+            </height>       
+            <supports>
+                <dirty-state/>  
+            </supports>
             <uses>
                 <good-folder-selector/>
             </uses>      
@@ -379,6 +386,9 @@
             <height>
                 <fixed>50px</fixed>
             </height>
+            <supports>
+                <dirty-state/>  
+            </supports>
             <uses>
                 <good-folder-selector/>
             </uses>
@@ -389,6 +399,9 @@
             <height>
                 <fixed>50px</fixed>
             </height>
+            <supports>
+                <dirty-state/>
+            </supports>
             <uses>
                 <good-folder-selector/>
             </uses>

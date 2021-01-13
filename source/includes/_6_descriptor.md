@@ -20,6 +20,7 @@
 |[2.5.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.5.0.xsd)|Виджеты с поддержкой протокола save-handler |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.6.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.6.0.xsd)|Виджеты с поддержкой протокола dirty-state |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.7.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.7.0.xsd)|Виджеты в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке |vendorApi, access, iframe(c expand), widgets | Серверные
+|[2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)|Кастомные попапы |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -28,6 +29,8 @@
   объявлены deprecated и с отменой поддержки дескрипторов версий 1.x.x станут недоступны).
   
 - Добавлен блок widgets (необязательный) для указания конфигурации виджетов приложения.
+
+- Добавлен блок popups (необязательный) для указания конфигурации попап-окон приложения.
 
 Дескрипторы версий 1.x.x некоторое время будут продолжать поддерживаться.
 
@@ -64,20 +67,31 @@
             </uses>                  
         </entity.counterparty.edit>    
     </widgets>
+    <popups>
+        <popup>
+            <name>somePopup</name>
+            <sourceUrl>https://example.com/popup.php</sourceUrl>
+        </popup>
+        <popup>
+            <name>somePopup2</name>
+            <sourceUrl>https://example.com/popup-2.php</sourceUrl>
+        </popup>
+    </popups>
 </ServerApplication>
 ```
 
 
 На текущий момент в [актуальной](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd) версии дескриптора 
-приложения есть четыре блока: **iframe**, **vendorApi**, **access**, **widgets**. 
+приложения есть четыре блока: **iframe**, **vendorApi**, **access**, **widgets**, **popups**. 
 Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольным.
 
 |Блок|Назначение|Доступно для типов приложений|Требует наличия других блоков|
 |----|----------|-----------------------------|-----------------------------|
-|iframe|Описывает iframe-часть приложения.|iframe-приложения, серверные приложения|Не требует|
-|vendorApi|Описывает взаимодействие по Vendor API.|серверные приложения|Не требует|
-|access|Описывает требуемый доступ приложения к ресурсам пользовательского аккаунта.|серверные приложения|vendorApi|
-|widgets|Описывает виджеты.|серверные приложения|Не требует|
+|iframe|Описывает iframe-часть приложения|iframe-приложения, серверные приложения|Не требует|
+|vendorApi|Описывает взаимодействие по Vendor API|серверные приложения|Не требует|
+|access|Описывает требуемый доступ приложения к ресурсам пользовательского аккаунта|серверные приложения|vendorApi|
+|widgets|Описывает виджеты|серверные приложения|Не требует|
+|popups|Описывает кастомные попапы|серверные приложения|Не требует|
 #### Блок iframe
 
 В теге **iframe/sourceUrl** указывается URL, по которому будет загружаться содержимое iframe внутри UI МоегоСклада. 
@@ -173,7 +187,6 @@
 
 #### Блок widgets
 
-
 Сначала необходимо определить в блоке **widgets** точку расширения - указать страницу, где будет 
 расположен виджет. 
 
@@ -251,6 +264,30 @@
         </document.customerorder.edit>
     </widgets>
 ```
+#### Блок popups
+
+> Блок popups с двумя попапами
+
+```xml
+    <popups>
+        <popup>
+            <name>somePopup1</name>
+            <sourceUrl>https://example.com/popup-1.php</sourceUrl>
+        </popup>
+        <popup>
+            <name>somePopup2</name>
+            <sourceUrl>https://example.com/popup-2.php</sourceUrl>
+        </popup>
+    </popups>
+```
+
+Служит для задания списка кастомных попап-окон, которые могут использоваться приложением (виджетами).
+
+Для задания имени попап-окна используется тег `name` (обязательный).
+Для задания адреса страницы используется тег `sourceUrl` (обязательный).
+
+Подробнее про работу с кастомными попап-окнами можно прочитать в разделе [Кастомные попапы](#kastomnye-popapy-dialogowye-okna). 
+
 
 ### Примеры дескрипторов
 
@@ -445,6 +482,44 @@
             </height>
         </document.invoiceout.edit>
     </widgets>
+</ServerApplication>
+```
+
+> Дескриптор для серверных приложений с виджетом в заказе покупателя и двумя кастомными попапами
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <document.customerorder.edit>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>150px</fixed>
+            </height>
+        </document.customerorder.edit>
+    </widgets>
+    <popups>
+        <popup>
+            <name>viewPopup</name>
+            <sourceUrl>https://example.com/view-popup.php</sourceUrl>
+        </popup>
+        <popup>
+            <name>editPopup</name>
+            <sourceUrl>https://example.com/edit-popup.php</sourceUrl>
+        </popup>
+    </popups>
 </ServerApplication>
 ```
 

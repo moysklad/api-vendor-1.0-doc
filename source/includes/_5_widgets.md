@@ -18,6 +18,11 @@
 - Заказ поставщику (_document.purchaseorder.edit_)
 - Счет поставщика (_document.invoicein.edit_)
 - Приемка (_document.supply.edit_)
+- Розничная продажа (_document.retaildemand.edit_)
+- Входящий платеж (_document.paymentin.edit_)
+- Исходящий платеж (_document.paymentout.edit_) 
+- Приходный ордер (_document.cashin.edit_)
+- Расходный ордер (_document.cashout.edit_) 
 
 Во всех точках расширения виджеты имеют одинаковый функционал.
 

@@ -376,6 +376,7 @@
 
 Когда виджет отправляет хост-окну сообщение `SelectGoodFolderRequest`(через Window.postMessage), 
 хост-окно запрашивает у пользователя выбор группы товаров, используя встроенный в МойСклад попап-селектор:
+
 ![useful image](good-folder-selector.png)
 
 > Cообщение SelectGoodFolderRequest
@@ -405,6 +406,7 @@
 ```
 
 Здесь:
+
 + `correlationId` - идентификатор соответствующего сообщения `SelectGoodFolderRequest`;
 + `selected` - признак наличия выбора;
 + `goodFolderId` - идентификатор выбранной группы товаров.
@@ -418,3 +420,434 @@
   "selected": false
 }
 ```
+
+### Кастомные попапы (диалоговые окна)
+
+> Дескриптор с виджетом, использующим кастомные попапы
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+        <expand>true</expand>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.edit>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>
+            <uses>
+                <good-folder-selector/>
+            </uses>                  
+        </entity.counterparty.edit>    
+    </widgets>
+    <popups>
+        <popup>
+            <name>somePopup</name>
+            <sourceUrl>https://example.com/popup.php</sourceUrl>
+        </popup>
+        <popup>
+            <name>somePopup2</name>
+            <sourceUrl>https://example.com/popup-2.php</sourceUrl>
+        </popup>
+    </popups>
+</ServerApplication>
+```
+> Сообщение ShowPopupRequest
+
+```json 
+{
+  "name": "ShowPopupRequest",
+  "messageId": 12,
+  "popupName": "somePopup",
+  "popupParameters": "hello"
+}
+```
+
+> Сообщение OpenPopup
+
+```json 
+{
+  "name": "OpenPopup",
+  "messageId": 36,
+  "popupName": "somePopup",
+  "popupParameters": "hello"
+}
+```
+
+> Сообщение ClosePopup
+
+```json 
+{
+  "name": "ClosePopup",
+  "messageId": 17,
+  "popupResponse": "world"
+}
+```
+
+> Сообщение ShowPopupResponse
+
+```json 
+{
+  "name": "ShowPopupResponse",
+  "correlationId": 12,
+  "popupName": "somePopup",
+  "popupResolution": "normal",
+  "popupResponse": "world"
+}
+```
+
+Использование кастомных попап-окон (диалоговых окон) позволяет виджетам (которые имеют фиксированную высоту и ширину)
+использовать диалоговые окна, аналогичные существующим в МоемСкладе, с возможностью передачи данных как от виджета в попап-окно, 
+так и в обратном направлении. 
+
+Попап-окна отображаются развернутыми на весь экран, что позволяет показать в них больший объем информации, чем в виджетах. 
+При этом МС отрисовывает только заголовок окна с кнопкой закрытия в верхнем правом углу (в качестве заголовка попапа используется название приложения).
+Все остальное должно быть отображено страницей вендора (страница отображается, как и виджеты, внутри iframe).
+
+Для использования виджетом попап-окон необходимо добавить блок 
+```
+<popups>
+    ...
+</popups>
+```
+в [дескрипторе приложения](#blok-popups). Пример дескриптора с блоком `popups` можно увидеть справа.
+
+Виджет может отобразить одно из попап-окон, отправив сообщение `ShowPopupRequest` с именем выбранного попапа хост-окну.
+Пример такого сообщения можно увидеть справа. 
+Здесь:
+
+* `messageId` - идентификатор сообщения;
+* `popupName` - имя открываемого попапа;
+* `popupParameters` - опциональные параметры, передаваемые попапу виджетом (может иметь любой тип, в том числе `null`).
+
+МойСклад проверяет сообщение `ShowPopupRequest` и, если сообщение валидно, то отображает попап-окно, 
+загружая страницу попапа по адресу `sourceUrl` в iframe с передачей `contextKey` в GET-параметре (аналогично загрузке виджета).
+Значение `sourceUrl` загружается из соответствующего элемента списка попап-окон `<popups>` в дескрипторе. 
+При этом поиск производится по переданному в сообщении `popupName`.
+
+После загрузки попапа хост-окно отправляет попап-окну сообщение `OpenPopup` (набор полей тот же что и в `ShowPopupRequest`).
+При этом `messageId` в данном сообщении свой, а не тот, что был передан в сообщении `ShowPopupRequest`.
+  
+Когда необходимо закрыть диалоговое окно, попап отправляет сообщение `ClosePopup` хост-окну.
+Пример такого сообщения можно увидеть справа. Здесь:
+
+* `messageId` - идентификатор сообщения;
+* `popupResponse` - опциональный ответ, возвращаемый виджету (может иметь любой тип, в том числе `null`).
+
+МойСклад в свою очередь отправляет сообщение `ShowPopupResponse` виджету, открывшему попап-окно.
+Пример такого сообщения можно увидеть справа. Здесь:
+
+* `correlationId` - идентификатор соответствующего сообщения ShowPopupRequest;
+* `popupName` - имя открывавшегося попапа;
+* `popupResolution` - вариант, по которому произошло закрытие попапа:
+                      `normal` - нормальное закрытие попапа по `ClosePopup`,
+                      `closedByUser` - закрытие попапа пользователем путем нажатия на крестик;
+* `popupResponse` - опциональный ответ, возвращаемый виджету.
+
+**Примечание**: в настоящий момент страницы попап-окон не кэшируются: при каждом открытии попапа (по сообщению `ShowPopupRequest`)
+будет создаваться новый iframe и содержимое попапа будет загружено повторно (в дальнейшем это поведение будет исправлено).
+
+Рассмотрим работу с попап-окнами на примерах.
+
+#### Пример работы без возврата параметров из попап-окна 
+
+> Пример взаимодействия без передачи дополнительных параметров
+
+```json 
+// виджет -> хост-окно
+{
+  "name": "ShowPopupRequest",
+  "messageId": 12,
+  "popupName": "somePopup"
+}
+
+// хост-окно -> попап
+{
+  "name": "OpenPopup",
+  "messageId": 35,
+  "popupName": "somePopup"
+}
+
+// хост-окно -> виджет
+{
+  "name": "ShowPopupResponse",
+  "correlationId": 12,
+  "popupName": "somePopup",
+  "popupResolution": "closedByUser"
+}
+```
+
+> Пример взаимодействия с передачей параметров в виде строки
+
+```json 
+// виджет -> хост-окно
+{
+  "name": "ShowPopupRequest",
+  "messageId": 17,
+  "popupName": "somePopup",
+  "popupParameters": "hello"
+}
+
+// хост-окно -> попап
+{
+  "name": "OpenPopup",
+  "messageId": 36,
+  "popupName": "somePopup",
+  "popupParameters": "hello"
+}
+
+// хост-окно -> виджет
+{
+  "name": "ShowPopupResponse",
+  "correlationId": 17,
+  "popupName": "somePopup",
+  "popupResolution": "closedByUser"
+}
+```
+
+1. Виджет отправляет хост-окну сообщение `ShowPopupRequest`, указывая в нем имя попапа и опциональные параметры
+1. Хост-окно отображает попап-окно, загружая страницу попапа по адресу `sourceUrl` в iframe с передачей `contextKey` в GET-параметре
+1. Хост-окно отправляет в iframe попап-окна сообщение `OpenPopup`, передавая в нем опциональные параметры от виджета
+1. Пользователь взаимодействует с веб-содержимым попапа, после чего закрывает диалог через системную кнопку (крестик), находящуюся в верхнем правом углу диалогового окна
+1. Система скрывает попап-окно и отправляет виджету сообщение `ShowPopupResponse` с указанием того, что попап был закрыт пользователем через системную кнопку (```"popupResolution": "closedByUser"```)
+
+Пример попап-окна с наличием только системной кнопки закрытия:
+
+![useful image](popup-view.png)
+
+> Закрытие попап-окна с использованием сообщения ClosePopup
+
+```json 
+...
+// попап -> хост-окно
+{
+  "name": "ClosePopup",
+  "messageId": 37,
+}
+
+// хост-окно -> виджет
+{
+  "name": "ShowPopupResponse",
+  "correlationId": 14,
+  "popupName": "somePopup",
+  "popupResolution": "normal"
+}
+```
+
+Вендор может отобразить на странице и собственную кнопку закрытия окна, при нажатии на которую будет отправляться сообщение `ClosePopup`,
+а виджет получит сообщение `ShowPopupResponse` с  ```"popupResolution": "normal"```.
+
+![useful image](popup-view-button.png)
+
+
+#### Пример работы с возвратом параметров из попап-окна 
+
+> Пример ответа с передачей данных о нажатой кнопке
+
+```json 
+// виджет -> хост-окно
+{
+  "name": "ShowPopupRequest",
+  "messageId": 29,
+  "popupName": "somePopup"
+}
+
+// хост-окно -> попап
+{
+  "name": "OpenPopup",
+  "messageId": 36,
+  "popupName": "somePopup"
+}
+
+// пользователь нажимает кнопку Сохранить
+
+// попап -> хост-окно
+{
+  "name": "ClosePopup",
+  "messageId": 44,
+  "popupResponse": "save"
+}
+
+// хост-окно -> виджет
+{
+  "name": "ShowPopupResponse",
+  "correlationId": 29,
+  "popupName": "somePopup",
+  "popupResolution": "normal",
+  "popupResponse": "save"
+}
+```
+Если попап-окну требуется вернуть информацию обратно в виджет, он должен передать ее в поле `popupResponse` сообщения `ClosePopup`.
+
+1. Виджет отправляет хост-окну сообщение `ShowPopupRequest`, указывая в нем имя попапа и опциональные параметры
+1. Хост-окно отображает попап-окно, загружая страницу попапа по адресу `sourceUrl` в iframe с передачей `contextKey` в GET-параметре
+1. Хост-окно отправляет в iframe попап-окна сообщение `OpenPopup` с опциональными параметрами
+1. Пользователь взаимодействует с веб-содержимым попапа, после чего нажимает кнопку закрытия или сохранения, находящуюся внутри страницы попапа
+1. Попап отправляет хост-окну сообщение `ClosePopup`, передавая в нем параметры в зависимости от действий пользователя, например тип нажатой кнопки
+1. Система скрывает попап-окно и отправляет виджету сообщение `ShowPopupResponse` с указанием параметров, переданных попапом
+
+Пользователь может закрыть попап принудительно, при этом параметры переданы в виджет не будут.
+
+Пример попап-окна с кнопками "Сохранить" и "Отмена":
+
+![useful image](popup-edit.png)
+
+#### Отображение содержимого, которое не вмещается в окно целиком
+
+> Пример "плавающей" верстки содержимого
+
+```html
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+
+    <title>Popup example</title>
+    <style>
+        body {
+            overflow: hidden;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .content-container {
+            overflow: auto;
+            flex-grow: 1;
+        }
+        .buttons-container {
+            padding-top: 15px;
+            min-height: 55px;
+        }
+    </style>
+    <link rel="stylesheet" href="css/uikit.css">
+</head>
+
+<body>
+<div class="main-container">
+    <div class="content-container">
+        <!--Разместите здесь содержимое -->
+    </div>
+    <div class="buttons-container">
+        <button class="button button--success">Сохранить</button>
+        <button class="button">Отмена</button>
+    </div>
+</div>
+</body>
+</html>
+```
+
+Если в попап-окне требуется отобразить содержимое, которое потенциально может не вместиться на экране пользователя, 
+то желательно использовать "плавающую" верстку: чтобы появлялись полосы прокрутки для содержимого, 
+и кнопки закрытия окна всегда отображались в нижней части диалога. 
+
+Пример попап-окна с полосами прокрутки:
+
+![useful image](popup-scroll.png)
+
+Пример такой верстки с использованием [UI Kit](https://github.com/moysklad/html-marketplace-1.0-uikit) представлен справа.
+
+
+#### Способы передачи параметров
+
+> Пример взаимодействия с передачей параметров в виде строки
+
+```json 
+// виджет -> хост-окно
+{
+  "name": "ShowPopupRequest",
+  "messageId": 12,
+  "popupName": "somePopup",
+  "popupParameters": "hello"
+}
+
+// хост-окно -> попап
+{
+  "name": "OpenPopup",
+  "messageId": 35,
+  "popupName": "somePopup",
+  "popupParameters": "hello"
+}
+```
+
+> Пример взаимодействия с передачей параметров в виде объекта
+
+```json 
+// виджет -> хост-окно
+{
+  "name": "ShowPopupRequest",
+  "messageId": 12,
+  "popupName": "somePopup",
+  "popupParameters": {
+    "aaa": 1,
+    "bbb": "qwerty"
+  }
+}
+
+// хост-окно -> попап
+{
+  "name": "OpenPopup",
+  "messageId": 35,
+  "popupName": "somePopup",
+  "popupParameters": {
+    "aaa": 1,
+    "bbb": "qwerty"
+  }
+}
+```
+
+
+> Пример взаимодействия с передачей параметров в виде массива
+
+```json 
+// виджет -> хост-окно
+{
+  "name": "ShowPopupRequest",
+  "messageId": 12,
+  "popupName": "somePopup",
+  "popupParameters": [123, "foobar"]
+}
+
+// хост-окно -> попап
+{
+  "name": "OpenPopup",
+  "messageId": 35,
+  "popupName": "somePopup",
+  "popupParameters": [123, "foobar"]
+}
+```
+
+Существует несколько способов передачи параметров между виджетами и попапами:
+
+* передача в виде примитивного значения
+* передача в виде объекта
+* передача в виде массива (в т.ч. массива объектов) 
+* передача в виде значения `null`
+
+Справа приведены примеры передачи параметров из виджета в попап-окно через сообщение `ShowPopupRequest`.
+Аналогичные способы передачи можно использовать и для возврата ответа обратно в сообщении `ClosePopup`.
+
+ 
+#### Подытожим сведения о попап-окнах 
+
+* Попап-окно открывается на весь экран аналогично прочим попап-диалогам в UI МоегоСклада (например, вызываемые “через карандаш” окна редактирования сущностей в полях).
+* Попап-окно является модальным, т.е. открывается поверх текущей страницы МС и требует действия от пользователя внутри этого окна (взаимодействие с веб-страницей и/или закрытие попапа).
+* Содержимое попапа определяется вендором (веб-содержимое загружается в iframe окна аналогично загрузке iframe виджета или основного iframe приложения).
+* Попап, так же как и виджеты и главный iframe приложения, может получать текущий контекст пользователя.
+* В качестве заголовка попап-окна используется название приложения.
+* У попапов всегда есть кнопка для принудительного закрытия попапа пользователем (крестик справа вверху).
+* Попап изменяет свои размеры при изменении размеров окна браузера.
+

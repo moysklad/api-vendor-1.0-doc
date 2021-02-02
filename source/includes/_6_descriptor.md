@@ -21,6 +21,7 @@
 |[2.6.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.6.0.xsd)|Виджеты с поддержкой протокола dirty-state |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.7.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.7.0.xsd)|Виджеты в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)|Кастомные попапы |vendorApi, access, iframe(c expand), widgets, popups | Серверные
+|[2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)|Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -201,6 +202,11 @@
 - **document.purchaseorder.edit** - документ "Заказ поставщику"
 - **document.invoicein.edit** - документ "Счет поcтавщика"
 - **document.supply.edit** - документ "Приемка"
+- **document.retaildemand.edit** - документ "Розничная продажа"
+- **document.paymentin.edit** - документ "Входящий платеж"
+- **document.paymentout.edit** - документ "Исходящий платеж"
+- **document.cashin.edit** - документ "Приходный ордер"
+- **document.cashout.edit** - документ "Расходный ордер" 
 
 В одном дескрипторе может быть указано несколько точек расширения, то есть одно приложение сможет создать
  сразу несколько виджетов - на разных страницах. В то же время для приложения действует правило:

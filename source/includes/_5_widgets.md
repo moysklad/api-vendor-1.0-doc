@@ -80,6 +80,10 @@
  отправляет сообщение  `OpenFeedback`, после чего система полностью открывает 
  виджет пользователю.
  
+ Если виджет поддерживает протокол **change-handler**, то при изменении полей документа 
+ он оповещается о факте изменения состояния объекта пользователем, получая сообщение `Change`,
+ даже когда изменения объекта еще недоступны по remap API (объект еще не был сохранен). 
+ 
  При сохранении страницы с виджетом, если виджет, который находится на экране редактирования сущности, 
  поддерживает протокол **save-handler**, то он оповещается о факте сохранения объекта пользователем, 
  получая сообщение `Save`.
@@ -93,7 +97,7 @@
 Внутренний dirty-флаг для виджета в хост-окне сбрасывается при открытии
 (при отправке сообщения `Open`) - т.е. хост-окно считает, что в виджете нет несохраненных изменений.
  
- Поддержку виджетом протоколов **open-feedback**, **save-handler**, **dirty-state** необходимо указать в [дескрипторе](#deskriptor-prilozheniq) 
+ Поддержку виджетом протоколов **open-feedback**, **save-handler**, **dirty-state**, **change-handler** необходимо указать в [дескрипторе](#deskriptor-prilozheniq) 
   приложения.
 
 ### Как работают виджеты
@@ -334,6 +338,239 @@
 при закрытии редактируемого объекта).
 
 Протокол **dirty-state** не поддерживается для точки `entity.counterparty.view`.
+
+#### Получение состояния редактируемого объекта
+
+Хост-окно может оповещать виджет об изменениях несохраненного состояния редактируемого объекта. 
+Для этого в дескрипторе для виджета нужно объявить поддержку опционального протокола **change-handler**.
+
+  > Тег дополнительных протоколов supports с протоколом change-handler
+  
+  ```xml
+      <supports>
+          <change-handler/>
+      </supports>
+  ```
+ 
+ Хост-окно отправляет виджету сообщение `Change` (через [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)) 
+ при изменении редактируемого объекта пользователем.
+ 
+ Отправка сообщения `Change` инициируется при следующих действиях пользователя, а именно:
+ 
+ - изменение полей документа (в т.ч. дополнительных полей) путём редактирования/выбора значения в селекторе
+ 
+ - добавление/удаление/редактирование позиций документа
+ 
+ Отправка сообщения `Change` **не происходит** при изменениях документа, связанных с его загрузкой из БД, а именно:
+ 
+ - при открытии экрана редактирования документа
+ 
+ - после сохраниения документа путём нажатия на кнопку “Сохранить” или любым другим доступным способом
+ 
+ Также сообщение Change не отправляется в случае, если при редактировании значение редактируемого поля не изменилось (т. е. при отсутствии реальных изменений).
+ 
+ 
+ Протокол **change-handler** поддерживается на данный момент только для точки `document.customerorder.edit`.
+
+ Пример сообщения `Change` cм. в правой части экрана. 
+ Здесь `changeHints` представляет собой массив с подсказками о том, что именно было изменено в редактируемом объекте:
+                                        
+- `_fields` - стандартные простые и ссылочные поля объекта (название, даты, контрагент и т. п.)  
+- `positions` - позиции объекта
+- `attributes` - значения доп. полей объекта 
+ 
+ Поле `objectState` - изменённое состояние объекта, которое представляет собой JavaScript-объект, соответствующий по структуре ответу JSON API 1.2 на получение того же объекта (документа) с позициями.
+ Актуальные сведения о поддержке полей документов в протоколе **change-handler** - см. в [документации](https://dev.moysklad.ru/doc/api/remap/1.2/) JSON API 1.2.
+ О поддержке полей в Заказе покупателя подробнее [здесь](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq).
+ > Сообщение Change
+ 
+ ```json
+{
+   "name":"Change",
+   "extensionPoint":"document.customerorder.edit",
+   "messageId":7,
+   "changeHints":[
+      "positions",
+      "_fields"
+   ],
+   "objectState":{
+      "meta":{
+         "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/c4c6e6ea-b3f5-11eb-0a80-35ed000000b8",
+         "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/metadata",
+         "type":"customerorder",
+         "mediaType":"application/json",
+         "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#customerorder/edit?id=c4c6e6ea-b3f5-11eb-0a80-35ed000000b8"
+      },
+      "id":"c4c6e6ea-b3f5-11eb-0a80-35ed000000b8",
+      "accountId":"5fc956ad-b3f2-11eb-0a80-1b8a00000000",
+      "created":"2021-05-13 17:16:11.465",
+      "payedSum":0,
+      "shippedSum":0,
+      "invoicedSum":0,
+      "name":"00001",
+      "applicable":true,
+      "moment":"2021-05-13 17:15:00.000",
+      "store":{
+         "meta":{
+            "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/store/605491e4-b3f2-11eb-0a80-35ed00000074",
+            "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/store/metadata",
+            "type":"store",
+            "mediaType":"application/json",
+            "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#warehouse/edit?id=605491e4-b3f2-11eb-0a80-35ed00000074"
+         }
+      },
+      "rate":{
+         "currency":{
+            "meta":{
+               "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/currency/6055a619-b3f2-11eb-0a80-35ed00000079",
+               "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/currency/metadata",
+               "type":"currency",
+               "mediaType":"application/json",
+               "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#currency/edit?id=6055a619-b3f2-11eb-0a80-35ed00000079"
+            }
+         }
+      },
+      "organization":{
+         "meta":{
+            "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/organization/6051401c-b3f2-11eb-0a80-35ed00000072",
+            "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/organization/metadata",
+            "type":"organization",
+            "mediaType":"application/json",
+            "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#mycompany/edit?id=6051401c-b3f2-11eb-0a80-35ed00000072"
+         }
+      },
+      "agent":{
+         "meta":{
+            "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/counterparty/60550738-b3f2-11eb-0a80-35ed00000077",
+            "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/counterparty/metadata",
+            "type":"counterparty",
+            "mediaType":"application/json",
+            "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#company/edit?id=60550738-b3f2-11eb-0a80-35ed00000077"
+         }
+      },
+      "state":{
+         "meta":{
+            "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/metadata/states/60850d6a-b3f2-11eb-0a80-35ed00000097",
+            "type":"state",
+            "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/metadata",
+            "mediaType":"application/json"
+         }
+      },
+      "externalCode":"JAGi0Yg0i0OYvylp7SzDi3",
+      "vatEnabled":true,
+      "vatIncluded":true,
+      "vatSum":0,
+      "sum":21000,
+      "updated":"2021-05-13 17:16:11.434",
+      "reservedSum":20000,
+      "attributes":[
+         {
+            "meta":{
+               "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/metadata/attributes/14fb3ad9-b3f6-11eb-0a80-35ed000000cb",
+               "type":"attributemetadata",
+               "mediaType":"application/json"
+            },
+            "id":"14fb3ad9-b3f6-11eb-0a80-35ed000000cb",
+            "name":"Строка",
+            "type":"string",
+            "value":"123АААББвQ"
+         },
+         {
+            "meta":{
+               "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/metadata/attributes/14fbcb79-b3f6-11eb-0a80-35ed000000cc",
+               "type":"attributemetadata",
+               "mediaType":"application/json"
+            },
+            "id":"14fbcb79-b3f6-11eb-0a80-35ed000000cc",
+            "name":"Ссылка",
+            "type":"link",
+            "value":null
+         },
+         {
+            "meta":{
+               "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/metadata/attributes/14fbd363-b3f6-11eb-0a80-35ed000000cd",
+               "type":"attributemetadata",
+               "mediaType":"application/json"
+            },
+            "id":"14fbd363-b3f6-11eb-0a80-35ed000000cd",
+            "name":"Компания",
+            "type":"counterparty",
+            "value":{
+               "meta":{
+                  "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/counterparty/6054e7f9-b3f2-11eb-0a80-35ed00000075",
+                  "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/counterparty/metadata",
+                  "type":"counterparty",
+                  "mediaType":"application/json",
+                  "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#company/edit?id=6054e7f9-b3f2-11eb-0a80-35ed00000075"
+               },
+               "name":"ООО \"Поставщик\""
+            }
+         }
+      ],
+      "positions":{
+         "meta":{
+            "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/customerorder/c4c6e6ea-b3f5-11eb-0a80-35ed000000b8/positions",
+            "type":"customerorderposition",
+            "mediaType":"application/json",
+            "size":2,
+            "limit":1000,
+            "offset":0
+         },
+         "rows":[
+            {
+               "meta":{
+                  "href":null,
+                  "type":"customerorderposition",
+                  "mediaType":"application/json"
+               },
+               "id":null,
+               "accountId":"5fc956ad-b3f2-11eb-0a80-1b8a00000000",
+               "price":10000,
+               "quantity":2,
+               "reserve":2,
+               "shipped":0,
+               "assortment":{
+                  "meta":{
+                     "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/product/788a1cc7-b3f6-11eb-0a80-35ed000000e2",
+                     "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/product/metadata",
+                     "type":"product",
+                     "mediaType":"application/json",
+                     "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#good/edit?id=78896bd4-b3f6-11eb-0a80-35ed000000e0"
+                  }
+               },
+               "vat":0,
+               "discount":0
+            },
+            {
+               "meta":{
+                  "href":null,
+                  "type":"customerorderposition",
+                  "mediaType":"application/json"
+               },
+               "id":null,
+               "accountId":"5fc956ad-b3f2-11eb-0a80-1b8a00000000",
+               "price":1000,
+               "quantity":1,
+               "shipped":0,
+               "assortment":{
+                  "meta":{
+                     "href":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/service/9d0c9a63-b3f6-11eb-0a80-35ed000000eb",
+                     "metadataHref":"https://online-marketplace-1.testms.lognex.ru/api/remap/1.2/entity/service/metadata",
+                     "type":"service",
+                     "mediaType":"application/json",
+                     "uuidHref":"https://online-marketplace-1.testms.lognex.ru/app/#good/edit?id=9d0c74c3-b3f6-11eb-0a80-35ed000000e9"
+                  }
+               },
+               "vat":0,
+               "discount":0
+            }
+         ]
+      }
+   }
+}
+
+ ```
+
 
 ### Сервисы хост-окна
 #### Селектор группы товаров

@@ -22,6 +22,7 @@
 |[2.7.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.7.0.xsd)|Виджеты в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке |vendorApi, access, iframe(c expand), widgets | Серверные
 |[2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)|Кастомные попапы |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)|Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере |vendorApi, access, iframe(c expand), widgets, popups | Серверные
+|[2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd)|Протокол change-handler для виджетов в Заказе покупателя |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -234,8 +235,10 @@
  
  - **dirty-state** - при наличии несохраненных изменений в виджете позволяет отобразить 
    диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
+   
+ - **change-handler** - при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя текущее состояние объекта. Пока доступен только в Заказе покупателя. Параметры у протокола отсутствуют.
  
- Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **dirty-state** можно прочитать в разделе
+ Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **dirty-state**, **change-handler** можно прочитать в разделе
   [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
  
 Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых виджетом. 

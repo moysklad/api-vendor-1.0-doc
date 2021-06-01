@@ -45,8 +45,5 @@ Authorization: Bearer 6ab89be1ae6ff147755625ee8da948e42612233b
 
 ### Особенности доступа к некоторым функциям JSON API 1.2
 
-На данный момент для приложений существует ряд ограничений в работе со следующими сущностями JSON API 1.2:
-
-+ приложение не может быть автором [Задач](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-zadacha)
-+ приложение не может работать с [Событиями Контрагентов](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-kontragent-sobytiq-kontragenta)
-+ приложение не может использовать [Шаблоны документов](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow)
+На данный момент для приложений существует ограничение в работе с JSON API 1.2: 
+приложение не может использовать [Шаблоны документов](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow)

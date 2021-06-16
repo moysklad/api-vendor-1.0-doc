@@ -194,8 +194,7 @@
 
 Сейчас доступны следующие точки расширения:
  
-- **entity.counterparty.view** - старая карточка Контрагента 
-- **entity.counterparty.edit** - новая карточка Контрагента
+- **entity.counterparty.edit** - карточка Контрагента
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.edit** - документ "Отгрузка"
 - **document.invoiceout.edit** - документ "Счет покупателю"
@@ -326,7 +325,7 @@
 
 
 
-> Дескриптор для серверных приложений с виджетом в старой карточке контрагента
+> Дескриптор для серверных приложений с виджетом в карточке контрагента
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -344,16 +343,16 @@
         <scope>admin</scope>
     </access>
     <widgets>        
-        <entity.counterparty.view>            
+        <entity.counterparty.edit>            
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
             </height>                  
-        </entity.counterparty.view>    
+        </entity.counterparty.edit>    
     </widgets>
 </ServerApplication>
 ```
-> Дескриптор для серверных приложений с виджетом в старой карточке контрагента, заказе покупателя и отгрузке и протоколами openfeedback и save-handler
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколами openfeedback и save-handler
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -371,13 +370,13 @@
         <scope>admin</scope>
     </access>
     <widgets>        
-        <entity.counterparty.view>            
+        <entity.counterparty.edit>            
             <sourceUrl>https://example.com/widget.php</sourceUrl>            
             <height>                
                 <fixed>150px</fixed>            
             </height>            
             <supports><open-feedback/></supports>        
-        </entity.counterparty.view>    
+        </entity.counterparty.edit>    
 
         <document.customerorder.edit>
             <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
@@ -401,7 +400,7 @@
 </ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с виджетом в новой карточке контрагента, заказе покупателя и отгрузке и протоколами good-folder-selector и dirty-state
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколами good-folder-selector и dirty-state
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             

@@ -581,6 +581,12 @@
 
 
 ### Сервисы хост-окна
+
+В настоящий момент сервисы хост-окна представлены следующими:
+
+* Селектор группы товаров
+* Стандартные диалоги
+
 #### Селектор группы товаров
 
 > Дескриптор с виджетом, использующим селектор группы товаров
@@ -670,6 +676,110 @@
   "selected": false
 }
 ```
+
+#### Стандартные диалоги
+
+> Дескриптор с виджетом, использующим стандартные диалоги
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+        <expand>true</expand>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.edit>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>
+            <uses>
+                <standard-dialogs/>
+            </uses>                  
+        </entity.counterparty.edit>    
+    </widgets>
+</ServerApplication>
+```
+
+Позволяет виджетам приложений использовать существующие в МоемСкладе стандартные диалоги.
+Чтобы виджет начал поддерживать протокол в дескрипторе необходимо добавить блок:
+```
+<uses>
+    <standard-dialogs/>
+</uses>
+```
+
+Когда виджет хочет показать пользователю стандартный диалог, он отправляет хост-окну сообщение `ShowDialogRequest`, 
+указывая в нем текст сообщения и кнопки, которые необходимо отобразить пользователю. Пример:
+
+![useful image](standard-dialog-with-two-buttons.png)
+
+
+> Cообщение ShowDialogRequest
+
+```json 
+{
+  "name": "ShowDialogRequest",
+  "messageId": 12345,
+  "messageText": "Учетная запись будет удалена. Вы хотите продолжить?",
+  "buttons": [
+    {"name": "Yes", "caption": "Да, удалить"},
+    {"name": "No", "caption": "Нет"}
+  ]
+}
+```
+
+Параметры сообщения ShowDialogRequest:
+
+* `messageId` - целочисленный идентификатор сообщения, уникальный в рамках текущего взаимодействия виджет - 
+хост-окно. Назначается виджетом;
+* `messageText` - текст сообщения, который нужно отобразить пользователю МС;
+* `buttons` - список кнопок в диалоге.
+
+После нажатия пользователем кнопки в диалоге или принудительном закрытии (через "крестик") хост-окно передает виджету результат 
+действий пользователя в сообщении `ShowDialogResponse`. 
+
+> Cообщение ShowDialogResponse (Пользователь нажимает кнопку "Нет")
+
+```json 
+{
+  "name": "ShowDialogResponse",
+  "correlationId": 12345,
+  "buttonName": "No",
+  "dialogResolution": "normal"
+}
+```
+
+Параметры ответа ShowDialogResponse:
+
++ `correlationId` - идентификатор соответствующего сообщения `ShowDialogResponse`;
++ `dialogResolution` - признак выбора: `normal` - означает, что была нажата одна из кнопок, 
+`closedByUser` - означает, что диалог был завершен принудительно;
++ `buttonName` - имя выбранной кнопки.
+
+> Cообщение ShowDialogResponse (Пользователь закрыл диалог через "крестик")
+
+```json 
+{
+  "name": "ShowDialogResponse",
+  "correlationId": 12345,
+  "dialogResolution": "closedByUser"
+}
+```
+**Примечание**: 
+В последних версиях Google Chrome (92.0 и выше) использование браузерных диалоговых окон 
+через вызовы Window.alert(), Window.confirm() из iframe [запрещено](https://www.chromestatus.com/feature/5148698084376576). 
+В связи с этим, крайне желательно использовать механизм стандартных диалогов МС.
 
 ### Кастомные попапы (диалоговые окна)
 

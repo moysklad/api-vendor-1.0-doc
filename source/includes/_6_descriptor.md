@@ -23,6 +23,7 @@
 |[2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)|Кастомные попапы |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)|Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd)|Протокол change-handler для виджетов в Заказе покупателя |vendorApi, access, iframe(c expand), widgets, popups | Серверные
+|[2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd)|Стандартные диалоги |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -64,6 +65,7 @@
             </height>
             <uses>
                 <good-folder-selector/>
+                <standard-dialogs/>
             </uses>                  
         </entity.counterparty.edit>    
     </widgets>
@@ -242,10 +244,16 @@
   [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
  
 Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых виджетом. 
-На данный момент в нем можно указать только протокол **uses/good-folder-selector**. 
-Он позволяет виджетам приложений переиспользовать существующий в МоемСкладе селектор группы товаров с получением 
+На данный момент в нем можно указать следующие протоколы: 
+
+* **uses/good-folder-selector** позволяет виджетам приложений переиспользовать существующий в МоемСкладе селектор группы товаров с получением 
 виджетом результата выбора пользователя. 
 Подробнее про протокол можно прочитать в разделе [Селектор группы товаров](#serwisy-host-okna). 
+Параметры у протокола отсутствуют.
+
+* **uses/standard-dialogs** позволяет виджетам приложений использовать существующие в МоемСкладе стандартные диалоги с получением 
+виджетом результата выбора пользователя (кнопки, нажатой пользователем). 
+Подробнее про протокол можно прочитать в разделе [Стандартные диалоги](#serwisy-host-okna). 
 Параметры у протокола отсутствуют.
 
 Пример заполненного блока **widgets**:
@@ -269,6 +277,7 @@
             </height>
             <uses>
                 <good-folder-selector/>
+                <standard-dialogs/>
             </uses>
         </document.customerorder.edit>
     </widgets>

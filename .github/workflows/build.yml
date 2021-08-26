@@ -4,7 +4,6 @@ on: push
 
 jobs:
   build:
-    environment: build-env
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
 

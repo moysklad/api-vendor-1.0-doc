@@ -24,6 +24,7 @@
 |[2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)|Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd)|Протокол change-handler для виджетов в Заказе покупателя |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd)|Стандартные диалоги |vendorApi, access, iframe(c expand), widgets, popups | Серверные
+|[2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd)|Гибкие права приложений |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -55,7 +56,15 @@
     </vendorApi>
     <access>
         <resource>https://online.moysklad.ru/api/remap/1.2</resource>
-        <scope>admin</scope>
+        <scope>custom</scope>
+        <permissions>
+          <viewDashboard/>
+          <customerOrder>
+            <view/>
+            <create/>
+            <update/>
+          </customerOrder>
+        </permissions>
     </access>
     <widgets>        
         <entity.counterparty.edit>            
@@ -168,8 +177,13 @@
 
 В тегах **access/resource** (в перспективе их может быть несколько) указываются ресурсы, к которым приложению нужен доступ.
 
-В тегах **access/scope** (в перспективе их тоже может быть несколько) указываются требуемые разрешения/требуемый уровень 
- доступа. При наличии блока **access** должны присутствовать как минимум по одному тегу **resource** и **scope**.
+В тегах **access/scope** (в перспективе их тоже может быть несколько) указываются требуемый уровень доступа.
+ 
+В тегах **access/permissions** (в перспективе их тоже может быть несколько) указываются требуемые разрешения. 
+
+При наличии блока **access** должны присутствовать как минимум по одному тегу **resource** и **scope**.
+
+При наличии блока **access/scope** со значением **custom** требуется наличие блока **access/permissions**.
  
 Наличие блока **access** требует наличия блока **vendorApi** для передачи токена(ов) к ресурсам аккаунта при активации 
 приложения по Vendor API.
@@ -179,9 +193,13 @@
 
 На текущий момент для **access/resource** возможно только одно значение: **https://online.moysklad.ru/api/remap/1.2**
 
-Для **access/scope** на текущий момент доступно тоже только одно значение: **admin**
+Для **access/scope** на текущий момент доступно два значения: **admin** и **custom**. 
 
-Другими словами, на текущий момент блок **access** может иметь только такой вид:
+Если указан scope **admin**, то приложение будет работать с правами Администратора аккаунта (картинка???).
+Если указан scope **custom**, то приложение получит доступ только к отчетам, документам и сущностям, 
+перечисленным в теге **permissions**.
+
+Пример заполнения блока **access** с указанием прав Администратора:
 
 ```xml
 <access>
@@ -189,6 +207,60 @@
     <scope>admin</scope>
 </access>
 ```
+
+Пример заполнения блока **access** с явным перечислением разрешений:
+
+```xml
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>custom</scope>
+        <permissions>
+          <viewDashboard/>
+          <viewAudit/>
+          <customerOrder>
+            <view/>
+            <create/>
+            <update/>
+            <delete/>
+            <approve/>
+            <print/>
+          </customerOrder>
+          <company>
+            <view/>
+            <create/>
+          </company>
+        </permissions>
+    </access>
+```
+
+Перечисленные в теге **permissions** права доступа могут включать в себя:
+
+* **Пользовательские** — бинарные права доступа, в которых достаточно указать только название. Пользовательские пермиссии
+  могут принимать следующие значения: viewDashboard, viewAudit, viewSaleProfit, viewTurnover, viewCompanyCRM, viewProfitAndLoss,
+  viewMoneyDashboard
+* **Сущностей** — права доступа, в которых помимо названия необходимо указывать так же и уровни доступа к соответствующим сущностям и документам: view, create, update и т.д.. 
+
+Есть три типа значений для пермиссий сущностей, далее будут указаны тип (возможные уровни доступа) — наименование:
+
+**1. OPERATION (view, create, update, delete, print, approve)** — purchaseOrder, invoiceIn, supply, purchaseReturn, factureIn, customerOrder,
+invoiceOut, demand, commissionReportIn, commissionReportOut, salesReturn, factureOut, enter, loss, internalOrder, move, priceList, paymentIn,
+paymentOut, cashIn, cashOut, retailDemand, retailSalesReturn, retailDrawerCashIn, retailDrawerCashOut, bonusTransaction, prepayment, prepaymentReturn,
+processing, processingOrder
+
+**2. DICTIONARY (view, create, update, delete, print)** — good, inventory, company, contract, retailShift
+
+**3. BASE (view, create, update, delete, print)** — retailStore, processingPlan, myCompany, employee, warehouse, currency, project, country, uom,
+customEntity
+
+Примечания: 
+
+* Имеются два ограничения на сочетания пермиссий сущностей: 
+  дескриптор не будет принимать другие уровни доступа, если не указан уровень доступа - view 
+  и дескриптор не будет принимать уровень доступа delete, если не указан update.
+* currency !!!. // TODO
+* В настоящий момент нет отдельного разрешения на работу с web-хуками. 
+  Приложение, которое хочет получить доступ к ним, должно работать с правами Администратора.
+
 
 ### Блок widgets
 
@@ -538,6 +610,43 @@
             <sourceUrl>https://example.com/edit-popup.php</sourceUrl>
         </popup>
     </popups>
+</ServerApplication>
+```
+
+> Дескриптор для серверных приложений с явным указанием прав доступа
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+  <iframe>
+    <sourceUrl>https://example.com/iframe.html</sourceUrl>
+  </iframe>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>
+    <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+    <scope>custom</scope>
+    <permissions>
+      <viewDashboard/>
+      <viewAudit/>
+      <purchaseOrder>
+        <view/>
+        <create/>
+        <update/>
+        <delete/>
+        <print/>
+        <approve/>
+      </purchaseOrder>
+      <good>
+        <view/>
+        <create/>
+        <print/>
+      </good>
+    </permissions>
+  </access>
 </ServerApplication>
 ```
 

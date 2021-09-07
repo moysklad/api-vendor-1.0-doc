@@ -45,5 +45,7 @@ Authorization: Bearer 6ab89be1ae6ff147755625ee8da948e42612233b
 
 ### Особенности доступа к некоторым функциям JSON API 1.2
 
-На данный момент для приложений существует ограничение в работе с JSON API 1.2: 
-приложение не может использовать [Шаблоны документов](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow)
+На данный момент для приложений существуют ограничения в работе с JSON API 1.2:
+
+* Приложение не может использовать [Шаблоны документов](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-obschie-swedeniq-shablony-dokumentow)
+* Приложение не может получать [Информацию о действующей подписке компании](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-podpiska-kompanii)

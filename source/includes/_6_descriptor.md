@@ -24,6 +24,7 @@
 |[2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)|Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd)|Протокол change-handler для виджетов в Заказе покупателя |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd)|Стандартные диалоги |vendorApi, access, iframe(c expand), widgets, popups | Серверные
+|[2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd)|Гибкие права приложений |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -55,7 +56,15 @@
     </vendorApi>
     <access>
         <resource>https://online.moysklad.ru/api/remap/1.2</resource>
-        <scope>admin</scope>
+        <scope>custom</scope>
+        <permissions>
+          <viewDashboard/>
+          <customerOrder>
+            <view/>
+            <create/>
+            <update/>
+          </customerOrder>
+        </permissions>
     </access>
     <widgets>        
         <entity.counterparty.edit>            
@@ -166,22 +175,26 @@
 
 ### Блок access
 
-В тегах **access/resource** (в перспективе их может быть несколько) указываются ресурсы, к которым приложению нужен доступ.
-
-В тегах **access/scope** (в перспективе их тоже может быть несколько) указываются требуемые разрешения/требуемый уровень 
- доступа. При наличии блока **access** должны присутствовать как минимум по одному тегу **resource** и **scope**.
- 
-Наличие блока **access** требует наличия блока **vendorApi** для передачи токена(ов) к ресурсам аккаунта при активации 
+Требуется для серверных приложений, которые хотят получить доступ по JSON API к ресурсам аккаунта.
+В случае отсутствия этого блока в дескрипторе приложения при установке на аккаунт приложению не выдаются никакие доступы 
+к ресурсам.
+Наличие блока **access** требует наличия блока **vendorApi** для передачи токена к ресурсам аккаунта при активации 
 приложения по Vendor API.
 
-В случае отсутствия этого блока в дескрипторе приложения при установке на аккаунт приложению не выдаются никакие доступы 
-к ресурсам аккаунта.
+В теге **access/resource** указывается ресурс, к которому приложению нужен доступ.
+На текущий момент для ресурса возможно только одно значение: `https://online.moysklad.ru/api/remap/1.2`
 
-На текущий момент для **access/resource** возможно только одно значение: **https://online.moysklad.ru/api/remap/1.2**
+В теге **access/scope** указывается требуемый уровень доступа.
+Для него на текущий момент доступно два значения: `admin` и `custom`. 
+Если указан уровень `admin`, то приложение будет работать с правами администратора аккаунта.
+Если указан уровень `custom`, то приложение получит доступ только к отчетам, документам и сущностям, 
+перечисленным в теге **permissions**.
+ 
+В теге **access/permissions** указываются требуемые пермиссии. 
+Данный тег обязателен для уровня доступа со значением `custom`.
+ 
 
-Для **access/scope** на текущий момент доступно тоже только одно значение: **admin**
-
-Другими словами, на текущий момент блок **access** может иметь только такой вид:
+> Пример заполнения блока **access** с указанием прав Администратора:
 
 ```xml
 <access>
@@ -189,6 +202,66 @@
     <scope>admin</scope>
 </access>
 ```
+
+> Пример заполнения блока **access** с явным перечислением пермиссий:
+
+```xml
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>custom</scope>
+        <permissions>
+          <viewDashboard/>
+          <viewAudit/>
+          <customerOrder>
+            <view/>
+            <create/>
+            <update/>
+            <delete/>
+            <approve/>
+            <print/>
+          </customerOrder>
+          <company>
+            <view/>
+            <create/>
+          </company>
+        </permissions>
+    </access>
+```
+
+Перечисленные в теге **permissions** права доступа могут включать в себя:
+
+* **Пользовательские** — права доступа, в которых достаточно указать только название. Позволяют получить доступ к отчетам в МоемСкладе.
+  Могут принимать следующие значения: viewDashboard, viewAudit, viewSaleProfit, viewTurnover, viewCompanyCRM, viewProfitAndLoss,
+  viewMoneyDashboard
+* **Сущностей** — права доступа, в которых помимо названия необходимо указывать так же и уровни доступа к соответствующим сущностям и документам: view, create, update и т.д. 
+
+Есть три типа значений для пермиссий сущностей, далее будут указаны тип (уровни доступа) и названия:
+
+**1. OPERATION (view, create, update, delete, print, approve)** — purchaseOrder, invoiceIn, supply, purchaseReturn, factureIn, customerOrder,
+invoiceOut, demand, commissionReportIn, commissionReportOut, salesReturn, factureOut, enter, loss, internalOrder, move, priceList, paymentIn,
+paymentOut, cashIn, cashOut, retailDemand, retailSalesReturn, retailDrawerCashIn, retailDrawerCashOut, bonusTransaction, prepayment, prepaymentReturn,
+processing, processingOrder
+
+**2. DICTIONARY (view, create, update, delete, print)** — good, inventory, company, contract, retailShift
+
+**3. BASE (view, create, update, delete, print)** — retailStore, processingPlan, myCompany, employee, warehouse, currency, project, country, uom,
+customEntity
+
+Подробнее о пермиссиях в МоемСкладе см. в [документации JSON API](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#sushhnosti-sotrudnik-rabota-s-pravami-sotrudnika).
+
+Примечания: 
+
+* Имеются два ограничения на сочетания пермиссий сущностей: 
+  * уровень доступа `<view/>` необходим, если есть другие уровни;
+  * уровень доступа `<update/>` необходим, если требуется уровень `<delete/>`.
+* При установке приложения ему будет автоматически предоставлено право на просмотр справочника Валют (`<currency><view/></currency>`).
+* В настоящий момент нет отдельной пермиссии для работы с web-хуками. 
+  Приложение, которое хочет получить доступ к ним, должно работать с правами администратора.
+* В настоящий момент не поддерживается пермиссия для работы с Задачами (`script`). 
+  Приложение, которое хочет получить доступ к ним, должно работать с правами администратора.
+* В настоящий момент не поддерживаются пермиссии для работы с сущностями Маркировки: 
+  `crptCancellation`, `crptPackageCreation`, `crptPackageItemRemoval`, `crptPackageDisaggregation`, `GTINList`, `trackingCodeList`. 
+
 
 ### Блок widgets
 
@@ -538,6 +611,43 @@
             <sourceUrl>https://example.com/edit-popup.php</sourceUrl>
         </popup>
     </popups>
+</ServerApplication>
+```
+
+> Дескриптор для серверных приложений с явным указанием прав доступа
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+  <iframe>
+    <sourceUrl>https://example.com/iframe.html</sourceUrl>
+  </iframe>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>
+    <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+    <scope>custom</scope>
+    <permissions>
+      <viewDashboard/>
+      <viewAudit/>
+      <purchaseOrder>
+        <view/>
+        <create/>
+        <update/>
+        <delete/>
+        <print/>
+        <approve/>
+      </purchaseOrder>
+      <good>
+        <view/>
+        <create/>
+        <print/>
+      </good>
+    </permissions>
+  </access>
 </ServerApplication>
 ```
 

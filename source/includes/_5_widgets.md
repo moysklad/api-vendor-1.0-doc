@@ -22,6 +22,11 @@
 - Исходящий платеж (_document.paymentout.edit_) 
 - Приходный ордер (_document.cashin.edit_)
 - Расходный ордер (_document.cashout.edit_) 
+- Перемещение (_document.move.edit_) 
+- Списание (_document.loss.edit_) 
+- Оприходование (_document.enter.edit_) 
+- Внутренний заказ (_document.internalorder.edit_) 
+- Инвентаризация (_document.inventory.edit_) 
 
 Во всех точках расширения виджеты имеют одинаковый функционал. За исключением документа Заказ покупателя - только в этой точке поддерживается протокол `change-handler`.
 

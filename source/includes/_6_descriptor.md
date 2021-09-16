@@ -25,6 +25,7 @@
 |[2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd)|Протокол change-handler для виджетов в Заказе покупателя |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd)|Стандартные диалоги |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd)|Гибкие права приложений |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd)|Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -283,6 +284,11 @@ customEntity
 - **document.paymentout.edit** - документ "Исходящий платеж"
 - **document.cashin.edit** - документ "Приходный ордер"
 - **document.cashout.edit** - документ "Расходный ордер" 
+- **document.move.edit** - документ "Перемещение"
+- **document.loss.edit** - документ "Списание"
+- **document.enter.edit** - документ "Оприходование"
+- **document.internalorder.edit** - документ "Внутренний заказ"
+- **document.inventory.edit** - документ Инвентаризация
 
 В одном дескрипторе может быть указано несколько точек расширения, то есть одно приложение сможет создать
  сразу несколько виджетов - на разных страницах. В то же время для приложения действует правило:

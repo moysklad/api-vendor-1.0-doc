@@ -28,7 +28,7 @@
 - Внутренний заказ (_document.internalorder.edit_) 
 - Инвентаризация (_document.inventory.edit_) 
 - Возврат поставщику (_document.purchasereturn.edit_) 
-- Возврат покупателю (_document.salesreturn.edit_) 
+- Возврат покупателя (_document.salesreturn.edit_) 
 
 Во всех точках расширения виджеты имеют одинаковый функционал. За исключением документа Заказ покупателя - только в этой точке поддерживается протокол `change-handler`.
 

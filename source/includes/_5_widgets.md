@@ -592,6 +592,7 @@
 
 * [Селектор группы товаров](#selektor-gruppy-towarow)
 * [Стандартные диалоги](#standartnye-dialogi)
+* [Протокол навигации](#protokol-nawigacii)
 
 #### Селектор группы товаров
 
@@ -790,6 +791,86 @@ HTML-теги в нем не допускаются (будут экраниро
 В последних версиях Google Chrome (92.0 и выше) использование браузерных диалоговых окон 
 через вызовы Window.alert(), Window.confirm() из iframe [запрещено](https://www.chromestatus.com/feature/5148698084376576). 
 В связи с этим, крайне желательно использовать сервис стандартных диалогов МС.
+
+#### Протокол навигации
+
+> Дескриптор с виджетом, использующим протокол валидации
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+        <expand>true</expand>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.edit>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>
+            <uses>
+                <navigation-service/>
+            </uses>                  
+        </entity.counterparty.edit>    
+    </widgets>
+</ServerApplication>
+```
+
+Позволяет виджетам приложений осуществлять переход на другую страницу МоегоСклада и открывать МойСклад в новой вкладке.
+Чтобы виджет начал поддерживать протокол навигации в дескрипторе необходимо добавить блок:
+
+```
+<uses>
+    <navigation-service/>
+</uses>
+```
+
+Когда виджет отправляет хост-окну сообщение `NavigateRequest`(через Window.postMessage),
+хост-окно переходит на другую страницу МоегоСклада или открывает в новой вкладке браузера нужную страницу МоегоСклада.
+
+> Cообщение NavigateRequest
+
+```json 
+{
+  "name": "NavigateRequest",
+  "messageId": 12345,
+  "path": "#good/edit?id=e8a46787-0ff4-11ec-0a80-1eb200000740",
+  "target": "blank"
+}
+```
+
+Здесь `messageId` - целочисленный идентификатор сообщения, уникальный в рамках текущего взаимодействия виджет -
+хост-окно. Назначается виджетом.
+
+`path` - путь до страницы, на которую виджет хочет осуществить переход. Например, чтобы осуществить переход пользователя на страницу реестра заказов 
+покупателя https://online.moysklad.ru/app/#customerorder, нужно передать `#customerorder`.
+
+`target` - вид навигации. Может принимать одно из двух значений: `self` - переход в текущей вкладке, `blank` - открытие в новой вкладке. 
+
+Если валидация сообщения пройдет успешно, то перед переходом пользователя будет отправлен `NavigateResponse` обратно в виджет. 
+
+> Cообщение NavigateResponse
+
+```json 
+{
+  "name": "NavigateResponse",
+  "correlationId": 12345 
+}
+```
+
+Здесь:
+
++ `correlationId` - идентификатор соответствующего сообщения `NavigateRequest`;
 
 ### Кастомные попапы (модальные окна)
 

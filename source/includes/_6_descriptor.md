@@ -27,7 +27,7 @@
 |[2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd)|Гибкие права приложений |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd)|Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-|[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Поддержка протокола <navigation-service/> в виджетах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 

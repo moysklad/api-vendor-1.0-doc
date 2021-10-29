@@ -613,7 +613,8 @@ customEntity
 </ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с виджетом в заказе покупателя и двумя кастомными попапами
+> Дескриптор для серверных приложений с виджетом в заказе покупателя и двумя кастомными попапами, один из которых
+> поддерживает протокол good-folder-selector
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -646,6 +647,9 @@ customEntity
         <popup>
             <name>editPopup</name>
             <sourceUrl>https://example.com/edit-popup.php</sourceUrl>
+            <uses>
+              <good-folder-selector/>
+            </uses>
         </popup>
     </popups>
 </ServerApplication>

@@ -596,7 +596,7 @@
 
 #### Селектор группы товаров
 
-> Дескриптор с виджетом, использующим селектор группы товаров
+> Дескриптор приложения с виджетом, использующим селектор группы товаров
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -628,15 +628,50 @@
 </ServerApplication>
 ```
 
-Позволяет виджетам приложений переиспользовать существующий в МоемСкладе селектор группы товаров с получением виджетом 
-результата выбора пользователя.
-Чтобы виджет начал поддерживать селектор в дескрипторе необходимо добавить блок:
+> Дескриптор приложения, у которого iframe и popup используют селектор группы товаров
+
+```xml
+<ServerApplication xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+  <iframe>
+    <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    <expand>true</expand>
+    <uses>
+      <good-folder-selector/>
+    </uses>
+  </iframe>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>
+    <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+    <scope>admin</scope>
+  </access>
+  <popups>
+    <popup>
+      <name>coolPopup</name>
+      <sourceUrl>https://vendorurl.coolpopup.ru</sourceUrl>
+      <uses>
+        <good-folder-selector/>
+      </uses>
+    </popup>
+  </popups>
+</ServerApplication>
+```
+
+Позволяет виджетам, главным iframe'ам и попап-окнам приложений переиспользовать существующий в МоемСкладе селектор группы 
+товаров с получением ими результата выбора пользователя.
+Чтобы виджет, iframe или попап-окно начали поддерживать селектор в дескрипторе, необходимо добавить блок: 
 ```
 <uses>
     <good-folder-selector/>
 </uses>
 ```
+ соответственно в блоки `widgets`, `iframe` или `popup`. Примеры справа.
 
+В частности далее рассмотрим кейс с виджетом.
 Когда виджет отправляет хост-окну сообщение `SelectGoodFolderRequest`(через Window.postMessage), 
 хост-окно запрашивает у пользователя выбор группы товаров, используя встроенный в МойСклад попап-селектор:
 

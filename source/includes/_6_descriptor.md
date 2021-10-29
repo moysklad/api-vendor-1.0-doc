@@ -26,6 +26,7 @@
 |[2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd)|Стандартные диалоги |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd)|Гибкие права приложений |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd)|Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.15.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.15.0.xsd)|Протокол change-handler для виджетов в Отгрузке |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
@@ -322,7 +323,7 @@ customEntity
  - **dirty-state** - при наличии несохраненных изменений в виджете позволяет отобразить 
    диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
    
- - **change-handler** - при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя текущее состояние объекта. Пока доступен только в Заказе покупателя. Параметры у протокола отсутствуют.
+ - **change-handler** - при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя текущее состояние объекта. Доступен в Заказе покупателя и Отгрузке. Параметры у протокола отсутствуют.
  
  Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **dirty-state**, **change-handler** можно прочитать в разделе
   [Жизненный цикл виджета](#zhiznennyj-cikl-widzheta).
@@ -451,7 +452,7 @@ customEntity
     </widgets>
 </ServerApplication>
 ```
-> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколами openfeedback и save-handler
+> Дескриптор для серверных приложений с виджетом в карточке контрагента, заказе покупателя и отгрузке и протоколами openfeedback, save-handler, change-handler
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -485,6 +486,7 @@ customEntity
             <supports>
                 <open-feedback/>
                 <save-handler/>
+                <change-handler/>
             </supports>  
         </document.customerorder.edit>
 
@@ -493,7 +495,10 @@ customEntity
             <height>
                 <fixed>50px</fixed>
             </height>
-            <supports><open-feedback/></supports>  
+            <supports>
+              <open-feedback/>
+              <change-handler/>
+            </supports>  
         </document.demand.edit>
     </widgets>
 </ServerApplication>

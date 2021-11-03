@@ -293,8 +293,30 @@ customEntity
 - **document.purchasereturn.edit** - документ "Возврат поставщику"
 - **document.salesreturn.edit** - документ "Возврат покупателя"
 
-Узнать, какие сейчас доступны протоколы в точках встраивания, можно в разделе
-[Точки встраивания и доступные в них протоколы](#tochki-wstraiwaniq-i-dostupnye-w-nih-protokoly)
+#### Доступные протоколы в блоке widgets/supports
+
+| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler |
+|:---------------------------------|:---:|:---:|:---:|:---:|
+| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ |
+| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ |
+| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ |
+| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ |
+| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ |
+| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ |
+| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ |
+| _document.supply.edit_           | ✅ | ✅ | ✅ | ⬜ |
+| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ |
+| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ |
+| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ |
+| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ |
+| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ |
+| _document.move.edit_             | ✅ | ✅ | ✅ | ⬜ |
+| _document.loss.edit_             | ✅ | ✅ | ✅ | ⬜ |
+| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ |
+| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ |
+| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ |
+| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ |
+| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ |
 
 Сначала необходимо определить в блоке **widgets** точку расширения - указать страницу, где будет расположен виджет.
 

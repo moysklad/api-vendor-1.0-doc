@@ -270,7 +270,30 @@ customEntity
 
 ### Блок widgets
 
-Узнать, какие сейчас доступны точки расширения и доступные в них протоколы, можно в разделе
+Сейчас доступны следующие точки расширения:
+
+- **entity.counterparty.edit** - карточка Контрагента
+- **document.customerorder.edit** - документ "Заказ покупателя"
+- **document.demand.edit** - документ "Отгрузка"
+- **document.invoiceout.edit** - документ "Счет покупателю"
+- **document.processingorder.edit** - документ "Заказ на производство"
+- **document.purchaseorder.edit** - документ "Заказ поставщику"
+- **document.invoicein.edit** - документ "Счет поcтавщика"
+- **document.supply.edit** - документ "Приемка"
+- **document.retaildemand.edit** - документ "Розничная продажа"
+- **document.paymentin.edit** - документ "Входящий платеж"
+- **document.paymentout.edit** - документ "Исходящий платеж"
+- **document.cashin.edit** - документ "Приходный ордер"
+- **document.cashout.edit** - документ "Расходный ордер"
+- **document.move.edit** - документ "Перемещение"
+- **document.loss.edit** - документ "Списание"
+- **document.enter.edit** - документ "Оприходование"
+- **document.internalorder.edit** - документ "Внутренний заказ"
+- **document.inventory.edit** - документ "Инвентаризация"
+- **document.purchasereturn.edit** - документ "Возврат поставщику"
+- **document.salesreturn.edit** - документ "Возврат покупателя"
+
+Узнать, какие сейчас доступны протоколы в точках встраивания, можно в разделе
 [Точки встраивания и доступные в них протоколы](#tochki-wstraiwaniq-i-dostupnye-w-nih-protokoly)
 
 Сначала необходимо определить в блоке **widgets** точку расширения - указать страницу, где будет расположен виджет.
@@ -372,34 +395,7 @@ customEntity
 Для задания имени попап-окна используется тег `name` (обязательный).
 Для задания адреса страницы используется тег `sourceUrl` (обязательный).
 
-Подробнее про работу с кастомными попап-окнами можно прочитать в разделе [Кастомные попапы](#kastomnye-popapy-dialogowye-okna). 
-
-### Точки встраивания и доступные в них протоколы
-
-| Страница              | Точка встраивания                | Протоколы в блоке widgets |
-|:--------------------- |:--------------------------------:| :-------------------------|
-| Контрагент            | _entity.counterparty.edit_       | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Заказ покупателя      | _document.customerorder.edit_    | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service, change-handler |
-| Отгрузка              | _document.demand.edit_           | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service, change-handler |
-| Счет покупателю       | _document.invoiceout.edit_       | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Заказ на производство | _document.processingorder.edit_  | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Заказ поставщику      | _document.purchaseorder.edit_    | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Счет поставщика       | _document.invoicein.edit_        | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Приемка               | _document.supply.edit_           | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Розничная продажа     | _document.retaildemand.edit_     | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Входящий платеж       | _document.paymentin.edit_        | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Исходящий платеж      | _document.paymentout.edit_       | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Приходный ордер       | _document.cashin.edit_           | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Расходный ордер       | _document.cashout.edit_          | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Перемещение           | _document.move.edit_             | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Списание              | _document.loss.edit_             | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Оприходование         | _document.enter.edit_            | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Внутренний заказ      | _document.internalorder.edit_    | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Инвентаризация        | _document.inventory.edit_        | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Возврат поставщику    | _document.purchasereturn.edit_   | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-| Возврат покупателя    | _document.salesreturn.edit_      | open-feedback, save-handler, dirty-state, good-folder-selector, standard-dialogs, navigation-service |
-
-Список доступных для модернизации страниц (точек расширения) и протоколов в них будет активно дополняться.
+Подробнее про работу с кастомными попап-окнами можно прочитать в разделе [Кастомные попапы](#kastomnye-popapy-dialogowye-okna).
 
 ### Примеры дескрипторов
 

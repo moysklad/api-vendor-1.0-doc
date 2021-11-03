@@ -41,8 +41,8 @@
 #### Протоколы в блоке widgets/supports
 
 | Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler |
-|:---------------------------------|:-------------:|:----------- :|:-----------:|:--------------:|
-| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜️|
+|:---------------------------------|:---:|:---:|:---:|:---:|
+| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ |
 | _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ |
 | _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ |
 | _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ |
@@ -66,7 +66,7 @@
 #### Протоколы в блоке widgets/uses
 
 | Точка встраивания                | good-folder-selector | standard-dialogs | navigation-service | 
-|:---------------------------------|:-------------:|:----------- :|:-----------:|
+|:---------------------------------|:---:|:---:|:---:|
 | _entity.counterparty.edit_       | ✅ | ✅ | ✅ |
 | _document.customerorder.edit_    | ✅ | ✅ | ✅ |
 | _document.demand.edit_           | ✅ | ✅ | ✅ |

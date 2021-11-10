@@ -28,6 +28,7 @@
 |[2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd)|Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.19.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.19.0.xsd)|Виджеты на странице создания Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -294,6 +295,7 @@ customEntity
 - **document.inventory.edit** - документ "Инвентаризация"
 - **document.purchasereturn.edit** - документ "Возврат поставщику"
 - **document.salesreturn.edit** - документ "Возврат покупателя"
+- **document.customerorder.create** - страница создания документа "Заказ покупателя"
 
 В одном дескрипторе может быть указано несколько точек расширения, то есть одно приложение сможет создать
  сразу несколько виджетов - на разных страницах. В то же время для приложения действует правило:
@@ -346,7 +348,7 @@ customEntity
 
 Пример заполненного блока **widgets**:
 
-> Блок widgets с точками расширения в контрагенте и заказе покупателя
+> Блок widgets с точками расширения в контрагенте и заказе покупателя в режиме редактирования
 
 ```xml
     <widgets>
@@ -369,6 +371,33 @@ customEntity
                 <navigation-service/>
             </uses>
         </document.customerorder.edit>
+    </widgets>
+```
+
+> Блок widgets с точкой расширения в заказе покупателя в режиме создания и в режиме редактирования
+
+```xml
+    <widgets>
+        <document.customerorder.edit>
+          <sourceUrl>https://example.com/widget-customerorder-edit.php</sourceUrl>
+          <height>
+            <fixed>50px</fixed>
+          </height>
+          <uses>
+            <good-folder-selector/>
+            <standard-dialogs/>
+            <navigation-service/>
+          </uses>
+        </document.customerorder.edit>
+        <document.customerorder.create>
+            <sourceUrl>https://example.com/widget-customerorder-create.php</sourceUrl>
+            <height>
+                <fixed>150px</fixed>
+            </height>
+            <supports>
+              <change-handler/>
+            </supports>
+        </document.customerorder.create>
     </widgets>
 ```
 ### Блок popups

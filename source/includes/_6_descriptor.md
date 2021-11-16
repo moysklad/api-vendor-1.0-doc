@@ -23,6 +23,7 @@
 |[2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)|Кастомные попапы |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)|Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd)|Протокол change-handler для виджетов в Заказе покупателя |vendorApi, access, iframe(c expand), widgets, popups | Серверные
+|[2.11.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.11.0.xsd)|Протокол update-provider для виджетов в Заказе покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd)|Стандартные диалоги |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd)|Гибкие права приложений |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd)|Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
@@ -354,34 +355,36 @@ customEntity
  - **change-handler** - при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя 
 текущее состояние объекта. Параметры у протокола отсутствуют.
 
+ - **update-provider** - позволяет менять текущее состояние объекта отправляя сообщение `UpdateRequest` из виджета. Параметры у протокола отсутствуют.
+
+**Доступность сервисных протоколов в зависимости от точек встраивания**
 #### Доступность дополнительных протоколов в зависимости от точек встраивания
 
-| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler |
-|:---------------------------------|:---:|:---:|:---:|:---:|
-| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ |
-| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ |
-| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ |
-| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ |
-| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ |
-| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ |
-| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ |
-| _document.supply.edit_           | ✅ | ✅ | ✅ | ⬜ |
-| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ |
-| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ |
-| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ |
-| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ |
-| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ |
-| _document.move.edit_             | ✅ | ✅ | ✅ | ⬜ |
-| _document.loss.edit_             | ✅ | ✅ | ✅ | ⬜ |
-| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ |
-| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ |
-| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ |
-| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ |
-| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ |
+| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler | update-provider |
+|:---------------------------------|:---:|:---:|:---:|:---:|:---:|
+| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
+| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ | ✅ |
+| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ |
+| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.supply.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.move.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.loss.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ | ⬜ |
 
 
- Подробнее про дополнительные протоколы **open-feedback**, **save-handler**, **dirty-state**, **change-handler** можно прочитать в разделе
-  [Как работают виджеты](#kak-rabotaut-widzhety).
+Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).
 
 #### Блок сервисных протоколов (uses)
 

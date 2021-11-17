@@ -30,7 +30,7 @@
 |[2.15.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.15.0.xsd)|Протокол change-handler для виджетов в Отгрузке |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-|[2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd)|Поддержка селектора групп товаров (<good-folder-selector/>) в главном iframe приложения и popup'ах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd)|Поддержка селектора групп товаров (`<good-folder-selector/>`) в главном iframe приложения и popup'ах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 

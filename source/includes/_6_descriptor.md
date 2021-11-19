@@ -30,6 +30,7 @@
 |[2.15.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.15.0.xsd)|Протокол change-handler для виджетов в Отгрузке |vendorApi, access, iframe(c expand), widgets, popups | Серверные
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd)|Поддержка селектора групп товаров (`<good-folder-selector/>`) в главном iframe приложения и popup'ах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -121,6 +122,14 @@
 МоегоСклада. Под расширением подразумевается автоматическое масштабирование iframe элемента в зависимости от контента.
 Данный элемент является опциональным со значением `false` по умолчанию, 
 но требуется его установка для случаев, когда содержимое не умещается в окне браузера по высоте.
+
+Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых iframe'ом.
+На данный момент в нем можно указать следующие протоколы:
+
+* **uses/good-folder-selector** позволяет iframe'ам переиспользовать существующий
+  в МоемСкладе селектор группы товаров с получением ими результата выбора пользователя.
+  Подробнее про протокол можно прочитать в разделе [Селектор группы товаров](#serwisy-host-okna).
+  Параметры у протокола отсутствуют.
 
 Чтобы расширение iframe работало верно, на странице, которая указана в **sourceUrl**, должен работать скрипт, 
 оповещающий страницу МоегоСклада об изменении высоты его контента, то есть:
@@ -407,7 +416,7 @@ customEntity
 
 ### Блок popups
 
-> Блок popups с двумя попапами
+> Блок popups с двумя попапами, один из которых использует протокол good-folder-selector
 
 ```xml
     <popups>
@@ -418,6 +427,9 @@ customEntity
         <popup>
             <name>somePopup2</name>
             <sourceUrl>https://example.com/popup-2.php</sourceUrl>
+            <uses>
+              <good-folder-selector/>
+            </uses>
         </popup>
     </popups>
 ```
@@ -426,6 +438,15 @@ customEntity
 
 Для задания имени попап-окна используется тег `name` (обязательный).
 Для задания адреса страницы используется тег `sourceUrl` (обязательный).
+
+Тег **uses** - опциональный. Предназначен для сервисных протоколов, используемых попап-окном. Он указывается в
+блоке **popup**.
+На данный момент в этом теге можно указать следующие протоколы:
+
+* **uses/good-folder-selector** позволяет попап-окну переиспользовать существующий
+  в МоемСкладе селектор группы товаров с получением ими результата выбора пользователя.
+  Подробнее про протокол можно прочитать в разделе [Селектор группы товаров](#serwisy-host-okna).
+  Параметры у протокола отсутствуют.
 
 Подробнее про работу с кастомными попап-окнами можно прочитать в разделе [Кастомные попапы](#kastomnye-popapy-dialogowye-okna).
 
@@ -629,7 +650,8 @@ customEntity
 </ServerApplication>
 ```
 
-> Дескриптор для серверных приложений с виджетом в заказе покупателя и двумя кастомными попапами
+> Дескриптор для серверных приложений с виджетом в заказе покупателя и двумя кастомными попапами, один из которых
+> поддерживает протокол good-folder-selector
 
 ```xml
 <ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -662,6 +684,9 @@ customEntity
         <popup>
             <name>editPopup</name>
             <sourceUrl>https://example.com/edit-popup.php</sourceUrl>
+            <uses>
+              <good-folder-selector/>
+            </uses>
         </popup>
     </popups>
 </ServerApplication>

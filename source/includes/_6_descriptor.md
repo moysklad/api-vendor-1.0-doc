@@ -31,6 +31,7 @@
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd)|Поддержка селектора групп товаров (`<good-folder-selector/>`) в главном iframe приложения и popup'ах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd)|Поддержка протокола валидации при редактировании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -362,35 +363,36 @@ customEntity
    диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
    
  - **change-handler** - при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя 
-текущее состояние объекта. Параметры у протокола отсутствуют.
+текущее состояние объекта. Параметры:
+   - **validation-feedback** - виджет поддерживает протокол валидации. Хост-окно будет ожидать от виджета сообщение `ValidationFeedback` в ответ на сообщение `Change`.
 
  - **update-provider** - позволяет менять текущее состояние объекта отправляя сообщение `UpdateRequest` из виджета. Параметры у протокола отсутствуют.
 
 **Доступность сервисных протоколов в зависимости от точек встраивания**
 #### Доступность дополнительных протоколов в зависимости от точек встраивания
 
-| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler | update-provider |
-|:---------------------------------|:---:|:---:|:---:|:---:|:---:|
-| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ | ✅ |
-| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ |
-| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.supply.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.move.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.loss.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ | ⬜ |
+| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider | 
+|:---------------------------------|:---:|:---:|:---:|:---:|:---:|:---:|
+| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
+| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.supply.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.move.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.loss.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).
@@ -553,6 +555,39 @@ customEntity
               <change-handler/>
             </supports>  
         </document.demand.edit>
+    </widgets>
+</ServerApplication>
+```
+
+> Дескриптор для серверных приложений с виджетом заказе покупателя и протоколом change-handler c validation-feedback
+
+```xml
+<ServerApplication  xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <document.customerorder.edit>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+            <supports>
+              <change-handler>
+                <validation-feedback/>
+              </change-handler>
+            </supports>  
+        </document.customerorder.edit>
     </widgets>
 </ServerApplication>
 ```

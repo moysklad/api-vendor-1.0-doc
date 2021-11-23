@@ -31,7 +31,9 @@
 |[2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd)|Виджеты в Возвратах покупателя и в Возвратах поставщику |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd)|Протокол навигации |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd)|Поддержка селектора групп товаров (`<good-folder-selector/>`) в главном iframe приложения и popup'ах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.19.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.19.0.xsd)|Виджеты на странице создания в Заказе покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd)|Поддержка протокола валидации при редактировании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.21.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.21.0.xsd)|Поддержка протокола валидации при создании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -284,6 +286,7 @@ customEntity
 Сейчас доступны следующие точки расширения:
 
 - **entity.counterparty.edit** - карточка Контрагента
+- **document.customerorder.create** - новый документ "Заказ покупателя" (до первого сохранения)
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.edit** - документ "Отгрузка"
 - **document.invoiceout.edit** - документ "Счет покупателю"
@@ -316,6 +319,13 @@ customEntity
             <supports><open-feedback/></supports>
         </entity.counterparty.edit>
 
+        <document.customerorder.create>
+            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <height>
+                <fixed>50px</fixed>
+            </height>
+        </document.customerorder.create>
+  
         <document.customerorder.edit>
             <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
             <height>
@@ -368,12 +378,12 @@ customEntity
 
  - **update-provider** - позволяет менять текущее состояние объекта отправляя сообщение `UpdateRequest` из виджета. Параметры у протокола отсутствуют.
 
-**Доступность сервисных протоколов в зависимости от точек встраивания**
 #### Доступность дополнительных протоколов в зависимости от точек встраивания
 
 | Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider | 
 |:---------------------------------|:---:|:---:|:---:|:---:|:---:|:---:|
 | _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.customerorder.create_  | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
 | _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
 | _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 

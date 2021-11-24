@@ -321,7 +321,7 @@ customEntity
         </entity.counterparty.edit>
 
         <document.customerorder.create>
-            <sourceUrl>https://example.com/widget-customerorder.php</sourceUrl>
+            <sourceUrl>https://example.com/widget-customerorder-create.php</sourceUrl>
             <height>
                 <fixed>50px</fixed>
             </height>

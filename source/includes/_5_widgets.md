@@ -92,8 +92,8 @@
 Внутренний dirty-флаг для виджета в хост-окне сбрасывается при открытии
 (при отправке сообщения `Open`) - т.е. хост-окно считает, что в виджете нет несохраненных изменений.
  
- Поддержку виджетом протоколов **open-feedback**, **save-handler**, **dirty-state**, **change-handler** необходимо указать в [дескрипторе](#deskriptor-prilozheniq) 
-  приложения.
+Поддержку виджетом протоколов **open-feedback**, **save-handler**, **dirty-state**, **change-handler** необходимо указать в [дескрипторе](#deskriptor-prilozheniq) 
+приложения.
 
 ### Как работают виджеты
 
@@ -404,8 +404,11 @@
 
   
  Актуальные сведения о поддержке конкретных полей документов в протоколе **change-handler** - см. в документации JSON API 1.2.
-- Заказ покупателя [здесь](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq).
-- Отгрузка [здесь](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka).
+
+- [Заказ покупателя](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq)
+- [Отгрузка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka)
+- [Приемка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka)
+
  > Сообщение Change
  
  ```json

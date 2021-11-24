@@ -34,6 +34,7 @@
 |[2.19.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.19.0.xsd)|Виджеты на странице создания в Заказе покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd)|Поддержка протокола валидации при редактировании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.21.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.21.0.xsd)|Поддержка протокола валидации при создании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.22.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.22.0.xsd)|Протокол change-handler для виджетов в Приемке |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -390,7 +391,7 @@ customEntity
 | _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.supply.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.supply.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
 | _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 

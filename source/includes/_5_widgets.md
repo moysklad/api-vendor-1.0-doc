@@ -9,6 +9,16 @@
 
 Список страниц для встраивания виджетов можно увидеть [тут](#blok-widgets).
 
+#### В чем отличия у точек встраивания edit и create?
+
+Виджеты на страницах создания (например в точке встраивания `document.customerorder.create`) имеют ограниченную функциональность 
+по сравнению с виджетами на страницах редактирования (`document.customerorder.edit`). 
+Это выражается как в меньшем количестве поддерживаемых протоколов, так и в реализации самих протоколов.
+Например, в сообщении Change часть полей, которые заполняются после первого сохранения документа (`id`, `created`, `meta` и т.д.) 
+будет заполнено значением `null`. 
+
+Список поддерживаемых протоколов в зависимости от точки встраивания можно увидеть [тут](#dostupnost-dopolnitel-nyh-protokolow-w-zawisimosti-ot-tochek-wstraiwaniq).
+
 #### В каком порядке отображаются виджеты?
 
 Если у пользователя установлены сразу несколько приложений с виджетами, встроенными на одну
@@ -165,25 +175,41 @@
 #### Открытие виджета
 
 При открытии пользователем страницы с виджетом хост-окно отображает iframe
- виджета (только что загруженный или ранее закэшированный) и передает в
+виджета (только что загруженный или ранее закэшированный) и передает в
 этот iframe виджета сообщение `Open` через [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).
 
 Пример сообщения `Open` cм. в правой части экрана.
-> Сообщение Open
+
+> Сообщение Open для виджета на экране создания в Заказе покупателя
 
 ```json
     {
       "name": "Open",
       "messageId": 12345,
-      "extensionPoint": "entity.counterparty.edit",
+      "extensionPoint": "document.customerorder.create",
+      "objectId": null,
+      "displayMode": "expanded"
+    }
+```
+
+> Сообщение Open для виджета на экране редактирования в Заказе покупателя
+
+```json
+    {
+      "name": "Open",
+      "messageId": 12345,
+      "extensionPoint": "document.customerorder.edit",
       "objectId": "8e9512f3-111b-11ea-0a80-02a2000a3c9c",
       "displayMode": "expanded"
     }
 ```
 
 
-Здесь `objectId` - это в данном случае идентификатор контрагента, так как 
-точка расширения `entity.counterparty.edit`. 
+Здесь: 
+
+- `extensionPoint` - текущая точка расширения;
+- `objectId` - идентификатор текущего документа или сущности. Для виджета отображаемого на экране создания значение будет `null`;
+- `displayMode` - режим отображения виджета. В настоящее время может принимать только одно значение `expanded`.
 
 Виджет при получении сообщения `Open` может, например, обратиться на сервер 
 за данными для указанного объекта `objectId` и отобразить их пользователю.
@@ -370,12 +396,18 @@
 - В objectState учитывается url сервиса – [МойСклад](https://online.moysklad.ru) или [Моя Торговля](https://online.sb-mt.ru)
 - На данный момент **change-handler** не поддерживает доп. поля типа Товар
 - В доп. полях типа Файл в `value` содержится имя файла с расширением, в отличие от JSON API 1.2
- 
- Актуальные сведения о поддержке конкретных полей документов в протоколе **change-handler** - см. в документации JSON API 1.2:
+- На страницах создания (точка расширения `*.create`) часть полей, которые заполняются после первого сохранения документа, могут быть не заполнены (иметь значение `null`):
+  - `id`, `accountId`, `created`, `meta`, `href`, `uuidHref` для документа;
+  - `id`, `accountId`, `meta`, `href`, `uuidHref` для позиций документа.
+- На страницах создания некоторые поля могут иметь другое значение:
+  - `updated` - заполняется временем открытия страницы документа.
 
-- [Заказ покупателя](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq).
-- [Отгрузка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka).
-- [Приемка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka).
+  
+ Актуальные сведения о поддержке конкретных полей документов в протоколе **change-handler** - см. в документации JSON API 1.2.
+
+- [Заказ покупателя](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq)
+- [Отгрузка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka)
+- [Приемка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka)
 
  > Сообщение Change
  
@@ -619,7 +651,7 @@
   "messageId": 12,
   "correlationId": 11,
   "valid": false,
-  "message": "Нужно больше печенья"
+  "message": "Пример ошибки от вендора"
 }
 ```
 

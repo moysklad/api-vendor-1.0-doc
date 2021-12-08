@@ -35,6 +35,7 @@
 |[2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd)|Поддержка протокола валидации при редактировании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.21.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.21.0.xsd)|Поддержка протокола валидации при создании Заказа покупателя |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 |[2.22.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.22.0.xsd)|Протокол change-handler для виджетов в Приемке |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+|[2.24.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.24.0.xsd)|Поддержка протокола валидации и виджетов на странице создания в Приемке |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -294,6 +295,7 @@ customEntity
 - **document.processingorder.edit** - документ "Заказ на производство"
 - **document.purchaseorder.edit** - документ "Заказ поставщику"
 - **document.invoicein.edit** - документ "Счет поcтавщика"
+- **document.supply.create** - новый документ "Приемка" (до первого сохранения)
 - **document.supply.edit** - документ "Приемка"
 - **document.retaildemand.edit** - документ "Розничная продажа"
 - **document.paymentin.edit** - документ "Входящий платеж"
@@ -391,6 +393,7 @@ customEntity
 | _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.supply.create_         | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
 | _document.supply.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
 | _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 

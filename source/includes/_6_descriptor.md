@@ -394,7 +394,7 @@ customEntity
 | _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.supply.create_         | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
-| _document.supply.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
+| _document.supply.edit_           | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | 
 | _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 

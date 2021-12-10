@@ -35,7 +35,7 @@
 | [2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd) | Поддержка протокола валидации при редактировании Заказа покупателя                                   |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 | [2.21.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.21.0.xsd) | Поддержка протокола валидации при создании Заказа покупателя                                         |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 | [2.22.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.22.0.xsd) | Протокол change-handler для виджетов в Приемке                                                       |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.23.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.23.0.xsd) | Протокол change-handler для виджетов в Перемещении                                                   |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+| [2.23.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.23.0.xsd) | Протокол change-handler для виджетов в Перемещении и Списании                                        |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -399,7 +399,7 @@ customEntity
 | _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.move.edit_             | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.loss.edit_             | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| _document.loss.edit_             | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
 | _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
 | _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 

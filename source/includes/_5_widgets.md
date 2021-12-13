@@ -1667,7 +1667,7 @@ HTML-теги в нем не допускаются (будут экраниро
 
 ```json 
 {
-  "name": "InvalidMessahttps://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-spisaniegeError",
+  "name": "InvalidMessageError",
   "correlationId": null,
   "invalidMessage": {
     "name": "SelectGoodFolderRequest"

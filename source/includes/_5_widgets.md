@@ -398,6 +398,7 @@
 - В доп. полях типа Файл в `value` содержится имя файла с расширением, в отличие от JSON API 1.2
 - На страницах создания (точка расширения `*.create`) часть полей, которые заполняются после первого сохранения документа, могут быть не заполнены (иметь значение `null`):
   - `id`, `accountId`, `created`, `meta`, `href`, `uuidHref` для документа;
+  - `externalCode` для документа (кроме Заказа покупателя, где внешний код может быть заполнен пользователем);
   - `id`, `accountId`, `meta`, `href`, `uuidHref` для позиций документа.
 - На страницах создания некоторые поля могут иметь другое значение:
   - `updated` - заполняется временем открытия страницы документа.
@@ -408,6 +409,8 @@
 - [Заказ покупателя](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-zakaz-pokupatelq)
 - [Отгрузка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-otgruzka)
 - [Приемка](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka)
+- [Перемещение](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-peremeschenie)
+- [Списание](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-spisanie)
 
  > Сообщение Change
  

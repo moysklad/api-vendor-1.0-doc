@@ -384,30 +384,30 @@ customEntity
 
 #### Доступность дополнительных протоколов в зависимости от точек встраивания
 
-| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider | 
-|:---------------------------------|:---:|:---:|:---:|:---:|:---:|:---:|
-| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.customerorder.create_  | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
-| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.supply.create_         | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
-| _document.supply.edit_           | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | 
-| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.move.edit_             | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.loss.edit_             | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| Точка встраивания               | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider | 
+|:--------------------------------|:-------------:|:------------:|:-----------:|:--------------:|:-------------------:|:---------------:|
+| _entity.counterparty.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.customerorder.create_ |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.customerorder.edit_   |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.demand.edit_          |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.invoiceout.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.processingorder.edit_ |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.purchaseorder.edit_   |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.invoicein.edit_       |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.supply.create_        |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.supply.edit_          |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ⬜        | 
+| _document.retaildemand.edit_    |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.paymentin.edit_       |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.paymentout.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.cashin.edit_          |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.cashout.edit_         |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.move.edit_            |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.loss.edit_            |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.enter.edit_           |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.internalorder.edit_   |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.inventory.edit_       |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.purchasereturn.edit_  |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.salesreturn.edit_     |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
 
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).

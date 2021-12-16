@@ -8,35 +8,35 @@
 
 ### История версий XSD-схемы дескриптора
 
-| Версия                                                                             | Описание                                                                                             | Разрешенное содержимое дескриптора  |  Поддерживаемые типы приложений  |  
-|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|----|----|
-| [1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)   | Серверные и простые iFrame-приложения                                                                | vendorApi, access, iframe | iFrame, Серверные
-| [1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)   | Расширение iFrame (тег expand)                                                                       |  vendorApi, access, iframe(c expand) | iFrame, Серверные
-| [2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)   | Виджеты в старой карточке контрагента. Прекращена поддержка приложений с типом iFrame                |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)   | Виджеты в Заказе покупателя и Отгрузке                                                               |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.2.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)   | Виджеты с поддержкой селектора групп товаров                                                         |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.3.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.3.0.xsd)   | Виджеты в Счете покупателю                                                                           |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)   | Виджеты в новой карточке Контрагента                                                                 |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.5.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.5.0.xsd)   | Виджеты с поддержкой протокола save-handler                                                          |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.6.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.6.0.xsd)   | Виджеты с поддержкой протокола dirty-state                                                           |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.7.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.7.0.xsd)   | Виджеты в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке                       |vendorApi, access, iframe(c expand), widgets | Серверные
-| [2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)   | Кастомные попапы                                                                                     |vendorApi, access, iframe(c expand), widgets, popups | Серверные
-| [2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)   | Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере              |vendorApi, access, iframe(c expand), widgets, popups | Серверные
-| [2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd) | Протокол change-handler для виджетов в Заказе покупателя                                             |vendorApi, access, iframe(c expand), widgets, popups | Серверные
-| [2.11.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.11.0.xsd) | Протокол update-provider для виджетов в Заказе покупателя                                            |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd) | Стандартные диалоги                                                                                  |vendorApi, access, iframe(c expand), widgets, popups | Серверные
-| [2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd) | Гибкие права приложений                                                                              |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd) | Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации                    |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.15.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.15.0.xsd) | Протокол change-handler для виджетов в Отгрузке                                                      |vendorApi, access, iframe(c expand), widgets, popups | Серверные
-| [2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd) | Виджеты в Возвратах покупателя и в Возвратах поставщику                                              |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd) | Протокол навигации                                                                                   |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd) | Поддержка селектора групп товаров (`<good-folder-selector/>`) в главном iframe приложения и popup'ах |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.19.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.19.0.xsd) | Виджеты на странице создания в Заказе покупателя                                                     |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd) | Поддержка протокола валидации при редактировании Заказа покупателя                                   |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.21.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.21.0.xsd) | Поддержка протокола валидации при создании Заказа покупателя                                         |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.22.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.22.0.xsd) | Протокол change-handler для виджетов в Приемке                                                       |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.23.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.23.0.xsd) | Протокол change-handler для виджетов в Перемещении и Списании                                        |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
-| [2.24.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.24.0.xsd) |Виджеты на странице создания в Приемке. Поддержка протокола валидации на страницах создания и редактирования Приемки |vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные
+| Версия                                                                             | Описание                                                                                                             | Разрешенное содержимое дескриптора                                  | Поддерживаемые типы приложений |  
+|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|--------------------------------|
+| [1.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.0.0.xsd)   | Серверные и простые iFrame-приложения                                                                                | vendorApi, access, iframe                                           | iFrame, Серверные              |
+| [1.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v1/application-1.1.0.xsd)   | Расширение iFrame (тег expand)                                                                                       | vendorApi, access, iframe(c expand)                                 | iFrame, Серверные              |
+| [2.0.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.0.0.xsd)   | Виджеты в старой карточке контрагента. Прекращена поддержка приложений с типом iFrame                                | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.1.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.1.0.xsd)   | Виджеты в Заказе покупателя и Отгрузке                                                                               | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.2.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.2.0.xsd)   | Виджеты с поддержкой селектора групп товаров                                                                         | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.3.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.3.0.xsd)   | Виджеты в Счете покупателю                                                                                           | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.4.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.4.0.xsd)   | Виджеты в новой карточке Контрагента                                                                                 | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.5.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.5.0.xsd)   | Виджеты с поддержкой протокола save-handler                                                                          | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.6.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.6.0.xsd)   | Виджеты с поддержкой протокола dirty-state                                                                           | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.7.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.7.0.xsd)   | Виджеты в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке                                       | vendorApi, access, iframe(c expand), widgets                        | Серверные                      |
+| [2.8.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.8.0.xsd)   | Кастомные попапы                                                                                                     | vendorApi, access, iframe(c expand), widgets, popups                | Серверные                      |
+| [2.9.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.9.0.xsd)   | Виджеты в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере                              | vendorApi, access, iframe(c expand), widgets, popups                | Серверные                      |
+| [2.10.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.10.0.xsd) | Протокол change-handler для виджетов в Заказе покупателя                                                             | vendorApi, access, iframe(c expand), widgets, popups                | Серверные                      |
+| [2.11.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.11.0.xsd) | Протокол update-provider для виджетов в Заказе покупателя                                                            | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.12.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.12.0.xsd) | Стандартные диалоги                                                                                                  | vendorApi, access, iframe(c expand), widgets, popups                | Серверные                      |
+| [2.13.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.13.0.xsd) | Гибкие права приложений                                                                                              | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.14.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.14.0.xsd) | Виджеты в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации                                    | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.15.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.15.0.xsd) | Протокол change-handler для виджетов в Отгрузке                                                                      | vendorApi, access, iframe(c expand), widgets, popups                | Серверные                      |
+| [2.16.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.16.0.xsd) | Виджеты в Возвратах покупателя и в Возвратах поставщику                                                              | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.17.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.17.0.xsd) | Протокол навигации                                                                                                   | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.18.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.18.0.xsd) | Поддержка селектора групп товаров (`<good-folder-selector/>`) в главном iframe приложения и popup'ах                 | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.19.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.19.0.xsd) | Виджеты на странице создания в Заказе покупателя                                                                     | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.20.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.20.0.xsd) | Поддержка протокола валидации при редактировании Заказа покупателя                                                   | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.21.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.21.0.xsd) | Поддержка протокола валидации при создании Заказа покупателя                                                         | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.22.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.22.0.xsd) | Протокол change-handler для виджетов в Приемке                                                                       | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.23.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.23.0.xsd) | Протокол change-handler для виджетов в Перемещении, Списании, Оприходовании                                          | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
+| [2.24.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.24.0.xsd) | Виджеты на странице создания в Приемке. Поддержка протокола валидации на страницах создания и редактирования Приемки | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                      |
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -384,30 +384,30 @@ customEntity
 
 #### Доступность дополнительных протоколов в зависимости от точек встраивания
 
-| Точка встраивания                | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider | 
-|:---------------------------------|:---:|:---:|:---:|:---:|:---:|:---:|
-| _entity.counterparty.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.customerorder.create_  | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
-| _document.customerorder.edit_    | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| _document.demand.edit_           | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.invoiceout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.processingorder.edit_  | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.purchaseorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.invoicein.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.supply.create_         | ⬜ | ⬜ | ⬜ | ✅ | ✅ | ⬜ |
-| _document.supply.edit_           | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | 
-| _document.retaildemand.edit_     | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.paymentin.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.paymentout.edit_       | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.cashin.edit_           | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.cashout.edit_          | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.move.edit_             | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.loss.edit_             | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | 
-| _document.enter.edit_            | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.internalorder.edit_    | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.inventory.edit_        | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.purchasereturn.edit_   | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
-| _document.salesreturn.edit_      | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | 
+| Точка встраивания               | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider | 
+|:--------------------------------|:-------------:|:------------:|:-----------:|:--------------:|:-------------------:|:---------------:|
+| _entity.counterparty.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.customerorder.create_ |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.customerorder.edit_   |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.demand.edit_          |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.invoiceout.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.processingorder.edit_ |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.purchaseorder.edit_   |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.invoicein.edit_       |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.supply.create_        |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.supply.edit_          |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ⬜        | 
+| _document.retaildemand.edit_    |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.paymentin.edit_       |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.paymentout.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.cashin.edit_          |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.cashout.edit_         |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.move.edit_            |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.loss.edit_            |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.enter.edit_           |       ✅       |      ✅       |      ✅      |       ✅        |          ⬜          |        ⬜        | 
+| _document.internalorder.edit_   |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.inventory.edit_       |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.purchasereturn.edit_  |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
+| _document.salesreturn.edit_     |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        | 
 
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).

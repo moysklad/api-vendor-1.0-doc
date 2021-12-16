@@ -283,7 +283,7 @@ customEntity
 - **entity.counterparty.edit** - карточка Контрагента
 - **document.customerorder.create** - новый документ "Заказ покупателя" (до первого сохранения)
 - **document.customerorder.edit** - документ "Заказ покупателя"
-- document.demand.create - новый документ "Отгрузка" (до первого сохранения)
+- **document.demand.create** - новый документ "Отгрузка" (до первого сохранения)
 - **document.demand.edit** - документ "Отгрузка"
 - **document.invoiceout.edit** - документ "Счет покупателю"
 - **document.processingorder.edit** - документ "Заказ на производство"

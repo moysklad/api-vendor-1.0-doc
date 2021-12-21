@@ -38,6 +38,7 @@
 | [2.22.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.22.0.xsd) | Протокол change-handler для виджетов в Приемке                                                                                                                                                                                       | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 | [2.23.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.23.0.xsd) | Протокол change-handler для виджетов в Перемещении, Списании, Оприходовании                                                                                                                                 | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 | [2.24.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.24.0.xsd) | Виджеты на странице создания в Приемке, Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
+| [2.25.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.25.0.xsd) | Виджеты на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -296,8 +297,11 @@ customEntity
 - **document.paymentout.edit** - документ "Исходящий платеж"
 - **document.cashin.edit** - документ "Приходный ордер"
 - **document.cashout.edit** - документ "Расходный ордер"
+- **document.move.create** - новый документ "Перемещение" (до первого сохранения)
 - **document.move.edit** - документ "Перемещение"
+- **document.loss.create** - новый документ "Списание" (до первого сохранения)
 - **document.loss.edit** - документ "Списание"
+- **document.enter.create** - новый документ "Оприходование" (до первого сохранения)
 - **document.enter.edit** - документ "Оприходование"
 - **document.internalorder.edit** - документ "Внутренний заказ"
 - **document.inventory.edit** - документ "Инвентаризация"
@@ -380,7 +384,7 @@ customEntity
 | _entity.counterparty.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.customerorder.create_   |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.customerorder.edit_     |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
-| *document.demand.create*          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.demand.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.demand.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ⬜       |
 | _document.invoiceout.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.processingorder.edit_   |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
@@ -393,9 +397,12 @@ customEntity
 | _document.paymentout.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.cashin.edit_            |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.cashout.edit_           |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _document.move.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |         ⬜         |       ⬜       |
-| _document.loss.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |         ⬜         |       ⬜       |
-| _document.enter.edit_             |      ✅      |      ✅      |     ✅     |       ✅       |         ⬜         |       ⬜       |
+| _document.move.create_            |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.move.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ⬜       |
+| _document.loss.create_            |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.loss.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ⬜       |
+| _document.enter.create_           |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.enter.edit_             |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ⬜       |
 | _document.internalorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.inventory.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchasereturn.edit_    |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |

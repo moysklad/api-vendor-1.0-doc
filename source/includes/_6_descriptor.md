@@ -412,7 +412,7 @@ customEntity
 | _document.inventory.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchasereturn.edit_    |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.salesreturn.edit_       |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _entity.counterparty.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.product.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _entity.variant.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _entity.service.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _entity.bundle.edit_              |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |

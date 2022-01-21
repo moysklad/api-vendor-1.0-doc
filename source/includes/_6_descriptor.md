@@ -283,6 +283,11 @@ customEntity
 Сейчас доступны следующие точки расширения:
 
 - **entity.counterparty.edit** - карточка Контрагента
+- **entity.product.edit** - карточка Товара
+- **entity.variant.edit** - карточка Модификации
+- **entity.service.edit** - карточка Услуги
+- **entity.bundle.edit** - карточка Комплекта
+- **entity.productfolder.edit** - карточка Группы товаров
 - **document.customerorder.create** - новый документ "Заказ покупателя" (до первого сохранения)
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.create** - новый документ "Отгрузка" (до первого сохранения)
@@ -308,11 +313,6 @@ customEntity
 - **document.inventory.edit** - документ "Инвентаризация"
 - **document.purchasereturn.edit** - документ "Возврат поставщику"
 - **document.salesreturn.edit** - документ "Возврат покупателя"
-- **entity.product.edit** - карточка Товара
-- **entity.variant.edit** - карточка Модификации
-- **entity.service.edit** - карточка Услуги
-- **entity.bundle.edit** - карточка Комплекта
-- **entity.productfolder.edit** - карточка Группы товаров
 
 > Блок widgets с точками расширения в контрагенте и заказе покупателя
 
@@ -387,6 +387,11 @@ customEntity
 | Точка встраивания | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider |
 | :---------------------------------- | :-------------: | :------------: | :-----------: | :--------------: | :-------------------: | :---------------: |
 | _entity.counterparty.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.product.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.variant.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.service.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.bundle.edit_              |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.productfolder.edit_       |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.customerorder.create_   |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.customerorder.edit_     |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.demand.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
@@ -412,11 +417,6 @@ customEntity
 | _document.inventory.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchasereturn.edit_    |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.salesreturn.edit_       |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _entity.product.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _entity.variant.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _entity.service.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _entity.bundle.edit_              |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _entity.productfolder.edit_       |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).
 

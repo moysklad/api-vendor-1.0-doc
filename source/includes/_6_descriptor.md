@@ -39,6 +39,7 @@
 | [2.23.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.23.0.xsd) | Протокол change-handler для виджетов в Перемещении, Списании, Оприходовании                                                                                                                                 | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 | [2.24.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.24.0.xsd) | Виджеты на странице создания в Приемке, Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 | [2.25.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.25.0.xsd) | Виджеты на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
+| [2.26.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.26.0.xsd) | Виджеты в Товаре, Модификации, Услуге, Комплекте, Группе товаров | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -282,6 +283,11 @@ customEntity
 Сейчас доступны следующие точки расширения:
 
 - **entity.counterparty.edit** - карточка Контрагента
+- **entity.product.edit** - карточка Товара
+- **entity.variant.edit** - карточка Модификации
+- **entity.service.edit** - карточка Услуги
+- **entity.bundle.edit** - карточка Комплекта
+- **entity.productfolder.edit** - карточка Группы товаров
 - **document.customerorder.create** - новый документ "Заказ покупателя" (до первого сохранения)
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.create** - новый документ "Отгрузка" (до первого сохранения)
@@ -372,7 +378,6 @@ customEntity
   диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
 - **change-handler** - при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя
   текущее состояние объекта. Параметры:
-
   - **validation-feedback** - виджет поддерживает протокол валидации. Хост-окно будет ожидать от виджета сообщение `ValidationFeedback` в ответ на сообщение `Change`.
 - **update-provider** - позволяет менять текущее состояние объекта отправляя сообщение `UpdateRequest` из виджета. Параметры у протокола отсутствуют.
 
@@ -382,6 +387,11 @@ customEntity
 | Точка встраивания | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider |
 | :---------------------------------- | :-------------: | :------------: | :-----------: | :--------------: | :-------------------: | :---------------: |
 | _entity.counterparty.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.product.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.variant.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.service.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.bundle.edit_              |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _entity.productfolder.edit_       |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.customerorder.create_   |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.customerorder.edit_     |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.demand.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |

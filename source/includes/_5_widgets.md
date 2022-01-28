@@ -214,27 +214,78 @@
 Виджет при получении сообщения `Open` может, например, обратиться на сервер 
 за данными для указанного объекта `objectId` и отобразить их пользователю.
 
-**Примечание**: в сообщении Open передается ИД текущей открытой сущности в карточке (который отображается в URL браузера в параметре `id`). 
-Несмотря на то, что для сущностей Товар, Услуга, Комплект этот идентификатор отличается от используемого в remap API, 
-запрос по нему по-прежнему будет работать. 
-Пример ответа на запрос для Товара `https://online.moysklad.ru/app/#good/edit?id=9e73d736-a0de-11e9-9109-f8fc00095c7f` приведен в правой части.
+**Примечание**: в сообщении Open передается идентификатор текущей открытой сущности в карточке (который отображается в URL браузера в параметре `id`). 
+Несмотря на то, что для сущностей Товар, Услуга, Комплект и Модификация этот идентификатор отличается от используемого в remap API, 
+запрос по нему по-прежнему будет работать (при этом сервер будет использовать [редирект](https://developer.mozilla.org/ru/docs/Web/HTTP/Status/308)). 
+Пример запроса для Товара `https://online.moysklad.ru/app/#good/edit?id=9e73d736-a0de-11e9-9109-f8fc00095c7f` приведен в правой части (часть вывода для упрощения опущена).
 
 > Ответ на запрос получения Товара  
 
-```
-    GET https://online.moysklad.ru/api/remap/1.2/entity/product/9e73d736-a0de-11e9-9109-f8fc00095c7f
-    
-    {
-      "meta": {
-        "href": "https://online.moysklad.ru/api/remap/1.2/entity/product/9e73e41d-a0de-11e9-9109-f8fc00095c81",
-        "metadataHref": "https://online.moysklad.ru/api/remap/1.2/entity/product/metadata",
-        "type": "product",
-        "mediaType": "application/json",
-        "uuidHref": "https://online.moysklad.ru/app/#good/edit?id=9e73d736-a0de-11e9-9109-f8fc00095c7f"
-      },
-      "id": "9e73e41d-a0de-11e9-9109-f8fc00095c81",
-      ...
-    }
+```shell
+curl -X GET --location "https://online.moysklad.ru/api/remap/1.2/entity/product/9e73d736-a0de-11e9-9109-f8fc00095c7f"     -H "Content-Type: application/json"     -H "Authorization: Bearer ..." -v 
+
+> GET /api/remap/1.2/entity/product/9e73d736-a0de-11e9-9109-f8fc00095c7f HTTP/1.1
+> Host: online.moysklad.ru
+> User-Agent: curl/7.68.0
+> Accept: */*
+> Content-Type: application/json
+> Authorization: Bearer ...
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 308 Permanent Redirect
+< Server: nginx/1.18.0
+< Date: Fri, 28 Jan 2022 11:13:00 GMT
+< Content-Length: 0
+< Connection: keep-alive
+< Cache-Control: max-age=0, no-cache
+< X-Lognex-Reset: 0
+< X-Lognex-Retry-After: 0
+< Location: https://online.moysklad.ru/api/remap/1.2/entity/product/9e73e41d-a0de-11e9-9109-f8fc00095c81
+< X-Lognex-Retry-TimeInterval: 3000
+< X-RateLimit-Remaining: 44
+< X-RateLimit-Limit: 45
+< Strict-Transport-Security: max-age=15552000
+< 
+* Connection #1 to host online.moysklad.ru left intact
+* Issue another request to this URL: 'https://online.moysklad.ru/api/remap/1.2/entity/product/9e73e41d-a0de-11e9-9109-f8fc00095c81'
+* Found bundle for host online.moysklad.ru: 0x55cb04fa3970 [serially]
+* Can not multiplex, even if we wanted to!
+* Re-using existing connection! (#1) with host online.moysklad.ru
+* Connected to online.moysklad.ru (88.212.252.4) port 443 (#1)
+> GET /api/remap/1.2/entity/product/9e73e41d-a0de-11e9-9109-f8fc00095c81 HTTP/1.1
+> Host: online.moysklad.ru
+> User-Agent: curl/7.68.0
+> Accept: */*
+> Content-Type: application/json
+> Authorization: Bearer ...
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Server: nginx/1.18.0
+< Date: Fri, 28 Jan 2022 11:13:00 GMT
+< Content-Type: application/json;charset=utf-8
+< Content-Length: 6535
+< Connection: keep-alive
+< Vary: Accept-Encoding
+< Cache-Control: no-cache
+< X-Lognex-Reset: 0
+< X-Lognex-Retry-After: 0
+< X-Lognex-Retry-TimeInterval: 3000
+< X-RateLimit-Remaining: 43
+< X-RateLimit-Limit: 45
+< Strict-Transport-Security: max-age=15552000
+< 
+{
+  "meta" : {
+    "href" : "https://online.moysklad.ru/api/remap/1.2/entity/product/9e73e41d-a0de-11e9-9109-f8fc00095c81",
+    "metadataHref" : "https://online.moysklad.ru/api/remap/1.2/entity/product/metadata",
+    "type" : "product",
+    "mediaType" : "application/json",
+    "uuidHref" : "https://online.moysklad.ru/app/#good/edit?id=9e73d736-a0de-11e9-9109-f8fc00095c7f"
+  },
+  "id" : "9e73e41d-a0de-11e9-9109-f8fc00095c81",
+  ...
+}
 ```
 
 

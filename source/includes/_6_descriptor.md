@@ -40,6 +40,7 @@
 | [2.24.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.24.0.xsd) | Виджеты на странице создания в Приемке, Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 | [2.25.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.25.0.xsd) | Виджеты на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 | [2.26.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.26.0.xsd) | Виджеты в Товаре, Модификации, Услуге, Комплекте, Группе товаров | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
+| [2.27.0](https://online.moysklad.ru/xml/ns/appstore/app/v2/application-2.27.0.xsd) | Гибкие права приложений - поддержка права видеть себестоимость, цену закупки и прибыль товаров (`<viewProductCostAndProfit/>`)                                                   | vendorApi, access(с permissions), iframe(c expand), widgets, popups | Серверные                                         |
 
 Основные отличия дескриптора v2 от дескрипторов версий 1.x.x:
 
@@ -228,6 +229,7 @@
         <permissions>
           <viewDashboard/>
           <viewAudit/>
+          <viewProductCostAndProfit/>
           <customerOrder>
             <view/>
             <create/>
@@ -248,7 +250,7 @@
 
 * **Пользовательские** — права доступа, в которых достаточно указать только название. Позволяют получить доступ к отчетам в МоемСкладе.
   Могут принимать следующие значения: viewDashboard, viewAudit, viewSaleProfit, viewTurnover, viewCompanyCRM, viewProfitAndLoss,
-  viewMoneyDashboard
+  viewMoneyDashboard, viewProductCostAndProfit
 * **Сущностей** — права доступа, в которых помимо названия необходимо указывать так же и уровни доступа к соответствующим сущностям и документам: view, create, update и т.д.
 
 Есть три типа значений для пермиссий сущностей, далее будут указаны тип (уровни доступа) и названия:

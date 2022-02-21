@@ -144,7 +144,7 @@
   * сообщение послать parent окну
   * данные сообщения должны содержать свойство “height” - высоту содержимого, страницы, которая сейчас отображается (в px)
 
-Для удобства можно добавить следующий [js скрипт](https://online.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-2.js)
+Для удобства можно добавить следующий [js скрипт](https://online.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-3.js)
 на свою страницу. Пример:
 
 ```html

@@ -157,7 +157,7 @@
 
 <body>
 ...
-<script type="text/javascript" src="https://online.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-2.js"></script>
+<script type="text/javascript" src="https://online.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-3.js"></script>
 </body>
 
 </html>

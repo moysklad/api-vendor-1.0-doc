@@ -1263,16 +1263,48 @@ HTML-теги в нем не допускаются (будут экраниро
     </widgets>
 </ServerApplication>
 ```
+> Дескриптор приложения, у которого iframe и popup используют протокол навигации
 
-Позволяет виджетам приложений осуществлять переход на другую страницу МоегоСклада и открывать МойСклад в новой вкладке.
-Чтобы виджет начал поддерживать протокол навигации в дескрипторе необходимо добавить блок:
+```xml
+<ServerApplication xmlns="https://online.moysklad.ru/xml/ns/appstore/app/v2"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="https://online.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://online.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+  <iframe>
+    <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    <expand>true</expand>
+    <uses>
+      <navigation-service/>
+    </uses>
+  </iframe>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>
+    <resource>https://online.moysklad.ru/api/remap/1.2</resource>
+    <scope>admin</scope>
+  </access>
+  <popups>
+    <popup>
+      <name>coolPopup</name>
+      <sourceUrl>https://vendorurl.coolpopup.ru</sourceUrl>
+      <uses>
+        <navigation-service/>
+      </uses>
+    </popup>
+  </popups>
+</ServerApplication>
+```
+Позволяет виджетам, главным iframe'ам и попап-окнам приложений осуществлять переход на другую страницу МоегоСклада и открывать МойСклад в новой вкладке.
+Чтобы виджет, iframe или попап-окно начали поддерживать протокол навигации в дескрипторе необходимо добавить блок:
 ```
 <uses>
     <navigation-service/>
 </uses>
 ```
+соответственно в блоки `widgets`, `iframe` или `popup`. Примеры справа.
 
-Когда виджет отправляет хост-окну сообщение `NavigateRequest`(через Window.postMessage),
+В частности далее рассмотрим кейс с виджетом. Когда виджет отправляет хост-окну сообщение `NavigateRequest`(через Window.postMessage),
 хост-окно переходит на другую страницу МоегоСклада или открывает в новой вкладке браузера нужную страницу МоегоСклада.
 
 > Cообщение NavigateRequest
@@ -1308,6 +1340,8 @@ HTML-теги в нем не допускаются (будут экраниро
 Параметры ответа `NavigateResponse`:
 
 + `correlationId` - идентификатор соответствующего сообщения `NavigateRequest`.
+
+При навигации из попапа в текущей вкладке (`target` имеет значение `self`) произойдет переход, но попап будет поверх страницы. Если необходимо, чтобы после перехода попап закрывался можно использовать сообщение `ClosePopup`. Подробнее в разделе [Кастомные попапы](#kastomnye-popapy-modal-nye-okna).
 
 ### Кастомные попапы (модальные окна)
 

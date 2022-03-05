@@ -21,6 +21,7 @@ includes:
   - 8.3_vendor_api_1.0_REST_vendorside
   - 8.4_vendor_api_1.0_REST_moyskladside
   - 8.5_vendor_api_1.0_retry
+  - 9_changelog
 
 
 search: true

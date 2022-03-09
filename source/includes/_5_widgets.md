@@ -55,8 +55,8 @@
 
 При первом открытии страницы с виджетом (в рамках одной вкладки браузера) cистема МоегоСклада 
 загружает виджет по HTTP GET-запросом по URL'у, указанному в теге sourceUrl. При этом система 
-генерирует и передает GET-параметром одноразовый contextKey, по которому виджет получает текущий 
-контекст пользователя  через [Vendor API](#blok-vendorapi).
+генерирует (и передает GET-параметром `contextKey`) ключ, по которому виджет получает текущий 
+контекст пользователя через [Vendor API](#poluchenie-kontexta-pol-zowatelq-dlq-prilozhenij-s-iframe-chast-u-i-widzhetami).
 
 Прочие данные передаются при помощи [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage) в первом и последующих открытиях виджета.
 

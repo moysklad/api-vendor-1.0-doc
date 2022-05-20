@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 20-05-2022
+#### Добавлено
+- Поддержка полей `incomingDate` и `incomingNumber` для протокола change-handler в [Приемке](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka).
+
 ### 20-04-2022
 #### Изменено
 - Требования к [иконкам приложений](#trebowaniq-k-ikonkam-prilozhenij) 

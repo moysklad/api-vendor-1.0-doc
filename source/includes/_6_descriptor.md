@@ -269,10 +269,11 @@ customEntity
 - **document.customerorder.edit** - документ "Заказ покупателя"
 - **document.demand.create** - новый документ "Отгрузка" (до первого сохранения)
 - **document.demand.edit** - документ "Отгрузка"
+- **document.invoiceout.create** - новый документ "Счет покупателю" (до первого сохранения)
 - **document.invoiceout.edit** - документ "Счет покупателю"
+- **document.invoicein.edit** - документ "Счет поcтавщика"
 - **document.processingorder.edit** - документ "Заказ на производство"
 - **document.purchaseorder.edit** - документ "Заказ поставщику"
-- **document.invoicein.edit** - документ "Счет поcтавщика"
 - **document.supply.create** - новый документ "Приемка" (до первого сохранения)
 - **document.supply.edit** - документ "Приемка"
 - **document.retaildemand.edit** - документ "Розничная продажа"
@@ -361,8 +362,8 @@ customEntity
 #### Доступность дополнительных протоколов в зависимости от точек встраивания
 
 
-| Точка встраивания | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider |
-| :---------------------------------- | :-------------: | :------------: | :-----------: | :--------------: | :-------------------: | :---------------: |
+| Точка встраивания                 | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider |
+| :-------------------------------- | :-----------: | :----------: | :---------: | :------------: | :-----------------: | :-------------: |
 | _entity.counterparty.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _entity.product.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _entity.variant.edit_             |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
@@ -373,10 +374,11 @@ customEntity
 | _document.customerorder.edit_     |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.demand.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.demand.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ⬜       |
-| _document.invoiceout.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _document.invoiceout.create_      |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.invoiceout.edit_        |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ⬜       |
+| _document.invoicein.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.processingorder.edit_   |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchaseorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _document.invoicein.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.supply.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.supply.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.retaildemand.edit_      |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |

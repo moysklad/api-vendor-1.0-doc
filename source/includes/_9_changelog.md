@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+## 26-07-2022
+### Добавлено
+- Поддержка накладных расходов (поле `overhead`) в протоколе update-provider в [Приемке](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#dokumenty-priemka).
+
 ### 07-07-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):

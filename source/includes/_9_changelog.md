@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 23-08-2022
+#### Изменено
+- Прекращена поддержка [типа приложений](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#tipy-prilozhenij-w-marketplejse) iFrame.
+ 
 ### 01-08-2022
 #### Добавлено
 - Поддержка накладных расходов (поле `overhead`) в протоколе update-provider в

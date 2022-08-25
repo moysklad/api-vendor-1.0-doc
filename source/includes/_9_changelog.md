@@ -2,7 +2,7 @@
 
 ### 23-08-2022
 #### Изменено
-- Прекращена поддержка [типа приложений](https://dev.moysklad.ru/doc/api/remap/1.2/documents/#tipy-prilozhenij-w-marketplejse) iframe.
+- Прекращена поддержка [типа приложений](#tipy-prilozhenij-w-marketplejse) iframe.
  
 ### 01-08-2022
 #### Добавлено

@@ -271,6 +271,7 @@ customEntity
 - **document.demand.edit** - документ "Отгрузка"
 - **document.invoiceout.create** - новый документ "Счет покупателю" (до первого сохранения)
 - **document.invoiceout.edit** - документ "Счет покупателю"
+- **document.invoicein.create** - новый документ "Счет поcтавщика" (до первого сохранения)
 - **document.invoicein.edit** - документ "Счет поcтавщика"
 - **document.processingorder.edit** - документ "Заказ на производство"
 - **document.purchaseorder.edit** - документ "Заказ поставщику"
@@ -376,7 +377,8 @@ customEntity
 | _document.demand.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.invoiceout.create_      |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.invoiceout.edit_        |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ⬜       |
-| _document.invoicein.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _document.invoicein.create_       |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.invoicein.edit_         |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ⬜       |
 | _document.processingorder.edit_   |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchaseorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.supply.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |

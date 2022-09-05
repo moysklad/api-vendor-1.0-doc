@@ -1,5 +1,10 @@
 ## Список последних изменений
 
+### 06-09-2022
+#### Изменено
+- Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете поставщика
+
 ### 23-08-2022
 #### Изменено
 - Прекращена поддержка [типа приложений](#tipy-prilozhenij-w-marketplejse) iframe.

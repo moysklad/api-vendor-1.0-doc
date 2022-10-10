@@ -1,5 +1,11 @@
 ## Список последних изменений
 
+### 12-10-2022
+#### Изменено
+#### Изменено
+- Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
+  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Списании и Счете покупателю
+ 
 ### 23-08-2022
 #### Изменено
 - Прекращена поддержка [типа приложений](#tipy-prilozhenij-w-marketplejse) iframe.

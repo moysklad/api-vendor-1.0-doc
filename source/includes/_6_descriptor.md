@@ -375,7 +375,7 @@ customEntity
 | _document.demand.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.demand.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.invoiceout.create_      |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
-| _document.invoiceout.edit_        |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ⬜       |
+| _document.invoiceout.edit_        |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
 | _document.invoicein.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.processingorder.edit_   |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchaseorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
@@ -389,7 +389,7 @@ customEntity
 | _document.move.create_            |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.move.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ✅       |
 | _document.loss.create_            |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
-| _document.loss.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ⬜       |
+| _document.loss.edit_              |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ✅       |
 | _document.enter.create_           |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.enter.edit_             |      ✅      |      ✅      |     ✅     |       ✅       |        ✅         |       ✅       |
 | _document.internalorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |

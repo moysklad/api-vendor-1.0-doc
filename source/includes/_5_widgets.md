@@ -475,7 +475,6 @@ curl -X GET --location "https://online.moysklad.ru/api/remap/1.2/entity/product/
 - В `objectState` передаётся документ со всеми позициями, что в целом соответствует  запросу в JSON API c `expand=positions`. При этом в метаданных позиций документа всегда `offset=0`,
   а `limit` зависит от  `size`: `limit=1000`, если `size <= 1000` и `limit=size` если `size > 1000`.
 - В objectState учитывается url сервиса – [МойСклад](https://online.moysklad.ru) или [Моя Торговля](https://online.sb-mt.ru)
-- На данный момент **change-handler** не поддерживает доп. поля типа Товар
 - В доп. полях типа Файл в `value` содержится имя файла с расширением, в отличие от JSON API 1.2
 - На страницах создания (точка расширения `*.create`) часть полей, которые заполняются после первого сохранения документа, могут быть не заполнены (иметь значение `null`):
   - `id`, `accountId`, `created`, `meta`, `href`, `uuidHref` для документа;

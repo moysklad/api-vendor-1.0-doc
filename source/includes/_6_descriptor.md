@@ -293,6 +293,8 @@ customEntity
 - **document.purchasereturn.edit** - документ "Возврат поставщику"
 - **document.salesreturn.create** - новый документ "Возврат покупателя"
 - **document.salesreturn.edit** - документ "Возврат покупателя"
+- **document.retaildemand.create** - новый документ "Розничная продажа"
+- **document.retaildemand.edit** - документ "Розничная продажа"
 
 > Блок widgets с точками расширения в контрагенте и заказе покупателя
 
@@ -400,6 +402,8 @@ customEntity
 | _document.purchasereturn.edit_    |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.salesreturn.create_     |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.salesreturn.edit_       |      ✅      |      ✅      |     ✅     |       ✅        |        ✅          |       ⬜       |
+| _document.retaildemand.create_    |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.retaildemand.edit_      |      ✅      |      ✅      |     ✅     |       ✅        |        ✅          |       ⬜       |
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).
 

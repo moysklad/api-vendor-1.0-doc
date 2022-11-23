@@ -277,7 +277,6 @@ customEntity
 - **document.purchaseorder.edit** - документ "Заказ поставщику"
 - **document.supply.create** - новый документ "Приемка" (до первого сохранения)
 - **document.supply.edit** - документ "Приемка"
-- **document.retaildemand.edit** - документ "Розничная продажа"
 - **document.paymentin.edit** - документ "Входящий платеж"
 - **document.paymentout.edit** - документ "Исходящий платеж"
 - **document.cashin.edit** - документ "Приходный ордер"
@@ -386,7 +385,6 @@ customEntity
 | _document.purchaseorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.supply.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.supply.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
-| _document.retaildemand.edit_      |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.paymentin.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.paymentout.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.cashin.edit_            |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |

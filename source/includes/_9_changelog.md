@@ -1,5 +1,10 @@
 ## Список последних изменений
 
+### 18-11-2022
+#### Изменено
+- Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Розничной продаже
+
 ### 09-11-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):

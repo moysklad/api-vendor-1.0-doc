@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 23-11-2022
+#### Изменено
+- Поддержка дополнительного поля типа справочник [[Товар]](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi) в протоколе [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta)
+
 ### 18-11-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):

@@ -4,6 +4,16 @@
 #### Изменено
 - Поддержка дополнительного поля типа справочник [[Товар]](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi) в протоколе [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta)
 
+### 18-11-2022
+#### Изменено
+- Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Розничной продаже
+
+### 09-11-2022
+#### Изменено
+- Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Возврате покупателя
+
 ### 12-10-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):

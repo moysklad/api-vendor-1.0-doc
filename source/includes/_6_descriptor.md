@@ -277,7 +277,6 @@ customEntity
 - **document.purchaseorder.edit** - документ "Заказ поставщику"
 - **document.supply.create** - новый документ "Приемка" (до первого сохранения)
 - **document.supply.edit** - документ "Приемка"
-- **document.retaildemand.edit** - документ "Розничная продажа"
 - **document.paymentin.edit** - документ "Входящий платеж"
 - **document.paymentout.edit** - документ "Исходящий платеж"
 - **document.cashin.edit** - документ "Приходный ордер"
@@ -291,7 +290,10 @@ customEntity
 - **document.internalorder.edit** - документ "Внутренний заказ"
 - **document.inventory.edit** - документ "Инвентаризация"
 - **document.purchasereturn.edit** - документ "Возврат поставщику"
+- **document.salesreturn.create** - новый документ "Возврат покупателя"
 - **document.salesreturn.edit** - документ "Возврат покупателя"
+- **document.retaildemand.create** - новый документ "Розничная продажа"
+- **document.retaildemand.edit** - документ "Розничная продажа"
 
 > Блок widgets с точками расширения в контрагенте и заказе покупателя
 
@@ -383,7 +385,6 @@ customEntity
 | _document.purchaseorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.supply.create_          |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.supply.edit_            |      ✅      |      ✅      |     ✅     |       ✅       |         ✅         |       ✅       |
-| _document.retaildemand.edit_      |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.paymentin.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.paymentout.edit_        |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.cashin.edit_            |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
@@ -397,7 +398,10 @@ customEntity
 | _document.internalorder.edit_     |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.inventory.edit_         |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 | _document.purchasereturn.edit_    |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
-| _document.salesreturn.edit_       |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _document.salesreturn.create_     |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.salesreturn.edit_       |      ✅      |      ✅      |     ✅     |       ✅        |        ✅          |       ⬜       |
+| _document.retaildemand.create_    |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
+| _document.retaildemand.edit_      |      ✅      |      ✅      |     ✅     |       ✅        |        ✅          |       ⬜       |
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).
 

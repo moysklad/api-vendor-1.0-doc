@@ -16,8 +16,8 @@ includes:
   - 5_widgets
   - 6_descriptor
   - 7_token_access_to_json_api
-  - 8.1_vendor_api_1.0_activation
-  - 8.2_vendor_api_1.0_autentification
+  - 8.1_vendor_api_1.0_autentification
+  - 8.2_vendor_api_1.0_activation
   - 8.3_vendor_api_1.0_REST_vendorside
   - 8.4_vendor_api_1.0_REST_moyskladside
   - 8.5_vendor_api_1.0_retry

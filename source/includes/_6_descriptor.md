@@ -294,6 +294,9 @@ customEntity
 - **document.salesreturn.edit** - документ "Возврат покупателя"
 - **document.retaildemand.create** - новый документ "Розничная продажа"
 - **document.retaildemand.edit** - документ "Розничная продажа"
+- **document.retailsalesreturn.edit** - документ "Розничный возврат"
+- **document.retaildrawercashin.edit** - документ "Внесение денег"
+- **document.retaildrawercashout.edit** - документ "Выплата денег"
 
 > Блок widgets с точками расширения в контрагенте и заказе покупателя
 
@@ -402,6 +405,9 @@ customEntity
 | _document.salesreturn.edit_       |      ✅      |      ✅      |     ✅     |       ✅        |        ✅          |       ⬜       |
 | _document.retaildemand.create_    |      ⬜      |      ⬜      |     ⬜     |       ✅       |         ✅         |       ⬜       |
 | _document.retaildemand.edit_      |      ✅      |      ✅      |     ✅     |       ✅        |        ✅          |       ⬜       |
+| _document.retailsalesreturn.edit_ |      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+| _document.retaildrawercashin.edit_|      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
+|_document.retaildrawercashout.edit_|      ✅      |      ✅      |     ✅     |       ⬜       |         ⬜         |       ⬜       |
 
 Подробнее про дополнительные протоколы можно прочитать в разделе [Как работают виджеты](#kak-rabotaut-widzhety).
 

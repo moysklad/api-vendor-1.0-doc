@@ -10,17 +10,19 @@ toc_footers:
 
 includes:
   - 1_terminology
-  - 2_general_information
-  - 3_apps_requirements
-  - 4_development_and_publication
-  - 5_widgets
-  - 6_descriptor
-  - 7_token_access_to_json_api
-  - 8.1_vendor_api_1.0_autentification
-  - 8.2_vendor_api_1.0_activation
-  - 8.3_vendor_api_1.0_REST_vendorside
-  - 8.4_vendor_api_1.0_REST_moyskladside
-  - 8.5_vendor_api_1.0_retry
+  - 2_getting_started
+  - 3_app_types
+  - 4_apps_requirements
+  - 5_development_and_publication
+  - 6.1_developer_guide_token_access_to_json_api
+  - 6.2_developer_guide_widgets
+  - 6.3_developer_guide_descriptor
+  - 7.1_vendor_api_1.0_autentification
+  - 7.2_vendor_api_1.0_activation
+  - 7.3_vendor_api_1.0_REST_vendorside
+  - 7.4_vendor_api_1.0_REST_moyskladside
+  - 7.5_vendor_api_1.0_retry
+  - 8_developer_personal_account
   - 9_changelog
 
 

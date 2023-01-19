@@ -8,7 +8,7 @@
 
 Процесс создания приложений телефонии и лояльности описан в [Сценарии работы с Phone API 1.0](https://dev.moysklad.ru/doc/api/phone/1.0/#%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B) и [Сценарии работы с LoyaltyAPI](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). Пошаговый процесс создания серверных приложений рассмотрим ниже.
 
-1. Определите, к какому [типу](#tipy-prilozhenij-dlq-magazina-prilozhenij-moegosklada) относится приложение. 
+1. Определите, к какому [типу](#tipy-prilozhenij-dlq-magazina-prilozhenij) относится приложение. 
 
 2. Создайте бизнес-логику приложения на сервере.
 
@@ -24,7 +24,7 @@
 
 8. Если приложение нужно встроить в интерфейс МоегоСклада, создайте виджет приложения. Для этого нужно реализовать iframe-часть виджета и обновить [дескриптор](#deskriptor-prilozheniq), добавив тег `widgets`. Подробнее читайте в разделе [Виджеты](#vidzhety). 
 
-9. [Разместите](#obschaq-shema-processa-razmescheniq-prilozheniq-w-marketplejse) приложение в магазине приложений.
+9. [Разместите](#uslowiq-razmescheniq-i-oplaty-prilozhenij) приложение в магазине приложений.
 
 ### Демо-приложение
 

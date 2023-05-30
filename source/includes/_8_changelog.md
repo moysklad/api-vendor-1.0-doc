@@ -3,28 +3,28 @@
 ### 23-11-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Розничном возврате, Внесении и Выплате денег
-- Поддержка дополнительного поля типа справочник [[Товар]](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi) в протоколе [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta)
+  [Виджеты](#vidzhety) в Розничном возврате, Внесении и Выплате денег.
+- Поддержка дополнительного поля типа справочник [[Товар]](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi) в протоколе [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta).
 
 ### 18-11-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Розничной продаже
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Розничной продаже.
 
 ### 09-11-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Возврате покупателя
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Возврате покупателя.
 
 ### 12-10-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Списании и Счете покупателю
+  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Списании и Счете покупателю.
 
 ### 06-09-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете поставщика
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете поставщика.
 
 ### 23-08-2022
 #### Изменено
@@ -44,17 +44,17 @@
 ### 22-07-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Отгрузке, Перемещении и Оприходовании
+  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Отгрузке, Перемещении и Оприходовании.
 
 ### 07-07-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете покупателю
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете покупателю.
 
 ### 04-07-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Приемке
+  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Приемке.
 
 ### 20-05-2022
 #### Добавлено
@@ -62,147 +62,147 @@
 
 ### 20-04-2022
 #### Изменено
-- Требования к [иконкам приложений](#trebowaniq-k-ikonkam-prilozhenij) 
+- Требования к [иконкам приложений](#trebowaniq-k-ikonkam-prilozhenij).
 
 ### 04-03-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Поддержка [протокола навигации](#protokol-nawigacii) (`<navigation-service/>`) в главном iframe приложения и popup'ах  
+  Поддержка [протокола навигации](#protokol-nawigacii) (`<navigation-service/>`) в главном iframe приложения и модальных окнах.  
 
 ### 27-01-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Гибкие права приложений](#blok-access) - поддержка права видеть себестоимость, цену закупки и прибыль товаров (<viewProductCostAndProfit/>)
+  [Гибкие права приложений](#blok-access) — поддержка права видеть себестоимость, цену закупки и прибыль товаров <viewProductCostAndProfit/>.
 
 ### 21-01-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Товаре, Модификации, Услуге, Комплекте, Группе товаров 
+  [Виджеты](#vidzhety) в Товаре, Модификации, Услуге, Комплекте, Группе товаров. 
 
 ### 21-12-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования
+  [Виджеты](#vidzhety) на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования.
 
 ### 16-12-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) на странице создания в Приемке и Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки
+  [Виджеты](#vidzhety) на странице создания в Приемке и Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки.
 
 ### 10-12-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Протокол change-handler для [виджетов](#vidzhety) в Перемещении, Списании и Оприходовании
+  Протокол change-handler для [виджетов](#vidzhety) в Перемещении, Списании и Оприходовании.
 
 ### 29-11-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Протокол change-handler для [виджетов](#vidzhety) в Приемке
+  Протокол change-handler для [виджетов](#vidzhety) в Приемке.
 
 ### 24-11-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) на странице создания в Заказе покупателя. Поддержка протокола валидации при создании Заказа покупателя
+  [Виджеты](#vidzhety) на странице создания в Заказе покупателя. Поддержка протокола валидации при создании Заказа покупателя.
 
 ### 19-11-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Поддержка протокола валидации при редактировании Заказа покупателя 
+  Поддержка протокола валидации при редактировании Заказа покупателя.
 
 ### 17-11-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Поддержка [селектора групп товаров](#selektor-gruppy-towarow) (`<good-folder-selector/>`) в главном iframe приложения и popup'ах
+  Поддержка [селектора групп товаров](#selektor-gruppy-towarow) (`<good-folder-selector/>`) в главном iframe приложения и модальных окнах.
 
 ### 11-11-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Отгрузке
+  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Отгрузке.
 
 ### 01-11-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе покупателя
+  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе покупателя.
 
 ### 21-10-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Протокол навигации](#protokol-nawigacii) в виджетах
+  [Протокол навигации](#protokol-nawigacii) в виджетах.
 
 ### 07-10-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Возвратах покупателя и в Возвратах поставщику
+  [Виджеты](#vidzhety) в Возвратах покупателя и в Возвратах поставщику.
 
 ### 16-09-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации
+  [Виджеты](#vidzhety) в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации.
 
 ### 30-08-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Гибкие права приложений](#blok-access)
+  [Гибкие права приложений](#blok-access).
 
 ### 10-08-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Стандартные диалоги
+  Стандартные диалоги.
 
 ### 13-05-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  Протокол change-handler для [виджетов](#vidzhety) в Заказе покупателя
+  Протокол change-handler для [виджетов](#vidzhety) в Заказе покупателя.
 
 ### 21-01-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере
+  [Виджеты](#vidzhety) в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере.
 
 ### 13-01-2021
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Кастомные попапы](#kastomnye-popapy-modal-nye-okna) в виджетах
+  [Кастомные модальные окна](#kastomnye-popapy-modal-nye-okna) в виджетах.
 
 ### 04-12-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке
+  [Виджеты](#vidzhety) в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке.
 
 ### 30-11-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) с поддержкой протокола dirty-state
+  [Виджеты](#vidzhety) с поддержкой протокола dirty-state.
 
 ### 13-11-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) с поддержкой протокола save-handler
+  [Виджеты](#vidzhety) с поддержкой протокола save-handler.
 
 ### 10-11-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в новой карточке Контрагента
+  [Виджеты](#vidzhety) в новой карточке Контрагента.
 
 ### 09-11-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Счете покупателю
+  [Виджеты](#vidzhety) в Счете покупателю.
 
 ### 22-10-2020
 #### Добавлено
 - [VendorApi 1.0](#vendor-api-1-0):
-  Новый эндпоинт на стороне МоегоСклада: [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte)
+  Новый эндпоинт на стороне МоегоСклада: [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte).
 
 ### 08-10-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) с поддержкой селектора групп товаров
+  [Виджеты](#vidzhety) с поддержкой селектора групп товаров.
 
 ### 22-09-2020
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):
-  [Виджеты](#vidzhety) в Заказе покупателя и Отгрузке
+  [Виджеты](#vidzhety) в Заказе покупателя и Отгрузке.
 
 ### 18-08-2020
 #### Добавлено

@@ -52,8 +52,7 @@ UI Kit доступен по [ссылке](https://github.com/moysklad/html-mar
 ### Телефония
 
 Эти приложения представляют собой интеграцию с внешними сервисами телефонии по Phone API: 
-[https://online.moysklad.ru/api/phone/1.0/doc/index.html](https://online.moysklad.ru/api/phone/1.0/doc/index.html)
-
+[https://apps-api.moysklad.ru/api/phone/1.0/doc/index.html](https://apps-api.moysklad.ru/api/phone/1.0/doc/index.html)
 Приложения телефонии не могут получать доступ по токену к JSON API, не имеют возможности активации и деактивации по Vendor API. В перспективе эти возможности могут появиться.
 
 Одновременно на аккаунте может быть подключено только одно приложение телефонии.

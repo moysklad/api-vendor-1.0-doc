@@ -1,6 +1,6 @@
 ## Список последних изменений
 
-### 21-08-2023
+### 30-08-2023
 #### Изменено
 - Базовый URL REST-эндпоинтов vendor API (`MARKETPLACE-ENDPOINT`) сменился на [https://apps-api.moysklad.ru/api/vendor/1.0](https://apps-api.moysklad.ru/api/vendor/1.0).
 - Для запросов к vendor API необходимо использовать сжатие (заголовок `Accept-Encoding`)

@@ -1,5 +1,11 @@
 ## Список последних изменений
 
+### 30-08-2023
+#### Изменено
+- Базовый URL REST-эндпоинтов vendor API (`MARKETPLACE-ENDPOINT`) сменился на [https://apps-api.moysklad.ru/api/vendor/1.0](https://apps-api.moysklad.ru/api/vendor/1.0).
+- Для запросов к vendor API необходимо использовать сжатие (заголовок `Accept-Encoding`)
+- URL личного кабинета разработчика сменился на [https://apps.moysklad.ru/cabinet](https://apps.moysklad.ru/cabinet).
+
 ### 23-11-2022
 #### Изменено
 - Версия 2 [дескриптора приложений](#deskriptor-prilozheniq):

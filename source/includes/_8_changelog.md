@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 06-09-2023
+#### Добавлено
+- В тело запроса при [активации приложения на аккаунте](#aktiwaciq-prilozheniq-na-akkaunte) добавлена информация о подписке (атрибут `subscription`).
+
 ### 30-08-2023
 #### Изменено
 - Базовый URL REST-эндпоинтов vendor API (`MARKETPLACE-ENDPOINT`) сменился на [https://apps-api.moysklad.ru/api/vendor/1.0](https://apps-api.moysklad.ru/api/vendor/1.0).

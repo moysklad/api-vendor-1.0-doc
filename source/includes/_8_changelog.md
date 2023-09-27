@@ -4,6 +4,10 @@
 #### Добавлено
 - В тело запроса при [активации приложения на аккаунте](#aktiwaciq-prilozheniq-na-akkaunte) добавлена информация о новой причине активации (`"cause": "TariffChanged"`).
 
+### 19-09-2023
+#### Изменено
+- В [дескрипторе приложений](#deskriptor-prilozheniq) в качестве значения блока `access.resource` можно указывать [https://api.moysklad.ru/api/remap/1.2](https://api.moysklad.ru/api/remap/1.2).
+
 ### 06-09-2023
 #### Добавлено
 - В тело запроса при [активации приложения на аккаунте](#aktiwaciq-prilozheniq-na-akkaunte) добавлена информация о подписке (атрибут `subscription`).

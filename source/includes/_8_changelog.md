@@ -2,7 +2,8 @@
 
 ### 27-09-2023
 #### Добавлено
-- В тело запроса при [активации приложения на аккаунте](#aktiwaciq-prilozheniq-na-akkaunte) добавлена информация о новой причине активации (`"cause": "TariffChanged"`).
+- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `tariffName` (название тарифа) и информация о новой причине активации (`"cause": "TariffChanged"`).
+- В тело ответа при [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte) добавлен атрибут `tariffName` (название тарифа).
 
 ### 19-09-2023
 #### Изменено

@@ -2,8 +2,12 @@
 
 ### 27-09-2023
 #### Добавлено
-- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `tariffName` (название тарифа).
+- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `tariffName` (название тарифа) и информация о новой причине активации (`"cause": "TariffChanged"`).
 - В тело ответа при [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte) добавлен атрибут `tariffName` (название тарифа).
+
+### 19-09-2023
+#### Изменено
+- В [дескрипторе приложений](#deskriptor-prilozheniq) в качестве значения блока `access.resource` можно указывать [https://api.moysklad.ru/api/remap/1.2](https://api.moysklad.ru/api/remap/1.2).
 
 ### 06-09-2023
 #### Добавлено

@@ -32,5 +32,6 @@ jobs:
           touch ~/.ssh/config && chmod 600 ~/.ssh/config
           echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\nPort ${SERVER_SSH_PORT}\n" >> ~/.ssh/config
           ssh-add - <<< "$DEPLOY_KEY"
+  
           ssh app@${SERVER_IP_ADDRESS} pwd
           rsync -r --delete-after --quiet site/ app@${SERVER_IP_ADDRESS}:./${APP_PREFIX}

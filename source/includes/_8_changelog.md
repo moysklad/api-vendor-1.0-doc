@@ -1,9 +1,19 @@
 ## Список последних изменений
 
+### 07-03-2024
+#### Добавлено
+- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `subscription.notForResale`.
+- В тело ответа при [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte) добавлен атрибут `subscription.notForResale`.
+
+### 19-01-2024
+#### Добавлено
+- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `subscription.expiryMoment`.
+- В тело ответа при [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte) добавлен атрибут `subscription.expiryMoment`.
+
 ### 27-09-2023
 #### Добавлено
-- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `tariffName` (название тарифа) и информация о новой причине активации (`"cause": "TariffChanged"`).
-- В тело ответа при [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte) добавлен атрибут `tariffName` (название тарифа).
+- В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `subscription.tariffName` (название тарифа) и информация о новой причине активации (`"cause": "TariffChanged"`).
+- В тело ответа при [Получение статуса приложения на аккаунте](#poluchenie-statusa-prilozheniq-na-akkaunte) добавлен атрибут `subscription.tariffName` (название тарифа).
 
 ### 19-09-2023
 #### Изменено

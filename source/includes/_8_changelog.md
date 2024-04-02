@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 02-04-2024
+#### Добавлено
+- Возможность получения [шаблонов](#osobennosti-dostupa-k-nekotorym-funkciqm-json-api-1-2) документов по токену приложения.
+
 ### 07-03-2024
 #### Добавлено
 - В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `subscription.notForResale`.

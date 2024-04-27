@@ -16,11 +16,11 @@ SaaS-сервис управления торговлей [МойСклад](htt
 
 ## Как создать и опубликовать приложение 
 
-Для магазина приложений МоегоСклада можно создать приложение на любом языке программирования с использованием любых фреймворков. Допустимые типы приложений: [серверные приложения](#serwernye-prilozheniq), [телефония](#telefoniq), [приложения лояльности](#prilozheniq-loql-nosti). 
+Для магазина приложений МоегоСклада можно создать приложение на любом языке программирования с использованием любых фреймворков. Допустимые типы приложений: [серверные приложения](#serwernye-prilozheniq), [телефония](#telefoniq). 
 
-Каждый тип приложений подключается к МоемуСкладу с помощью своего API: серверные приложения используют [JSON API 1.2](https://dev.moysklad.ru/doc/api/remap/1.2), приложения телефонии — [Phone API 1.0](https://dev.moysklad.ru/doc/api/phone/1.0/), приложения лояльности — [Loyalty API](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). 
+Приложения интегрируются с МоимСкладом с помощью различных API: серверные приложения используют [JSON API 1.2](https://dev.moysklad.ru/doc/api/remap/1.2) и [Loyalty API](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty), приложения телефонии — [Phone API 1.0](https://dev.moysklad.ru/doc/api/phone/1.0/). 
 
-Процесс создания приложений телефонии и лояльности описан в [Сценарии работы с Phone API 1.0](https://dev.moysklad.ru/doc/api/phone/1.0/#%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B) и [Сценарии работы с LoyaltyAPI](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). Пошаговый процесс создания серверных приложений рассмотрим ниже.
+Процесс создания приложений телефонии описан в [Сценарии работы с Phone API 1.0](https://dev.moysklad.ru/doc/api/phone/1.0/#%D1%81%D1%86%D0%B5%D0%BD%D0%B0%D1%80%D0%B8%D0%B9-%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B) и [Сценарии работы с LoyaltyAPI](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). Пошаговый процесс создания серверных приложений рассмотрим ниже.
 
 1. Определите, к какому [типу](#tipy-prilozhenij-dlq-magazina-prilozhenij) относится приложение. 
 

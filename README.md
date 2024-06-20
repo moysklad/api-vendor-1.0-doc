@@ -61,7 +61,7 @@ bundle install
 > Получить Сущности
 
 > **`GET`**
-> http://example.com/baseurl/api/moysklad/vendor/1.0/retaildemand/recalc
+> http://example.com/api/moysklad/vendor/1.0/retaildemand/recalc
 
 > **Request**
 
@@ -84,3 +84,7 @@ JSON ответа от сервера
 2. Если же, ссылаемая страница находится на другом хосте, то добавляем полностью. Например: https://online.moysklad.ru/app/#apps
 
 При клике на ссылок, если ссылка без хоста (1-пункт) то страница открывается на текущей вкладке. Иначе (2-пункт), на новой вкладке. 
+
+Есть скрипт, который генерирует относительную ссылку также, как основной механизм. 
+Вставьте в файл [test_translit.rb](lib%2Ftest_translit.rb) нужные заголовки и запустите находясь в папке /lib ```ruby test_translit.rb```
+

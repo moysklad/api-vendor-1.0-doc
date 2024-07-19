@@ -269,7 +269,7 @@ _Функция доступна только для Серверных прил
           type="text/css"
           href="https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-manual.css"/>
     <script type="text/javascript"
-            src="https://apps-api.moysklad.ru/js/ns/appstore/app/v1/v1/moysklad-manual.js"></script>
+            src="https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-manual.js"></script>
 </head>
 <body>
     <h1>Приложение Онлайн-заказ</h1>

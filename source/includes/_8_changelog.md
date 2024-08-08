@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 08-08-2024
+#### Добавлено
+- В URL запроса [Получение контекста пользователя для приложений с iframe-частью, кастомными модальными окнами и виджетами](#poluchenie-kontexta-pol-zowatelq-dlq-prilozhenij-s-iframe-chast-u-kastomnymi-modal-nymi-oknami-i-widzhetami) добавлены новые параметры: appUid и appId.
+
 ### 08-05-2024
 #### Добавлено
 - В [дескрипторе приложений](#deskriptor-prilozheniq) добавлена возможность указания блока `loyaltyApi`.

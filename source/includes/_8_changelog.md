@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 09-10-2024
+#### Добавлено
+- В [дескрипторе приложений](#deskriptor-prilozheniq) добавлена возможность указания пермиссий для работы с веб-хуками `useOwnWebhooks` и `useAllWebhooks`.
+
 ### 20-08-2024
 #### Добавлено
 - В тело запроса при [Активация приложения на аккаунте](#rest-andpointy-na-storone-razrabotchika-prilozhenij) добавлен атрибут `subscription.partner`.

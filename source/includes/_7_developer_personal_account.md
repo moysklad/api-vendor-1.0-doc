@@ -373,10 +373,9 @@ _Функция доступна только для Серверных реше
 
 ```html
 <iframe 
-  width="720" height="405" 
+  width="640" height="360" 
   src="https://rutube.ru/play/embed/ID/" 
-  frameBorder="0" allow="clipboard-write; autoplay" 
-  webkitAllowFullScreen mozallowfullscreen allowFullScreen>
+  frameBorder="0" allow="clipboard-write; autoplay">
 </iframe>
 ```
 

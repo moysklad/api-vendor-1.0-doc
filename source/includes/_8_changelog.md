@@ -2,7 +2,7 @@
 
 ### 11-12-2024
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания прав для работы с дополнительными правами: `useOwnAttributeMetadata` и `useAllAttributeMetadata`.
+- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания прав для работы с дополнительными полями: `useOwnAttributeMetadata` и `useAllAttributeMetadata`.
 
 ### 09-12-2024
 #### Добавлено

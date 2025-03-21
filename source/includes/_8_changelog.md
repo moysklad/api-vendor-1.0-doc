@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 21-03-2025
+#### Добавлено
+- В [получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) добавлено поле с текущими правами, предоставленными приложению.
+
 ### 10-03-2025
 #### Добавлено
 - В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кастомных кнопок: `document.customerorder.list`, `document.demand.list`, `document.purchaseorder.list`.

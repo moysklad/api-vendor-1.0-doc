@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 01-04-2025
+#### Добавлено
+- В эндпоинт [получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) в теле ответа добавлено поле access.
+
 ### 10-03-2025
 #### Добавлено
 - В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кастомных кнопок: `document.customerorder.list`, `document.demand.list`, `document.purchaseorder.list`.

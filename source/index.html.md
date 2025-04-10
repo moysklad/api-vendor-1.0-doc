@@ -18,6 +18,7 @@ includes:
   - 5.3_developer_guide_descriptor
   - 6.1_vendor_api_1.0_autentification
   - 6.2_vendor_api_1.0_activation
+  - 6.2.5_vendor_api_1.0_events
   - 6.3_vendor_api_1.0_REST_vendorside
   - 6.4_vendor_api_1.0_REST_moyskladside
   - 6.5_vendor_api_1.0_retry

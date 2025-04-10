@@ -2,7 +2,8 @@
 
 ### XX-04-2025
 #### Добавлено
-- новое событие для получения [обновлённых прав установки](#podpiska-na-sobytie-izmeneniq-praw-ustanowki)
+- новый раздел [Дополнительные события](#uwedomleniq-o-dopolnitel-nyh-sobytiqh)
+- новое событие [получения обновлённых прав установки](#sobytie-izmeneniq-praw-ustanowki-updatepermissions)
 
 ### 07-04-2025
 #### Добавлено

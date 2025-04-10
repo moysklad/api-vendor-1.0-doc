@@ -1,5 +1,10 @@
 ## Список последних изменений
 
+### XX-04-2025
+#### Добавлено
+- новый раздел [Дополнительные события](#uwedomleniq-o-dopolnitel-nyh-sobytiqh)
+- новое событие [получения обновлённых прав установки](#sobytie-izmeneniq-praw-ustanowki-updatepermissions)
+
 ### 07-04-2025
 #### Добавлено
 - В эндпоинт [запроса обработки нажатия на кнопку](#obrabotka-nazhatiq-na-kastomnuu-knopku) добавлена возможность открытия кастомного модального окна (`action=ShowPopup`).

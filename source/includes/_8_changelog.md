@@ -2,7 +2,7 @@
 
 ### 01-09-2025
 #### Добавлено
-- В во все запросы [на стороне разработчика](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен заголовок `X_Lognex_RequestId`  
+- Во все запросы [на стороне разработчика](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен заголовок `X_Lognex_RequestId`  
 
 ### 20-08-2025
 #### Добавлено

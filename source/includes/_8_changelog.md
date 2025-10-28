@@ -1,6 +1,6 @@
 ## Список последних изменений
 
-### 20-10-2025
+### 28-10-2025
 #### Добавлено
 - В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: список Розничных продаж (`document.retaildemand.list`),
   документ и список Перемещений (`document.move.edit` и `document.move.list`), документ и список Оприходований (`document.enter.edit` и `document.enter.list`).

@@ -1,5 +1,10 @@
 ## Список последних изменений
 
+### 28-10-2025
+#### Добавлено
+- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: список Розничных продаж (`document.retaildemand.list`),
+  документ и список Перемещений (`document.move.edit` и `document.move.list`), документ и список Оприходований (`document.enter.edit` и `document.enter.list`).
+
 ### 01-10-2025
 #### Добавлено
 - Во все запросы [на стороне разработчика](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен заголовок `X_Lognex_RequestId`  

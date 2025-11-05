@@ -20,7 +20,6 @@ includes:
   - 6.2_vendor_api_1.0_processes
   - 6.3_vendor_api_1.0_REST_vendorside
   - 6.4_vendor_api_1.0_REST_moyskladside
-  - 6.5_vendor_api_1.0_retry
   - 7_developer_personal_account
   - 8_changelog
 

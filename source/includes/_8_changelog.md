@@ -1,5 +1,13 @@
 ## Список последних изменений
 
+### 21-01-2026
+#### Добавлено
+- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: 
+документ и список Возвратов покупателей (`document.salesreturn.edit` и `document.salesreturn.list`), 
+документ и список Внутренних заказов (`document.internalorder.edit` и `document.internalorder.list`), 
+документ и список Инвентаризаций (`document.inventory.edit` и `document.inventory.list`), 
+документ и список Списаний (`document.loss.edit` и `document.loss.list`).
+
 ### 19-01-2026
 #### Добавлено
 - В [дескриптор решений](#deskriptor-resheniq) добавлен новый атрибут `useSelected` у [кастомных кнопок](#blok-buttons).

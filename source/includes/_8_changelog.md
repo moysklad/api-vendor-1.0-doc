@@ -2,7 +2,7 @@
 
 ### 06-02-2026
 #### Добавлено
-- Добавлен раздел [Ограничения для контента, загружаемого в виджетах](#ogranicheniq-dlq-kontenta-zagruzhaemogo-w-widzhetah): описание sandbox-флагов и Permissions Policy, применяемых к iframe вендорских решений.
+- Добавлен раздел [Ограничения для контента, загружаемого в виджетах](#ogranicheniq-dlq-kontenta-zagruzhaemogo-w-widzhetah): описание sandbox-флагов и Permissions Policy, применяемых к iframe решений.
 
 ### 21-01-2026
 #### Добавлено

@@ -158,7 +158,7 @@
 
 ### 08-08-2024
 #### Добавлено
-- В URL запроса [Получение контекста пользователя для решений с iframe-частью, кастомными модальными окнами и виджетами](#poluchenie-kontexta-pol-zowatelq-dlq-reshenij-s-iframe-chast-u-kastomnymi-modal-nymi-oknami-i-widzhetami) добавлены новые параметры: appUid и appId.
+- В URL запроса [Получение контекста пользователя](#poluchenie-kontexta-pol-zowatelq) добавлены новые параметры: appUid и appId.
 
 ### 08-05-2024
 #### Добавлено

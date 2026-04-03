@@ -415,8 +415,14 @@ html, body {
     clear:both;
   }
 
-  h4, h5, h6 {
+  h4, h6 {
     font-size: 14px;
+    clear: both;
+  }
+
+  h5 {
+    font-size: 14px;
+    font-style: italic;
     clear: both;
   }
 

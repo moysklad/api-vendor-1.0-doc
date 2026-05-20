@@ -71,8 +71,9 @@ SaaS-сервис управления торговлей [МойСклад](htt
 
 Для демонстрации способов взаимодействия решений разработчиков с МоимСкладом были созданы проекты на нескольких языках программирования:
 
-* PHP - [репозиторий проекта на GitHub](https://github.com/moysklad/php-dummyapp-marketplace-1.0)
 * Node.js  - [репозиторий проекта на GitHub](https://github.com/moysklad/node-js-demo-app)
+* PHP - [репозиторий проекта на GitHub](https://github.com/moysklad/php-demo-app)
+* Python  - [репозиторий проекта на GitHub](https://github.com/moysklad/python-demo-app)
 
 В этих проектах реализован следующий набор функций:
 

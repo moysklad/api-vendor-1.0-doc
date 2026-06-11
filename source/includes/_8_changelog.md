@@ -1,6 +1,6 @@
 ## Список последних изменений
 
-### 02-06-2026
+### 11-06-2026
 #### Добавлено
 - В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания [виджетов](#vidzhety): новый Заказ поставщику (`document.purchaseorder.create`), новый Внутренний заказ (`document.internalorder.create`) и новая Инвентаризация (`document.inventory.create`).
 

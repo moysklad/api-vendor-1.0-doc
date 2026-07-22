@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 21-07-2026
+#### Добавлено
+- В [дескрипторе решения](#deskriptor-resheniq) добавлена поддержка протоколов [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе поставщику, Внутреннем заказе и Инвентаризации.
+
 ### 02-07-2026
 #### Добавлено
 - В раздел [Создание и загрузка инструкции для пользователя](#sozdanie-i-zagruzka-instrukcii-dlq-pol-zowatelq) добавлено описание атрибута `data-manual-zoom`, который позволяет открывать изображения инструкции в увеличенном виде.

@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 22-07-2026
+#### Добавлено
+- В [дескриптор решений](#deskriptor-resheniq) добавлено право для работы со статьями расходов: `expenseItem`.
+
 ### 21-07-2026
 #### Добавлено
 - В [дескрипторе решения](#deskriptor-resheniq) добавлена поддержка протоколов [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе поставщику, Внутреннем заказе и Инвентаризации.

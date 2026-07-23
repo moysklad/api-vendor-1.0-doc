@@ -16,6 +16,9 @@ python3 scripts/check-doc-links.py --site-dir build
 
 By default, the script checks external `http://` and `https://` links too.
 Use `--skip-external` for a fast local pass.
+API endpoint references such as `https://api.moysklad.ru/api/remap/1.2` and
+`https://apps-api.moysklad.ru/api/vendor/1.0` are treated as documentation
+references and skipped from external HTTP validation.
 
 The script performs the check against the generated HTML:
 

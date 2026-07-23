@@ -17,6 +17,10 @@ from urllib.request import Request, urlopen
 SITE_ORIGIN = "http://docs.local"
 LOCAL_HOSTS = {"docs.local", "localhost", "127.0.0.1", "::1"}
 IGNORED_SCHEMES = {"mailto", "tel", "javascript", "data"}
+IGNORED_EXTERNAL_PREFIXES = (
+    ("api.moysklad.ru", "/api/remap/1.2"),
+    ("apps-api.moysklad.ru", "/api/vendor/1.0"),
+)
 REQUEST_HEADERS = {
     "User-Agent": "doc-link-checker/1.0",
     "Accept": "*/*",
@@ -252,12 +256,27 @@ def is_internal_url(url: str) -> bool:
     return parsed.scheme in {"http", "https"} and (parsed.hostname or "").lower() in LOCAL_HOSTS
 
 
+def is_intentional_external_reference(url: str) -> bool:
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+    path = parsed.path.rstrip("/")
+
+    for ignored_host, ignored_prefix in IGNORED_EXTERNAL_PREFIXES:
+        if host == ignored_host and (path == ignored_prefix or path.startswith(ignored_prefix + "/")):
+            return True
+
+    return False
+
+
 def check_external_link(
     url: str,
     link: str,
     timeout: int,
     external_cache: Dict[str, ExternalLinkResult],
 ) -> Optional[CheckError]:
+    if is_intentional_external_reference(url):
+        return None
+
     if url in external_cache:
         result = external_cache[url]
     else:

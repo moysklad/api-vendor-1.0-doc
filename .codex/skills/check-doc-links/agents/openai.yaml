@@ -1,4 +1,4 @@
 interface:
   display_name: "Check Doc Links"
-  short_description: "Run docs and verify page links"
-  default_prompt: "Use $check-doc-links to run the local documentation and check its internal and external links."
+  short_description: "Check built documentation links"
+  default_prompt: "Use $check-doc-links to build the docs if needed and run the site-based link checker."

@@ -84,7 +84,19 @@ JSON ответа от сервера
 2. Если же, ссылаемая страница находится на другом хосте, то добавляем полностью. Например: https://online.moysklad.ru/app/#apps
 
 При клике на ссылки, если ссылка без хоста (1-пункт) то страница открывается на текущей вкладке. Иначе (2-пункт), на новой вкладке. 
-
+Cannot resolve file 'lib/test_translit.rb' 
 Есть скрипт, который генерирует относительную ссылку также, как основной механизм. 
 Вставьте в файл [test_translit.rb](lib%2Ftest_translit.rb) нужные заголовки и запустите находясь в папке /lib ```ruby test_translit.rb```
 
+## Проверка битых ссылок
+
+Перед проверкой сначала соберите документацию:
+```bash
+bundle exec middleman build
+python3 scripts/check-doc-links.py --site-dir build
+```
+
+By default, the checker validates external `http/https` links as well.
+Use `--skip-external` for a fast local pass.
+
+В GitHub Actions эта проверка запускается на `pull_request` до мержа.

@@ -20,7 +20,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Build
-        run: bundle exec middleman build
+        run: bundle exec middleman build --clean
 
       - name: Check documentation links
         run: python3 scripts/check-doc-links.py --site-dir build
@@ -40,7 +40,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Build
-        run: bundle exec middleman build
+        run: bundle exec middleman build --clean
 
       - name: Deploy
         env:

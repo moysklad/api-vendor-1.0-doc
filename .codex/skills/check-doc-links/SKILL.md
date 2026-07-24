@@ -11,7 +11,7 @@ Build the documentation first, then run the checker from the repository root:
 
 ```bash
 docker compose build
-docker compose run --rm app bundle exec middleman build
+docker compose run --rm app bundle exec middleman build --clean
 python3 scripts/check-doc-links.py --site-dir build
 ```
 

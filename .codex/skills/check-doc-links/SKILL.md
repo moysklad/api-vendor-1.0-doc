@@ -10,12 +10,20 @@ description: Build this project's documentation and verify links in the generate
 Build the documentation first, then run the checker from the repository root:
 
 ```bash
-bundle exec middleman build
+docker compose build
+docker compose run --rm app bundle exec middleman build
 python3 scripts/check-doc-links.py --site-dir build
 ```
 
+The project uses an old Ruby/Bundler stack, so local builds should run in the
+Docker image defined by `Dockerfile` (Ruby 2.5.9). The GitHub Actions workflow
+may use its own Ruby setup.
+
 By default, the script checks external `http://` and `https://` links too.
 Use `--skip-external` for a fast local pass.
+Manually verified external URLs unavailable from the CI network can be added
+to `scripts/check-doc-links-allowlist.txt`; they are reported as `INFO` and do
+not fail CI.
 API endpoint references such as `https://api.moysklad.ru/api/remap/1.2` and
 `https://apps-api.moysklad.ru/api/vendor/1.0` are treated as documentation
 references and skipped from external HTTP validation.

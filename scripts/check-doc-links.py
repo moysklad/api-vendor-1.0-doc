@@ -16,6 +16,7 @@ from urllib.request import Request, urlopen
 
 SITE_ORIGIN = "http://docs.local"
 LOCAL_HOSTS = {"docs.local", "localhost", "127.0.0.1", "::1"}
+DEFAULT_EXTERNAL_ALLOWLIST = Path(__file__).with_name("check-doc-links-allowlist.txt")
 IGNORED_SCHEMES = {"mailto", "tel", "javascript", "data"}
 IGNORED_EXTERNAL_PREFIXES = (
     ("api.moysklad.ru", "/api/remap/1.2"),
@@ -46,6 +47,18 @@ class CheckError:
 
 
 @dataclass
+class CheckInfo:
+    kind: str
+    link: str
+    detail: Optional[str] = None
+
+    def __str__(self) -> str:
+        if self.detail:
+            return f"CheckInfo{{kind={self.kind}, link='{self.link}', detail='{self.detail}'}}"
+        return f"CheckInfo{{kind={self.kind}, link='{self.link}'}}"
+
+
+@dataclass
 class Page:
     file_path: Path
     url: str
@@ -68,6 +81,12 @@ def parse_args() -> argparse.Namespace:
         "--skip-external",
         action="store_true",
         help="Skip checks for external http/https links.",
+    )
+    parser.add_argument(
+        "--external-allowlist",
+        type=Path,
+        default=DEFAULT_EXTERNAL_ALLOWLIST,
+        help="File with manually verified external URLs to report as INFO.",
     )
     parser.add_argument("--verbose-found", action="store_true")
     parser.add_argument("--verbose-check", action="store_true")
@@ -268,14 +287,35 @@ def is_intentional_external_reference(url: str) -> bool:
     return False
 
 
+def load_external_allowlist(path: Path) -> Set[str]:
+    if not path.exists():
+        return set()
+    if not path.is_file():
+        raise RuntimeError(f"External allowlist is not a file: {path}")
+
+    allowlist: Set[str] = set()
+    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        value = line.strip()
+        if not value or value.startswith("#"):
+            continue
+        parsed = urlparse(value)
+        if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+            raise RuntimeError(f"Invalid external allowlist URL at {path}:{line_number}: {value}")
+        allowlist.add(value)
+    return allowlist
+
+
 def check_external_link(
     url: str,
     link: str,
     timeout: int,
     external_cache: Dict[str, ExternalLinkResult],
-) -> Optional[CheckError]:
+    external_allowlist: Set[str],
+) -> Tuple[Optional[CheckError], Optional[CheckInfo]]:
     if is_intentional_external_reference(url):
-        return None
+        return None, None
+    if url in external_allowlist:
+        return None, CheckInfo("EXTERNAL_LINK_ALLOWLISTED", link, url)
 
     if url in external_cache:
         result = external_cache[url]
@@ -285,12 +325,12 @@ def check_external_link(
         external_cache[url] = result
 
     if result.ok:
-        return None
+        return None, None
 
     detail = result.detail
     if result.final_url and result.final_url != url:
         detail = f"{detail}; final_url={result.final_url}"
-    return CheckError("EXTERNAL_LINK_BROKEN", link, detail)
+    return CheckError("EXTERNAL_LINK_BROKEN", link, detail), None
 
 
 def check_internal_link(
@@ -323,7 +363,8 @@ def check_links_for_page(
     args: argparse.Namespace,
     page_cache: Dict[Path, Page],
     external_cache: Dict[str, ExternalLinkResult],
-) -> Tuple[List[CheckError], int, int]:
+    external_allowlist: Set[str],
+) -> Tuple[List[CheckError], List[CheckInfo], int, int]:
     links = list(iter_links(page.content))
     if args.show_content:
         print(f"[{page.file_path.relative_to(site_dir)}] content:")
@@ -334,10 +375,12 @@ def check_links_for_page(
             print(link)
 
     errors: List[CheckError] = []
+    infos: List[CheckInfo] = []
     skipped = 0
 
     for link in links:
         error: Optional[CheckError] = None
+        info: Optional[CheckInfo] = None
         href = extract_value(link, HREF_RE)
 
         if href is None or href.strip() == "":
@@ -367,15 +410,24 @@ def check_links_for_page(
                 elif args.skip_external:
                     skipped += 1
                 else:
-                    error = check_external_link(absolute_url, link, args.link_timeout, external_cache)
+                    error, info = check_external_link(
+                        absolute_url,
+                        link,
+                        args.link_timeout,
+                        external_cache,
+                        external_allowlist,
+                    )
+                    if info:
+                        infos.append(info)
 
         if args.verbose_check:
-            print(link + " - " + (str(error) if error else "OK"))
+            result = str(error) if error else (str(info) if info else "OK")
+            print(link + " - " + result)
 
         if error:
             errors.append(error)
 
-    return errors, len(links), skipped
+    return errors, infos, len(links), skipped
 
 
 def main() -> int:
@@ -394,25 +446,34 @@ def main() -> int:
     log("Check links in " + str(site_dir))
     page_cache: Dict[Path, Page] = {}
     external_cache: Dict[str, ExternalLinkResult] = {}
+    external_allowlist = load_external_allowlist(args.external_allowlist)
     errors: List[CheckError] = []
+    infos: List[CheckInfo] = []
     total_links = 0
     skipped = 0
 
     for page_file in pages:
         page = load_page(page_file, site_dir, page_cache)
-        page_errors, page_links, page_skipped = check_links_for_page(
+        page_errors, page_infos, page_links, page_skipped = check_links_for_page(
             page,
             site_dir,
             args,
             page_cache,
             external_cache,
+            external_allowlist,
         )
         errors.extend(page_errors)
+        infos.extend(page_infos)
         total_links += page_links
         skipped += page_skipped
 
     log(f"Checked pages: {len(pages)}")
-    log(f"Checked links: total={total_links}, skipped={skipped}, errors={len(errors)}")
+    log(f"Checked links: total={total_links}, skipped={skipped}, infos={len(infos)}, errors={len(errors)}")
+
+    if infos:
+        print("INFO FOUND: " + str(len(infos)))
+        for info in infos:
+            print(info)
 
     if not errors:
         print("There is no errors found")

@@ -7,6 +7,7 @@ import argparse
 import re
 import sys
 from dataclasses import dataclass
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Set, Tuple
 from urllib.error import HTTPError, URLError
@@ -29,9 +30,7 @@ REQUEST_HEADERS = {
 }
 
 LINK_RE = re.compile(r"<\s*a\b.*?</a\s*>", re.IGNORECASE | re.DOTALL)
-HEADER_RE = re.compile(r"<\s*h[1-6]\b.*?>", re.IGNORECASE | re.DOTALL)
 HREF_RE = re.compile(r"\bhref\s*=\s*([\"'])(.*?)\1", re.IGNORECASE | re.DOTALL)
-ID_RE = re.compile(r"\bid\s*=\s*([\"'])(.*?)\1", re.IGNORECASE | re.DOTALL)
 
 
 @dataclass
@@ -63,7 +62,7 @@ class Page:
     file_path: Path
     url: str
     content: str
-    header_ids: Set[str]
+    element_ids: Set[str]
 
 
 @dataclass
@@ -185,26 +184,30 @@ def is_intentional_placeholder_link(link: str, href: Optional[str]) -> bool:
     return False
 
 
-def parse_header_ids(content: str) -> Set[str]:
-    header_ids: Set[str] = set()
-    duplicates: Set[str] = set()
+class IdParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.element_ids: Set[str] = set()
+        self.duplicates: Set[str] = set()
 
-    for header in HEADER_RE.finditer(content):
-        markup = header.group(0)
-        match = ID_RE.search(markup)
-        if match is None:
-            raise RuntimeError(f"Broken header (id not found): {markup}")
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
+        for name, value in attrs:
+            if name == "id" and value is not None:
+                if value in self.element_ids:
+                    self.duplicates.add(value)
+                self.element_ids.add(value)
 
-        header_id = match.group(2)
-        if header_id in header_ids:
-            duplicates.add(header_id)
-        header_ids.add(header_id)
 
-    if duplicates:
-        duplicate_list = ", ".join(sorted(duplicates))
-        raise RuntimeError(f"There are duplicate ids in some header(s): {duplicate_list}")
+def parse_element_ids(content: str) -> Set[str]:
+    parser = IdParser()
+    parser.feed(content)
+    parser.close()
 
-    return header_ids
+    if parser.duplicates:
+        duplicate_list = ", ".join(sorted(parser.duplicates))
+        raise RuntimeError(f"There are duplicate ids in some HTML elements: {duplicate_list}")
+
+    return parser.element_ids
 
 
 def find_html_files(site_dir: Path) -> List[Path]:
@@ -229,14 +232,14 @@ def load_page(file_path: Path, site_dir: Path, cache: Dict[Path, Page]) -> Page:
         file_path=file_path,
         url=page_url_for_file(file_path, site_dir),
         content=content,
-        header_ids=parse_header_ids(content),
+        element_ids=parse_element_ids(content),
     )
     cache[file_path] = page
     return page
 
 
-def fragment_exists(fragment: str, header_ids: Set[str]) -> bool:
-    return fragment in header_ids or unquote(fragment) in header_ids
+def fragment_exists(fragment: str, element_ids: Set[str]) -> bool:
+    return fragment in element_ids or unquote(fragment) in element_ids
 
 
 def resolve_local_file(site_dir: Path, url: str) -> Optional[Path]:
@@ -351,7 +354,7 @@ def check_internal_link(
     except Exception as error:
         return CheckError("INTERNAL_LINK_BROKEN", link, str(error))
 
-    if fragment and not fragment_exists(fragment, target_page.header_ids):
+    if fragment and not fragment_exists(fragment, target_page.element_ids):
         return CheckError("INTERNAL_ANCHOR_BROKEN", link, fragment)
 
     return None
@@ -397,7 +400,7 @@ def check_links_for_page(
                 fragment = href[1:]
                 if is_intentional_placeholder_link(link, href):
                     skipped += 1
-                elif not fragment_exists(fragment, page.header_ids):
+                elif not fragment_exists(fragment, page.element_ids):
                     error = CheckError("INTERNAL_ANCHOR_BROKEN", link, fragment)
             else:
                 absolute_url = urljoin(page.url, href)

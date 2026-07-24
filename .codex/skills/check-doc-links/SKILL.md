@@ -40,7 +40,7 @@ The script performs the check against the generated HTML:
 Treat `href` values as follows:
 
 - Missing or blank `href`: `LINK_HREF_ABSENT_OR_BLANK`.
-- `#anchor`: validate against ids on page headings (`h1` through `h6`).
+- `#anchor`: validate against `id` attributes on the target page.
 - Relative paths and `http://docs.local/...` links: resolve against the built `build/` output and validate the optional fragment as `INTERNAL_LINK_BROKEN`.
 - Absolute `http://` or `https://` URLs to other hosts: perform an HTTP request and report non-2xx/3xx responses as `EXTERNAL_LINK_BROKEN`.
 - Skip `mailto:`, `tel:`, `javascript:`, `data:`, and non-HTTP(S) schemes.

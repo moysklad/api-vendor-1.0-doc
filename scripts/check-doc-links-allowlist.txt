@@ -1,0 +1,2 @@
+# Manually verified external URLs that may be unavailable from CI networks.
+https://reestr.digital.gov.ru/

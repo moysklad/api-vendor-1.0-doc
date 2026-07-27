@@ -1,11 +1,14 @@
 name: Build
 
-on: push
+on:
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
-  build:
+  check-doc-links:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/checkout@v2
@@ -13,12 +16,30 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.5.1'
+          ruby-version: '2.5.9'
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Build
-        run:
-          bundle exec middleman build --build-dir=site
+        run: bundle exec middleman build --clean
+
+      - name: Check documentation links
+        run: python3 scripts/check-doc-links.py --site-dir build
+
+  build:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.5.9'
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Build
+        run: bundle exec middleman build --clean
 
       - name: Deploy
         env:
@@ -32,6 +53,6 @@ jobs:
           touch ~/.ssh/config && chmod 600 ~/.ssh/config
           echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\nPort ${SERVER_SSH_PORT}\n" >> ~/.ssh/config
           ssh-add - <<< "$DEPLOY_KEY"
-  
+
           ssh app@${SERVER_IP_ADDRESS} pwd
-          rsync -r --delete-after --quiet site/ app@${SERVER_IP_ADDRESS}:./${APP_PREFIX}
+          rsync -r --delete-after --quiet build/ app@${SERVER_IP_ADDRESS}:./${APP_PREFIX}

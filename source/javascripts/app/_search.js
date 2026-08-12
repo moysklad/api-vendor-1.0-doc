@@ -17,7 +17,7 @@ $(function () {
       var title = $(this);
       var body = title.nextUntil('h1, h2');
 
-      let doc = {
+      var doc = {
         "id": title.prop('id'),
         "title": title.text(),
         "body": body.text()

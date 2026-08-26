@@ -2,7 +2,7 @@
 
 ### 26-08-2026
 #### Добавлено
-- В разделе [Ошибки при работе с виджетами](#oshibki-pri-rabote-s-widzhetami) описаны коды ошибок `1005` и `1006`. В описание протокола [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлена гарантия ответа на каждое сообщение `UpdateRequest` и перечень характерных ошибок.
+- В протоколе [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлен код ошибки [`1006`](#oshibki-pri-rabote-s-widzhetami) — ошибка обработки сообщения на стороне МоегоСклада (таймаут, внутренняя ошибка). Хост-окно теперь гарантированно отвечает на каждое сообщение `UpdateRequest`.
 
 ### 17-08-2026
 #### Добавлено

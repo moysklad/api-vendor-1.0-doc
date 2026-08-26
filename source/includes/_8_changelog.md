@@ -2,7 +2,7 @@
 
 ### 26-08-2026
 #### Добавлено
-- В протоколе [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлен код ошибки [`1006`](#oshibki-pri-rabote-s-widzhetami) — ошибка обработки сообщения на стороне МоегоСклада (таймаут, внутренняя ошибка). Хост-окно теперь гарантированно отвечает на каждое сообщение `UpdateRequest`.
+- В протоколе [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлен код ошибки [`1006`](#oshibki-pri-rabote-s-widzhetami).
 
 ### 17-08-2026
 #### Добавлено

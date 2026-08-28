@@ -82,6 +82,6 @@ $search-box-border-color: #666 !default;
 // These settings are probably best left alone.
 
 %break-words {
-    word-break: break-all;
+    overflow-wrap: anywhere;
     hyphens: auto;
 }

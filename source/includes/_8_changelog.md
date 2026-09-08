@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 26-08-2026
+#### Добавлено
+- В протоколе [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлен код ошибки [`1006`](#oshibki-pri-rabote-s-widzhetami).
+
 ### 17-08-2026
 #### Добавлено
 - В раздел [Процесс приостановки и возобновления работы решения на аккаунте](#process-priostanowki-i-wozobnowleniq-raboty-resheniq-na-akkaunte) добавлено описание [рекомендации сохранять пользовательские настройки](#sohranenie-nastroek-pri-priostanowke-resheniq) при приостановке и удалении решения. В [демо-решениях](#demo-resheniq) добавлены примеры сохранения и восстановления настроек.

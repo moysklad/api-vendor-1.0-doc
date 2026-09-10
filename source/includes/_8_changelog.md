@@ -1,5 +1,11 @@
 ## Список последних изменений
 
+### 02-09-2026
+#### Добавлено
+- Добавлен [протокол контекста пользователя](#protokol-kontexta-pol-zowatelq) для запроса одноразового токена контекста пользователя из главного окна, виджета или модального окна.
+- Добавлен эндпоинт [получения контекста пользователя по одноразовому токену](#poluchenie-kontexta-pol-zowatelq-po-odnorazowomu-tokenu).
+- В [дескрипторе решений](#deskriptor-resheniq) добавлены протокол `user-context` и атрибут `useContextKey`.
+
 ### 26-08-2026
 #### Добавлено
 - В протоколе [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлен код ошибки [`1006`](#oshibki-pri-rabote-s-widzhetami).

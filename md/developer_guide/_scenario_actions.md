@@ -6,12 +6,12 @@
 
 Пример настройки действия в сценариях:
 
-![useful image](images/scenario-setup.png)
+![useful image](./images/scenario-setup.png)
 
-Для добавления действия нужно заполнить [блок scenario](#blok-scenario) в дескрипторе и реализовать [эндпоинт обработчика действия в vendorApi](#obrabotka-dejstwiq-w-scenarii).
+Для добавления действия нужно заполнить [блок scenario](#/developer-guide/solution-descriptor#4-blok-scenario) в дескрипторе и реализовать [эндпоинт обработчика действия в vendorApi](#/vendor-api/vendor-endpoints#4-obrabotka-dejstviya-v-scenarii).
 
 Если при выполнении обработчика действия возникнет ошибка, пользователи увидят сообщение об этом в истории выполнения на странице редактирования сценария. Пример:
 
-![useful image](images/scenario-audit.png)
+![useful image](./images/scenario-audit.png)
 
 Подробнее про сценарии можно прочитать на [странице Центра поддержки](https://support.moysklad.ru/hc/ru/знакомство%20с%20сервисом/инструменты/сценарии).

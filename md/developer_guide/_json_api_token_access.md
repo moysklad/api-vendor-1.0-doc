@@ -23,8 +23,8 @@ Authorization: Bearer 6ab89be1ae6ff147755625ee8da948e42612233b
 
 #### Диаграмма последовательности предоставления доступа при подключении решения
 
-![useful image](images/diag_install.png)
+![useful image](./images/diag_install.png)
 
 #### Диаграмма последовательности отзыва доступа при отключении решения
 
-![useful image](images/diag_uninstall.png)
+![useful image](./images/diag_uninstall.png)

@@ -5,248 +5,248 @@
 
 ### 29-09-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлено право для работы с начислениями зарплаты: `payroll`.
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлено право для работы с начислениями зарплаты: `payroll`.
 
 ### 09-09-2026
 #### Изменено
-- Требования к иконке, изображениям, видео и инструкции решения объединены в раздел [Визуальные материалы решения](#vizual-nye-materialy-resheniq).
+- Требования к иконке, изображениям, видео и инструкции решения объединены в раздел [Визуальные материалы решения](#/getting-started/visual-materials#2-vizualnye-materialy-resheniya).
 
 ### 02-09-2026
 #### Добавлено
-- Добавлен [протокол контекста пользователя](#protokol-kontexta-pol-zowatelq) для запроса одноразового токена контекста пользователя из главного окна, виджета или модального окна.
-- Добавлен эндпоинт [получения контекста пользователя по одноразовому токену](#poluchenie-kontexta-pol-zowatelq-po-odnorazowomu-tokenu).
-- В [дескрипторе решений](#deskriptor-resheniq) добавлены протокол `user-context` и атрибут `useContextKey`.
+- Добавлен [протокол контекста пользователя](#/developer-guide/host-window-services#4-protokol-konteksta-polzovatelya) для запроса одноразового токена контекста пользователя из главного окна, виджета или модального окна.
+- Добавлен эндпоинт [получения контекста пользователя по одноразовому токену](#/vendor-api/moysklad-endpoints#4-poluchenie-konteksta-polzovatelya-po-odnorazovomu-tokenu).
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены протокол `user-context` и атрибут `useContextKey`.
 
 ### 26-08-2026
 #### Добавлено
-- В протоколе [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) добавлен код ошибки [`1006`](#oshibki-pri-rabote-s-widzhetami).
+- В протоколе [update-provider](#/developer-guide/widgets#4-izmenenie-sostoyaniya-redaktiruemogo-obuekta) добавлен код ошибки [`1006`](#/developer-guide/widget-errors#2-oshibki-pri-rabote-s-vidzhetami).
 
 ### 17-08-2026
 #### Добавлено
-- В раздел [Процесс приостановки и возобновления работы решения на аккаунте](#process-priostanowki-i-wozobnowleniq-raboty-resheniq-na-akkaunte) добавлено описание [рекомендации сохранять пользовательские настройки](#sohranenie-nastroek-pri-priostanowke-resheniq) при приостановке и удалении решения. В [демо-решениях](#demo-resheniq) добавлены примеры сохранения и восстановления настроек.
+- В раздел [Процесс приостановки и возобновления работы решения на аккаунте](#/vendor-api/suspend-and-resume#2-process-priostanovki-i-vozobnovleniya-raboty-resheniya-na-akkaunte) добавлено описание [рекомендации сохранять пользовательские настройки](#/vendor-api/suspend-and-resume#4-sohranenie-nastroek-pri-priostanovke-resheniya) при приостановке и удалении решения. В [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya) добавлены примеры сохранения и восстановления настроек.
 
 ### 03-08-2026
 #### Добавлено
-- В [дескрипторе решения](#deskriptor-resheniq) добавлена поддержка протокола [update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе поставщику, Внутреннем заказе и Инвентаризации.
+- В [дескрипторе решения](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена поддержка протокола [update-provider](#/developer-guide/widgets#4-izmenenie-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Заказе поставщику, Внутреннем заказе и Инвентаризации.
 
 ### 30-07-2026
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) в блоке [`iframes`](#blok-iframes) добавлен тип окна `mobile`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) в блоке [`iframes`](#/developer-guide/solution-descriptor#4-blok-iframes) добавлен тип окна `mobile`.
 
 ### 29-07-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлено право для работы со статьями расходов: `expenseItem`.
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлено право для работы со статьями расходов: `expenseItem`.
 
 ### 21-07-2026
 #### Добавлено
-- В [дескрипторе решения](#deskriptor-resheniq) добавлена поддержка протоколов [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе поставщику, Внутреннем заказе и Инвентаризации.
+- В [дескрипторе решения](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена поддержка протоколов [change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta) и [validation-feedback](#/developer-guide/widgets#4-validaciya-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Заказе поставщику, Внутреннем заказе и Инвентаризации.
 
 ### 02-07-2026
 #### Добавлено
-- В раздел [Инструкция для пользователя](#instrukciq-dlq-pol-zowatelq) добавлено описание атрибута `data-manual-zoom`, который позволяет открывать изображения инструкции в увеличенном виде.
+- В раздел [Инструкция для пользователя](#/getting-started/visual-materials#3-instrukciya-dlya-polzovatelya) добавлено описание атрибута `data-manual-zoom`, который позволяет открывать изображения инструкции в увеличенном виде.
 
 ### 11-06-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания [виджетов](#vidzhety): новый Заказ поставщику (`document.purchaseorder.create`), новый Внутренний заказ (`document.internalorder.create`) и новая Инвентаризация (`document.inventory.create`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания [виджетов](#/developer-guide/widgets#2-vidzhety): новый Заказ поставщику (`document.purchaseorder.create`), новый Внутренний заказ (`document.internalorder.create`) и новая Инвентаризация (`document.inventory.create`).
 
 ### 20-05-2026
 #### Добавлено
-- В [демо-решениях](#demo-resheniq) добавлен пример решения на Python.
+- В [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya) добавлен пример решения на Python.
 
 ### 14-05-2026
 #### Добавлено
-- В [демо-решениях](#demo-resheniq) добавлен пример решения на Node.js.
+- В [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya) добавлен пример решения на Node.js.
 
 ### 29-04-2026
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания прав для работы с пользовательскими справочниками: `customDictionary`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания прав для работы с пользовательскими справочниками: `customDictionary`.
 
 ### 10-04-2026
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания блока `scenario` для списка [действий в сценариях](#dejstwiq-w-scenariqh).
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания блока `scenario` для списка [действий в сценариях](#/developer-guide/scenario-actions#2-dejstviya-v-scenariyah).
 
 ### 04-04-2026
 #### Добавлено
-- В раздел [Внесение изменений в опубликованное решение](#vnesenie-izmenenij-w-opublikowannoe-reshenie) добавлено описание рекомендуемого порядка тестирования и публикации изменений.
+- В раздел [Внесение изменений в опубликованное решение](#/cabinet/developer-cabinet#4-vnesenie-izmenenij-v-opublikovannoe-reshenie) добавлено описание рекомендуемого порядка тестирования и публикации изменений.
 
 #### Изменено
-- В разделе [Изображения для страницы решения](#izobrazheniq-dlq-stranicy-resheniq) уточнены требования к изображениям: разрешение 1280x720–1920x1080 px (16:9), размер файла до 2 Мб.
+- В разделе [Изображения для страницы решения](#/getting-started/visual-materials#3-izobrazheniya-dlya-stranicy-resheniya) уточнены требования к изображениям: разрешение 1280x720–1920x1080 px (16:9), размер файла до 2 Мб.
 
 ### 03-04-2026
 #### Добавлено
-- В [контексте пользователя](#kontext-pol-zowatelq) добавлен новый параметр `userLocale`.
+- В [контексте пользователя](#/developer-guide/user-context#2-kontekst-polzovatelya) добавлен новый параметр `userLocale`.
 
 ### 16-03-2026
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания блока `iframes` с главным окном и окном чатов.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания блока `iframes` с главным окном и окном чатов.
 
 ### 12-03-2026
 #### Добавлено
-- В дескрипторе решений в [блоке `widgets`](#blok-widgets) теперь можно указать высоту `0px` для того, чтобы скрыть виджет.
+- В дескрипторе решений в [блоке `widgets`](#/developer-guide/solution-descriptor#4-blok-widgets) теперь можно указать высоту `0px` для того, чтобы скрыть виджет.
 
 ### 12-03-2026
 #### Изменено
-- Прекращена поддержка статуса `404 (Not Found)` в эндпоинте [деактивации решения на аккаунте](#deaktiwaciq-resheniq-na-akkaunte).
+- Прекращена поддержка статуса `404 (Not Found)` в эндпоинте [деактивации решения на аккаунте](#/vendor-api/vendor-endpoints#4-deaktivaciya-resheniya-na-akkaunte).
 
 ### 06-03-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлена новая точка встраивания [кнопок](#blok-buttons): документ Заказ кодов маркировки (`document.emissionorder.edit`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена новая точка встраивания [кнопок](#/developer-guide/solution-descriptor#4-blok-buttons): документ Заказ кодов маркировки (`document.emissionorder.edit`).
 
 ### 03-03-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлена новая точка встраивания [виджетов](#vidzhety): документ Заказ кодов маркировки (`document.emissionorder.edit`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена новая точка встраивания [виджетов](#/developer-guide/widgets#2-vidzhety): документ Заказ кодов маркировки (`document.emissionorder.edit`).
 
 ### 06-02-2026
 #### Добавлено
-- Добавлен раздел [Ограничения для контента, загружаемого в виджетах](#ogranicheniq-dlq-kontenta-zagruzhaemogo-w-widzhetah): описание sandbox-флагов и Permissions Policy, применяемых к iframe решений.
+- Добавлен раздел [Ограничения для контента, загружаемого в виджетах](#/developer-guide/widget-content-limits#2-ogranicheniya-dlya-kontenta-zagruzhaemogo-v-vidzhetah): описание sandbox-флагов и Permissions Policy, применяемых к iframe решений.
 
 ### 21-01-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: 
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: 
 документ и список Возвратов покупателей (`document.salesreturn.edit` и `document.salesreturn.list`), 
 документ и список Внутренних заказов (`document.internalorder.edit` и `document.internalorder.list`), 
 документ и список Списаний (`document.loss.edit` и `document.loss.list`).
 
 ### 19-01-2026
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлен новый атрибут `useSelected` у [кастомных кнопок](#blok-buttons).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлен новый атрибут `useSelected` у [кастомных кнопок](#/developer-guide/solution-descriptor#4-blok-buttons).
 
 ### 19-11-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые [гибкие права](#blok-access):
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые [гибкие права](#/developer-guide/solution-descriptor#4-blok-access):
   - Права сущностей: Производственные задания, Выполнение этапов, Этапы производства, Техпроцессы, Каналы продаж, Ставки НДС, Корректировка взаиморасчетов.
   - Пользовательские: Просмотр взаиморасчетов и Просмотр остатков по товарам.
 
 ### 28-10-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: список Розничных продаж (`document.retaildemand.list`),
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: список Розничных продаж (`document.retaildemand.list`),
   документ и список Перемещений (`document.move.edit` и `document.move.list`), документ и список Оприходований (`document.enter.edit` и `document.enter.list`).
 
 ### 01-10-2025
 #### Добавлено
-- Во все запросы [на стороне разработчика](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен заголовок `X_Lognex_RequestId`  
+- Во все запросы [на стороне разработчика](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij) добавлен заголовок `X_Lognex_RequestId`  
 
 ### 19-09-2025
 #### Добавлено
-- В запросе на [завершение асинхронной обработки нажатия на кастомную кнопку](#zawershenie-asinhronnoj-obrabotki-nazhatiq-na-kastomnuu-knopku) добавлены ограничения на максимальный размер значений и формат ссылки.
+- В запросе на [завершение асинхронной обработки нажатия на кастомную кнопку](#/vendor-api/moysklad-endpoints#4-zavershenie-asinhronnoj-obrabotki-nazhatiya-na-kastomnuyu-knopku) добавлены ограничения на максимальный размер значений и формат ссылки.
 
 ### 16-09-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: документ Входящий платеж (`document.paymentin.edit`) и Исходящий платеж (`document.paymentout.edit`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: документ Входящий платеж (`document.paymentin.edit`) и Исходящий платеж (`document.paymentout.edit`).
 
 ### 11-09-2025
 #### Добавлено
-- Возможность указания [счетчика Яндекс Метрики](#nastrojka-yandex-metriki-dlq-resheniq) для Серверного решения в кабинете разработчика.
+- Возможность указания [счетчика Яндекс Метрики](#/cabinet/developer-cabinet#3-nastrojka-yandeks-metriki-dlya-resheniya) для Серверного решения в кабинете разработчика.
 
 ### 20-08-2025
 #### Добавлено
-- В эндпоинт [запроса обработки нажатия на кнопку](#obrabotka-nazhatiq-na-kastomnuu-knopku) добавлена возможность асинхронной обработки (`async=true`).
+- В эндпоинт [запроса обработки нажатия на кнопку](#/vendor-api/vendor-endpoints#4-obrabotka-nazhatiya-na-kastomnuyu-knopku) добавлена возможность асинхронной обработки (`async=true`).
 
 ### 12-08-2025
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания блока `qrPayApi`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания блока `qrPayApi`.
 
 ### 30-06-2025
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания блока `fiscalApi`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания блока `fiscalApi`.
 
 ### 20-05-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: список Счетов поставщиков (`document.invoicein.list`), 
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: список Счетов поставщиков (`document.invoicein.list`), 
 Счетов покупателям (`document.invoiceout.list`) и Приемок (`document.supply.list`).
 
 ### 06-05-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: список Товаров и услуг (`entity.good.list`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: список Товаров и услуг (`entity.good.list`).
 
 ### 16-04-2025
 #### Добавлено
-- Новый раздел [Дополнительные события](#uwedomleniq-o-dopolnitel-nyh-sobytiqh)
-- Новое событие [получения обновлённых прав установки](#sobytie-izmeneniq-praw-ustanowki-updatepermissions)
+- Новый раздел [Дополнительные события](#/vendor-api/additional-events#2-uvedomleniya-o-dopolnitelnyh-sobytiyah)
+- Новое событие [получения обновлённых прав установки](#/vendor-api/additional-events#4-sobytie-izmeneniya-prav-ustanovki-updatepermissions)
 
 ### 14-04-2025
 #### Изменено
-- Массовые операции теперь работают на всех страницах где поддерживаются [кастомные кнопки](#kastomnye-knopki)
+- Массовые операции теперь работают на всех страницах где поддерживаются [кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki)
 
 ### 07-04-2025
 #### Добавлено
-- В эндпоинт [запроса обработки нажатия на кнопку](#obrabotka-nazhatiq-na-kastomnuu-knopku) добавлена возможность открытия кастомного модального окна (`action=ShowPopup`).
-- В [кастомные кнопки](#kastomnye-knopki) в списках добавлена возможность отправки более 100 позиций.
+- В эндпоинт [запроса обработки нажатия на кнопку](#/vendor-api/vendor-endpoints#4-obrabotka-nazhatiya-na-kastomnuyu-knopku) добавлена возможность открытия кастомного модального окна (`action=ShowPopup`).
+- В [кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki) в списках добавлена возможность отправки более 100 позиций.
 
 ### 01-04-2025
 #### Добавлено
-- В эндпоинт [получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) в теле ответа добавлено поле access.
+- В эндпоинт [получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte) в теле ответа добавлено поле access.
 
 ### 10-03-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кастомных кнопок: `document.customerorder.list`, `document.demand.list`, `document.purchaseorder.list`.
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кастомных кнопок: `document.customerorder.list`, `document.demand.list`, `document.purchaseorder.list`.
 
 ### 17-02-2025
 #### Добавлено
-- В [REST-эндпоинты на стороне МоегоСклада](#rest-andpointy-na-storone-moegosklada) добавлен новый эндпоинт для [частичного изменения настроек лояльности](#chastichnoe-izmenenie-nastroek-loql-nosti).
+- В [REST-эндпоинты на стороне МоегоСклада](#/vendor-api/moysklad-endpoints#2-rest-endpointy-na-storone-moegosklada) добавлен новый эндпоинт для [частичного изменения настроек лояльности](#/vendor-api/moysklad-endpoints#4-chastichnoe-izmenenie-nastroek-loyalnosti).
 
 ### 10-02-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кастомных кнопок: список Платежей (`document.finance.list`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кастомных кнопок: список Платежей (`document.finance.list`).
 
 ### 28-01-2025
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кастомных кнопок: список Контрагентов (`entity.counterparty.list`).
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кастомных кнопок: список Контрагентов (`entity.counterparty.list`).
 
 ### 27-01-2025
 #### Добавлено
-- В личном кабинете добавлена вкладка для [просмотра истории модерации](#prosmotr-istorii-moderacii).
+- В личном кабинете добавлена вкладка для [просмотра истории модерации](#/cabinet/developer-cabinet#3-prosmotr-istorii-moderacii).
 
 ### 21-01-2025
 #### Добавлено
-- Отправка события `TariffChanged` при [продлении пробного периода](#prodlenie-probnogo-perioda).
+- Отправка события `TariffChanged` при [продлении пробного периода](#/placement/placement-requirements#3-prodlenie-probnogo-perioda).
 
 ### 11-12-2024
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания прав для работы с дополнительными полями: `useOwnAttributeMetadata` и `useAllAttributeMetadata`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания прав для работы с дополнительными полями: `useOwnAttributeMetadata` и `useAllAttributeMetadata`.
 
 ### 09-12-2024
 #### Добавлено
-- Поддержка [встраивания видео в инструкции](#video-w-instrukcii).
+- Поддержка [встраивания видео в инструкции](#/getting-started/visual-materials#4-video-v-instrukcii).
 
 ### 03-12-2024
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: карточки Товара, Услуги, Комплекта, Модификации и Группы товаров.
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: карточки Товара, Услуги, Комплекта, Модификации и Группы товаров.
 
 ### 21-11-2024
 #### Добавлено
-- В [дескриптор решений](#deskriptor-resheniq) добавлены новые точки встраивания кнопок: документы Отгрузка, Счет покупателю, Заказ поставщику, Розничная продажа и карточка Контрагента.
+- В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлены новые точки встраивания кнопок: документы Отгрузка, Счет покупателю, Заказ поставщику, Розничная продажа и карточка Контрагента.
 
 ### 11-11-2024
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Поддержка [кастомных кнопок](#kastomnye-knopki) (`<buttons>`).
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Поддержка [кастомных кнопок](#/developer-guide/custom-buttons#2-kastomnye-knopki) (`<buttons>`).
 
 ### 30-10-2024
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Поддержка [стандартных диалогов](#standartnye-dialogi) (`<standard-dialogs/>`) в главном iframe решения и модальных окнах.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Поддержка [стандартных диалогов](#/developer-guide/host-window-services#4-standartnye-dialogi) (`<standard-dialogs/>`) в главном iframe решения и модальных окнах.
 
 ### 09-10-2024
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания прав для работы с веб-хуками: `useOwnWebhooks` и `useAllWebhooks`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания прав для работы с веб-хуками: `useOwnWebhooks` и `useAllWebhooks`.
 
 ### 20-08-2024
 #### Добавлено
-- В тело запроса при [Активация решения на аккаунте](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.partner`.
-- В тело ответа при [Получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) добавлен атрибут `subscription.partner`.
+- В тело запроса при [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.partner`.
+- В тело ответа при [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte) добавлен атрибут `subscription.partner`.
 
 ### 08-08-2024
 #### Добавлено
-- В URL запроса [Получение контекста пользователя](#poluchenie-kontexta-pol-zowatelq) добавлены новые параметры: appUid и appId.
+- В URL запроса [Получение контекста пользователя](#/vendor-api/moysklad-endpoints#4-poluchenie-konteksta-polzovatelya) добавлены новые параметры: appUid и appId.
 
 ### 08-05-2024
 #### Добавлено
-- В [дескрипторе решений](#deskriptor-resheniq) добавлена возможность указания блока `loyaltyApi`.
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлена возможность указания блока `loyaltyApi`.
 
 ### 06-05-2024
 #### Добавлено
-- В тело запроса при [Активация решения на аккаунте](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлена новая причина активации (`"cause": "Autoprolongation"`).
+- В тело запроса при [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij) добавлена новая причина активации (`"cause": "Autoprolongation"`).
 
 ### 23-04-2024
 #### Изменено
@@ -254,30 +254,30 @@
 
 ### 02-04-2024
 #### Добавлено
-- Возможность получения [шаблонов](#osobennosti-dostupa-k-nekotorym-funkciqm-json-api-1-2) документов по токену решения.
+- Возможность получения [шаблонов](#/developer-guide/json-api-access-notes#2-osobennosti-dostupa-k-nekotorym-funkciyam-json-api-12) документов по токену решения.
 
 ### 07-03-2024
 #### Добавлено
-- В тело запроса при [Активация решения на аккаунте](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.notForResale`.
-- В тело ответа при [Получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) добавлен атрибут `subscription.notForResale`.
+- В тело запроса при [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.notForResale`.
+- В тело ответа при [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte) добавлен атрибут `subscription.notForResale`.
 
 ### 19-01-2024
 #### Добавлено
-- В тело запроса при [Активация решения на аккаунте](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.expiryMoment`.
-- В тело ответа при [Получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) добавлен атрибут `subscription.expiryMoment`.
+- В тело запроса при [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.expiryMoment`.
+- В тело ответа при [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte) добавлен атрибут `subscription.expiryMoment`.
 
 ### 27-09-2023
 #### Добавлено
-- В тело запроса при [Активация решения на аккаунте](#rest-andpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.tariffName` (название тарифа) и информация о новой причине активации (`"cause": "TariffChanged"`).
-- В тело ответа при [Получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte) добавлен атрибут `subscription.tariffName` (название тарифа).
+- В тело запроса при [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij) добавлен атрибут `subscription.tariffName` (название тарифа) и информация о новой причине активации (`"cause": "TariffChanged"`).
+- В тело ответа при [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte) добавлен атрибут `subscription.tariffName` (название тарифа).
 
 ### 19-09-2023
 #### Изменено
-- В [дескрипторе решений](#deskriptor-resheniq) в качестве значения блока `access.resource` можно указывать [https://api.moysklad.ru/api/remap/1.2](https://api.moysklad.ru/api/remap/1.2).
+- В [дескрипторе решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) в качестве значения блока `access.resource` можно указывать [https://api.moysklad.ru/api/remap/1.2](https://api.moysklad.ru/api/remap/1.2).
 
 ### 06-09-2023
 #### Добавлено
-- В тело запроса при [активации решения на аккаунте](#aktiwaciq-resheniq-na-akkaunte) добавлена информация о подписке (атрибут `subscription`).
+- В тело запроса при [активации решения на аккаунте](#/vendor-api/vendor-endpoints#4-aktivaciya-resheniya-na-akkaunte) добавлена информация о подписке (атрибут `subscription`).
 
 ### 30-08-2023
 #### Изменено
@@ -287,33 +287,33 @@
 
 ### 23-11-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Розничном возврате, Внесении и Выплате денег.
-- Поддержка дополнительного поля типа справочник [[Товар]](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi) в протоколе [change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta).
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Розничном возврате, Внесении и Выплате денег.
+- Поддержка дополнительного поля типа справочник [[Товар]](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-rabota-s-dopolnitel-nymi-polqmi) в протоколе [change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta).
 
 ### 18-11-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Розничной продаже.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta) и [validation-feedback](#/developer-guide/widgets#4-validaciya-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Розничной продаже.
 
 ### 09-11-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Возврате покупателя.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta) и [validation-feedback](#/developer-guide/widgets#4-validaciya-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Возврате покупателя.
 
 ### 12-10-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Списании и Счете покупателю.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол update-provider](#/developer-guide/widgets#4-izmenenie-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Списании и Счете покупателю.
 
 ### 06-09-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете поставщика.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta) и [validation-feedback](#/developer-guide/widgets#4-validaciya-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Счете поставщика.
 
 ### 23-08-2022
 #### Изменено
-- Прекращена поддержка [типа решений](#tipy-reshenij-dlq-kataloga-reshenij) iframe.
+- Прекращена поддержка [типа решений](#/app-types/app-types#1-tipy-reshenij-dlya-kataloga-reshenij) iframe.
  
 ### 01-08-2022
 #### Добавлено
@@ -328,18 +328,18 @@
 
 ### 22-07-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Отгрузке, Перемещении и Оприходовании.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол update-provider](#/developer-guide/widgets#4-izmenenie-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Отгрузке, Перемещении и Оприходовании.
 
 ### 07-07-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) и [validation-feedback](#validaciq-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Счете покупателю.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta) и [validation-feedback](#/developer-guide/widgets#4-validaciya-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Счете покупателю.
 
 ### 04-07-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Приемке.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол update-provider](#/developer-guide/widgets#4-izmenenie-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Приемке.
 
 ### 20-05-2022
 #### Добавлено
@@ -347,149 +347,149 @@
 
 ### 20-04-2022
 #### Изменено
-- Требования к [иконке решения](#ikonka-resheniq).
+- Требования к [иконке решения](#/getting-started/visual-materials#3-ikonka-resheniya).
 
 ### 04-03-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Поддержка [протокола навигации](#protokol-nawigacii) (`<navigation-service/>`) в главном iframe решения и модальных окнах.  
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Поддержка [протокола навигации](#/developer-guide/host-window-services#4-protokol-navigacii) (`<navigation-service/>`) в главном iframe решения и модальных окнах.  
 
 ### 27-01-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Гибкие права решений](#blok-access) — поддержка права видеть себестоимость, цену закупки и прибыль товаров <viewProductCostAndProfit/>.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Гибкие права решений](#/developer-guide/solution-descriptor#4-blok-access) — поддержка права видеть себестоимость, цену закупки и прибыль товаров <viewProductCostAndProfit/>.
 
 ### 21-01-2022
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Товаре, Модификации, Услуге, Комплекте, Группе товаров. 
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Товаре, Модификации, Услуге, Комплекте, Группе товаров. 
 
 ### 21-12-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) на странице создания в Перемещении, Списании и Оприходовании. Поддержка протокола валидации на страницах создания и редактирования Перемещения, Списания и Оприходования.
 
 ### 16-12-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) на странице создания в Приемке и Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) на странице создания в Приемке и Отгрузке. Поддержка протокола валидации на страницах создания и редактирования Приемки и Отгрузки.
 
 ### 10-12-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Протокол change-handler для [виджетов](#vidzhety) в Перемещении, Списании и Оприходовании.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Протокол change-handler для [виджетов](#/developer-guide/widgets#2-vidzhety) в Перемещении, Списании и Оприходовании.
 
 ### 29-11-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Протокол change-handler для [виджетов](#vidzhety) в Приемке.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Протокол change-handler для [виджетов](#/developer-guide/widgets#2-vidzhety) в Приемке.
 
 ### 24-11-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) на странице создания в Заказе покупателя. Поддержка протокола валидации при создании Заказа покупателя.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) на странице создания в Заказе покупателя. Поддержка протокола валидации при создании Заказа покупателя.
 
 ### 19-11-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
   Поддержка протокола валидации при редактировании Заказа покупателя.
 
 ### 17-11-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Поддержка [селектора групп товаров](#selektor-gruppy-towarow) (`<good-folder-selector/>`) в главном iframe решения и модальных окнах.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Поддержка [селектора групп товаров](#/developer-guide/host-window-services#4-selektor-gruppy-tovarov) (`<good-folder-selector/>`) в главном iframe решения и модальных окнах.
 
 ### 11-11-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол change-handler](#poluchenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Отгрузке.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол change-handler](#/developer-guide/widgets#4-poluchenie-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Отгрузке.
 
 ### 01-11-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол update-provider](#izmenenie-sostoqniq-redaktiruemogo-ob-ekta) для виджетов в Заказе покупателя.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол update-provider](#/developer-guide/widgets#4-izmenenie-sostoyaniya-redaktiruemogo-obuekta) для виджетов в Заказе покупателя.
 
 ### 21-10-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Протокол навигации](#protokol-nawigacii) в виджетах.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Протокол навигации](#/developer-guide/host-window-services#4-protokol-navigacii) в виджетах.
 
 ### 07-10-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Возвратах покупателя и в Возвратах поставщику.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Возвратах покупателя и в Возвратах поставщику.
 
 ### 16-09-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Перемещении, Списании, Оприходовании, Внутреннем заказе, Инвентаризации.
 
 ### 30-08-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Гибкие права решений](#blok-access).
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Гибкие права решений](#/developer-guide/solution-descriptor#4-blok-access).
 
 ### 10-08-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
   Стандартные диалоги.
 
 ### 13-05-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  Протокол change-handler для [виджетов](#vidzhety) в Заказе покупателя.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  Протокол change-handler для [виджетов](#/developer-guide/widgets#2-vidzhety) в Заказе покупателя.
 
 ### 21-01-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Розничной продаже, Входящем и Исходящем платеже, Приходном и Расходном ордере.
 
 ### 13-01-2021
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Кастомные модальные окна](#kastomnye-modal-nye-okna) в виджетах.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna) в виджетах.
 
 ### 04-12-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Счете поставщика, Заказе поставщику, Заказе на производство, Приемке.
 
 ### 30-11-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) с поддержкой протокола dirty-state.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) с поддержкой протокола dirty-state.
 
 ### 13-11-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) с поддержкой протокола save-handler.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) с поддержкой протокола save-handler.
 
 ### 10-11-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в новой карточке Контрагента.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в новой карточке Контрагента.
 
 ### 09-11-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Счете покупателю.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Счете покупателю.
 
 ### 22-10-2020
 #### Добавлено
-- [VendorApi 1.0](#vendor-api-1-0):
-  Новый эндпоинт на стороне МоегоСклада: [Получение статуса решения на аккаунте](#poluchenie-statusa-resheniq-na-akkaunte).
+- [VendorApi 1.0](#/vendor-api/authentication#1-vendor-api-10):
+  Новый эндпоинт на стороне МоегоСклада: [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte).
 
 ### 08-10-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) с поддержкой селектора групп товаров.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) с поддержкой селектора групп товаров.
 
 ### 22-09-2020
 #### Изменено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в Заказе покупателя и Отгрузке.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в Заказе покупателя и Отгрузке.
 
 ### 18-08-2020
 #### Добавлено
-- Версия 2 [дескриптора решений](#deskriptor-resheniq):
-  [Виджеты](#vidzhety) в карточке контрагента.
+- Версия 2 [дескриптора решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya):
+  [Виджеты](#/developer-guide/widgets#2-vidzhety) в карточке контрагента.

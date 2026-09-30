@@ -5,8 +5,8 @@
 решения в каталоге решений:
 
 1. Создать Черновик решения в личном кабинете разработчика.
-2. После создания Черновика на странице редактирования решения будет доступен [Секретный ключ](#sekretnyj-kluch-secretkey) (Secret Key).
-3. Создать [аккаунт разработчика](#otladka-reshenij-na-akkauntah-razrabotchika), привязав [аккаунт МоегоСклада](https://online.moysklad.ru/) к аккаунту в [личном кабинете разработчика](#lichnyj-kabinet-razrabotchika).
+2. После создания Черновика на странице редактирования решения будет доступен [Секретный ключ](#/vendor-api/authentication#4-sekretnyj-klyuch-secretkey) (Secret Key).
+3. Создать [аккаунт разработчика](#/cabinet/developer-cabinet#3-otladka-reshenij-na-akkauntah-razrabotchika), привязав [аккаунт МоегоСклада](https://online.moysklad.ru/) к аккаунту в [личном кабинете разработчика](#/cabinet/developer-cabinet#1-lichnyj-kabinet-razrabotchika).
 4. Протестировать и отладить решение на аккаунте разработчика.
 5. Отправить решение на модерацию через личный кабинет разработчика.
 

@@ -2,10 +2,10 @@
 
 В виджетах, iframe и модальных окнах доступны следующие сервисные возможности МоегоСклада (хост-окна):
 
-* [Селектор группы товаров](#selektor-gruppy-towarow),
-* [Стандартные диалоги](#standartnye-dialogi),
-* [Протокол навигации](#protokol-nawigacii),
-* [Протокол контекста пользователя](#protokol-kontexta-pol-zowatelq).
+* [Селектор группы товаров](#/developer-guide/host-window-services#4-selektor-gruppy-tovarov),
+* [Стандартные диалоги](#/developer-guide/host-window-services#4-standartnye-dialogi),
+* [Протокол навигации](#/developer-guide/host-window-services#4-protokol-navigacii),
+* [Протокол контекста пользователя](#/developer-guide/host-window-services#4-protokol-konteksta-polzovatelya).
 
 #### Селектор группы товаров
 
@@ -82,7 +82,7 @@
 Рассмотрим пример с виджетом. Когда виджет отправляет хост-окну сообщение `SelectGoodFolderRequest` через Window.postMessage,
 хост-окно запрашивает у пользователя выбор группы товаров, используя встроенный в МойСклад селектор:
 
-![useful image](images/good-folder-selector.png)
+![useful image](./images/good-folder-selector.png)
 
 > Cообщение SelectGoodFolderRequest
 
@@ -200,7 +200,7 @@
 
 Рассмотрим пример с виджетом. Когда виджет хочет показать пользователю стандартный диалог, он отправляет хост-окну сообщение `ShowDialogRequest`. В сообщении указывается текст сообщения и кнопки, которые необходимо отобразить пользователю. Наример:
 
-![useful image](images/standard-dialog-with-two-buttons.png)
+![useful image](./images/standard-dialog-with-two-buttons.png)
 
 
 > Cообщение ShowDialogRequest
@@ -358,7 +358,7 @@
 
 + `correlationId` — идентификатор соответствующего сообщения `NavigateRequest`.
 
-При навигации из модального окна в текущей вкладке (`target` имеет значение `self`) произойдет переход, и модальное окно будет отображаться поверх страницы. Если необходимо, чтобы после перехода окно закрывалось, используйте сообщение `ClosePopup`. Подробнее смотрите в разделе [Кастомные модальные окна](#kastomnye-modal-nye-okna).
+При навигации из модального окна в текущей вкладке (`target` имеет значение `self`) произойдет переход, и модальное окно будет отображаться поверх страницы. Если необходимо, чтобы после перехода окно закрывалось, используйте сообщение `ClosePopup`. Подробнее смотрите в разделе [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna).
 
 #### Протокол контекста пользователя
 
@@ -404,16 +404,16 @@
 необходимо добавить в блок `uses` для `widgets`, `iframe` или `popup` тег: `<user-context/>`.
 Примеры смотрите в правой части экрана.
 
-В [окне чатов](#okno-chatow) и [мобильном окне](#mobil-noe-okno) протокол пока не поддерживается: тег
+В [окне чатов](#/developer-guide/iframes#4-okno-chatov) и [мобильном окне](#/developer-guide/iframes#4-mobilnye-prilozheniya) протокол пока не поддерживается: тег
 `<user-context/>` для окон типа `chat` и `mobile` указать нельзя.
 
 Атрибут `useContextKey="false"` отключает передачу параметра `contextKey` в URL загрузки. Подробнее
-смотрите в разделе [Блок iframes](#blok-iframes).
+смотрите в разделе [Блок iframes](#/developer-guide/solution-descriptor#4-blok-iframes).
 
 Рассмотрим пример с виджетом. Когда виджет отправляет хост-окну сообщение `UserContextRequest` (через
 Window.postMessage), хост-окно выдает одноразовый токен и возвращает его в сообщении `UserContextResponse`.
 Полученный токен виджет передает на сервер разработчика, а сервер обменивает его на контекст пользователя запросом
-[POST /context/user](#poluchenie-kontexta-pol-zowatelq-po-odnorazowomu-tokenu).
+[POST /context/user](#/vendor-api/moysklad-endpoints#4-poluchenie-konteksta-polzovatelya-po-odnorazovomu-tokenu).
 
 > Сообщение UserContextRequest
 
@@ -444,7 +444,7 @@ Window.postMessage), хост-окно выдает одноразовый то�
 + `token` — одноразовый токен контекста пользователя. Токен действует 60 секунд с момента выдачи и перестает
   действовать после первого успешного обмена.
 
-Для работы с протоколом рекомендуется использовать [JS Widget SDK](#sdk-dlq-widzhetow) версии 1.2.0 и выше. Метод
+Для работы с протоколом рекомендуется использовать [JS Widget SDK](#/developer-guide/widget-sdk#2-sdk-dlya-vidzhetov) версии 1.2.0 и выше. Метод
 `requestUserContextToken()` отправляет сообщение `UserContextRequest`, ожидает ответ хост-окна (по умолчанию не
 более 10 секунд) и возвращает полученный токен. Библиотека не сохраняет токен в браузере и не выводит его значение
 в отладочные логи.

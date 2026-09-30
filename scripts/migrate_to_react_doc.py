@@ -95,6 +95,24 @@ def unwrap_blockquotes(text):
     return "\n".join(output) + "\n"
 
 
+def convert_explicit_html_headings(text):
+    lines = text.splitlines()
+    in_fence = False
+    converted = []
+    pattern = re.compile(r"^<h([1-6]) id=\"[^\"]+\">(.*?)</h\1>$")
+    for line in lines:
+        if FENCE_RE.match(line):
+            in_fence = not in_fence
+            converted.append(line)
+            continue
+        match = None if in_fence else pattern.match(line.strip())
+        if match:
+            converted.append(f"{'#' * int(match.group(1))} {match.group(2)}")
+            continue
+        converted.append(line)
+    return "\n".join(converted) + "\n"
+
+
 def rewrite_images(text):
     def replace(match):
         alt, target = match.group(1), match.group(2).strip()
@@ -223,7 +241,7 @@ def write_page(path, nodes, folder_title=None, preamble=None):
 
 def main():
     raw = "\n".join((INCLUDES / name).read_text(encoding="utf-8") for name in INCLUDE_ORDER)
-    prepared = rewrite_images(unwrap_blockquotes(raw))
+    prepared = convert_explicit_html_headings(rewrite_images(unwrap_blockquotes(raw)))
     preamble, sections = h2_sections(parse_nodes(prepared))
     by_title = {section["title"]: section for section in sections}
     if len(by_title) != len(sections):

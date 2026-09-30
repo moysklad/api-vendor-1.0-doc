@@ -1,0 +1,249 @@
+[
+  {
+    "title": "Быстрый старт",
+    "level": 1,
+    "folderPath": "./getting_started/_quick_start.md",
+    "children": [
+      {
+        "title": "Быстрый старт",
+        "level": 2,
+        "folderPath": "./getting_started/_quick_start.md",
+        "children": []
+      },
+      {
+        "title": "Как создать и опубликовать решение",
+        "level": 2,
+        "folderPath": "./getting_started/_create_and_publish.md",
+        "children": []
+      },
+      {
+        "title": "Порядок размещения решения в каталоге решений",
+        "level": 2,
+        "folderPath": "./getting_started/_publication_order.md",
+        "children": []
+      },
+      {
+        "title": "Визуальные материалы решения",
+        "level": 2,
+        "folderPath": "./getting_started/_visual_materials.md",
+        "children": []
+      },
+      {
+        "title": "Демо-решения",
+        "level": 2,
+        "folderPath": "./getting_started/_demo_solutions.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "Типы решений для каталога решений",
+    "level": 1,
+    "folderPath": "./app_types/_app_types.md",
+    "children": [
+      {
+        "title": "Типы решений для каталога решений",
+        "level": 2,
+        "folderPath": "./app_types/_app_types.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "Условия размещения решений",
+    "level": 1,
+    "folderPath": "./placement/_placement_requirements.md",
+    "children": [
+      {
+        "title": "Условия размещения решений",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "Руководство разработчика",
+    "level": 1,
+    "folderPath": "./developer_guide/_json_api_token_access.md",
+    "children": [
+      {
+        "title": "Доступ по токену к JSON API",
+        "level": 2,
+        "folderPath": "./developer_guide/_json_api_token_access.md",
+        "children": []
+      },
+      {
+        "title": "Работа с вебхуками",
+        "level": 2,
+        "folderPath": "./developer_guide/_webhooks.md",
+        "children": []
+      },
+      {
+        "title": "Работа с дополнительными полями",
+        "level": 2,
+        "folderPath": "./developer_guide/_custom_fields.md",
+        "children": []
+      },
+      {
+        "title": "Особенности доступа к некоторым функциям JSON API 1.2",
+        "level": 2,
+        "folderPath": "./developer_guide/_json_api_access_notes.md",
+        "children": []
+      },
+      {
+        "title": "Окна (iframes)",
+        "level": 2,
+        "folderPath": "./developer_guide/_iframes.md",
+        "children": []
+      },
+      {
+        "title": "Виджеты",
+        "level": 2,
+        "folderPath": "./developer_guide/_widgets.md",
+        "children": []
+      },
+      {
+        "title": "Кастомные модальные окна",
+        "level": 2,
+        "folderPath": "./developer_guide/_custom_popups.md",
+        "children": []
+      },
+      {
+        "title": "Контекст пользователя",
+        "level": 2,
+        "folderPath": "./developer_guide/_user_context.md",
+        "children": []
+      },
+      {
+        "title": "Сервисы хост-окна",
+        "level": 2,
+        "folderPath": "./developer_guide/_host_window_services.md",
+        "children": []
+      },
+      {
+        "title": "SDK для виджетов",
+        "level": 2,
+        "folderPath": "./developer_guide/_widget_sdk.md",
+        "children": []
+      },
+      {
+        "title": "Ошибки при работе с виджетами",
+        "level": 2,
+        "folderPath": "./developer_guide/_widget_errors.md",
+        "children": []
+      },
+      {
+        "title": "Ограничения для контента, загружаемого в виджетах",
+        "level": 2,
+        "folderPath": "./developer_guide/_widget_content_limits.md",
+        "children": []
+      },
+      {
+        "title": "Кастомные кнопки",
+        "level": 2,
+        "folderPath": "./developer_guide/_custom_buttons.md",
+        "children": []
+      },
+      {
+        "title": "Действия в сценариях",
+        "level": 2,
+        "folderPath": "./developer_guide/_scenario_actions.md",
+        "children": []
+      },
+      {
+        "title": "Дескриптор решения",
+        "level": 2,
+        "folderPath": "./developer_guide/_solution_descriptor.md",
+        "children": []
+      },
+      {
+        "title": "Примеры дескрипторов",
+        "level": 2,
+        "folderPath": "./developer_guide/_descriptor_examples.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "Vendor API 1.0",
+    "level": 1,
+    "folderPath": "./vendor_api/_authentication.md",
+    "children": [
+      {
+        "title": "Аутентификация взаимодействия по Vendor API",
+        "level": 2,
+        "folderPath": "./vendor_api/_authentication.md",
+        "children": []
+      },
+      {
+        "title": "Процесс активации решения на аккаунте",
+        "level": 2,
+        "folderPath": "./vendor_api/_activation.md",
+        "children": []
+      },
+      {
+        "title": "Процесс деактивации решения на аккаунте",
+        "level": 2,
+        "folderPath": "./vendor_api/_deactivation.md",
+        "children": []
+      },
+      {
+        "title": "Процесс приостановки и возобновления работы решения на аккаунте",
+        "level": 2,
+        "folderPath": "./vendor_api/_suspend_and_resume.md",
+        "children": []
+      },
+      {
+        "title": "Уведомления о дополнительных событиях",
+        "level": 2,
+        "folderPath": "./vendor_api/_additional_events.md",
+        "children": []
+      },
+      {
+        "title": "Механизм Retry",
+        "level": 2,
+        "folderPath": "./vendor_api/_retry.md",
+        "children": []
+      },
+      {
+        "title": "REST-эндпоинты на стороне разработчика решений",
+        "level": 2,
+        "folderPath": "./vendor_api/_vendor_endpoints.md",
+        "children": []
+      },
+      {
+        "title": "REST-эндпоинты на стороне МоегоСклада",
+        "level": 2,
+        "folderPath": "./vendor_api/_moysklad_endpoints.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "Личный кабинет разработчика",
+    "level": 1,
+    "folderPath": "./cabinet/_developer_cabinet.md",
+    "children": [
+      {
+        "title": "Личный кабинет разработчика",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "title": "Список последних изменений",
+    "level": 1,
+    "folderPath": "./changelog/_changelog.md",
+    "children": [
+      {
+        "title": "Список последних изменений",
+        "level": 2,
+        "folderPath": "./changelog/_changelog.md",
+        "children": []
+      }
+    ]
+  }
+]

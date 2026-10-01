@@ -84,7 +84,6 @@
 #### Добавлено
 - В дескрипторе решений в [блоке `widgets`](#/developer-guide/solution-descriptor#4-blok-widgets) теперь можно указать высоту `0px` для того, чтобы скрыть виджет.
 
-### 12-03-2026
 #### Изменено
 - Прекращена поддержка статуса `404 (Not Found)` в эндпоинте [деактивации решения на аккаунте](#/vendor-api/vendor-endpoints#4-deaktivaciya-resheniya-na-akkaunte).
 

@@ -1,36 +1,5 @@
 ## Кастомные кнопки
 
-Дескриптор решения с 3 кнопками на странице Заказа покупателя
-
-```xml
-   <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2
-         https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
-       <iframe>...</iframe>
-       <vendorApi>...</vendorApi>
-       <access>...</access>
-        <buttons>
-            <button name="button1" title="Отправить контрагенту">
-                <locations>
-                    <document.customerorder.edit/>
-                </locations>
-            </button>
-            <button name="button2" title="Сформировать цифровую подпись">
-                <locations>
-                    <document.customerorder.create/>
-                    <document.customerorder.edit/>
-                </locations>
-            </button>
-            <button name="button3" title="Импортировать документы" useSelected="false">
-                <locations>
-                    <document.customerorder.list/>
-                </locations>
-            </button>
-        </buttons>
-</ServerApplication>
-```
-
 Кастомные кнопки позволяют пользователю выполнять дополнительные действия путем выбора элемента из меню Решения, расположенного в карточке или в списке документов (сущностей) МоегоСклада.
 Каждая кнопка запускает одно специфическое действие, инициируемое пользователем и выполняемое на сервере разработчика.
 
@@ -71,3 +40,34 @@
 ![useful image](./images/async_buttons_1.png)
 
 ![useful image](./images/async_buttons_2.png)
+
+> Дескриптор решения с 3 кнопками на странице Заказа покупателя
+
+```xml
+   <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2
+         https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+       <iframe>...</iframe>
+       <vendorApi>...</vendorApi>
+       <access>...</access>
+        <buttons>
+            <button name="button1" title="Отправить контрагенту">
+                <locations>
+                    <document.customerorder.edit/>
+                </locations>
+            </button>
+            <button name="button2" title="Сформировать цифровую подпись">
+                <locations>
+                    <document.customerorder.create/>
+                    <document.customerorder.edit/>
+                </locations>
+            </button>
+            <button name="button3" title="Импортировать документы" useSelected="false">
+                <locations>
+                    <document.customerorder.list/>
+                </locations>
+            </button>
+        </buttons>
+</ServerApplication>
+```

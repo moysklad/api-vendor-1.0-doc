@@ -9,70 +9,6 @@
 
 ### Селектор группы товаров
 
-Дескриптор решения с виджетом, использующим селектор группы товаров
-
-```xml
-<ServerApplication  xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"             
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
-                    xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2      
-                    https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
-    <iframe>
-        <sourceUrl>https://example.com/iframe.html</sourceUrl>
-        <expand>true</expand>
-    </iframe>
-    <vendorApi>
-        <endpointBase>https://example.com/dummy-app</endpointBase>
-    </vendorApi>
-    <access>
-        <resource>https://api.moysklad.ru/api/remap/1.2</resource>
-        <scope>admin</scope>
-    </access>
-    <widgets>        
-        <entity.counterparty.edit>            
-            <sourceUrl>https://example.com/widget.php</sourceUrl>            
-            <height>                
-                <fixed>150px</fixed>            
-            </height>
-            <uses>
-                <good-folder-selector/>
-            </uses>                  
-        </entity.counterparty.edit>    
-    </widgets>
-</ServerApplication>
-```
-
-Дескриптор решения, главный iframe и модальное окно которого используют селектор группы товаров
-
-```xml
-<ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2      
-                    https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
-  <iframe>
-    <sourceUrl>https://example.com/iframe.html</sourceUrl>
-    <expand>true</expand>
-    <uses>
-      <good-folder-selector/>
-    </uses>
-  </iframe>
-  <vendorApi>
-    <endpointBase>https://example.com/dummy-app</endpointBase>
-  </vendorApi>
-  <access>
-    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
-    <scope>admin</scope>
-  </access>
-  <popups>
-    <popup>
-      <name>coolPopup</name>
-      <sourceUrl>https://vendorurl.coolpopup.ru</sourceUrl>
-      <uses>
-        <good-folder-selector/>
-      </uses>
-    </popup>
-  </popups>
-</ServerApplication>
-```
 Позволяет виджетам, главному и модальным окнам решений переиспользовать существующий в МоемСкладе селектор группы
 товаров с получением ими результата выбора пользователя.
 
@@ -125,9 +61,7 @@
 }
 ```
 
-### Стандартные диалоги
-
-Дескриптор с виджетом, использующим стандартные диалоги
+> Дескриптор решения с виджетом, использующим селектор группы товаров
 
 ```xml
 <ServerApplication  xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -152,14 +86,14 @@
                 <fixed>150px</fixed>            
             </height>
             <uses>
-                <standard-dialogs/>
+                <good-folder-selector/>
             </uses>                  
         </entity.counterparty.edit>    
     </widgets>
 </ServerApplication>
 ```
 
-Дескриптор решения, главное и модальное окно которого используют стандартные диалоги
+> Дескриптор решения, главный iframe и модальное окно которого используют селектор группы товаров
 
 ```xml
 <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
@@ -170,7 +104,7 @@
     <sourceUrl>https://example.com/iframe.html</sourceUrl>
     <expand>true</expand>
     <uses>
-        <standard-dialogs/>
+      <good-folder-selector/>
     </uses>
   </iframe>
   <vendorApi>
@@ -185,13 +119,14 @@
       <name>coolPopup</name>
       <sourceUrl>https://vendorurl.coolpopup.ru</sourceUrl>
       <uses>
-          <standard-dialogs/>
+        <good-folder-selector/>
       </uses>
     </popup>
   </popups>
 </ServerApplication>
 ```
 
+### Стандартные диалоги
 
 Позволяет виджетам, главному и кастомным модальным окнам использовать существующие в МоемСкладе стандартные диалоги.
 
@@ -201,7 +136,6 @@
 Рассмотрим пример с виджетом. Когда виджет хочет показать пользователю стандартный диалог, он отправляет хост-окну сообщение `ShowDialogRequest`. В сообщении указывается текст сообщения и кнопки, которые необходимо отобразить пользователю. Наример:
 
 ![useful image](./images/standard-dialog-with-two-buttons.png)
-
 
 > Cообщение ShowDialogRequest
 
@@ -255,9 +189,7 @@
 В версии Google Chrome 92.0 и выше использование браузерных диалоговых окон через вызовы Window.alert(), Window.confirm() из iframe [запрещено](https://www.chromestatus.com/feature/5148698084376576).
 Поэтому рекомендуется использовать сервис стандартных диалогов МоегоСклада.
 
-### Протокол навигации
-
-Дескриптор с виджетом, использующим протокол навигации
+> Дескриптор с виджетом, использующим стандартные диалоги
 
 ```xml
 <ServerApplication  xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"             
@@ -282,13 +214,14 @@
                 <fixed>150px</fixed>            
             </height>
             <uses>
-                <navigation-service/>
+                <standard-dialogs/>
             </uses>                  
         </entity.counterparty.edit>    
     </widgets>
 </ServerApplication>
 ```
-Дескриптор решения, у которого главное и модальное окно используют протокол навигации
+
+> Дескриптор решения, главное и модальное окно которого используют стандартные диалоги
 
 ```xml
 <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
@@ -299,7 +232,7 @@
     <sourceUrl>https://example.com/iframe.html</sourceUrl>
     <expand>true</expand>
     <uses>
-      <navigation-service/>
+        <standard-dialogs/>
     </uses>
   </iframe>
   <vendorApi>
@@ -314,17 +247,19 @@
       <name>coolPopup</name>
       <sourceUrl>https://vendorurl.coolpopup.ru</sourceUrl>
       <uses>
-        <navigation-service/>
+          <standard-dialogs/>
       </uses>
     </popup>
   </popups>
 </ServerApplication>
 ```
+
+### Протокол навигации
+
 Позволяет виджетам, главному и модальным окнам решений осуществлять переход на другую страницу МоегоСклада и открывать МойСклад в новой вкладке.
 
 Чтобы виджет, iframe или модальное окно начали поддерживать протокол навигации в дескрипторе необходимо добавить в блок `uses` для `widgets`, `iframe` или `popup` тег:
 `<navigation-service/>`.
-Примеры смотрите в правой части экрана.
 
 Рассмотрим пример с виджетом. Когда виджет отправляет хост-окну сообщение `NavigateRequest` (через Window.postMessage), хост-окно переходит на другую страницу МоегоСклада или открывает в новой вкладке браузера нужную страницу МоегоСклада.
 
@@ -360,22 +295,52 @@
 
 При навигации из модального окна в текущей вкладке (`target` имеет значение `self`) произойдет переход, и модальное окно будет отображаться поверх страницы. Если необходимо, чтобы после перехода окно закрывалось, используйте сообщение `ClosePopup`. Подробнее смотрите в разделе [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna).
 
-### Протокол контекста пользователя
+> Дескриптор с виджетом, использующим протокол навигации
 
-Дескриптор решения, у которого главное окно и виджет используют протокол контекста пользователя
+```xml
+<ServerApplication  xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"             
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"             
+                    xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2      
+                    https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+    <iframe>
+        <sourceUrl>https://example.com/iframe.html</sourceUrl>
+        <expand>true</expand>
+    </iframe>
+    <vendorApi>
+        <endpointBase>https://example.com/dummy-app</endpointBase>
+    </vendorApi>
+    <access>
+        <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+        <scope>admin</scope>
+    </access>
+    <widgets>        
+        <entity.counterparty.edit>            
+            <sourceUrl>https://example.com/widget.php</sourceUrl>            
+            <height>                
+                <fixed>150px</fixed>            
+            </height>
+            <uses>
+                <navigation-service/>
+            </uses>                  
+        </entity.counterparty.edit>    
+    </widgets>
+</ServerApplication>
+```
+
+> Дескриптор решения, у которого главное и модальное окно используют протокол навигации
 
 ```xml
 <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2
+                   xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2      
                     https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
-  <iframes>
-    <iframe type="main" sourceUrl="https://example.com/iframe.html" useContextKey="false">
-      <uses>
-        <user-context/>
-      </uses>
-    </iframe>
-  </iframes>
+  <iframe>
+    <sourceUrl>https://example.com/iframe.html</sourceUrl>
+    <expand>true</expand>
+    <uses>
+      <navigation-service/>
+    </uses>
+  </iframe>
   <vendorApi>
     <endpointBase>https://example.com/dummy-app</endpointBase>
   </vendorApi>
@@ -383,26 +348,25 @@
     <resource>https://api.moysklad.ru/api/remap/1.2</resource>
     <scope>admin</scope>
   </access>
-  <widgets>
-    <entity.counterparty.edit useContextKey="false">
-      <sourceUrl>https://example.com/widget.php</sourceUrl>
-      <height>
-        <fixed>150px</fixed>
-      </height>
+  <popups>
+    <popup>
+      <name>coolPopup</name>
+      <sourceUrl>https://vendorurl.coolpopup.ru</sourceUrl>
       <uses>
-        <user-context/>
+        <navigation-service/>
       </uses>
-    </entity.counterparty.edit>
-  </widgets>
+    </popup>
+  </popups>
 </ServerApplication>
 ```
+
+### Протокол контекста пользователя
 
 Позволяет виджетам, главному окну и модальным окнам решений получить у хост-окна одноразовый токен и обменять его на
 сервере разработчика на контекст текущего пользователя МоегоСклада.
 
 Чтобы виджет, главное окно или модальное окно начали поддерживать протокол контекста пользователя, в дескрипторе
 необходимо добавить в блок `uses` для `widgets`, `iframe` или `popup` тег: `<user-context/>`.
-Примеры смотрите в правой части экрана.
 
 В [окне чатов](#/developer-guide/iframes#3-okno-chatov) и [мобильном окне](#/developer-guide/iframes#3-mobilnye-prilozheniya) протокол пока не поддерживается: тег
 `<user-context/>` для окон типа `chat` и `mobile` указать нельзя.
@@ -455,3 +419,38 @@ Window.postMessage), хост-окно выдает одноразовый то�
 1. Не отображайте токен пользователю и не записывайте его в логи.
 1. Передавайте токен на сервер разработчика сразу после получения, в теле POST-запроса.
 1. Запрашивайте новый токен на каждый обмен: повторно обменять уже использованный токен нельзя.
+
+> Дескриптор решения, у которого главное окно и виджет используют протокол контекста пользователя
+
+```xml
+<ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2
+                    https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+  <iframes>
+    <iframe type="main" sourceUrl="https://example.com/iframe.html" useContextKey="false">
+      <uses>
+        <user-context/>
+      </uses>
+    </iframe>
+  </iframes>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>
+    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+    <scope>admin</scope>
+  </access>
+  <widgets>
+    <entity.counterparty.edit useContextKey="false">
+      <sourceUrl>https://example.com/widget.php</sourceUrl>
+      <height>
+        <fixed>150px</fixed>
+      </height>
+      <uses>
+        <user-context/>
+      </uses>
+    </entity.counterparty.edit>
+  </widgets>
+</ServerApplication>
+```

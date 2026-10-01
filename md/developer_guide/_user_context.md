@@ -11,10 +11,6 @@
   * `ru_RU` - русский 
   * `en_US` - английский. 
 
-Пример загружаемого URL для решения Онлайн-заказ (при условии, что `iframe.sourceUrl` в его дескрипторе имеет значение `https://example.com/iframe.html`):
-
-`https://example.com/iframe.html?contextKey=1c14e98cd272239c03bf3d9697f167699743292c&appUid=online-order.moysklad&appId=f0e50ffd-e267-46bf-a963-0adcf2fe09e0&userLocale=ru_RU`.
-
 Рекомендуется запрашивать контекст пользователя сразу при загрузке страницы решения и сохранять данные пользователя в сессии. 
 Повторное использование одного и того же contextKey не рекомендуется, так как в будущем может быть запрещено.
 
@@ -36,3 +32,10 @@
 продолжают получать `contextKey`.
 
 Более подробный пример работы с контекстом пользователя можно увидеть в [демо-решениях](#/getting-started/quick-start#2-demo-resheniya).
+
+> Пример загружаемого URL для решения Онлайн-заказ (при условии, что `iframe.sourceUrl` в его дескрипторе имеет значение `https://example.com/iframe.html`)
+
+```
+https://example.com/iframe.html?contextKey=1c14e98cd272239c03bf3d9697f167699743292c&appUid=online-order.moysklad&appId=f0e50ffd-e267-46bf-a963-0adcf2fe09e0&userLocale=ru_RU
+```
+

@@ -16,6 +16,27 @@
 
 ### Содержимое дескриптора решения
 
+В [актуальной версии](https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd) дескриптора
+решения допустимы следующие блоки:
+
+| Блок       | Назначение                                                               | Требует наличия других блоков | Обязательный |
+|------------|--------------------------------------------------------------------------|-------------------------------|--------------|
+| vendorApi  | Описывает взаимодействие по Vendor API                                   | Нет                           | Да           |
+| access     | Описывает требуемый доступ решения к ресурсам пользовательского аккаунта | Требует vendorApi             | Да           |
+| loyaltyApi | Указывает на то, что решение поддерживает Loyalty API                    | Нет                           | Нет          |
+| fiscalApi  | Указывает на то, что решение поддерживает Fiscal API                     | Нет                           | Нет          |
+| qrPayApi   | Указывает на то, что решение поддерживает QrPay API                      | Нет                           | Нет          |
+| iframes    | Описывает окна решения                                                   | Нет                           | Нет          |
+| iframe     | Описывает главный iframe решения (устарел)                               | Нет                           | Нет          |
+| widgets    | Описывает виджеты                                                        | Нет                           | Нет          |
+| popups     | Описывает кастомные модальные окна                                       | Нет                           | Нет          |
+| buttons    | Описывает кастомные кнопки                                               | Нет                           | Нет          |
+| scenario   | Описывает действия в сценариях                                           | Нет                           | Нет          |
+
+Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольным.
+
+> Пример
+
 ```xml
 <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -39,37 +60,7 @@
 </ServerApplication>
 ```
 
-В [актуальной версии](https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd) дескриптора
-решения допустимы следующие блоки:
-
-| Блок       | Назначение                                                               | Требует наличия других блоков | Обязательный |
-|------------|--------------------------------------------------------------------------|-------------------------------|--------------|
-| vendorApi  | Описывает взаимодействие по Vendor API                                   | Нет                           | Да           |
-| access     | Описывает требуемый доступ решения к ресурсам пользовательского аккаунта | Требует vendorApi             | Да           |
-| loyaltyApi | Указывает на то, что решение поддерживает Loyalty API                    | Нет                           | Нет          |
-| fiscalApi  | Указывает на то, что решение поддерживает Fiscal API                     | Нет                           | Нет          |
-| qrPayApi   | Указывает на то, что решение поддерживает QrPay API                      | Нет                           | Нет          |
-| iframes    | Описывает окна решения                                                   | Нет                           | Нет          |
-| iframe     | Описывает главный iframe решения (устарел)                               | Нет                           | Нет          |
-| widgets    | Описывает виджеты                                                        | Нет                           | Нет          |
-| popups     | Описывает кастомные модальные окна                                       | Нет                           | Нет          |
-| buttons    | Описывает кастомные кнопки                                               | Нет                           | Нет          |
-| scenario   | Описывает действия в сценариях                                           | Нет                           | Нет          |
-
-Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольным.
-
 ### Блок vendorApi
-
-Пример дескриптора с заполненным vendorApi:
-
-```xml
-<ServerApplication ...>
-  <vendorApi>
-    <endpointBase>https://example.com/dummy-app</endpointBase>
-  </vendorApi>
-  <access>...</access>
-</ServerApplication>
-```
 
 В теге **vendorApi/endpointBase** указывается базовый URL эндпоинта на стороне разработчика, к которому будет обращаться
 МойСклад. В URL допускается использование только протокола HTTPS.
@@ -98,6 +89,17 @@
 В случае отсутствия блока vendorApi в дескрипторе не выполняется активация и деактивация решения на серверах
 разработчика.
 
+> Пример дескриптора с заполненным vendorApi
+
+```xml
+<ServerApplication ...>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>...</access>
+</ServerApplication>
+```
+
 #### Блок дополнительных событий
 
 В блоке vendorApi опционально можно указать поддерживаемые разработчиком дополнительные события (additionalEvents).
@@ -106,8 +108,7 @@
 
 * updatePermissions - Событие изменения прав установки, подробнее см. в разделе [События](#/vendor-api/additional-events#3-sobytie-izmeneniya-prav-ustanovki-updatepermissions)
 
-
-Пример блока vendorApi с событием обновления прав
+> Пример блока vendorApi с событием обновления прав
 
 ```xml
 <vendorApi>
@@ -118,52 +119,7 @@
 </vendorApi>
 ```
 
-
 ### Блок access
-
-Пример заполнения блока **access** с указанием прав Администратора:
-
-```xml
-<ServerApplication ...>
-  <vendorApi>...</vendorApi>
-  <access>
-    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
-    <scope>admin</scope>
-  </access>
-</ServerApplication>
-
-```
-
-Пример заполнения блока **access** с явным перечислением пермиссий:
-
-```xml
-<ServerApplication ...>
-  <vendorApi>...</vendorApi>
-  <access>
-    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
-    <scope>custom</scope>
-    <permissions>
-      <viewDashboard/>
-      <viewAudit/>
-      <viewProductCostAndProfit/>
-      <useOwnWebhooks/>
-      <useAllAttributeMetadata/>      
-      <customerOrder>
-        <view/>
-        <create/>
-        <update/>
-        <delete/>
-        <approve/>
-        <print/>
-      </customerOrder>
-      <company>
-        <view/>
-        <create/>
-      </company>
-    </permissions>
-  </access>
-</ServerApplication>
-```
 
 Требуется для серверных решений, которые хотят получить доступ по JSON API к ресурсам аккаунта.
 В случае отсутствия этого блока в дескрипторе решения при установке на аккаунт решению не выдаются никакие доступы
@@ -209,7 +165,6 @@
 | Просматривать остатки по товарам | `<viewStockReport/>`          | Просматривать отчеты по остаткам                    |
 | Просматривать взаиморасчеты      | `<viewCustomerBalanceList/>`  | Просматривать отчеты по взаиморасчетам              |
 
-
 Специальные пермиссии
 
 | Название                             | Тег в дескрипторе            | Описание                                                 |
@@ -218,7 +173,6 @@
 | Управление всеми вебхуками           | `<useAllWebhooks/>`          | Полный доступ ко всем вебхукам                           |
 | Управление своими доп. полями        | `<useOwnAttributeMetadata/>` | Видеть/создавать/обновлять/удалять только свои доп. поля |
 | Управление всеми доп. полями         | `<useAllAttributeMetadata/>` | Полный доступ ко всем дополнительным полям               |
-
 
 Пермиссии сущностей по уровням доступа
 
@@ -297,9 +251,58 @@
 * В настоящий момент не поддерживаются пермиссии для работы с сущностями Маркировки:
   `crptCancellation`, `crptPackageCreation`, `crptPackageItemRemoval`, `crptPackageDisaggregation`, `GTINList`, `trackingCodeList`.
 
+> Пример заполнения блока **access** с указанием прав Администратора
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>
+    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+    <scope>admin</scope>
+  </access>
+</ServerApplication>
+
+```
+
+> Пример заполнения блока **access** с явным перечислением пермиссий
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>
+    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+    <scope>custom</scope>
+    <permissions>
+      <viewDashboard/>
+      <viewAudit/>
+      <viewProductCostAndProfit/>
+      <useOwnWebhooks/>
+      <useAllAttributeMetadata/>      
+      <customerOrder>
+        <view/>
+        <create/>
+        <update/>
+        <delete/>
+        <approve/>
+        <print/>
+      </customerOrder>
+      <company>
+        <view/>
+        <create/>
+      </company>
+    </permissions>
+  </access>
+</ServerApplication>
+```
+
 ### Блок loyaltyApi
 
-Пример дескриптора с поддержкой Loyalty API:
+Тег **loyaltyApi** является опциональным и указывается пустым. Он информирует МойСклад о том, что решение
+поддерживает [Loyalty API](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). Настройки лояльности для
+решения, установленного на аккаунте, могут быть переданы посредством эндпоинта **/loyalty** Vendor API. Подробнее в
+разделе [REST эндпоинты на стороне МоегоСклада](#/vendor-api/moysklad-endpoints#2-rest-endpointy-na-storone-moegosklada).
+
+> Пример дескриптора с поддержкой Loyalty API
 
 ```xml
 <ServerApplication ...>
@@ -309,14 +312,16 @@
 </ServerApplication>
 ```
 
-Тег **loyaltyApi** является опциональным и указывается пустым. Он информирует МойСклад о том, что решение
-поддерживает [Loyalty API](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). Настройки лояльности для
-решения, установленного на аккаунте, могут быть переданы посредством эндпоинта **/loyalty** Vendor API. Подробнее в
-разделе [REST эндпоинты на стороне МоегоСклада](#/vendor-api/moysklad-endpoints#2-rest-endpointy-na-storone-moegosklada).
-
 ### Блок fiscalApi
 
-Пример дескриптора с поддержкой Fiscal API:
+Тег **fiscalApi** является опциональным. Он информирует МойСклад о том, что решение является провайдером операции фискализации для розничных продаж.
+
+В теге **fiscalApi/operationTypes** указываются поддерживаемые типы операций.
+В теге **fiscalApi/paymentTypes** указываются поддерживаемые типы оплат.
+
+Полный список поддерживаемых операций см. в [документации FiscalApi](https://dev.moysklad.ru/doc/api/fiscal/1.0/#podderzhiwaemye-operacii).
+
+> Пример дескриптора с поддержкой Fiscal API
 
 ```xml
 <ServerApplication ...>
@@ -350,16 +355,16 @@
 </ServerApplication>
 ```
 
-Тег **fiscalApi** является опциональным. Он информирует МойСклад о том, что решение является провайдером операции фискализации для розничных продаж.
-
-В теге **fiscalApi/operationTypes** указываются поддерживаемые типы операций.
-В теге **fiscalApi/paymentTypes** указываются поддерживаемые типы оплат.
-
-Полный список поддерживаемых операций см. в [документации FiscalApi](https://dev.moysklad.ru/doc/api/fiscal/1.0/#podderzhiwaemye-operacii).
-
 ### Блок qrPayApi
 
-Пример дескриптора с поддержкой QrPayAPI:
+Тег **qrPayApi** является опциональным. Он информирует МойСклад о том, что решение является провайдером оплаты по QR-коду.
+
+В теге **qrPayApi/paymentProvider** указываются способы оплаты, поддерживаемые приложением.
+В теге **qrPayApi/paymentProvider/qrType** указываются поддерживаемые типы QR.
+
+Полный список возможных значений qrType см. в [документации QRPay API](https://dev.moysklad.ru/doc/api/qr-pay/1.0/#kak-zapolnit-deskriptor).
+
+> Пример дескриптора с поддержкой QrPayAPI
 
 ```xml
 <ServerApplication ...>
@@ -380,16 +385,21 @@
 </ServerApplication>
 ```
 
-Тег **qrPayApi** является опциональным. Он информирует МойСклад о том, что решение является провайдером оплаты по QR-коду.
-
-В теге **qrPayApi/paymentProvider** указываются способы оплаты, поддерживаемые приложением.
-В теге **qrPayApi/paymentProvider/qrType** указываются поддерживаемые типы QR.
-
-Полный список возможных значений qrType см. в [документации QRPay API](https://dev.moysklad.ru/doc/api/qr-pay/1.0/#kak-zapolnit-deskriptor).
-
 ### Блок iframes
 
-Пример дескриптора с заполненным блоком iframes:
+Служит для задания списка окон решения, которые будут появляться на страницах МоегоСклада.
+
+- Чтобы задать тип окна, используйте атрибут `iframe.type` (обязательный). В настоящий момент может принимать одно из трех значений: `main`, `chat`, `mobile`. Для каждого типа может быть указано не более одного окна.
+- Чтобы задать URL, по которому будет загружаться содержимое iframe, используйте атрибут `iframe.sourceUrl` (обязательный). В URL допускается использование только протокола HTTPS.
+- Чтобы задать дополнительные протоколы, которые будут использоваться в iframe, используйте тег `uses` (опциональный). В настоящий момент поддерживается только для типа `main`. Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
+- Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
+  система при загрузке окна передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
+  в URL не передается и контекст пользователя следует получать по
+  [протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Подробнее про [окна решений](#/developer-guide/iframes#2-okna-iframes).
+
+> Пример дескриптора с заполненным блоком iframes
 
 ```xml
 <ServerApplication ...>
@@ -409,32 +419,7 @@
 </ServerApplication>
 ```
 
-Служит для задания списка окон решения, которые будут появляться на страницах МоегоСклада.
-
-- Чтобы задать тип окна, используйте атрибут `iframe.type` (обязательный). В настоящий момент может принимать одно из трех значений: `main`, `chat`, `mobile`. Для каждого типа может быть указано не более одного окна.
-- Чтобы задать URL, по которому будет загружаться содержимое iframe, используйте атрибут `iframe.sourceUrl` (обязательный). В URL допускается использование только протокола HTTPS.
-- Чтобы задать дополнительные протоколы, которые будут использоваться в iframe, используйте тег `uses` (опциональный). В настоящий момент поддерживается только для типа `main`. Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
-- Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
-  система при загрузке окна передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
-  в URL не передается и контекст пользователя следует получать по
-  [протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
-
-Подробнее про [окна решений](#/developer-guide/iframes#2-okna-iframes). 
-
 ### Блок iframe
-
-Пример дескриптора с заполненным блоком iframe:
-
-```xml
-<ServerApplication ...>
-  <vendorApi>...</vendorApi>
-  <access>...</access>
-  <iframe useContextKey="false">
-    <sourceUrl>https://example.com/dummy-app/iframe.html</sourceUrl>
-    <expand>true</expand>
-  </iframe>
-</ServerApplication>
-```
 
 В теге **iframe/sourceUrl** указывается URL, по которому будет загружаться содержимое главного iframe внутри UI
 МоегоСклада. В URL допускается использование только протокола HTTPS.
@@ -452,53 +437,20 @@
 
 Данный блок считается устаревшим. Вместо него следует использовать [блок **iframes**](#/developer-guide/app-descriptor#3-blok-iframes).
 
-### Блок widgets
-
-Блок widgets с точками расширения в карточке Контрагента и документе Заказ покупателя
+> Пример дескриптора с заполненным блоком iframe
 
 ```xml
 <ServerApplication ...>
   <vendorApi>...</vendorApi>
   <access>...</access>
-  <widgets>
-    <entity.counterparty.edit>
-      <sourceUrl>https://example.com/dummy-app/widget-counterparty.php</sourceUrl>
-      <height>
-        <fixed>200px</fixed>
-      </height>
-      <supports>
-        <open-feedback/>
-      </supports>
-    </entity.counterparty.edit>
-  
-    <document.customerorder.create>
-      <sourceUrl>https://example.com/dummy-app/widget-customerorder-validation.php</sourceUrl>
-      <height>
-        <!-- Скрытый виджет-->
-        <fixed>0px</fixed>
-      </height>
-      <supports>
-        <change-handler>
-          <validation-feedback/>
-        </change-handler>
-      </supports>
-    </document.customerorder.create>
-  
-    <document.customerorder.edit useContextKey="false">
-      <sourceUrl>https://example.com/dummy-app/widget-customerorder.php</sourceUrl>
-      <height>
-        <fixed>50px</fixed>
-      </height>
-      <uses>
-        <good-folder-selector/>
-        <standard-dialogs/>
-        <navigation-service/>
-        <user-context/>
-      </uses>
-    </document.customerorder.edit>
-  </widgets>
+  <iframe useContextKey="false">
+    <sourceUrl>https://example.com/dummy-app/iframe.html</sourceUrl>
+    <expand>true</expand>
+  </iframe>
 </ServerApplication>
 ```
+
+### Блок widgets
 
 Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
 система при загрузке виджета передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
@@ -570,6 +522,52 @@
 в пикселях, в формате `150px`. 
 
 Виджет можно скрыть, установив `height/fixed = 0px`. Скрытые виджеты не отображаются на страницах МоегоСклада, но могут использовать все допустимые [протоколы](#/developer-guide/widgets#3-protokoly-vidzhetov).
+
+> Блок widgets с точками расширения в карточке Контрагента и документе Заказ покупателя
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <widgets>
+    <entity.counterparty.edit>
+      <sourceUrl>https://example.com/dummy-app/widget-counterparty.php</sourceUrl>
+      <height>
+        <fixed>200px</fixed>
+      </height>
+      <supports>
+        <open-feedback/>
+      </supports>
+    </entity.counterparty.edit>
+  
+    <document.customerorder.create>
+      <sourceUrl>https://example.com/dummy-app/widget-customerorder-validation.php</sourceUrl>
+      <height>
+        <!-- Скрытый виджет-->
+        <fixed>0px</fixed>
+      </height>
+      <supports>
+        <change-handler>
+          <validation-feedback/>
+        </change-handler>
+      </supports>
+    </document.customerorder.create>
+  
+    <document.customerorder.edit useContextKey="false">
+      <sourceUrl>https://example.com/dummy-app/widget-customerorder.php</sourceUrl>
+      <height>
+        <fixed>50px</fixed>
+      </height>
+      <uses>
+        <good-folder-selector/>
+        <standard-dialogs/>
+        <navigation-service/>
+        <user-context/>
+      </uses>
+    </document.customerorder.edit>
+  </widgets>
+</ServerApplication>
+```
 
 ### Блок дополнительных протоколов (supports)
 
@@ -658,11 +656,26 @@
   создания, например в точке встраивания `document.customerorder.create`. Подробнее о протоколе читайте в
   разделе [Протокол контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
 
-Пример заполненного блока **widgets** можно увидеть справа.
-
 ### Блок popups
 
-Блок popups с двумя модальными окнами, одно из которых использует протокол good-folder-selector
+Служит для задания списка кастомных модальных окон, которые могут использоваться решением в виджетах (блок widgets) и
+главном окне (блок iframes).
+
+- Чтобы задать имя модального окна, используйте тег `name` (обязательный).
+- Чтобы задать адрес страницы, используйте тег `sourceUrl` (обязательный).
+
+Тег **uses** — опциональный. Предназначен для сервисных протоколов, используемых модальным окном. 
+Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
+
+Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
+система при загрузке модального окна передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
+в URL не передается и контекст пользователя следует получать по
+[протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Подробнее о работе с кастомными модальными окнами читайте в
+разделе [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna).
+
+> Блок popups с двумя модальными окнами, одно из которых использует протокол good-folder-selector
 
 ```xml
 <ServerApplication ...>
@@ -684,56 +697,8 @@
   </popups>
 </ServerApplication>
 ```
-Служит для задания списка кастомных модальных окон, которые могут использоваться решением в виджетах (блок widgets) и
-главном окне (блок iframes).
-
-- Чтобы задать имя модального окна, используйте тег `name` (обязательный).
-- Чтобы задать адрес страницы, используйте тег `sourceUrl` (обязательный).
-
-Тег **uses** — опциональный. Предназначен для сервисных протоколов, используемых модальным окном. 
-Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
-
-Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
-система при загрузке модального окна передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
-в URL не передается и контекст пользователя следует получать по
-[протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
-
-Подробнее о работе с кастомными модальными окнами читайте в
-разделе [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna).
 
 ### Блок buttons
-
-Блок buttons с кнопками в Заказе покупателя, Заказе поставщику и списке Контрагентов
-
-```xml
-<ServerApplication ...>
-  <vendorApi>...</vendorApi>
-  <access>...</access>
-  <buttons>
-    <button name="button1" title="Отправить контрагенту">
-      <locations>
-        <document.customerorder.edit/>
-      </locations>
-    </button>
-    <button name="button2" title="Сформировать цифровую подпись">
-      <locations>
-        <document.customerorder.edit/>
-        <document.purchaseorder.edit/>
-      </locations>
-    </button>
-    <button name="button3" title="Проверить контрагентов">
-      <locations>
-        <entity.counterparty.list/>
-      </locations>
-    </button>
-    <button name="button4" title="Импортировать заказы" useSelected="false">
-      <locations>
-        <document.customerorder.list/>
-      </locations>
-    </button>
-  </buttons>
-</ServerApplication>
-```
 
 Служит для задания списка кастомных кнопок, которые будут появляться на страницах МоегоСклада.
 
@@ -780,13 +745,50 @@
 - **document.loss.edit** — документ Списание
 - **document.emissionorder.edit** — документ Заказ кодов маркировки
 
-Пример заполненного блока **buttons** можно увидеть справа.
-
 Подробнее о работе с кастомными кнопками читайте в разделе [Кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki).
+
+> Блок buttons с кнопками в Заказе покупателя, Заказе поставщику и списке Контрагентов
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <buttons>
+    <button name="button1" title="Отправить контрагенту">
+      <locations>
+        <document.customerorder.edit/>
+      </locations>
+    </button>
+    <button name="button2" title="Сформировать цифровую подпись">
+      <locations>
+        <document.customerorder.edit/>
+        <document.purchaseorder.edit/>
+      </locations>
+    </button>
+    <button name="button3" title="Проверить контрагентов">
+      <locations>
+        <entity.counterparty.list/>
+      </locations>
+    </button>
+    <button name="button4" title="Импортировать заказы" useSelected="false">
+      <locations>
+        <document.customerorder.list/>
+      </locations>
+    </button>
+  </buttons>
+</ServerApplication>
+```
 
 ### Блок scenario
 
-Блок scenario с двумя действиями
+Служит для задания списка действий в сценариях, которые можно будет выбрать на странице настройки сценария в МоемСкладе.
+
+- Чтобы задать имя действия, отправляемое на сервер при срабатывании сценария, используйте атрибут `action.name` (обязательный).
+- Чтобы задать название действия, отображаемое в МоемСкладе, используйте атрибут `action.title` (обязательный).
+
+Подробнее о работе со сценариями читайте в разделе [Действия в сценариях](#/developer-guide/scenario-actions#2-dejstviya-v-scenariyah).
+
+> Блок scenario с двумя действиями
 
 ```xml
 <ServerApplication ...>
@@ -798,12 +800,3 @@
   </scenario>
 </ServerApplication>
 ```
-
-Служит для задания списка действий в сценариях, которые можно будет выбрать на странице настройки сценария в МоемСкладе.
-
-- Чтобы задать имя действия, отправляемое на сервер при срабатывании сценария, используйте атрибут `action.name` (обязательный).
-- Чтобы задать название действия, отображаемое в МоемСкладе, используйте атрибут `action.title` (обязательный).
-
-Пример заполненного блока **scenario** можно увидеть справа.
-
-Подробнее о работе со сценариями читайте в разделе [Действия в сценариях](#/developer-guide/scenario-actions#2-dejstviya-v-scenariyah).

@@ -1,15 +1,5 @@
 ## Ограничения для контента, загружаемого в виджетах
 
-Пример HTML-атрибутов iframe виджета, видимых в DevTools браузера
-
-```html
-<iframe src="https://example.com/widget.html"
-        sandbox="allow-forms allow-scripts allow-same-origin
-                 allow-popups allow-modals allow-downloads"
-        allow="clipboard-read; clipboard-write">
-</iframe>
-```
-
 МойСклад загружает весь контент решения (главный iframe, виджеты и кастомные модальные окна) внутри
 sandboxed iframe с определёнными HTML-атрибутами `sandbox` и `allow`. Эти атрибуты устанавливаются
 платформой МоегоСклада и не могут быть изменены разработчиком.
@@ -58,3 +48,14 @@ sandboxed iframe с определёнными HTML-атрибутами `sandbo
 Главный iframe дополнительно получает `fullscreen`, позволяющий использовать Fullscreen API
 (например, `element.requestFullscreen()`). Виджеты и модальные окна не получают `fullscreen`,
 так как являются встроенными компонентами, занимающими часть страницы.
+
+> Пример HTML-атрибутов iframe виджета, видимых в DevTools браузера
+
+```html
+<iframe src="https://example.com/widget.html"
+        sandbox="allow-forms allow-scripts allow-same-origin
+                 allow-popups allow-modals allow-downloads"
+        allow="clipboard-read; clipboard-write">
+</iframe>
+```
+

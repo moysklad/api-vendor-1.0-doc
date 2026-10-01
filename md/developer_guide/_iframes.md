@@ -51,7 +51,7 @@
 следующий [js скрипт](https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-3.js) на свою страницу.
 Шаблон такой страницы приведен справа:
 
-Более подробный пример использования главного iframe можно увидеть в [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya).
+Более подробный пример использования главного iframe можно увидеть в [демо-решениях](#/getting-started/quick-start#2-demo-resheniya).
 
 #### Окно чатов
 

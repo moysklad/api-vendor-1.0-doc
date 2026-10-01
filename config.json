@@ -5,46 +5,58 @@
     "folderPath": "./getting_started/_quick_start.md",
     "children": [
       {
-        "title": "Быстрый старт",
+        "title": "Как создать и опубликовать решение",
         "level": 2,
         "folderPath": "./getting_started/_quick_start.md",
         "children": []
       },
       {
-        "title": "Как создать и опубликовать решение",
-        "level": 2,
-        "folderPath": "./getting_started/_create_and_publish.md",
-        "children": []
-      },
-      {
         "title": "Порядок размещения решения в каталоге решений",
         "level": 2,
-        "folderPath": "./getting_started/_publication_order.md",
-        "children": []
-      },
-      {
-        "title": "Визуальные материалы решения",
-        "level": 2,
-        "folderPath": "./getting_started/_visual_materials.md",
+        "folderPath": "./getting_started/_quick_start.md",
         "children": []
       },
       {
         "title": "Демо-решения",
         "level": 2,
-        "folderPath": "./getting_started/_demo_solutions.md",
+        "folderPath": "./getting_started/_quick_start.md",
+        "children": []
+      },
+      {
+        "title": "Типы решений для каталога решений",
+        "level": 2,
+        "folderPath": "./app_types/_app_types.md",
         "children": []
       }
     ]
   },
   {
-    "title": "Типы решений для каталога решений",
+    "title": "Визуальные материалы решения",
     "level": 1,
-    "folderPath": "./app_types/_app_types.md",
+    "folderPath": "./getting_started/_visual_materials.md",
     "children": [
       {
-        "title": "Типы решений для каталога решений",
+        "title": "Иконка решения",
         "level": 2,
-        "folderPath": "./app_types/_app_types.md",
+        "folderPath": "./getting_started/_visual_materials.md",
+        "children": []
+      },
+      {
+        "title": "Изображения для страницы решения",
+        "level": 2,
+        "folderPath": "./getting_started/_visual_materials.md",
+        "children": []
+      },
+      {
+        "title": "Видео для страницы решения",
+        "level": 2,
+        "folderPath": "./getting_started/_visual_materials.md",
+        "children": []
+      },
+      {
+        "title": "Инструкция для пользователя",
+        "level": 2,
+        "folderPath": "./getting_started/_visual_materials.md",
         "children": []
       }
     ]
@@ -55,7 +67,55 @@
     "folderPath": "./placement/_placement_requirements.md",
     "children": [
       {
-        "title": "Условия размещения решений",
+        "title": "Требования к решениям",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Стоимость решения",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Требования к разработчикам",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Расчет вознаграждения и комиссия",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Рекомендуемые цены",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Изменение стоимости решения",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Пробный период платных решений",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Продление пробного периода",
+        "level": 2,
+        "folderPath": "./placement/_placement_requirements.md",
+        "children": []
+      },
+      {
+        "title": "Порядок получения выплат",
         "level": 2,
         "folderPath": "./placement/_placement_requirements.md",
         "children": []
@@ -226,7 +286,67 @@
     "folderPath": "./cabinet/_developer_cabinet.md",
     "children": [
       {
-        "title": "Личный кабинет разработчика",
+        "title": "Получение доступа к личному кабинету разработчика",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Жизненный цикл решения",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Редактирование информации о разработчике",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Привязка аккаунта к разработчику",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Отладка решений на аккаунтах разработчика",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Просмотр логов решения",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Просмотр истории модерации",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Отчеты в личном кабинете разработчика",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Права доступа для решений",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Прямая ссылка на решение",
+        "level": 2,
+        "folderPath": "./cabinet/_developer_cabinet.md",
+        "children": []
+      },
+      {
+        "title": "Настройка Яндекс Метрики для решения",
         "level": 2,
         "folderPath": "./cabinet/_developer_cabinet.md",
         "children": []

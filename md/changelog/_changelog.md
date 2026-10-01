@@ -2,14 +2,13 @@
 
 ## Список последних изменений
 
-
 ### 29-09-2026
 #### Добавлено
 - В [дескриптор решений](#/developer-guide/solution-descriptor#2-deskriptor-resheniya) добавлено право для работы с начислениями зарплаты: `payroll`.
 
 ### 09-09-2026
 #### Изменено
-- Требования к иконке, изображениям, видео и инструкции решения объединены в раздел [Визуальные материалы решения](#/getting-started/visual-materials#2-vizualnye-materialy-resheniya).
+- Требования к иконке, изображениям, видео и инструкции решения объединены в раздел [Визуальные материалы решения](#/getting-started/visual-materials#1-vizualnye-materialy-resheniya).
 
 ### 02-09-2026
 #### Добавлено
@@ -23,7 +22,7 @@
 
 ### 17-08-2026
 #### Добавлено
-- В раздел [Процесс приостановки и возобновления работы решения на аккаунте](#/vendor-api/suspend-and-resume#2-process-priostanovki-i-vozobnovleniya-raboty-resheniya-na-akkaunte) добавлено описание [рекомендации сохранять пользовательские настройки](#/vendor-api/suspend-and-resume#4-sohranenie-nastroek-pri-priostanovke-resheniya) при приостановке и удалении решения. В [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya) добавлены примеры сохранения и восстановления настроек.
+- В раздел [Процесс приостановки и возобновления работы решения на аккаунте](#/vendor-api/suspend-and-resume#2-process-priostanovki-i-vozobnovleniya-raboty-resheniya-na-akkaunte) добавлено описание [рекомендации сохранять пользовательские настройки](#/vendor-api/suspend-and-resume#4-sohranenie-nastroek-pri-priostanovke-resheniya) при приостановке и удалении решения. В [демо-решениях](#/getting-started/quick-start#2-demo-resheniya) добавлены примеры сохранения и восстановления настроек.
 
 ### 03-08-2026
 #### Добавлено
@@ -43,7 +42,7 @@
 
 ### 02-07-2026
 #### Добавлено
-- В раздел [Инструкция для пользователя](#/getting-started/visual-materials#3-instrukciya-dlya-polzovatelya) добавлено описание атрибута `data-manual-zoom`, который позволяет открывать изображения инструкции в увеличенном виде.
+- В раздел [Инструкция для пользователя](#/getting-started/visual-materials#2-instrukciya-dlya-polzovatelya) добавлено описание атрибута `data-manual-zoom`, который позволяет открывать изображения инструкции в увеличенном виде.
 
 ### 11-06-2026
 #### Добавлено
@@ -51,11 +50,11 @@
 
 ### 20-05-2026
 #### Добавлено
-- В [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya) добавлен пример решения на Python.
+- В [демо-решениях](#/getting-started/quick-start#2-demo-resheniya) добавлен пример решения на Python.
 
 ### 14-05-2026
 #### Добавлено
-- В [демо-решениях](#/getting-started/demo-solutions#2-demo-resheniya) добавлен пример решения на Node.js.
+- В [демо-решениях](#/getting-started/quick-start#2-demo-resheniya) добавлен пример решения на Node.js.
 
 ### 29-04-2026
 #### Добавлено
@@ -70,7 +69,7 @@
 - В раздел [Внесение изменений в опубликованное решение](#/cabinet/developer-cabinet#4-vnesenie-izmenenij-v-opublikovannoe-reshenie) добавлено описание рекомендуемого порядка тестирования и публикации изменений.
 
 #### Изменено
-- В разделе [Изображения для страницы решения](#/getting-started/visual-materials#3-izobrazheniya-dlya-stranicy-resheniya) уточнены требования к изображениям: разрешение 1280x720–1920x1080 px (16:9), размер файла до 2 Мб.
+- В разделе [Изображения для страницы решения](#/getting-started/visual-materials#2-izobrazheniya-dlya-stranicy-resheniya) уточнены требования к изображениям: разрешение 1280x720–1920x1080 px (16:9), размер файла до 2 Мб.
 
 ### 03-04-2026
 #### Добавлено
@@ -135,7 +134,7 @@
 
 ### 11-09-2025
 #### Добавлено
-- Возможность указания [счетчика Яндекс Метрики](#/cabinet/developer-cabinet#3-nastrojka-yandeks-metriki-dlya-resheniya) для Серверного решения в кабинете разработчика.
+- Возможность указания [счетчика Яндекс Метрики](#/cabinet/developer-cabinet#2-nastrojka-yandeks-metriki-dlya-resheniya) для Серверного решения в кабинете разработчика.
 
 ### 20-08-2025
 #### Добавлено
@@ -194,11 +193,11 @@
 
 ### 27-01-2025
 #### Добавлено
-- В личном кабинете добавлена вкладка для [просмотра истории модерации](#/cabinet/developer-cabinet#3-prosmotr-istorii-moderacii).
+- В личном кабинете добавлена вкладка для [просмотра истории модерации](#/cabinet/developer-cabinet#2-prosmotr-istorii-moderacii).
 
 ### 21-01-2025
 #### Добавлено
-- Отправка события `TariffChanged` при [продлении пробного периода](#/placement/placement-requirements#3-prodlenie-probnogo-perioda).
+- Отправка события `TariffChanged` при [продлении пробного периода](#/placement/placement-requirements#2-prodlenie-probnogo-perioda).
 
 ### 11-12-2024
 #### Добавлено
@@ -312,7 +311,7 @@
 
 ### 23-08-2022
 #### Изменено
-- Прекращена поддержка [типа решений](#/app-types/app-types#1-tipy-reshenij-dlya-kataloga-reshenij) iframe.
+- Прекращена поддержка [типа решений](#/app-types/app-types#2-tipy-reshenij-dlya-kataloga-reshenij) iframe.
  
 ### 01-08-2022
 #### Добавлено
@@ -346,7 +345,7 @@
 
 ### 20-04-2022
 #### Изменено
-- Требования к [иконке решения](#/getting-started/visual-materials#3-ikonka-resheniya).
+- Требования к [иконке решения](#/getting-started/visual-materials#2-ikonka-resheniya).
 
 ### 04-03-2022
 #### Изменено

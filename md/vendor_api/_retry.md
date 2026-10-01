@@ -15,10 +15,10 @@
 
 | Эндпоинт/Событие                                                                                                          | Длительность | Периодичность  | 
 |---------------------------------------------------------------------------------------------------------------------------|--------------|----------------|
-| [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#4-aktivaciya-resheniya-na-akkaunte) <br/>(кроме событий `TariffChanged`, `Autoprolongation`) | 3 минуты     | 10 сек         |
-| [Дективация решения на аккаунте](#/vendor-api/vendor-endpoints#4-deaktivaciya-resheniya-na-akkaunte)                                                       | 3 минуты     | 10 сек         |
-| [Обработка дополнительных событий](#/vendor-api/vendor-endpoints#4-obrabotka-dopolnitelnyh-sobytij)                                                     | 24 часа      | 5 минут        |
-| [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#4-aktivaciya-resheniya-na-akkaunte) <br/>(для событий `TariffChanged`, `Autoprolongation`)   | 24 часа      | 5 минут        |
-| [Обработка действия в сценариях](#/vendor-api/vendor-endpoints#4-obrabotka-dejstviya-v-scenarii)                                                          | 24 часа      | 5 минут        |
+| [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#3-aktivaciya-resheniya-na-akkaunte) <br/>(кроме событий `TariffChanged`, `Autoprolongation`) | 3 минуты     | 10 сек         |
+| [Дективация решения на аккаунте](#/vendor-api/vendor-endpoints#3-deaktivaciya-resheniya-na-akkaunte)                                                       | 3 минуты     | 10 сек         |
+| [Обработка дополнительных событий](#/vendor-api/vendor-endpoints#3-obrabotka-dopolnitelnyh-sobytij)                                                     | 24 часа      | 5 минут        |
+| [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#3-aktivaciya-resheniya-na-akkaunte) <br/>(для событий `TariffChanged`, `Autoprolongation`)   | 24 часа      | 5 минут        |
+| [Обработка действия в сценариях](#/vendor-api/vendor-endpoints#3-obrabotka-dejstviya-v-scenarii)                                                          | 24 часа      | 5 минут        |
 
 Если достигнут лимит максимальной длительности повторений, попытки прекращаются. Дальнейшее поведение системы зависит от операции, которую пытались выполнить.

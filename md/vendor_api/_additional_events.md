@@ -2,9 +2,9 @@
 
 Есть возможность получать дополнительные события о действиях с приложением со стороны пользователя.
 
-Поддержку таких событий необходимо явно объявлять в дескрипторе, см. [Блок дополнительных событий](#/developer-guide/solution-descriptor#5-blok-dopolnitelnyh-sobytij)
+Поддержку таких событий необходимо явно объявлять в дескрипторе, см. [Блок дополнительных событий](#/developer-guide/app-descriptor#4-blok-dopolnitelnyh-sobytij)
 
-#### Событие изменения прав установки (updatePermissions)
+### Событие изменения прав установки (updatePermissions)
 
 Получение обновлённых прав установки от МоегоСклада, когда права для токена у пользователя изменены.
 
@@ -15,5 +15,5 @@
 
 Чтобы получать событие, нужно выполнить 2 условия:
 
-1. Объявить о поддержке события `updatePermissions` через дескриптор, см. [блок additionalEvents в дескрипторе](#/developer-guide/solution-descriptor#5-blok-dopolnitelnyh-sobytij)
-2. Реализовать на сервере разработчика [эндпоинт для получения событий](#/vendor-api/vendor-endpoints#4-obrabotka-dopolnitelnyh-sobytij)
+1. Объявить о поддержке события `updatePermissions` через дескриптор, см. [блок additionalEvents в дескрипторе](#/developer-guide/app-descriptor#4-blok-dopolnitelnyh-sobytij)
+2. Реализовать на сервере разработчика [эндпоинт для получения событий](#/vendor-api/vendor-endpoints#3-obrabotka-dopolnitelnyh-sobytij)

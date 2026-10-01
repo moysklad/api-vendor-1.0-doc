@@ -59,9 +59,9 @@
 
 ![useful image](./images/confirm-click-button.png)
 
-Если кнопка не зависит от выбранных элементов, диалог подтверждения можно пропустить. См. атрибут `useSelected` в [buttons](#/developer-guide/solution-descriptor#4-blok-buttons).
+Если кнопка не зависит от выбранных элементов, диалог подтверждения можно пропустить. См. атрибут `useSelected` в [buttons](#/developer-guide/app-descriptor#3-blok-buttons).
 
-Для добавления кастомной кнопки в меню Решения необходимо заполнить [блок buttons](#/developer-guide/solution-descriptor#4-blok-buttons) в дескрипторе и реализовать [эндпоинт обработчика нажатия на кнопку в vendorApi](#/vendor-api/vendor-endpoints#4-obrabotka-nazhatiya-na-kastomnuyu-knopku).
+Для добавления кастомной кнопки в меню Решения необходимо заполнить [блок buttons](#/developer-guide/app-descriptor#3-blok-buttons) в дескрипторе и реализовать [эндпоинт обработчика нажатия на кнопку в vendorApi](#/vendor-api/vendor-endpoints#3-obrabotka-nazhatiya-na-kastomnuyu-knopku).
 
 Обработку нажатия можно сделать как синхронной (если время обработки известно и оно не превышает нескольких секунд), так и асинхронной (когда точное время обработки заранее не известно).
 Если при нажатии на кастомную кнопку запускается асинхронная обработка, то при ее окончании пользователю будет выведено всплывающее системное уведомление, которое также сохраняется в Ленте уведомлений.

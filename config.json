@@ -56,7 +56,7 @@
       {
         "title": "Инструкция для пользователя",
         "level": 2,
-        "folderPath": "./getting_started/_visual_materials.md",
+        "folderPath": "./getting_started/_user_manual.md",
         "children": []
       }
     ]
@@ -214,7 +214,7 @@
       {
         "title": "Дескриптор решения",
         "level": 2,
-        "folderPath": "./developer_guide/_solution_descriptor.md",
+        "folderPath": "./developer_guide/_app_descriptor.md",
         "children": []
       },
       {
@@ -294,7 +294,7 @@
       {
         "title": "Жизненный цикл решения",
         "level": 2,
-        "folderPath": "./cabinet/_developer_cabinet.md",
+        "folderPath": "./cabinet/_app_lifecycle.md",
         "children": []
       },
       {
@@ -330,7 +330,7 @@
       {
         "title": "Отчеты в личном кабинете разработчика",
         "level": 2,
-        "folderPath": "./cabinet/_developer_cabinet.md",
+        "folderPath": "./cabinet/_cabinet_reports.md",
         "children": []
       },
       {

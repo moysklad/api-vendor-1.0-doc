@@ -46,7 +46,7 @@ FILE_NAMES = {
     "Ограничения для контента, загружаемого в виджетах": "widget_content_limits",
     "Кастомные кнопки": "custom_buttons",
     "Действия в сценариях": "scenario_actions",
-    "Дескриптор решения": "solution_descriptor",
+    "Дескриптор решения": "app_descriptor",
     "Примеры дескрипторов": "descriptor_examples",
     "Аутентификация взаимодействия по Vendor API": "authentication",
     "Процесс активации решения на аккаунте": "activation",

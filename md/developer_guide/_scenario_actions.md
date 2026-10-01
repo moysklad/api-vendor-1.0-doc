@@ -8,7 +8,7 @@
 
 ![useful image](./images/scenario-setup.png)
 
-Для добавления действия нужно заполнить [блок scenario](#/developer-guide/solution-descriptor#4-blok-scenario) в дескрипторе и реализовать [эндпоинт обработчика действия в vendorApi](#/vendor-api/vendor-endpoints#4-obrabotka-dejstviya-v-scenarii).
+Для добавления действия нужно заполнить [блок scenario](#/developer-guide/app-descriptor#3-blok-scenario) в дескрипторе и реализовать [эндпоинт обработчика действия в vendorApi](#/vendor-api/vendor-endpoints#3-obrabotka-dejstviya-v-scenarii).
 
 Если при выполнении обработчика действия возникнет ошибка, пользователи увидят сообщение об этом в истории выполнения на странице редактирования сценария. Пример:
 

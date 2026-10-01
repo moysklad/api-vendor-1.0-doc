@@ -10,15 +10,15 @@ Rest-эндпоинты на стороне МоегоСклада позвол�
 
 На текущий момент со стороны МоегоСклада есть следующие эндпоинты:
 
-+ [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-poluchenie-statusa-resheniya-na-akkaunte)
-+ [Изменение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#4-izmenenie-statusa-resheniya-na-akkaunte)
-+ [Изменение настроек лояльности на аккаунте](#/vendor-api/moysklad-endpoints#4-izmenenie-nastroek-loyalnosti-na-akkaunte)
-+ [Частичное изменение настроек лояльности](#/vendor-api/moysklad-endpoints#4-chastichnoe-izmenenie-nastroek-loyalnosti)
-+ [Получение контекста пользователя по одноразовому токену](#/vendor-api/moysklad-endpoints#4-poluchenie-konteksta-polzovatelya-po-odnorazovomu-tokenu)
-+ [Получение полного контекста пользователя](#/vendor-api/moysklad-endpoints#4-poluchenie-konteksta-polzovatelya)
-+ [Завершение асинхронной обработки нажатия на кастомную кнопку](#/vendor-api/moysklad-endpoints#4-zavershenie-asinhronnoj-obrabotki-nazhatiya-na-kastomnuyu-knopku)
++ [Получение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#3-poluchenie-statusa-resheniya-na-akkaunte)
++ [Изменение статуса решения на аккаунте](#/vendor-api/moysklad-endpoints#3-izmenenie-statusa-resheniya-na-akkaunte)
++ [Изменение настроек лояльности на аккаунте](#/vendor-api/moysklad-endpoints#3-izmenenie-nastroek-loyalnosti-na-akkaunte)
++ [Частичное изменение настроек лояльности](#/vendor-api/moysklad-endpoints#3-chastichnoe-izmenenie-nastroek-loyalnosti)
++ [Получение контекста пользователя по одноразовому токену](#/vendor-api/moysklad-endpoints#3-poluchenie-konteksta-polzovatelya-po-odnorazovomu-tokenu)
++ [Получение полного контекста пользователя](#/vendor-api/moysklad-endpoints#3-poluchenie-konteksta-polzovatelya)
++ [Завершение асинхронной обработки нажатия на кастомную кнопку](#/vendor-api/moysklad-endpoints#3-zavershenie-asinhronnoj-obrabotki-nazhatiya-na-kastomnuyu-knopku)
 
-#### Получение статуса решения на аккаунте
+### Получение статуса решения на аккаунте
 
 С помощью этого вызова разработчик может получить текущий статус установки решения на аккаунте пользователя.
 
@@ -46,7 +46,7 @@ Rest-эндпоинты на стороне МоегоСклада позвол�
 
 Если решение не подключено на данном аккаунте или указанный аккаунт отсутствует в МоемСкладе, возвращается ошибка 404 Not Found (код 2004).
 
-##### Атрибуты сущности subscription
+#### Атрибуты сущности subscription
 
 | Название	    | Тип     | Описание                                                                                    | Обязательное при ответе |
 |:-------------|:--------|:--------------------------------------------------------------------------------------------|:------------------------|
@@ -57,7 +57,7 @@ Rest-эндпоинты на стороне МоегоСклада позвол�
 | notForResale | Boolean | Признак установки с аккаунта партнера МоегоСклада                                           | Да                      |
 | partner      | Boolean | Признак установки при помощи партнера МоегоСклада                                           | Да                      |
 
-##### Атрибуты сущности access
+#### Атрибуты сущности access
 
 | Название	   | Тип    | Описание                                                                 | Обязательное при ответе |
 |:------------|:-------|:-------------------------------------------------------------------------|:------------------------|
@@ -65,7 +65,7 @@ Rest-эндпоинты на стороне МоегоСклада позвол�
 | scope       | String | Может быть **admin** или **custom**                                      | Да                      |
 | permissions | String | Заполняется когда скоуп прав **custom**. Cтруктуру см. в примере справа. | Нет                     |
 
-##### Таблица возможных статусов решения на аккаунте
+#### Таблица возможных статусов решения на аккаунте
 
 | status             | cause     | Значение                                                                                            |
 |:-------------------|:----------|:----------------------------------------------------------------------------------------------------|
@@ -139,7 +139,7 @@ curl "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b
 }
 ```
 
-#### Изменение статуса решения на аккаунте
+### Изменение статуса решения на аккаунте
 
 С помощью <b>PUT</b> запроса разработчик может изменить статус устанавливающегося решения пользователя. При [активации
 решения со стороны разработчика](#/vendor-api/vendor-endpoints#2-rest-endpointy-na-storone-razrabotchika-reshenij), разработчик может ответить одним из статусов **Activated**,
@@ -191,7 +191,7 @@ curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7
 Response 200 (application/json).
 Успешный запрос.
 
-#### Изменение настроек лояльности на аккаунте
+### Изменение настроек лояльности на аккаунте
 
 > Пример запроса на изменение настроек лояльности решения на аккаунте
 
@@ -244,7 +244,7 @@ Response 200 (application/json).
 
 Подробнее про работу с системами лояльности см. [документацию LoyaltyAPI](https://dev.moysklad.ru/doc/api/loyalty/1.0/)
 
-#### Частичное изменение настроек лояльности
+### Частичное изменение настроек лояльности
 
 > Пример запроса на изменение URL в настройках лояльности на аккаунте
 
@@ -293,10 +293,10 @@ Response 200 (application/json).
 + **400 Bad Request** — в случае отсутствия loyaltyApi в дескрипторе решения или нахождения решения в статусе
   отличном от **SettingsRequired** и **Installed**.
 
-#### Получение контекста пользователя по одноразовому токену
+### Получение контекста пользователя по одноразовому токену
 
 Рекомендуемый способ получения контекста пользователя для главного окна, модальных окон и виджетов решения.
-Виджет запрашивает у хост-окна одноразовый токен по [протоколу контекста пользователя](#/developer-guide/host-window-services#4-protokol-konteksta-polzovatelya) и передает его
+Виджет запрашивает у хост-окна одноразовый токен по [протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya) и передает его
 на сервер разработчика, а сервер обменивает токен на контекст пользователя этим запросом.
 
 > Пример запроса на получение контекста по одноразовому токену
@@ -345,7 +345,7 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/user" \
 | role      | String | Роль пользователя. Возможные значения: `admin`, `cashier`, `worker`, `individual` | Да           |
 
 Значения `role` совпадают с полем
-[роли в обработке нажатия на кастомную кнопку](#/vendor-api/vendor-endpoints#4-obrabotka-nazhatiya-na-kastomnuyu-knopku).
+[роли в обработке нажатия на кастомную кнопку](#/vendor-api/vendor-endpoints#3-obrabotka-nazhatiya-na-kastomnuyu-knopku).
 
 Токен действует 60 секунд с момента выдачи хост-окном и перестает действовать после первого успешного обмена.
 Токен выдается для конкретного решения: обменять токен, выданный другому решению, нельзя.
@@ -361,14 +361,14 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/user" \
 
 + **200 OK** — контекст пользователя получен;
 + **400 Bad Request** (код **3008**) — передан пустой токен;
-+ **401 Unauthorized** — [ошибка аутентификации](#/vendor-api/authentication#4-oshibki-autentifikacii-i-avtorizacii) по JWT-токену. Токен контекста
++ **401 Unauthorized** — [ошибка аутентификации](#/vendor-api/authentication#3-oshibki-autentifikacii-i-avtorizacii) по JWT-токену. Токен контекста
   проверяется после аутентификации, поэтому в этом случае он не расходуется и его можно обменять повторно;
 + **404 Not Found** (код **3007**) — токен не найден, уже использован, истек срок его действия или он выдан другому
   решению.
 
-В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#4-obrabotka-oshibok-na-storone-moegosklada).
+В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#3-obrabotka-oshibok-na-storone-moegosklada).
 
-#### Получение контекста пользователя
+### Получение контекста пользователя
 
 > Пример запроса на получение контекста пользователя
 
@@ -892,9 +892,9 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd27223
 
 `https://api.moysklad.ru/api/remap/1.2/context/employee`.
 
-Признак администратора аккаунта — `permissions.admin.view == "ALL"`. Подробнее смотрите в таблице [«Пользовательские и тарифные пермиссии»](https://dev.moysklad.ru/doc/api/remap/1.2/#/general#5-permissii-sotrudnika) JSON API 1.2.
+Признак администратора аккаунта — `permissions.admin.view == "ALL"`. Подробнее смотрите в таблице [«Пользовательские и тарифные пермиссии»](https://dev.moysklad.ru/doc/api/remap/1.2/#/general#4-permissii-sotrudnika) JSON API 1.2.
 
-В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#4-obrabotka-oshibok-na-storone-moegosklada).
+В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#3-obrabotka-oshibok-na-storone-moegosklada).
 
 <u>HTTP status codes</u>:
 
@@ -902,7 +902,7 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd27223
 + **403 Forbidden** — решение не авторизовано на доступ по данному contextKey;
 + **404 Not Found** — contextKey не найден или истекло время его жизни.
 
-#### Завершение асинхронной обработки нажатия на кастомную кнопку
+### Завершение асинхронной обработки нажатия на кастомную кнопку
 
 > Пример запроса на завершение асинхронной обработки
 
@@ -938,7 +938,7 @@ Response 200 (application/json).
 
 <u>Тело запроса</u>:
 
-+ **asyncProcessId** `UUID` — идентификатор процесса, который был передан в ответ на запрос [Обработки нажатия на кастомную кнопку](#/vendor-api/vendor-endpoints#4-obrabotka-nazhatiya-na-kastomnuyu-knopku) со стороны МоегоСклада;
++ **asyncProcessId** `UUID` — идентификатор процесса, который был передан в ответ на запрос [Обработки нажатия на кастомную кнопку](#/vendor-api/vendor-endpoints#3-obrabotka-nazhatiya-na-kastomnuyu-knopku) со стороны МоегоСклада;
 + **notification** `Object` — объект уведомления. Поля:
   + **text** `String` — текст уведомления (максимум 255 символов);
   + **url** `String` — ссылка для открытия (опционально, если не указан `urlText`, максимум 255 символов). Допускаются только https-ссылки либо относительные ссылки на страницу внутри МоегоСклада;
@@ -954,7 +954,7 @@ Response 200 (application/json).
 + **409 Conflict** — процесс уже был завершен ранее;
 + **410 Gone** — с момента начала процесса прошло слишком много времени (более 24 часов).
 
-#### Обработка ошибок на стороне МоегоСклада
+### Обработка ошибок на стороне МоегоСклада
 
 При взаимодействии Разработчик → МойСклад обработка ошибок на стороне МоегоСклада выполняется аналогично тому, как это сделано в [JSON API 1.2 ](https://dev.moysklad.ru/doc/api/remap/1.2/). В тело ответа включается JSON-объект с описанием
 ошибки. При необходимости в ответе проставляются соответствующие HTTP-заголовки.

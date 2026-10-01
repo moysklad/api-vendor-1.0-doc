@@ -2,12 +2,12 @@
 
 В виджетах, iframe и модальных окнах доступны следующие сервисные возможности МоегоСклада (хост-окна):
 
-* [Селектор группы товаров](#/developer-guide/host-window-services#4-selektor-gruppy-tovarov),
-* [Стандартные диалоги](#/developer-guide/host-window-services#4-standartnye-dialogi),
-* [Протокол навигации](#/developer-guide/host-window-services#4-protokol-navigacii),
-* [Протокол контекста пользователя](#/developer-guide/host-window-services#4-protokol-konteksta-polzovatelya).
+* [Селектор группы товаров](#/developer-guide/host-window-services#3-selektor-gruppy-tovarov),
+* [Стандартные диалоги](#/developer-guide/host-window-services#3-standartnye-dialogi),
+* [Протокол навигации](#/developer-guide/host-window-services#3-protokol-navigacii),
+* [Протокол контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
 
-#### Селектор группы товаров
+### Селектор группы товаров
 
 Дескриптор решения с виджетом, использующим селектор группы товаров
 
@@ -125,7 +125,7 @@
 }
 ```
 
-#### Стандартные диалоги
+### Стандартные диалоги
 
 Дескриптор с виджетом, использующим стандартные диалоги
 
@@ -255,7 +255,7 @@
 В версии Google Chrome 92.0 и выше использование браузерных диалоговых окон через вызовы Window.alert(), Window.confirm() из iframe [запрещено](https://www.chromestatus.com/feature/5148698084376576).
 Поэтому рекомендуется использовать сервис стандартных диалогов МоегоСклада.
 
-#### Протокол навигации
+### Протокол навигации
 
 Дескриптор с виджетом, использующим протокол навигации
 
@@ -360,7 +360,7 @@
 
 При навигации из модального окна в текущей вкладке (`target` имеет значение `self`) произойдет переход, и модальное окно будет отображаться поверх страницы. Если необходимо, чтобы после перехода окно закрывалось, используйте сообщение `ClosePopup`. Подробнее смотрите в разделе [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna).
 
-#### Протокол контекста пользователя
+### Протокол контекста пользователя
 
 Дескриптор решения, у которого главное окно и виджет используют протокол контекста пользователя
 
@@ -404,16 +404,16 @@
 необходимо добавить в блок `uses` для `widgets`, `iframe` или `popup` тег: `<user-context/>`.
 Примеры смотрите в правой части экрана.
 
-В [окне чатов](#/developer-guide/iframes#4-okno-chatov) и [мобильном окне](#/developer-guide/iframes#4-mobilnye-prilozheniya) протокол пока не поддерживается: тег
+В [окне чатов](#/developer-guide/iframes#3-okno-chatov) и [мобильном окне](#/developer-guide/iframes#3-mobilnye-prilozheniya) протокол пока не поддерживается: тег
 `<user-context/>` для окон типа `chat` и `mobile` указать нельзя.
 
 Атрибут `useContextKey="false"` отключает передачу параметра `contextKey` в URL загрузки. Подробнее
-смотрите в разделе [Блок iframes](#/developer-guide/solution-descriptor#4-blok-iframes).
+смотрите в разделе [Блок iframes](#/developer-guide/app-descriptor#3-blok-iframes).
 
 Рассмотрим пример с виджетом. Когда виджет отправляет хост-окну сообщение `UserContextRequest` (через
 Window.postMessage), хост-окно выдает одноразовый токен и возвращает его в сообщении `UserContextResponse`.
 Полученный токен виджет передает на сервер разработчика, а сервер обменивает его на контекст пользователя запросом
-[POST /context/user](#/vendor-api/moysklad-endpoints#4-poluchenie-konteksta-polzovatelya-po-odnorazovomu-tokenu).
+[POST /context/user](#/vendor-api/moysklad-endpoints#3-poluchenie-konteksta-polzovatelya-po-odnorazovomu-tokenu).
 
 > Сообщение UserContextRequest
 

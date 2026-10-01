@@ -94,9 +94,7 @@ curl "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b
 -H "Authorization: Bearer ..."  
 ```
 
-> ---
-> Response 200 (application/json).
-> Успешный запрос.
+> Пример ответа
 
 ```json
 {
@@ -186,31 +184,14 @@ curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7
     }'
 ```
 
----
+> Response 200 (application/json).
+> Успешный запрос.
 
-Response 200 (application/json).
-Успешный запрос.
-
-### Изменение настроек лояльности на аккаунте
-
-> Пример запроса на изменение настроек лояльности решения на аккаунте
-
-```shell
-curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty"     
--H "Content-Type: application/json"
--H "Accept: application/json"    
--H "Authorization: Bearer ..."  
--d '{
-    "url": "https://...",
-    "token": "...",
-    "externalSearch": true
-}'
+```json
+<Response body is empty>
 ```
 
----
-
-Response 200 (application/json).
-Успешный запрос.
+### Изменение настроек лояльности на аккаунте
 
 С помощью этого запроса разработчик может изменить настройки программы лояльности у аккаунта пользователя.
 Запрос доступен для статусов жизненного цикла решения **SettingsRequired** и **Installed** и
@@ -244,24 +225,27 @@ Response 200 (application/json).
 
 Подробнее про работу с системами лояльности см. [документацию LoyaltyAPI](https://dev.moysklad.ru/doc/api/loyalty/1.0/)
 
-### Частичное изменение настроек лояльности
-
-> Пример запроса на изменение URL в настройках лояльности на аккаунте
+> Пример запроса на изменение настроек лояльности решения на аккаунте
 
 ```shell
-curl -X PATCH "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty"     
+curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty"     
 -H "Content-Type: application/json"
 -H "Accept: application/json"    
 -H "Authorization: Bearer ..."  
 -d '{
-    "url": "https://..."
+    "url": "https://...",
+    "token": "...",
+    "externalSearch": true
 }'
 ```
 
----
+> Response 200 (application/json).
+> Успешный запрос.
 
-Response 200 (application/json).
-Успешный запрос.
+```json
+<Response body is empty>
+```
+### Частичное изменение настроек лояльности
 
 С помощью этого запроса разработчик может изменить часть настроек программы лояльности.
 Запрос доступен для статусов жизненного цикла решения **SettingsRequired** и **Installed** и
@@ -293,37 +277,29 @@ Response 200 (application/json).
 + **400 Bad Request** — в случае отсутствия loyaltyApi в дескрипторе решения или нахождения решения в статусе
   отличном от **SettingsRequired** и **Installed**.
 
-### Получение контекста пользователя по одноразовому токену
-
-Рекомендуемый способ получения контекста пользователя для главного окна, модальных окон и виджетов решения.
-Виджет запрашивает у хост-окна одноразовый токен по [протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya) и передает его
-на сервер разработчика, а сервер обменивает токен на контекст пользователя этим запросом.
-
-> Пример запроса на получение контекста по одноразовому токену
+> Пример запроса на изменение URL в настройках лояльности на аккаунте
 
 ```shell
-curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/user" \
--H "Accept: application/json" \
--H "Content-Type: application/json" \
--H "Authorization: Bearer ..." \
+curl -X PATCH "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty"     
+-H "Content-Type: application/json"
+-H "Accept: application/json"    
+-H "Authorization: Bearer ..."  
 -d '{
-  "token": "a1b2c3d4e5f6478901234567890abcdef1234567"
+    "url": "https://..."
 }'
 ```
-
----
 
 > Response 200 (application/json).
 > Успешный запрос.
 
 ```json
-{
-  "accountId": "b0b309ee-13e3-11e9-9109-f8fc0001f188",
-  "userId": "b0a02321-13e3-11e9-912f-f3d4002516e3",
-  "userUid": "admin@elonmask",
-  "role": "admin"
-}
+<Response body is empty>
 ```
+### Получение контекста пользователя по одноразовому токену
+
+Рекомендуемый способ получения контекста пользователя для главного окна, модальных окон и виджетов решения.
+Виджет запрашивает у хост-окна одноразовый токен по [протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya) и передает его
+на сервер разработчика, а сервер обменивает токен на контекст пользователя этим запросом.
 
 **Resource**: `BASE-ENDPOINT/context/user`
 
@@ -368,7 +344,59 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/user" \
 
 В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#3-obrabotka-oshibok-na-storone-moegosklada).
 
+> Пример запроса на получение контекста по одноразовому токену
+
+```shell
+curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/user" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer ..." \
+-d '{
+  "token": "a1b2c3d4e5f6478901234567890abcdef1234567"
+}'
+```
+
+> Response 200 (application/json).
+> Успешный запрос.
+
+```json
+{
+  "accountId": "b0b309ee-13e3-11e9-9109-f8fc0001f188",
+  "userId": "b0a02321-13e3-11e9-912f-f3d4002516e3",
+  "userUid": "admin@elonmask",
+  "role": "admin"
+}
+```
 ### Получение контекста пользователя
+
+Через этот эндпоинт можно получить информацию о пользователе, который использует решение в UI МоегоСклада.
+
+**Resource**: `BASE-ENDPOINT/context/{contextKey}`
+
+Здесь:
+
++ **contextKey** `String` — временный ключ, переданный при загрузке окна или виджета через [GET-параметр](#/developer-guide/user-context#2-kontekst-polzovatelya).
+
+<u>HTTP-метод</u>: **POST**
+
+<u>Тело запроса</u>: пустое
+
+<u>Тело ответа</u>:
+
+В случае успешного ответа возвращается такое же по структуре содержимое как в
+[эндпоинте получения Контекста сотрудника JSON API](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontext-zaprosa-sotrudnika):
+
+`https://api.moysklad.ru/api/remap/1.2/context/employee`.
+
+Признак администратора аккаунта — `permissions.admin.view == "ALL"`. Подробнее смотрите в таблице [«Пользовательские и тарифные пермиссии»](https://dev.moysklad.ru/doc/api/remap/1.2/#/general#4-permissii-sotrudnika) JSON API 1.2.
+
+В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#3-obrabotka-oshibok-na-storone-moegosklada).
+
+<u>HTTP status codes</u>:
+
++ **200 OK** — все в порядке, в ответе отдается контекст пользователя;
++ **403 Forbidden** — решение не авторизовано на доступ по данному contextKey;
++ **404 Not Found** — contextKey не найден или истекло время его жизни.
 
 > Пример запроса на получение контекста пользователя
 
@@ -377,8 +405,6 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd27223
 -H "Accept: application/json"     
 -H "Authorization: Bearer ..."  
 ```
-
----
 
 > Response 200 (application/json).
 > Успешный запрос.
@@ -872,59 +898,7 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd27223
   }
 }
 ```
-
-Через этот эндпоинт можно получить информацию о пользователе, который использует решение в UI МоегоСклада.
-
-**Resource**: `BASE-ENDPOINT/context/{contextKey}`
-
-Здесь:
-
-+ **contextKey** `String` — временный ключ, переданный при загрузке окна или виджета через [GET-параметр](#/developer-guide/user-context#2-kontekst-polzovatelya).
-
-<u>HTTP-метод</u>: **POST**
-
-<u>Тело запроса</u>: пустое
-
-<u>Тело ответа</u>:
-
-В случае успешного ответа возвращается такое же по структуре содержимое как в
-[эндпоинте получения Контекста сотрудника JSON API](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontext-zaprosa-sotrudnika):
-
-`https://api.moysklad.ru/api/remap/1.2/context/employee`.
-
-Признак администратора аккаунта — `permissions.admin.view == "ALL"`. Подробнее смотрите в таблице [«Пользовательские и тарифные пермиссии»](https://dev.moysklad.ru/doc/api/remap/1.2/#/general#4-permissii-sotrudnika) JSON API 1.2.
-
-В случае ошибок возвращается JSON-объект с ошибкой. Подробнее см. [Обработка ошибок МоегоСклада](#/vendor-api/moysklad-endpoints#3-obrabotka-oshibok-na-storone-moegosklada).
-
-<u>HTTP status codes</u>:
-
-+ **200 OK** — все в порядке, в ответе отдается контекст пользователя;
-+ **403 Forbidden** — решение не авторизовано на доступ по данному contextKey;
-+ **404 Not Found** — contextKey не найден или истекло время его жизни.
-
 ### Завершение асинхронной обработки нажатия на кастомную кнопку
-
-> Пример запроса на завершение асинхронной обработки
-
-```shell
-curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/button/complete"     
--H "Content-Type: application/json"
--H "Accept: application/json"    
--H "Authorization: Bearer ..."  
--d '{
-    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7",
-    "notification": {
-      "text": "Отчет успешно создан",
-      "url": "https://vendor.com/report/view/sde7Hweyf4",
-      "urlText": "Скачать"
-    }
-}'
-```
-
----
-
-Response 200 (application/json).
-Успешный запрос.
 
 С помощью этого запроса разработчик должен отправить уведомление пользователю о том, что асинхронный процесс, запущенный при нажатии на кнопку, завершен.
 
@@ -954,6 +928,29 @@ Response 200 (application/json).
 + **409 Conflict** — процесс уже был завершен ранее;
 + **410 Gone** — с момента начала процесса прошло слишком много времени (более 24 часов).
 
+> Пример запроса на завершение асинхронной обработки
+
+```shell
+curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/button/complete"     
+-H "Content-Type: application/json"
+-H "Accept: application/json"    
+-H "Authorization: Bearer ..."  
+-d '{
+    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7",
+    "notification": {
+      "text": "Отчет успешно создан",
+      "url": "https://vendor.com/report/view/sde7Hweyf4",
+      "urlText": "Скачать"
+    }
+}'
+```
+
+> Response 200 (application/json).
+> Успешный запрос.
+
+```json
+<Response body is empty>
+```
 ### Обработка ошибок на стороне МоегоСклада
 
 При взаимодействии Разработчик → МойСклад обработка ошибок на стороне МоегоСклада выполняется аналогично тому, как это сделано в [JSON API 1.2 ](https://dev.moysklad.ru/doc/api/remap/1.2/). В тело ответа включается JSON-объект с описанием

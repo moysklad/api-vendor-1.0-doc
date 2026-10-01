@@ -21,7 +21,6 @@ Rest-эндпоинты на стороне разработчика позво�
 + **Authorization**: `Bearer <token>` - заголовок авторизации c JWT-токеном
 + **X_Lognex_RequestId**: `<requestId>` - уникальный ID запроса. Отправляется повторно только при срабатывании механизма [Retry](#/vendor-api/retry#2-mehanizm-retry).
 
-
 ### Активация решения на аккаунте
 
 Для обработки установки (возобновления) решения на аккаунте пользователя МоегоСклада требуется реализовать на сервере разработчика эндпоинт с адресом:
@@ -95,72 +94,56 @@ HTTP-заголовок `Content-Type: application/json`, смотрите пр�
 + прочие статусы **5хх** обрабатываются как ошибка — запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
 + **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
 
-Пример запроса при установке решения на аккаунт:
+> Пример запроса при установке решения на аккаунт
 
-**Request:** 
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
   "cause": "Install",
   "access": [
     {
       "resource": "https://api.moysklad.ru/api/remap/1.2",
-      "scope": ["admin"],
+      "scope": [
+        "admin"
+      ],
       "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
     }
   ],
   "subscription": {
-    "tariffId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e", 
+    "tariffId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
     "trial": true,
     "tariffName": "Basic",
     "expiryMoment": "2024-01-19T18:50:12+03:00",
     "notForResale": false,
     "partner": false
   }
-}
+}'
 ```
----
 
-**Response:**
+> Пример активации при возобновлении работы решения на аккаунте после поступления оплаты
 
-Response 200
-
-Content-Type: **application/json**
-
-> Body: 
-
-```json
-{
-  "status": "SettingsRequired"
-}
-``` 
-
----
-Пример активации при возобновлении работы решения на аккаунте после поступления оплаты:
-
-**Request:** 
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
   "cause": "Resume",
   "access": [
     {
       "resource": "https://api.moysklad.ru/api/remap/1.2",
-      "scope": ["admin"],
+      "scope": [
+        "admin"
+      ],
       "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
     }
   ],
@@ -172,42 +155,26 @@ https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9f
     "notForResale": false,
     "partner": false
   }
-}
+}'
 ```
----
 
-**Response:**
+> Пример активации решения с блоком permissions (гибким набором прав)
 
-Response 200
-
-Content-Type: **application/json**
-
-> Body: 
-
-```json
-{
-  "status": "Activated"
-}
-``` 
-
----
-Пример активации решения с блоком permissions (гибким набором прав):
-
-**Request:**
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
   "access": [
     {
       "resource": "https://api.moysklad.ru/api/remap/1.2",
-      "scope": ["custom"],
+      "scope": [
+        "custom"
+      ],
       "permissions": {
         "supply": {
           "view": "ALL",
@@ -220,36 +187,18 @@ https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9f
     }
   ],
   "cause": "Install"
-}
+}'
 ```
 
----
+> Пример запроса при изменении тарифа подписки
 
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "status": "SettingsRequired"
-}
-``` 
----
-Пример запроса при изменении тарифа подписки:
-
-**Request:**
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
   "cause": "TariffChanged",
@@ -261,35 +210,18 @@ https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9f
     "notForResale": false,
     "partner": false
   }
-}
+}'
 ```
----
 
-**Response:**
+> Пример запроса при автопродлении тарифа подписки
 
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "status": "Activated"
-}
-``` 
----
-Пример запроса при автопродлении тарифа подписки:
-
-**Request:**
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
   "cause": "Autoprolongation",
@@ -301,42 +233,27 @@ https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9f
     "notForResale": false,
     "partner": false
   }
-}
+}'
 ```
----
 
-**Response:**
+> Пример запроса при установке решения c Fiscal API на аккаунт
 
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "status": "Activated"
-}
-``` 
----
-Пример запроса при установке решения c Fiscal API на аккаунт:
-
-**Request:**
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
   "cause": "Install",
   "access": [
     {
       "resource": "https://api.moysklad.ru/api/remap/1.2",
-      "scope": ["admin"],
+      "scope": [
+        "admin"
+      ],
       "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
     }
   ],
@@ -346,23 +263,26 @@ https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9f
       "token": "asdfasdfgaerdfgqawefgqaergqa"
     }
   }
+}'
+```
+
+Примеры ответов
+
+> Требуется настройка
+
+```json
+{
+  "status": "SettingsRequired"
 }
 ```
----
 
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
+> Решение готово к работе
 
 ```json
 {
   "status": "Activated"
 }
-``` 
+```
 
 ### Деактивация решения на аккаунте
 
@@ -403,58 +323,41 @@ Content-Type: **application/json**
 + прочие статусы **5хх** обрабатываются как ошибка — запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
 + **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
 
-Пример деактивации решения при удалении с аккаунта:
+> Пример деактивации решения при удалении с аккаунта
 
-**Request:** 
-
-**DELETE**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
   "cause": "Uninstall"
-}
+}'
 ```
 
----
+> Пример деактивации платного решения при приостановке решения на аккаунте (при отсутствии оплаты решения)
 
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
----
----
-
-Пример деактивации платного решения при приостановке решения на аккаунте (при отсутствии оплаты решения):
-
-**Request:** 
-
-**DELETE**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
-> Body
-
-```json
-{
+```shell
+curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
   "cause": "Suspend"
-}
+}'
 ```
 
----
+> Response 200 (application/json). Успешный запрос
 
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
+```json
+<Response body is empty>
+```
 
 ### Проверка статуса активации решения в системе разработчика
 
@@ -475,22 +378,16 @@ Content-Type: **application/json**
 + **200 OK** — решение активировано или активируется во внешней системе. Статус активации — в теле ответа;
 + **404 Not Found** — решение отключено или никогда не было подключено для данного аккаунта.
 
-Пример
+> Пример запроса на проверку статуса активации
 
-**Request:**
+```shell
+curl "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+```
 
-**GET**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f
-
----
-  
-**Response:** 
-
-Response 200
-
-Content-Type: **application/json**
-
-> Response body
+> Response 200 (application/json). Успешный запрос
 
 ```json
 {
@@ -499,42 +396,6 @@ Content-Type: **application/json**
 ```
 
 ### Обработка дополнительных событий
-
-Пример события при изменении набора прав:
-
-**Request:**
-
-**PUT**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/event
-
-> Body
-
-```json
-{
-  "appUid": "example-app.example-vendor",
-  "accountName": "account-test",
-  "access": [
-    {
-      "resource": "https://api.moysklad.ru/api/remap/1.2",
-      "scope": ["custom"],
-      "permissions": {
-        "supply": {
-          "view": "ALL",
-          "update": "ALL"
-        },
-        "viewDashboard": true,
-        "viewAudit": true
-      }
-    }
-  ],
-  "cause": "PermissionsChanged"
-}
-```
----
-
-**Response:**
-
-Response 200
 
 URL для приёма дополнительных событий -
 
@@ -546,196 +407,38 @@ URL для приёма дополнительных событий -
 
 Полный список дополнительных событий см. в разделе [уведомления о дополнительных событиях](#/vendor-api/additional-events#2-uvedomleniya-o-dopolnitelnyh-sobytiyah).
 
-### Обработка нажатия на кастомную кнопку
+> Пример события при изменении набора прав
 
-Пример запроса при нажатии кнопки в Заказе покупателя:
-
-**Request:**
-
-**POST**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button
-
-> Body
-
-```json
-{
-  "buttonName": "button1",
-  "extensionPoint": "document.customerorder.edit",
-  "objectId": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
-  "user": {
-    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e", 
-    "role": "admin"
-  }
-}
-```
----
-Пример запроса при нажатии кнопки в списке Контрагентов:
-
-**Request:**
-
-**POST**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button
-
-> Body
-
-```json
-{
-  "buttonName": "button1",
-  "extensionPoint": "entity.counterparty.list",
-  "selected": [
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/event"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "account-test",
+  "access": [
     {
-      "id": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
-      "type": "counterparty"
-    },
-    {
-      "id": "123c5489-6a17-48b7-9fe5-b2000eb80765",
-      "type": "counterparty"
+      "resource": "https://api.moysklad.ru/api/remap/1.2",
+      "scope": [
+        "custom"
+      ],
+      "permissions": {
+        "supply": {
+          "view": "ALL",
+          "update": "ALL"
+        },
+        "viewDashboard": true,
+        "viewAudit": true
+      }
     }
   ],
-  "user": {
-    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
-    "role": "admin"
-  }
-}
+  "cause": "PermissionsChanged"
+}'
 ```
----
-Примеры ответов
 
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "action": "showNotification",
-  "params": {
-    "text": "Документ успешно подписан"
-  } 
-}
-``` 
----
-
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "action": "navigateTo",
-  "params": {
-    "url": "https://api.whatsapp.com/send/?phone=%2B79127775533"
-  } 
-}
-``` 
----
-
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "action": "showPopup",
-  "params": {
-    "popupName": "somePopup",
-    "popupParameters": "hello"
-  } 
-}
-``` 
----
-Примеры ответов для асинхронной обработки
-
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "action": "showNotification",
-  "async": true,
-  "params": {
-    "text": "Документ подписывается. Ожидайте уведомления...",
-    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7"
-  }
-}
-``` 
----
-
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "action": "navigateTo",
-  "async": true,
-  "params": {
-    "url": "https://test.vendor.com/showStatus/072f8047-83dc-4374-8c22-73e965ffebf7",
-    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7"
-  }
-}
-``` 
----
-
-**Response:**
-
-Response 200
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "action": "showPopup",
-  "async": true,
-  "params": {
-    "popupName": "statusPopup",
-    "popupParameters": { 
-      "processId": "0a20070f-2fb6-4857-9158-3d7971531517"
-    },
-    "asyncProcessId": "0a20070f-2fb6-4857-9158-3d7971531517"
-  }
-}
-``` 
----
-
-**Response:**
-
-Response 400
-
-Content-Type: **application/json**
-
-> Body:
-
-```json
-{
-  "error": {
-    "code": 1234,
-    "errorMessage": "Необходимо заполнить склад в документе Перемещение"
-  } 
-}
-``` 
+### Обработка нажатия на кастомную кнопку
 
 Эндпоинт необходим для обработки нажатия на кастомную кнопку на странице документа МоегоСклада и должен иметь адрес: 
 
@@ -800,52 +503,147 @@ Content-Type: **application/json**
 Если решению для обработки действия требуется дополнительная информация о сотруднике, то ее необходимо запросить в JSON API через эндпоинты [получения информации о сотруднике](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sotrudnik-poluchit-sotrudnika) или [получения прав сотрудника](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sotrudnik-poluchit-informaciu-o-prawah-sotrudnika).
 При обработке действия в списках нужно учитывать массовый характер операции и [ограничения](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-ogranicheniq) JSON API.
 
-Подробнее о работе с кастомными кнопками читайте в разделе [Кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki).
+> Пример запроса при нажатии кнопки в Заказе покупателя
 
-### Обработка действия в сценарии
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
+  "buttonName": "button1",
+  "extensionPoint": "document.customerorder.edit",
+  "objectId": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
+  "user": {
+    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "role": "admin"
+  }
+}'
+```
 
-Пример запроса при срабатывании сценария на создание Заказа покупателя:
+> Пример запроса при нажатии кнопки в списке Контрагентов
 
-**Request:**
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
+  "buttonName": "button1",
+  "extensionPoint": "entity.counterparty.list",
+  "selected": [
+    {
+      "id": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
+      "type": "counterparty"
+    },
+    {
+      "id": "123c5489-6a17-48b7-9fe5-b2000eb80765",
+      "type": "counterparty"
+    }
+  ],
+  "user": {
+    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "role": "admin"
+  }
+}'
+```
 
-**POST**
-https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/scenario
+Примеры ответов
 
-> Body
+> Отобразить уведомление 
 
 ```json
 {
-  "actionName": "send_telegram_message",
-  "actionType": "ADD",
-  "objectId": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
-  "objectType": "CustomerOrder"
+  "action": "showNotification",
+  "params": {
+    "text": "Документ успешно подписан"
+  }
 }
 ```
----
-Примеры ответов
 
-**Response:**
+> Открыть новую страницу
 
-Response 200
+```json
+{
+  "action": "navigateTo",
+  "params": {
+    "url": "https://api.whatsapp.com/send/?phone=%2B79127775533"
+  }
+}
+```
 
----
+> Открыть модальное окно
 
-**Response:**
+```json
+{
+  "action": "showPopup",
+  "params": {
+    "popupName": "somePopup",
+    "popupParameters": "hello"
+  }
+}
+```
 
-Response 400
-
-Content-Type: **application/json**
-
-> Body:
+> Вернуть ошибку (Response code 400)
 
 ```json
 {
   "error": {
-    "code": 1244,
-    "errorMessage": "Не найден контакт для контрагента"
-  } 
+    "code": 1234,
+    "errorMessage": "Необходимо заполнить склад в документе Перемещение"
+  }
 }
-``` 
+```
+
+Примеры ответов для асинхронной обработки
+
+> Отобразить уведомление
+
+```json
+{
+  "action": "showNotification",
+  "async": true,
+  "params": {
+    "text": "Документ подписывается. Ожидайте уведомления...",
+    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7"
+  }
+}
+```
+
+> Открыть новую страницу
+
+```json
+{
+  "action": "navigateTo",
+  "async": true,
+  "params": {
+    "url": "https://test.vendor.com/showStatus/072f8047-83dc-4374-8c22-73e965ffebf7",
+    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7"
+  }
+}
+```
+
+> Открыть модальное окно
+
+```json
+{
+  "action": "showPopup",
+  "async": true,
+  "params": {
+    "popupName": "statusPopup",
+    "popupParameters": {
+      "processId": "0a20070f-2fb6-4857-9158-3d7971531517"
+    },
+    "asyncProcessId": "0a20070f-2fb6-4857-9158-3d7971531517"
+  }
+}
+```
+
+Подробнее о работе с кастомными кнопками читайте в разделе [Кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki).
+
+### Обработка действия в сценарии
 
 Эндпоинт необходим для обработки действий из сценариев МоегоСклада и должен иметь адрес: 
 
@@ -886,5 +684,40 @@ Content-Type: **application/json**
 В этом случае требуется заполнить в теле ответа объект `error` (со строковым полем `errorMessage` и опциональным полем `code`).
 + **5хх** — сетевая ошибка или система разработчика не смогла обработать запрос: будет выполнена еще одна попытка в соответствии с [политиками Retry](#/vendor-api/retry#2-mehanizm-retry).
 + **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, обработка будет считаться неуспешной и будет выполнена еще одна попытка.
+
+> Пример запроса при срабатывании сценария на создание Заказа покупателя
+
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/scenario"
+-H "Content-Type: application/json"
+-H "Accept: application/json"
+-H "Authorization: Bearer ..."
+-H "X_Lognex_RequestId: ..."
+-d '{
+  "actionName": "send_telegram_message",
+  "actionType": "ADD",
+  "objectId": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
+  "objectType": "CustomerOrder"
+}'
+```
+
+Примеры ответов
+
+> Response 200 (application/json). Успешный запрос
+
+```json
+<Response body is empty>
+```
+
+> Response 400 (application/json).
+
+```json
+{
+  "error": {
+    "code": 1244,
+    "errorMessage": "Не найден контакт для контрагента"
+  }
+}
+```
 
 Подробнее о работе со сценариями читайте в разделе [Действия в сценариях](#/developer-guide/scenario-actions#2-dejstviya-v-scenariyah).

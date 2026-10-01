@@ -354,14 +354,20 @@
     ]
   },
   {
-    "title": "Список последних изменений",
+    "title": "Список изменений",
     "level": 1,
     "folderPath": "./changelog/_changelog.md",
     "children": [
       {
-        "title": "Список последних изменений",
+        "title": "Нотификация в изменениях API",
         "level": 2,
         "folderPath": "./changelog/_changelog.md",
+        "children": []
+      },
+      {
+        "title": "Список последних изменений",
+        "level": 2,
+        "folderPath": "./changelog/_changelog_changes.md",
         "children": []
       }
     ]

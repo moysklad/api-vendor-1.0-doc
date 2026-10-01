@@ -40,9 +40,9 @@ SaaS-сервис управления торговлей [МойСклад](htt
 5. Если в решении нужны дополнительные поля для сущностей и/или документов, создайте их через JSON API 1.2 в рамках [активации решения](#/vendor-api/activation#2-process-aktivacii-resheniya-na-akkaunte). Если при этом процесс создания занимает более одной минуты, используйте асинхронную активацию с возвратом статуса **Activating**.
 
 6. Если решение нужно встроить в интерфейс МоегоСклада, то можно:
-  * добавить [виджет](#/developer-guide/widgets#2-vidzhety) решения. Для этого нужно реализовать страницу виджета и обновить [дескриптор](#/developer-guide/app-descriptor#2-deskriptor-resheniya), добавив тег `widgets`. 
-  * добавить [кастомную кнопку](#/developer-guide/custom-buttons#2-kastomnye-knopki). Для этого нужно реализовать [эндпоинт обработчика нажатия на кнопку в vendorApi](#/vendor-api/vendor-endpoints#3-obrabotka-nazhatiya-na-kastomnuyu-knopku) и обновить [дескриптор](#/developer-guide/app-descriptor#2-deskriptor-resheniya), добавив тег `buttons`.
-  * добавить [окно чатов](#/developer-guide/iframes#3-okno-chatov). Для этого нужно реализовать страницу чата и обновить [дескриптор](#/developer-guide/app-descriptor#2-deskriptor-resheniya), добавив тег `iframes`.
+    * добавить [виджет](#/developer-guide/widgets#2-vidzhety) решения. Для этого нужно реализовать страницу виджета и обновить [дескриптор](#/developer-guide/app-descriptor#2-deskriptor-resheniya), добавив тег `widgets`.
+    * добавить [кастомную кнопку](#/developer-guide/custom-buttons#2-kastomnye-knopki). Для этого нужно реализовать [эндпоинт обработчика нажатия на кнопку в vendorApi](#/vendor-api/vendor-endpoints#3-obrabotka-nazhatiya-na-kastomnuyu-knopku) и обновить [дескриптор](#/developer-guide/app-descriptor#2-deskriptor-resheniya), добавив тег `buttons`.
+    * добавить [окно чатов](#/developer-guide/iframes#3-okno-chatov). Для этого нужно реализовать страницу чата и обновить [дескриптор](#/developer-guide/app-descriptor#2-deskriptor-resheniya), добавив тег `iframes`.
 
 7. Решение может быть встроено в интерфейс мобильного приложения МоегоСклада. Для этого нужно реализовать страницу [мобильного окна](#/developer-guide/iframes#3-mobilnye-prilozheniya) и обновить тег `iframes` в [дескрипторе](#/developer-guide/app-descriptor#2-deskriptor-resheniya).
 

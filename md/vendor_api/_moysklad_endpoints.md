@@ -89,9 +89,9 @@ Rest-эндпоинты на стороне МоегоСклада позвол�
 > Пример запроса на получение статуса решения на аккаунте
 
 ```shell
-curl "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/status"     
--H "Accept: application/json"     
--H "Authorization: Bearer ..."  
+curl "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/status" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..."
 ```
 
 > Пример ответа
@@ -175,10 +175,10 @@ curl "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b
 > Пример запроса на изменение статуса решения на аккаунте
 
 ```shell
-curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/status"     
--H "Content-Type: application/json"
--H "Accept: application/json"    
--H "Authorization: Bearer ..."  
+curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/status" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
 -d '{
       "status": "Activating"
     }'
@@ -187,7 +187,7 @@ curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7
 > Response 200 (application/json).
 > Успешный запрос.
 
-```json
+```text
 <Response body is empty>
 ```
 
@@ -228,10 +228,10 @@ curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7
 > Пример запроса на изменение настроек лояльности решения на аккаунте
 
 ```shell
-curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty"     
--H "Content-Type: application/json"
--H "Accept: application/json"    
--H "Authorization: Bearer ..."  
+curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
 -d '{
     "url": "https://...",
     "token": "...",
@@ -242,7 +242,7 @@ curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7
 > Response 200 (application/json).
 > Успешный запрос.
 
-```json
+```text
 <Response body is empty>
 ```
 ### Частичное изменение настроек лояльности
@@ -280,10 +280,10 @@ curl -X PUT "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7
 > Пример запроса на изменение URL в настройках лояльности на аккаунте
 
 ```shell
-curl -X PATCH "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty"     
--H "Content-Type: application/json"
--H "Accept: application/json"    
--H "Authorization: Bearer ..."  
+curl -X PATCH "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/loyalty" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
 -d '{
     "url": "https://..."
 }'
@@ -292,7 +292,7 @@ curl -X PATCH "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48
 > Response 200 (application/json).
 > Успешный запрос.
 
-```json
+```text
 <Response body is empty>
 ```
 ### Получение контекста пользователя по одноразовому токену
@@ -401,9 +401,9 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/user" \
 > Пример запроса на получение контекста пользователя
 
 ```shell
-curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd272239c03bf3d9697f167699743292c"     
--H "Accept: application/json"     
--H "Authorization: Bearer ..."  
+curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd272239c03bf3d9697f167699743292c" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..."
 ```
 
 > Response 200 (application/json).
@@ -931,10 +931,10 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/context/1c14e98cd27223
 > Пример запроса на завершение асинхронной обработки
 
 ```shell
-curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/button/complete"     
--H "Content-Type: application/json"
--H "Accept: application/json"    
--H "Authorization: Bearer ..."  
+curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/button/complete" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
 -d '{
     "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7",
     "notification": {
@@ -948,7 +948,7 @@ curl -X POST "https://apps-api.moysklad.ru/api/vendor/1.0/apps/5f3c5489-6a17-48b
 > Response 200 (application/json).
 > Успешный запрос.
 
-```json
+```text
 <Response body is empty>
 ```
 ### Обработка ошибок на стороне МоегоСклада

@@ -660,6 +660,8 @@ curl -X GET --location "https://api.moysklad.ru/api/remap/1.2/entity/product/9e7
 }
 ```
 
+> Асинхронный ответ после завершения проверки
+
 ```json
 {
   "name": "ValidationFeedback",

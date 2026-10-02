@@ -57,9 +57,7 @@ Authorization: `Bearer <token> `
 
 Тип `NumericDate` соответствует JSON Number с количеством секунд от 1970-01-01T00:00:00Z UTC.
 
-```text
-JWT-header всегда такой:
-```
+> JWT-header всегда такой:
 
 ```json
 {
@@ -68,9 +66,7 @@ JWT-header всегда такой:
 }
 ```
 
-```text
-JWT-payload включает в себя следующие поля:
-```
+> JWT-payload включает в себя следующие поля:
 
 ```json
 {
@@ -117,9 +113,7 @@ Authorization: `Bearer <token>`
    maxTokenLifetime или поле "exp" отсутствует, в качестве "exp" используется _iat + maxTokenLifetime_. То есть:
    `effectiveExp = exp ? min(exp, iat + maxTokenLifetime) : iat + maxTokenLifetime`
 
-```text
-JWT-header может быть с указанием поля "typ":
-```
+> JWT-header может быть с указанием поля "typ":
 
 ```json
 {
@@ -128,9 +122,7 @@ JWT-header может быть с указанием поля "typ":
 }
 ```
 
-```text
-и без указания поля "typ":
-```
+> и без указания поля "typ":
 
 ```json
 {
@@ -138,10 +130,8 @@ JWT-header может быть с указанием поля "typ":
 }
 ```
 
-```text
-JWT-payload должен содержать следующие поля:
-(поле "exp" — опциональное, остальные — обязательные)
-```
+> JWT-payload должен содержать следующие поля:
+> (поле "exp" — опциональное, остальные — обязательные)
 
 ```json
 {

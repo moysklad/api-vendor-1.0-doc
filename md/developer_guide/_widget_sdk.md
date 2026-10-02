@@ -9,7 +9,7 @@
 
 Подробности и актуальные примеры смотрите в README репозитория.
 
-**Подключение**:
+> Подключение
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@moysklad/js-widget-sdk/dist/widget.min.js"></script>
@@ -20,7 +20,7 @@
 - с фиксацией мажорной версии: `https://cdn.jsdelivr.net/npm/@moysklad/js-widget-sdk@1/dist/widget.min.js`
 - с фиксацией конкретной версии: `https://cdn.jsdelivr.net/npm/@moysklad/js-widget-sdk@1.0.0/dist/widget.min.js`
 
-**Быстрый старт**:
+> Пример отображения стандартного диалога
 
 ```js
 const sdk = WidgetSDK.create({ debug: true });

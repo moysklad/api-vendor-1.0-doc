@@ -97,11 +97,11 @@ HTTP-заголовок `Content-Type: application/json`, смотрите пр�
 > Пример запроса при установке решения на аккаунт
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
@@ -129,11 +129,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример активации при возобновлении работы решения на аккаунте после поступления оплаты
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
@@ -161,11 +161,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример активации решения с блоком permissions (гибким набором прав)
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
@@ -193,11 +193,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример запроса при изменении тарифа подписки
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
@@ -216,11 +216,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример запроса при автопродлении тарифа подписки
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
@@ -239,11 +239,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример запроса при установке решения c Fiscal API на аккаунт
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "dummyaccount",
@@ -326,11 +326,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример деактивации решения при удалении с аккаунта
 
 ```shell
-curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
@@ -341,11 +341,11 @@ curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5
 > Пример деактивации платного решения при приостановке решения на аккаунте (при отсутствии оплаты решения)
 
 ```shell
-curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
@@ -355,7 +355,7 @@ curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5
 
 > Response 200 (application/json). Успешный запрос
 
-```json
+```text
 <Response body is empty>
 ```
 
@@ -381,9 +381,9 @@ curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5
 > Пример запроса на проверку статуса активации
 
 ```shell
-curl "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
+curl "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
 -H "X_Lognex_RequestId: ..."
 ```
 
@@ -410,11 +410,11 @@ URL для приёма дополнительных событий -
 > Пример события при изменении набора прав
 
 ```shell
-curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/event"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/event" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "appUid": "example-app.example-vendor",
   "accountName": "account-test",
@@ -506,11 +506,11 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 > Пример запроса при нажатии кнопки в Заказе покупателя
 
 ```shell
-curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "buttonName": "button1",
   "extensionPoint": "document.customerorder.edit",
@@ -525,11 +525,11 @@ curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c548
 > Пример запроса при нажатии кнопки в списке Контрагентов
 
 ```shell
-curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "buttonName": "button1",
   "extensionPoint": "entity.counterparty.list",
@@ -688,11 +688,11 @@ curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c548
 > Пример запроса при срабатывании сценария на создание Заказа покупателя
 
 ```shell
-curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/scenario"
--H "Content-Type: application/json"
--H "Accept: application/json"
--H "Authorization: Bearer ..."
--H "X_Lognex_RequestId: ..."
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/scenario" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
 -d '{
   "actionName": "send_telegram_message",
   "actionType": "ADD",
@@ -705,7 +705,7 @@ curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c548
 
 > Response 200 (application/json). Успешный запрос
 
-```json
+```text
 <Response body is empty>
 ```
 

@@ -4,7 +4,7 @@ Rest-эндпоинты на стороне МоегоСклада позвол�
 
 Базовый URL REST-эндпоинтов со стороны МоегоСклада (далее — `BASE-ENDPOINT`):
 
-[https://apps-api.moysklad.ru/api/vendor/1.0](https://apps-api.moysklad.ru/api/vendor/1.0)
+`https://apps-api.moysklad.ru/api/vendor/1.0`
 
 При запросах к API обязательно нужно указать в HTTP-заголовке запроса **Accept-Encoding** формат сжатия содержимого — **gzip**. Если указан другой формат, возвращается ошибка 415 Unsupported Media Type (Неподдерживаемый тип данных).
 

@@ -269,7 +269,7 @@
 
 ### 19-09-2023
 **Изменено**
-- В [дескрипторе решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) в качестве значения блока `access.resource` можно указывать [https://api.moysklad.ru/api/remap/1.2](https://api.moysklad.ru/api/remap/1.2).
+- В [дескрипторе решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) в качестве значения блока `access.resource` можно указывать `https://api.moysklad.ru/api/remap/1.2`.
 
 ### 06-09-2023
 **Добавлено**
@@ -277,7 +277,7 @@
 
 ### 30-08-2023
 **Изменено**
-- Базовый URL REST-эндпоинтов vendor API (`MARKETPLACE-ENDPOINT`) сменился на [https://apps-api.moysklad.ru/api/vendor/1.0](https://apps-api.moysklad.ru/api/vendor/1.0).
+- Базовый URL REST-эндпоинтов vendor API (`MARKETPLACE-ENDPOINT`) сменился на `https://apps-api.moysklad.ru/api/vendor/1.0`.
 - Для запросов к vendor API необходимо использовать сжатие (заголовок `Accept-Encoding`)
 - URL личного кабинета разработчика сменился на [https://apps.moysklad.ru/cabinet](https://apps.moysklad.ru/cabinet).
 

@@ -26,21 +26,3 @@ jobs:
 
       - name: Check external links
         run: python3 scripts/check-doc-links.py --markdown-dir md
-
-  deploy:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: check-doc-links
-
-    steps:
-      - name: Trigger Vendor documentation deployment
-        env:
-          GITLAB_TRIGGER_TOKEN: ${{ secrets.GITLAB_TRIGGER_TOKEN }}
-        run: |
-          curl --fail --request POST \
-            --form "token=${GITLAB_TRIGGER_TOKEN}" \
-            --form "ref=master" \
-            --form "variables[deploy_target]=vendor-api" \
-            --form "variables[source_sha]=${GITHUB_SHA}" \
-            --form "variables[deploy_source]=github" \
-            "https://git.company.lognex/api/v4/projects/177/trigger/pipeline"

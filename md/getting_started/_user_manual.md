@@ -6,8 +6,8 @@
 
 - Упаковать файлы в zip-архив размером не более 3 Мб
 - В корне архива файл `index.html`. Других HTML-файлов в архиве быть не должно
-- Для оглавления: заголовки разделов тегами `<h2>` и в `head` подключён [js-скрипт](https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-manual.js)
-- Для стилей: в `head` подключён [файл стилей](https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-manual.css)
+- Для оглавления: заголовки разделов тегами `<h2>` и в `head` подключён js-скрипт `https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-manual.js`
+- Для стилей: в `head` подключён файл стилей `https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-manual.css`
 - Картинки только PNG, JPEG, GIF, WEBP, SVG; могут лежать в корне архива или во вложенных папках
 
 **Рекомендуется**

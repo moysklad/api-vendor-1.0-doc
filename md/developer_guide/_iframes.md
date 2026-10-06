@@ -31,7 +31,7 @@
 * данные сообщения должны содержать свойство `height` — высоту страницы, которая сейчас отображается, в пикселях.
 
 Для того чтобы не реализовывать это поведение самостоятельно, можно подключить
-следующий [js скрипт](https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-3.js) на свою страницу.
+js-скрипт `https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-iframe-expand-3.js` на свою страницу.
 
 > Пример шаблона страницы главного iframe
 

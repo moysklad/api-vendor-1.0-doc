@@ -1,8 +1,15 @@
 services:
-
-  app:
-    build: .
+  docs:
+    image: docker.infra.lognex/react-doc-engine:AS-4800-482141
     ports:
-      - 4567:4567
+      - "4567:4567"
+    environment:
+      DOC_CONTENT_ID: vendor-api
     volumes:
-      - .:/usr/src/app
+      - ./md:/src/assets/md
+      - ./config.json:/src/assets/config.json:ro
+      - ./hash-redirect-map.json:/src/assets/hash-redirect-map.json:ro
+      - ./site.json:/src/assets/site.json:ro
+      - ./images:/public/images:ro
+      - ./scripts/serve-docs.sh:/serve-docs.sh:ro
+    command: ["sh", "/serve-docs.sh"]

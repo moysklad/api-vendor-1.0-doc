@@ -1,0 +1,801 @@
+## Дескриптор решения
+
+Дескриптор решения — XML-структура, которая описывает технические параметры встраивания/интеграции решения
+разработчика в МойСклад.
+
+Содержимое дескриптора должно соответствовать версии XSD-схемы.
+Актуальной версией считается [v2](https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd).
+
+### История версий XSD-схемы дескриптора
+
+| Версия | Поддерживается | Описание                                                                                                                                                        | Разрешенное содержимое дескриптора                                 | Поддерживаемые типы решений |
+|-------|:--------------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|-----------------------------|
+| 1.0.0 |       ⬜        | Серверные и простые iFrame-решения                                                                                                                              | vendorApi, access, iframe                                          | iFrame, Серверные           |
+| 1.1.0 |       ⬜        | Расширение iFrame (тег expand)                                                                                                                                  | vendorApi, access, iframe(c expand)                                | iFrame, Серверные           |
+| [v2](https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd) |       ✅        | [Виджеты](#/developer-guide/widgets#2-vidzhety) в документах и сущностях. Кастомные модальные окна. Гибкие права решений. Дополнительные и сервисные протоколы. | vendorApi, access(с permissions), iframe, iframes, widgets, popups | Серверные                   |
+
+### Содержимое дескриптора решения
+
+В актуальной версии (v2) дескриптора решения допустимы следующие блоки:
+
+| Блок       | Назначение                                                               | Требует наличия других блоков | Обязательный |
+|------------|--------------------------------------------------------------------------|-------------------------------|--------------|
+| vendorApi  | Описывает взаимодействие по Vendor API                                   | Нет                           | Да           |
+| access     | Описывает требуемый доступ решения к ресурсам пользовательского аккаунта | Требует vendorApi             | Да           |
+| loyaltyApi | Указывает на то, что решение поддерживает Loyalty API                    | Нет                           | Нет          |
+| fiscalApi  | Указывает на то, что решение поддерживает Fiscal API                     | Нет                           | Нет          |
+| qrPayApi   | Указывает на то, что решение поддерживает QrPay API                      | Нет                           | Нет          |
+| iframes    | Описывает окна решения                                                   | Нет                           | Нет          |
+| iframe     | Описывает главный iframe решения (устарел)                               | Нет                           | Нет          |
+| widgets    | Описывает виджеты                                                        | Нет                           | Нет          |
+| popups     | Описывает кастомные модальные окна                                       | Нет                           | Нет          |
+| buttons    | Описывает кастомные кнопки                                               | Нет                           | Нет          |
+| scenario   | Описывает действия в сценариях                                           | Нет                           | Нет          |
+
+Порядок расположения этих блоков относительно друг друга в дескрипторе может быть произвольным.
+
+> Пример
+
+```xml
+<ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2    
+                    https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>
+    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+    <scope>custom</scope>
+    <permissions>
+      <viewDashboard/>
+      <customerOrder>
+        <view/>
+        <create/>
+        <update/>
+      </customerOrder>
+    </permissions>
+  </access>
+</ServerApplication>
+```
+
+### Блок vendorApi
+
+В теге **vendorApi/endpointBase** указывается базовый URL эндпоинта на стороне разработчика, к которому будет обращаться
+МойСклад. В URL допускается использование только протокола HTTPS.
+
+Для получения полного адреса конкретного эндпоинта Vendor API на стороне разработчика к базовому URL добавляется суффикс
+`/api/moysklad/vendor/1.0` и путь эндпоинта. Шаблон формирования полного URL ресурса в общем случае такой:
+
+`{endpointBase}/api/moysklad/vendor/1.0/{endpointPath}/…`
+
+Для эндпоинта активации/деактивации решений на аккаунте шаблон следующий (endpointPath = apps):
+
+`{endpointBase}/api/moysklad/vendor/1.0/apps/{appId}/{accountId}`
+
+Например, если:
+
++ endpointBase = example.com/dummy-app
++ appId = 5f3c5489-6a17-48b7-9fe5-b2000eb807fe
++ accountId = f088b0a7-9490-4a57-b804-393163e7680f
++ endpointPath = apps
+
+то полный URL ресурса на стороне разработчика, к которому будет выполнять запросы МойСклад при активации и деактивации
+решения на аккаунте, будет следующим:
+
+`https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f`
+
+В случае отсутствия блока vendorApi в дескрипторе не выполняется активация и деактивация решения на серверах
+разработчика.
+
+> Пример дескриптора с заполненным vendorApi
+
+```xml
+<ServerApplication ...>
+  <vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+  </vendorApi>
+  <access>...</access>
+</ServerApplication>
+```
+
+#### Блок дополнительных событий
+
+В блоке vendorApi опционально можно указать поддерживаемые разработчиком дополнительные события (additionalEvents).
+
+Какие события реализованы:
+
+* updatePermissions - Событие изменения прав установки, подробнее см. в разделе [События](#/vendor-api/additional-events#3-sobytie-izmeneniya-prav-ustanovki-updatepermissions)
+
+> Пример блока vendorApi с событием обновления прав
+
+```xml
+<vendorApi>
+    <endpointBase>https://example.com/dummy-app</endpointBase>
+    <additionalEvents>
+        <updatePermissions/>
+    </additionalEvents>
+</vendorApi>
+```
+
+### Блок access
+
+Требуется для серверных решений, которые хотят получить доступ по JSON API к ресурсам аккаунта.
+В случае отсутствия этого блока в дескрипторе решения при установке на аккаунт решению не выдаются никакие доступы
+к ресурсам.
+Наличие блока **access** требует наличия блока **vendorApi** для передачи токена к ресурсам аккаунта при активации
+решения по Vendor API.
+
+В теге **access/resource** указывается ресурс, к которому решению нужен доступ.
+На текущий момент для ресурса возможно только одно значение: `https://api.moysklad.ru/api/remap/1.2`
+
+В теге **access/scope** указывается требуемый уровень доступа.
+Для него на текущий момент доступно два значения: `admin` и `custom`.
+
+- Если указан уровень `admin`, решение будет работать с правами администратора аккаунта.
+- Если указан уровень `custom`, решение получит доступ только к отчетам, документам и сущностям,
+  перечисленным в теге **permissions**.
+
+В теге **access/permissions** указываются требуемые пермиссии.
+Данный тег обязателен для уровня доступа со значением `custom`.
+
+Перечисленные в теге **permissions** права доступа делятся на три группы:
+
+* **Пользовательские** — доступ к отчётам в МоемСкладе.
+* **Специальные** — права для работы с вебхуками и дополнительными полями (подробнее: [вебхуки](#/developer-guide/webhooks#2-rabota-s-vebhukami), [доп. поля](#/developer-guide/custom-fields#2-rabota-s-dopolnitelnymi-polyami)).
+* **Сущностей** — права к сущностям и документам с уровнями доступа (`view`, `create`, `update`, `delete`, `print`, `approve`).
+
+Полный перечень поддерживаемых пермиссий и допустимых действий указан в таблицах ниже.
+
+**Поддерживаемые пермиссии в дескрипторе решения**
+
+Пользовательские пермиссии
+
+| Название                         | Тег в дескрипторе             | Описание                                            |
+|----------------------------------|-------------------------------|-----------------------------------------------------|
+| Просмотр дашборда                | `<viewDashboard/>`            | Доступ к показателям dashboard                      |
+| Просмотр аудита                  | `<viewAudit/>`                | Доступ к истории действий                           |
+| Просмотр прибыльности            | `<viewSaleProfit/>`           | Прибыль по товарам, сотрудникам, контрагентам и пр. |
+| Просмотр прибыли и убытков       | `<viewProfitAndLoss/>`        | Используется в отчёте о прибыли                     |
+| Просмотр себестоимости и прибыли | `<viewProductCostAndProfit/>` | Цена закупки и себестоимость в документах           |
+| Просмотр CRM-показателей         | `<viewCompanyCRM/>`           | Показатели CRM для контрагентов                     |
+| Просмотр оборотов                | `<viewTurnover/>`             | Доступ к отчёту об оборотах                         |
+| Видеть остатки денег             | `<viewMoneyDashboard/>`       | Остатки на счетах и движение средств                |
+| Просматривать остатки по товарам | `<viewStockReport/>`          | Просматривать отчеты по остаткам                    |
+| Просматривать взаиморасчеты      | `<viewCustomerBalanceList/>`  | Просматривать отчеты по взаиморасчетам              |
+
+Специальные пермиссии
+
+| Название                             | Тег в дескрипторе            | Описание                                                 |
+|--------------------------------------|------------------------------|----------------------------------------------------------|
+| Управление своими вебхуками          | `<useOwnWebhooks/>`          | Видеть/создавать/обновлять/удалять только свои вебхуки   |
+| Управление всеми вебхуками           | `<useAllWebhooks/>`          | Полный доступ ко всем вебхукам                           |
+| Управление своими доп. полями        | `<useOwnAttributeMetadata/>` | Видеть/создавать/обновлять/удалять только свои доп. поля |
+| Управление всеми доп. полями         | `<useAllAttributeMetadata/>` | Полный доступ ко всем дополнительным полям               |
+
+Пермиссии сущностей по уровням доступа
+
+| Название сущности                       | Техническая сущность      | Тип        | Тег в дескрипторе                                            |
+|-----------------------------------------|---------------------------|------------|--------------------------------------------------------------|
+| Бонусные баллы                          | bonusTransaction          | OPERATION  | `<bonusTransaction>...</bonusTransaction>`                   |
+| Валюты                                  | currency                  | BASE       | `<currency>...</currency>`                                   |
+| Внесения                                | retailDrawerCashIn        | OPERATION  | `<retailDrawerCashIn>...</retailDrawerCashIn>`               |
+| Внутренние заказы                       | internalOrder             | OPERATION  | `<internalOrder>...</internalOrder>`                         |
+| Возврат покупателя                      | salesReturn               | OPERATION  | `<salesReturn>...</salesReturn>`                             |
+| Возвраты                                | retailSalesReturn         | OPERATION  | `<retailSalesReturn>...</retailSalesReturn>`                 |
+| Возвраты поставщикам                    | purchaseReturn            | OPERATION  | `<purchaseReturn>...</purchaseReturn>`                       |
+| Возвраты предоплат                      | prepaymentReturn          | OPERATION  | `<prepaymentReturn>...</prepaymentReturn>`                   |
+| Входящий платеж                         | paymentIn                 | OPERATION  | `<paymentIn>...</paymentIn>`                                 |
+| Выданный отчет комиссионера             | commissionReportOut       | OPERATION  | `<commissionReportOut>...</commissionReportOut>`             |
+| Выплаты                                 | retailDrawerCashOut       | OPERATION  | `<retailDrawerCashOut>...</retailDrawerCashOut>`             |
+| Выполнение этапов                       | productionStageCompletion | DICTIONARY | `<productionStageCompletion>...</productionStageCompletion>` |
+| Договоры                                | contract                  | DICTIONARY | `<contract>...</contract>`                                   |
+| Единицы измерения                       | uom                       | BASE       | `<uom>...</uom>`                                             |
+| Заказы на производство                  | processingOrder           | OPERATION  | `<processingOrder>...</processingOrder>`                     |
+| Заказы покупателей                      | customerOrder             | OPERATION  | `<customerOrder>...</customerOrder>`                         |
+| Заказы поставщикам                      | purchaseOrder             | OPERATION  | `<purchaseOrder>...</purchaseOrder>`                         |
+| Инвентаризации                          | inventory                 | DICTIONARY | `<inventory>...</inventory>`                                 |
+| Исходящий платеж                        | paymentOut                | OPERATION  | `<paymentOut>...</paymentOut>`                               |
+| Каналы продаж                           | salesChannel              | BASE       | `<salesChannel>...</salesChannel>`                           |
+| Контрагенты                             | company                   | DICTIONARY | `<company>...</company>`                                     |
+| Корректировки взаиморасчетов            | counterpartyAdjustment    | DICTIONARY | `<counterpartyAdjustment>...</counterpartyAdjustment>`       |
+| Начисления зарплаты                     | payroll                   | OPERATION  | `<payroll>...</payroll>`                                     |
+| Оприходования                           | enter                     | OPERATION  | `<enter>...</enter>`                                         |
+| Отгрузки                                | demand                    | OPERATION  | `<demand>...</demand>`                                       |
+| Перемещения                             | move                      | OPERATION  | `<move>...</move>`                                           |
+| Полученный отчет комиссионера           | commissionReportIn        | OPERATION  | `<commissionReportIn>...</commissionReportIn>`               |
+| Пользовательские справочники            | customDictionary          | BASE       | `<customDictionary>...</customDictionary>`                   |
+| Элементы пользовательских справочников  | customEntity              | BASE       | `<customEntity>...</customEntity>`                           |
+| Прайс-листы                             | priceList                 | OPERATION  | `<priceList>...</priceList>`                                 |
+| Предоплаты                              | prepayment                | OPERATION  | `<prepayment>...</prepayment>`                               |
+| Приемки                                 | supply                    | OPERATION  | `<supply>...</supply>`                                       |
+| Приходный ордер                         | cashIn                    | OPERATION  | `<cashIn>...</cashIn>`                                       |
+| Продажи                                 | retailDemand              | OPERATION  | `<retailDemand>...</retailDemand>`                           |
+| Проекты                                 | project                   | BASE       | `<project>...</project>`                                     |
+| Производственные задания                | productionTask            | OPERATION  | `<productionTask>...</productionTask>`                       |
+| Расходный ордер                         | cashOut                   | OPERATION  | `<cashOut>...</cashOut>`                                     |
+| Склады                                  | warehouse                 | BASE       | `<warehouse>...</warehouse>`                                 |
+| Смены                                   | retailShift               | DICTIONARY | `<retailShift>...</retailShift>`                             |
+| Сотрудники                              | employee                  | BASE       | `<employee>...</employee>`                                   |
+| Списания                                | loss                      | OPERATION  | `<loss>...</loss>`                                           |
+| Ставки НДС                              | taxRate                   | BASE       | `<taxRate>...</taxRate>`                                     |
+| Статьи расходов                         | expenseItem               | BASE       | `<expenseItem>...</expenseItem>`                             |
+| Страны                                  | country                   | BASE       | `<country>...</country>`                                     |
+| Счета покупателям                       | invoiceOut                | OPERATION  | `<invoiceOut>...</invoiceOut>`                               |
+| Счета поставщиков                       | invoiceIn                 | OPERATION  | `<invoiceIn>...</invoiceIn>`                                 |
+| Счета-фактуры выданные                  | factureOut                | OPERATION  | `<factureOut>...</factureOut>`                               |
+| Счета-фактуры полученные                | factureIn                 | OPERATION  | `<factureIn>...</factureIn>`                                 |
+| Техкарты                                | processingPlan            | BASE       | `<processingPlan>...</processingPlan>`                       |
+| Техоперации                             | processing                | BASE       | `<processing>...</processing>`                               |
+| Техпроцессы                             | processingProcess         | BASE       | `<processingProcess>...</processingProcess>`                 |
+| Товары и услуги                         | good                      | DICTIONARY | `<good>...</good>`                                           |
+| Точки продаж                            | retailStore               | BASE       | `<retailStore>...</retailStore>`                             |
+| Этапы                                   | processingStage           | BASE       | `<processingStage>...</processingStage>`                     |
+| Юр. лица                                | myCompany                 | BASE       | `<myCompany>...</myCompany>`                                 |
+
+Подробнее о пермиссиях в МоемСкладе смотрите
+в [документации JSON API](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sotrudnik-rabota-s-prawami-sotrudnika).
+
+Примечания:
+
+* Имеются два ограничения на сочетания пермиссий сущностей:
+  * уровень доступа `<view/>` необходим, если есть другие уровни;
+  * уровень доступа `<update/>` необходим, если требуется уровень `<delete/>`.
+* При установке решения ему будет автоматически предоставлено право на просмотр справочника
+  Валют (`<currency><view/></currency>`).
+* Право на просмотр пользовательских справочников (`<customDictionary><view/></customDictionary>`) фактически не используется, так как получить этот список 
+  в JSON API можно только через [метаданные настроек компании](https://dev.moysklad.ru/doc/api/remap/1.2/#/dictionaries/companysettings#3-poluchit-metadannye-nastroek-kompanii).
+* В настоящий момент не поддерживается пермиссия для работы с Задачами (`script`).
+  Решение, которое хочет получить доступ к ним, должно работать с правами администратора.
+* В настоящий момент не поддерживаются пермиссии для работы с сущностями Маркировки:
+  `crptCancellation`, `crptPackageCreation`, `crptPackageItemRemoval`, `crptPackageDisaggregation`, `GTINList`, `trackingCodeList`.
+
+> Пример заполнения блока **access** с указанием прав Администратора
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>
+    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+    <scope>admin</scope>
+  </access>
+</ServerApplication>
+
+```
+
+> Пример заполнения блока **access** с явным перечислением пермиссий
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>
+    <resource>https://api.moysklad.ru/api/remap/1.2</resource>
+    <scope>custom</scope>
+    <permissions>
+      <viewDashboard/>
+      <viewAudit/>
+      <viewProductCostAndProfit/>
+      <useOwnWebhooks/>
+      <useAllAttributeMetadata/>      
+      <customerOrder>
+        <view/>
+        <create/>
+        <update/>
+        <delete/>
+        <approve/>
+        <print/>
+      </customerOrder>
+      <company>
+        <view/>
+        <create/>
+      </company>
+    </permissions>
+  </access>
+</ServerApplication>
+```
+
+### Блок loyaltyApi
+
+Тег **loyaltyApi** является опциональным и указывается пустым. Он информирует МойСклад о том, что решение
+поддерживает [Loyalty API](https://dev.moysklad.ru/doc/api/loyalty/1.0/#scenarij-raboty). Настройки лояльности для
+решения, установленного на аккаунте, могут быть переданы посредством эндпоинта **/loyalty** Vendor API. Подробнее в
+разделе [REST эндпоинты на стороне МоегоСклада](#/vendor-api/moysklad-endpoints#2-rest-endpointy-na-storone-moegosklada).
+
+> Пример дескриптора с поддержкой Loyalty API
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <loyaltyApi/>
+</ServerApplication>
+```
+
+### Блок fiscalApi
+
+Тег **fiscalApi** является опциональным. Он информирует МойСклад о том, что решение является провайдером операции фискализации для розничных продаж.
+
+В теге **fiscalApi/operationTypes** указываются поддерживаемые типы операций.
+В теге **fiscalApi/paymentTypes** указываются поддерживаемые типы оплат.
+
+Полный список поддерживаемых операций см. в [документации FiscalApi](https://dev.moysklad.ru/doc/api/fiscal/1.0/#podderzhiwaemye-operacii).
+
+> Пример дескриптора с поддержкой Fiscal API
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <fiscalApi>
+    <endpointBase>https://vendor.com/api/fiscal</endpointBase>
+    <operationTypes>
+      <openShift/>
+      <closeShift/>
+      <retailDemand/>
+      <prepayment/>
+      <retailSalesReturn/>
+      <retailDrawerCashIn/>
+      <retailDrawerCashOut/>
+      <prepaymentReturn/>
+      <advance/>
+      <advanceReturn/>
+    </operationTypes>
+    <paymentTypes>
+      <cash/>
+      <card/>
+      <qr/>
+      <cashCard/>
+      <advance/>
+      <prepaymentCash/>
+      <prepaymentCard/>
+      <prepaymentQr/>
+    </paymentTypes>
+  </fiscalApi>
+</ServerApplication>
+```
+
+### Блок qrPayApi
+
+Тег **qrPayApi** является опциональным. Он информирует МойСклад о том, что решение является провайдером оплаты по QR-коду.
+
+В теге **qrPayApi/paymentProvider** указываются способы оплаты, поддерживаемые приложением.
+В теге **qrPayApi/paymentProvider/qrType** указываются поддерживаемые типы QR.
+
+Полный список возможных значений qrType см. в [документации QRPay API](https://dev.moysklad.ru/doc/api/qr-pay/1.0/#kak-zapolnit-deskriptor).
+
+> Пример дескриптора с поддержкой QrPayAPI
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <qrPayApi>
+    <paymentProvider>
+        <name>Some vendor's first payment provider</name>
+        <qrType>MERCHANT_GENERATED_DYNAMIC</qrType>
+        <endpointBase>https://some-vendor.ru/api/1/root</endpointBase>
+    </paymentProvider>
+    <paymentProvider>
+        <name>Some vendor's second payment provider</name>
+        <qrType>MERCHANT_GENERATED_DYNAMIC</qrType>
+        <endpointBase>https://some-vendor.ru/api/2/root</endpointBase>
+    </paymentProvider>
+  </qrPayApi>
+</ServerApplication>
+```
+
+### Блок iframes
+
+Служит для задания списка окон решения, которые будут появляться на страницах МоегоСклада.
+
+- Чтобы задать тип окна, используйте атрибут `iframe.type` (обязательный). В настоящий момент может принимать одно из трех значений: `main`, `chat`, `mobile`. Для каждого типа может быть указано не более одного окна.
+- Чтобы задать URL, по которому будет загружаться содержимое iframe, используйте атрибут `iframe.sourceUrl` (обязательный). В URL допускается использование только протокола HTTPS.
+- Чтобы задать дополнительные протоколы, которые будут использоваться в iframe, используйте тег `uses` (опциональный). В настоящий момент поддерживается только для типа `main`. Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
+- Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
+  система при загрузке окна передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
+  в URL не передается и контекст пользователя следует получать по
+  [протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Подробнее про [окна решений](#/developer-guide/iframes#2-okna-iframes).
+
+> Пример дескриптора с заполненным блоком iframes
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <iframes>
+    <iframe type="main" sourceUrl="https://example.com/dummy-app/main.html" useContextKey="false">
+      <uses>
+        <good-folder-selector/>
+        <user-context/>
+      </uses>
+    </iframe>
+    <iframe type="chat" sourceUrl="https://example.com/dummy-app/chat.html"/>
+    <iframe type="mobile" sourceUrl="https://example.com/dummy-app/mobile.html"/>
+  </iframes>
+    
+</ServerApplication>
+```
+
+### Блок iframe
+
+В теге **iframe/sourceUrl** указывается URL, по которому будет загружаться содержимое главного iframe внутри UI
+МоегоСклада. В URL допускается использование только протокола HTTPS.
+
+В теге **iframe/expand** указывается `boolean` значение, которое должно быть установлено в true, 
+если содержимое не умещается в минимальную допустимую высоту окна (768px).
+
+Тег **uses** — опциональный. Предназначен для сервисных протоколов, используемых iframe. 
+Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
+
+Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
+система при загрузке iframe передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
+в URL не передается и контекст пользователя следует получать по
+[протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Данный блок считается устаревшим. Вместо него следует использовать [блок **iframes**](#/developer-guide/app-descriptor#3-blok-iframes).
+
+> Пример дескриптора с заполненным блоком iframe
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <iframe useContextKey="false">
+    <sourceUrl>https://example.com/dummy-app/iframe.html</sourceUrl>
+    <expand>true</expand>
+  </iframe>
+</ServerApplication>
+```
+
+### Блок widgets
+
+Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
+система при загрузке виджета передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
+в URL не передается и контекст пользователя следует получать по
+[протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Сейчас доступны следующие точки расширения:
+
+- **entity.counterparty.edit** — карточка Контрагента
+- **entity.product.edit** — карточка Товара
+- **entity.variant.edit** — карточка Модификации
+- **entity.service.edit** — карточка Услуги
+- **entity.bundle.edit** — карточка Комплекта
+- **entity.productfolder.edit** — карточка Группы товаров
+- **document.customerorder.create** — новый документ Заказ покупателя (до первого сохранения)
+- **document.customerorder.edit** — документ Заказ покупателя
+- **document.demand.create** — новый документ Отгрузка (до первого сохранения)
+- **document.demand.edit** — документ Отгрузка
+- **document.invoiceout.create** — новый документ Счет покупателю (до первого сохранения)
+- **document.invoiceout.edit** — документ Счет покупателю
+- **document.invoicein.create** — новый документ Счет поcтавщика (до первого сохранения)
+- **document.invoicein.edit** — документ Счет поcтавщика
+- **document.processingorder.edit** — документ Заказ на производство
+- **document.purchaseorder.create** — новый документ Заказ поставщику (до первого сохранения)
+- **document.purchaseorder.edit** — документ Заказ поставщику
+- **document.supply.create** — новый документ Приемка (до первого сохранения)
+- **document.supply.edit** — документ Приемка
+- **document.paymentin.edit** — документ Входящий платеж
+- **document.paymentout.edit** — документ Исходящий платеж
+- **document.cashin.edit** — документ Приходный ордер
+- **document.cashout.edit** — документ Расходный ордер
+- **document.move.create** — новый документ Перемещение (до первого сохранения)
+- **document.move.edit** — документ Перемещение
+- **document.loss.create** — новый документ Списание (до первого сохранения)
+- **document.loss.edit** — документ Списание
+- **document.enter.create** — новый документ Оприходование (до первого сохранения)
+- **document.enter.edit** — документ Оприходование
+- **document.internalorder.create** — новый документ Внутренний заказ (до первого сохранения)
+- **document.internalorder.edit** — документ Внутренний заказ
+- **document.inventory.create** — новый документ Инвентаризация (до первого сохранения)
+- **document.inventory.edit** — документ Инвентаризация
+- **document.purchasereturn.edit** — документ Возврат поставщику
+- **document.salesreturn.create** — новый документ Возврат покупателя
+- **document.salesreturn.edit** — документ Возврат покупателя
+- **document.retaildemand.create** — новый документ Розничная продажа
+- **document.retaildemand.edit** — документ Розничная продажа
+- **document.retailsalesreturn.edit** — документ Розничный возврат
+- **document.retaildrawercashin.edit** — документ Внесение денег
+- **document.retaildrawercashout.edit** — документ Выплата денег
+- **document.emissionorder.edit** — документ Заказ кодов маркировки
+
+В Инвентаризации виджеты поддерживаются в документе по складам и не поддерживаются в Инвентаризации с ячейками.
+
+Сначала необходимо определить в блоке **widgets** точку расширения — указать страницу, где будет расположен виджет.
+
+В одном дескрипторе может быть указано несколько точек расширения, то есть одно решение сможет создать
+сразу несколько виджетов на разных страницах. В то же время для решения действует правило: одна страница — один
+виджет. То есть, в дескрипторе может быть указано только по
+одной точке расширения каждого типа.
+
+Тем не менее в итоге на одной странице может оказаться несколько виджетов (от разных решений).
+
+Список тегов для точек расширения:
+
+Тег **sourceUrl** — обязательный. Содержит URL, по которому загружается код виджета в iframe.
+В URL допускается использование только протокола HTTPS.
+
+Тег **height** — обязательный. В теге **height/fixed** задается фиксированная высота виджета
+в пикселях, в формате `150px`. 
+
+Виджет можно скрыть, установив `height/fixed = 0px`. Скрытые виджеты не отображаются на страницах МоегоСклада, но могут использовать все допустимые [протоколы](#/developer-guide/widgets#3-protokoly-vidzhetov).
+
+> Блок widgets с точками расширения в карточке Контрагента и документе Заказ покупателя
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <widgets>
+    <entity.counterparty.edit>
+      <sourceUrl>https://example.com/dummy-app/widget-counterparty.php</sourceUrl>
+      <height>
+        <fixed>200px</fixed>
+      </height>
+      <supports>
+        <open-feedback/>
+      </supports>
+    </entity.counterparty.edit>
+  
+    <document.customerorder.create>
+      <sourceUrl>https://example.com/dummy-app/widget-customerorder-validation.php</sourceUrl>
+      <height>
+        <!-- Скрытый виджет-->
+        <fixed>0px</fixed>
+      </height>
+      <supports>
+        <change-handler>
+          <validation-feedback/>
+        </change-handler>
+      </supports>
+    </document.customerorder.create>
+  
+    <document.customerorder.edit useContextKey="false">
+      <sourceUrl>https://example.com/dummy-app/widget-customerorder.php</sourceUrl>
+      <height>
+        <fixed>50px</fixed>
+      </height>
+      <uses>
+        <good-folder-selector/>
+        <standard-dialogs/>
+        <navigation-service/>
+        <user-context/>
+      </uses>
+    </document.customerorder.edit>
+  </widgets>
+</ServerApplication>
+```
+
+### Блок дополнительных протоколов (supports)
+
+Блок **supports** — опциональный. Предназначен для дополнительных протоколов, поддерживаемых
+виджетом. На данный момент в нем можно указать протоколы:
+
+- **open-feedback** — при открытии экрана обеспечивает скрытие содержимого виджета до явного уведомления от виджета о
+  готовности.
+  Параметры у протокола отсутствуют.
+- **save-handler** — при сохранении сущности или объекта позволяет уведомить об этом виджет. Параметры у протокола
+  отсутствуют.
+- **dirty-state** — при наличии несохраненных изменений в виджете позволяет отобразить
+  диалог подтверждения сохранения изменений. Параметры у протокола отсутствуют.
+- **change-handler** — при изменении несохраненного состояния объекта позволяет уведомить об этом виджет, отправляя
+  текущее состояние объекта. Параметры:
+  - **validation-feedback** — виджет поддерживает протокол валидации. Хост-окно будет ожидать от виджета
+    сообщение `ValidationFeedback` в ответ на сообщение `Change`.
+- **update-provider** — позволяет менять текущее состояние объекта отправляя сообщение `UpdateRequest` из виджета.
+  Параметры у протокола отсутствуют.
+
+### Доступность дополнительных протоколов в зависимости от точек встраивания
+
+| Точка встраивания                   | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider |
+|:------------------------------------|:-------------:|:------------:|:-----------:|:--------------:|:-------------------:|:---------------:|
+| _entity.counterparty.edit_          |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _entity.product.edit_               |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _entity.variant.edit_               |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _entity.service.edit_               |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _entity.bundle.edit_                |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _entity.productfolder.edit_         |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.customerorder.create_     |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.customerorder.edit_       |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.demand.create_            |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.demand.edit_              |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.invoiceout.create_        |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.invoiceout.edit_          |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.invoicein.create_         |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.invoicein.edit_           |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ⬜        |
+| _document.processingorder.edit_     |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.purchaseorder.create_     |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.purchaseorder.edit_       |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.supply.create_            |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.supply.edit_              |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.paymentin.edit_           |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.paymentout.edit_          |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.cashin.edit_              |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.cashout.edit_             |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.move.create_              |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.move.edit_                |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.loss.create_              |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.loss.edit_                |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.enter.create_             |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.enter.edit_               |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.internalorder.create_     |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.internalorder.edit_       |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.inventory.create_         |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.inventory.edit_           |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+| _document.purchasereturn.edit_      |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.salesreturn.create_       |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.salesreturn.edit_         |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ⬜        |
+| _document.retaildemand.create_      |       ⬜       |      ⬜       |      ⬜      |       ✅        |          ✅          |        ⬜        |
+| _document.retaildemand.edit_        |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ⬜        |
+| _document.retailsalesreturn.edit_   |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.retaildrawercashin.edit_  |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.retaildrawercashout.edit_ |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
+| _document.emissionorder.edit_       |       ✅       |      ✅       |      ✅      |       ✅        |          ✅          |        ✅        |
+
+Подробнее о дополнительных протоколах читайте в разделе [Виджеты](#/developer-guide/widgets#2-vidzhety).
+
+### Блок сервисных протоколов (uses)
+
+Блок **uses** — опциональный. Предназначен для сервисных протоколов, используемых виджетом.
+На данный момент в нем можно указать следующие протоколы:
+
+* **good-folder-selector** позволяет виджетам решений переиспользовать существующий в МоемСкладе селектор группы
+  товаров. При этом виджет получает результат выбора пользователя. Параметры у протокола отсутствуют. Подробнее про
+  протокол можно прочитать в разделе [Селектор группы товаров](#/developer-guide/host-window-services#3-selektor-gruppy-tovarov).
+* **standard-dialogs** позволяет виджетам решений использовать стандартные диалоги, существующие в МоемСкладе. При
+  этом виджет получает результат выбора пользователя (кнопка, нажатая пользователем). Параметры у протокола отсутствуют.
+  Подробнее о протоколе читайте в разделе [Стандартные диалоги](#/developer-guide/host-window-services#3-standartnye-dialogi).
+* **navigation-service** позволяет виджетам решений осуществлять переход на другую страницу МоегоСклада и открывать
+  МойСклад в новой вкладке. Параметры у протокола отсутствуют. Подробнее о протоколе читайте в
+  разделе [Протокол навигации](#/developer-guide/host-window-services#3-protokol-navigacii).
+* **user-context** позволяет виджетам, главному окну и модальным окнам запросить у хост-окна одноразовый токен
+  контекста пользователя. Параметры у протокола отсутствуют. Протокол поддерживается в том числе виджетами на страницах
+  создания, например в точке встраивания `document.customerorder.create`. Подробнее о протоколе читайте в
+  разделе [Протокол контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+### Блок popups
+
+Служит для задания списка кастомных модальных окон, которые могут использоваться решением в виджетах (блок widgets) и
+главном окне (блок iframes).
+
+- Чтобы задать имя модального окна, используйте тег `name` (обязательный).
+- Чтобы задать адрес страницы, используйте тег `sourceUrl` (обязательный).
+
+Тег **uses** — опциональный. Предназначен для сервисных протоколов, используемых модальным окном. 
+Список поддерживаемых значений совпадает со списком [блока **uses** для виджетов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses).
+
+Атрибут **useContextKey** — опциональный, тип `boolean`, значение по умолчанию `true`. Он определяет, будет ли
+система при загрузке модального окна передавать в URL параметр `contextKey`. Если указано значение `false`, `contextKey`
+в URL не передается и контекст пользователя следует получать по
+[протоколу контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Подробнее о работе с кастомными модальными окнами читайте в
+разделе [Кастомные модальные окна](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna).
+
+> Блок popups с двумя модальными окнами, одно из которых использует протокол good-folder-selector
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <popups>
+    <popup>
+      <name>somePopup1</name>
+      <sourceUrl>https://example.com/dummy-app/popup-1.php</sourceUrl>
+    </popup>
+    <popup useContextKey="false">
+      <name>somePopup2</name>
+      <sourceUrl>https://example.com/dummy-app/popup-2.php</sourceUrl>
+      <uses>
+        <good-folder-selector/>
+        <user-context/>
+      </uses>
+    </popup>
+  </popups>
+</ServerApplication>
+```
+
+### Блок buttons
+
+Служит для задания списка кастомных кнопок, которые будут появляться на страницах МоегоСклада.
+
+- Чтобы задать имя кнопки, отправляемое на сервер при нажатии, используйте атрибут `button.name` (обязательный).
+- Чтобы задать заголовок кнопки, отображаемый в меню, используйте атрибут `button.title` (обязательный).
+- Чтобы задать точки встраивания (страницы), на которых нужно показывать кнопку, используйте тег `locations` (обязательный).
+- Чтобы на страницах списков отключить проверку наличия выбранных элементов и пропустить диалог подтверждения массовой операции, используйте атрибут `useSelected` (опциональный, по умолчанию `true`). При `false` выбранные элементы не учитываются.
+
+Сейчас доступны следующие точки встраивания:
+
+- **entity.counterparty.edit** — карточка Контрагента
+- **entity.counterparty.list** — список Контрагентов
+- **entity.product.edit** — карточка Товара
+- **entity.variant.edit** — карточка Модификации
+- **entity.service.edit** — карточка Услуги
+- **entity.bundle.edit** — карточка Комплекта
+- **entity.productfolder.edit** — карточка Группы товаров
+- **entity.good.list** — список Товаров и услуг
+- **document.customerorder.create** — новый документ Заказ покупателя (до первого сохранения)
+- **document.customerorder.edit** — документ Заказ покупателя
+- **document.customerorder.list** — список Заказов покупателей
+- **document.demand.edit** — документ Отгрузка
+- **document.demand.list** — список Отгрузок
+- **document.invoiceout.edit** — документ Счет покупателю
+- **document.invoiceout.list** — список Счетов покупателям
+- **document.purchaseorder.edit** — документ Заказ поставщику
+- **document.purchaseorder.list** — список Заказов поставщикам
+- **document.retaildemand.edit** — документ Розничная продажа
+- **document.retaildemand.list** — список Розничных продаж
+- **document.finance.list** — список Платежей
+- **document.invoicein.list** — список Счетов поставщиков
+- **document.supply.list** — список Приемок
+- **document.move.edit** — документ Перемещение
+- **document.move.list** — список Перемещений
+- **document.enter.edit** — документ Оприходование
+- **document.enter.list** — список Оприходований
+- **document.paymentin.edit** — документ Входящий платеж
+- **document.paymentout.edit** — документ Исходящий платеж
+- **document.salesreturn.list** — список Возвратов покупателей
+- **document.salesreturn.edit** — документ Возврат покупателя
+- **document.internalorder.list** — список Внутренних заказов
+- **document.internalorder.edit** — документ Внутренний заказ
+- **document.loss.list** — список Списаний
+- **document.loss.edit** — документ Списание
+- **document.emissionorder.edit** — документ Заказ кодов маркировки
+
+Подробнее о работе с кастомными кнопками читайте в разделе [Кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki).
+
+> Блок buttons с кнопками в Заказе покупателя, Заказе поставщику и списке Контрагентов
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <buttons>
+    <button name="button1" title="Отправить контрагенту">
+      <locations>
+        <document.customerorder.edit/>
+      </locations>
+    </button>
+    <button name="button2" title="Сформировать цифровую подпись">
+      <locations>
+        <document.customerorder.edit/>
+        <document.purchaseorder.edit/>
+      </locations>
+    </button>
+    <button name="button3" title="Проверить контрагентов">
+      <locations>
+        <entity.counterparty.list/>
+      </locations>
+    </button>
+    <button name="button4" title="Импортировать заказы" useSelected="false">
+      <locations>
+        <document.customerorder.list/>
+      </locations>
+    </button>
+  </buttons>
+</ServerApplication>
+```
+
+### Блок scenario
+
+Служит для задания списка действий в сценариях, которые можно будет выбрать на странице настройки сценария в МоемСкладе.
+
+- Чтобы задать имя действия, отправляемое на сервер при срабатывании сценария, используйте атрибут `action.name` (обязательный).
+- Чтобы задать название действия, отображаемое в МоемСкладе, используйте атрибут `action.title` (обязательный).
+
+Подробнее о работе со сценариями читайте в разделе [Действия в сценариях](#/developer-guide/scenario-actions#2-dejstviya-v-scenariyah).
+
+> Блок scenario с двумя действиями
+
+```xml
+<ServerApplication ...>
+  <vendorApi>...</vendorApi>
+  <access>...</access>
+  <scenario>
+    <action name="create_cdek_invoice" title="Создать накладную СДЭК"/>
+    <action name="send_telegram_message" title="Отправить сообщение в Telegram"/>
+  </scenario>
+</ServerApplication>
+```

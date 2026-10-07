@@ -1,8 +1,21 @@
 services:
-
-  app:
-    build: .
+  docs:
+    image: docker.infra.lognex/react-doc-engine:AS-4800-483503
     ports:
-      - 4567:4567
+      - "4567:4567"
+    environment:
+      DOC_CONTENT_ID: vendor-api
     volumes:
-      - .:/usr/src/app
+      - ./md:/src/assets/md
+      - ./config.json:/src/assets/config.json:ro
+      - ./hash-redirect-map.json:/src/assets/hash-redirect-map.json:ro
+      - ./site.json:/src/assets/site.json:ro
+      - ./images:/public/images:ro
+    command:
+      - sh
+      - -c
+      - |
+        node src/assets/config_generator.js &&
+        node build-notifications-index.js &&
+        npm run build-index &&
+        exec npm run serve -- --host 0.0.0.0 --port 4567

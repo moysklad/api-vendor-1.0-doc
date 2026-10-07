@@ -1,6 +1,6 @@
 services:
   docs:
-    image: docker.infra.lognex/react-doc-engine:AS-4800-482141
+    image: docker.infra.lognex/react-doc-engine:AS-4800-483503
     ports:
       - "4567:4567"
     environment:
@@ -11,5 +11,11 @@ services:
       - ./hash-redirect-map.json:/src/assets/hash-redirect-map.json:ro
       - ./site.json:/src/assets/site.json:ro
       - ./images:/public/images:ro
-      - ./scripts/serve-docs.sh:/serve-docs.sh:ro
-    command: ["sh", "/serve-docs.sh"]
+    command:
+      - sh
+      - -c
+      - |
+        node src/assets/config_generator.js &&
+        node build-notifications-index.js &&
+        npm run build-index &&
+        exec npm run serve -- --host 0.0.0.0 --port 4567

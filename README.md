@@ -30,8 +30,6 @@
 
 ## Локальный запуск
 
-Нужны Docker и доступ к `docker.infra.lognex`. Образ `AS-4800-482141` — тот же, которым собирается Vendor API.
-
 ```bash
 docker compose up
 ```

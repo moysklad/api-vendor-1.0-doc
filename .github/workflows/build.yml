@@ -11,48 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          ruby-version: '2.5.9'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          node-version: '22'
 
-      - name: Build
-        run: bundle exec middleman build --clean
+      - name: Install slugify
+        run: npm install --no-save --package-lock=false slugify@1.6.6
 
-      - name: Check documentation links
-        run: python3 scripts/check-doc-links.py --site-dir build
+      - name: Check internal links and legacy redirects
+        run: python3 scripts/build_hash_redirect_map.py --check
 
-  build:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '2.5.9'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-
-      - name: Build
-        run: bundle exec middleman build --clean
-
-      - name: Deploy
-        env:
-          SERVER_IP_ADDRESS: ${{ secrets.SERVER_IP_ADDRESS }}
-          SERVER_SSH_PORT: ${{ secrets.SERVER_SSH_PORT }}
-          APP_PREFIX: api-vendor
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-        run: |
-          eval "$(ssh-agent -s)"
-          mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          touch ~/.ssh/config && chmod 600 ~/.ssh/config
-          echo -e "Host ${SERVER_IP_ADDRESS}\n\tStrictHostKeyChecking no\nPort ${SERVER_SSH_PORT}\n" >> ~/.ssh/config
-          ssh-add - <<< "$DEPLOY_KEY"
-
-          ssh app@${SERVER_IP_ADDRESS} pwd
-          rsync -r --delete-after --quiet build/ app@${SERVER_IP_ADDRESS}:./${APP_PREFIX}
+      - name: Check external links
+        run: python3 scripts/check-doc-links.py --markdown-dir md

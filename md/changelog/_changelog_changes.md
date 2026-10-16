@@ -1,8 +1,9 @@
 ## Список последних изменений
 
-### 12-10-2026
+### 14-10-2026
 **Изменено**
 - В [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya) уточнено, что тег `permissions` для уровня доступа `custom` должен содержать хотя бы одно право.
+- [Протокол контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya) поддерживается в [окне чатов](#/developer-guide/iframes#3-okno-chatov): в [блоке iframes](#/developer-guide/app-descriptor#3-blok-iframes) для окна типа `chat` можно указать `<user-context/>`.
 
 ### 29-09-2026
 **Добавлено**

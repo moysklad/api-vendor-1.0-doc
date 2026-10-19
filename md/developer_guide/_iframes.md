@@ -69,7 +69,7 @@ js-скрипт `https://apps-api.moysklad.ru/js/ns/appstore/app/v1/moysklad-ifr
 
 1. Максимальная ширина: 1096 px (горизонтального скролла не должно быть)
 2. Вертикальный скролл реализуется самим разработчиком (автоматическое масштабирование высоты окна не поддерживается хост-окном)
-3. Не поддерживаются [сервисы хост-окна](#/developer-guide/host-window-services#2-servisy-host-okna), в том числе
+3. Из [сервисов хост-окна](#/developer-guide/host-window-services#2-servisy-host-okna) поддерживается только
    [протокол контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
 
 ### Мобильные приложения

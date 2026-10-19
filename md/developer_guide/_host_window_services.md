@@ -362,14 +362,15 @@
 
 ### Протокол контекста пользователя
 
-Позволяет виджетам, главному окну и модальным окнам решений получить у хост-окна одноразовый токен и обменять его на
+Позволяет виджетам, главному окну, окну чатов и модальным окнам решений получить у хост-окна одноразовый токен и обменять его на
 сервере разработчика на контекст текущего пользователя МоегоСклада.
 
-Чтобы виджет, главное окно или модальное окно начали поддерживать протокол контекста пользователя, в дескрипторе
-необходимо добавить в блок `uses` для `widgets`, `iframe` или `popup` тег: `<user-context/>`.
+Чтобы виджет, главное окно, окно чатов или модальное окно начали поддерживать протокол контекста пользователя,
+в дескрипторе необходимо добавить в блок `uses` для `widgets`, `iframe` (типы `main` и `chat`) или `popup`
+тег: `<user-context/>`.
 
-В [окне чатов](#/developer-guide/iframes#3-okno-chatov) и [мобильном окне](#/developer-guide/iframes#3-mobilnye-prilozheniya) протокол пока не поддерживается: тег
-`<user-context/>` для окон типа `chat` и `mobile` указать нельзя.
+В [мобильном окне](#/developer-guide/iframes#3-mobilnye-prilozheniya) протокол пока не поддерживается: тег `<user-context/>` для окна типа
+`mobile` указать нельзя.
 
 Атрибут `useContextKey="false"` отключает передачу параметра `contextKey` в URL загрузки. Подробнее
 смотрите в разделе [Блок iframes](#/developer-guide/app-descriptor#3-blok-iframes).
@@ -420,7 +421,7 @@ Window.postMessage), хост-окно выдает одноразовый то�
 1. Передавайте токен на сервер разработчика сразу после получения, в теле POST-запроса.
 1. Запрашивайте новый токен на каждый обмен: повторно обменять уже использованный токен нельзя.
 
-> Дескриптор решения, у которого главное окно и виджет используют протокол контекста пользователя
+> Дескриптор решения, у которого главное окно, окно чатов и виджет используют протокол контекста пользователя
 
 ```xml
 <ServerApplication xmlns="https://apps-api.moysklad.ru/xml/ns/appstore/app/v2"
@@ -429,6 +430,11 @@ Window.postMessage), хост-окно выдает одноразовый то�
                     https://apps-api.moysklad.ru/xml/ns/appstore/app/v2/application-v2.xsd">
   <iframes>
     <iframe type="main" sourceUrl="https://example.com/iframe.html" useContextKey="false">
+      <uses>
+        <user-context/>
+      </uses>
+    </iframe>
+    <iframe type="chat" sourceUrl="https://example.com/chat.html" useContextKey="false">
       <uses>
         <user-context/>
       </uses>

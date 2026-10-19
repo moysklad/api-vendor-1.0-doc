@@ -1,5 +1,6 @@
 {
   "title": "Документация разработчика решений",
   "contentId": "vendor-api",
-  "logo": "images/logo.svg"
+  "logo": "images/logo.svg",
+  "showCopyForLLM": false
 }

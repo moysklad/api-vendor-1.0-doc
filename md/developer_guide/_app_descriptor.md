@@ -152,18 +152,19 @@
 
 Пользовательские пермиссии
 
-| Название                         | Тег в дескрипторе             | Описание                                            |
-|----------------------------------|-------------------------------|-----------------------------------------------------|
-| Просмотр дашборда                | `<viewDashboard/>`            | Доступ к показателям dashboard                      |
-| Просмотр аудита                  | `<viewAudit/>`                | Доступ к истории действий                           |
-| Просмотр прибыльности            | `<viewSaleProfit/>`           | Прибыль по товарам, сотрудникам, контрагентам и пр. |
-| Просмотр прибыли и убытков       | `<viewProfitAndLoss/>`        | Используется в отчёте о прибыли                     |
-| Просмотр себестоимости и прибыли | `<viewProductCostAndProfit/>` | Цена закупки и себестоимость в документах           |
-| Просмотр CRM-показателей         | `<viewCompanyCRM/>`           | Показатели CRM для контрагентов                     |
-| Просмотр оборотов                | `<viewTurnover/>`             | Доступ к отчёту об оборотах                         |
-| Видеть остатки денег             | `<viewMoneyDashboard/>`       | Остатки на счетах и движение средств                |
-| Просматривать остатки по товарам | `<viewStockReport/>`          | Просматривать отчеты по остаткам                    |
-| Просматривать взаиморасчеты      | `<viewCustomerBalanceList/>`  | Просматривать отчеты по взаиморасчетам              |
+| Название                                  | Тег в дескрипторе                    | Описание                                                         |
+|-------------------------------------------|--------------------------------------|------------------------------------------------------------------|
+| Редактировать документы закрытого периода | `<editDocumentsOfRestrictedPeriod/>` | Снимает ограничение закрытого периода для операций с документами |
+| Просмотр дашборда                         | `<viewDashboard/>`                   | Доступ к показателям dashboard                                   |
+| Просмотр аудита                           | `<viewAudit/>`                       | Доступ к истории действий                                        |
+| Просмотр прибыльности                     | `<viewSaleProfit/>`                  | Прибыль по товарам, сотрудникам, контрагентам и пр.              |
+| Просмотр прибыли и убытков                | `<viewProfitAndLoss/>`               | Используется в отчёте о прибыли                                  |
+| Просмотр себестоимости и прибыли          | `<viewProductCostAndProfit/>`        | Цена закупки и себестоимость в документах                        |
+| Просмотр CRM-показателей                  | `<viewCompanyCRM/>`                  | Показатели CRM для контрагентов                                  |
+| Просмотр оборотов                         | `<viewTurnover/>`                    | Доступ к отчёту об оборотах                                      |
+| Видеть остатки денег                      | `<viewMoneyDashboard/>`              | Остатки на счетах и движение средств                             |
+| Просматривать остатки по товарам          | `<viewStockReport/>`                 | Просматривать отчеты по остаткам                                 |
+| Просматривать взаиморасчеты               | `<viewCustomerBalanceList/>`         | Просматривать отчеты по взаиморасчетам                           |
 
 Специальные пермиссии
 
@@ -187,11 +188,13 @@
 | Возвраты поставщикам                    | purchaseReturn            | OPERATION  | `<purchaseReturn>...</purchaseReturn>`                       |
 | Возвраты предоплат                      | prepaymentReturn          | OPERATION  | `<prepaymentReturn>...</prepaymentReturn>`                   |
 | Входящий платеж                         | paymentIn                 | OPERATION  | `<paymentIn>...</paymentIn>`                                 |
+| Вывод кодов маркировки из оборота        | retireOrder               | DICTIONARY | `<retireOrder>...</retireOrder>`                             |
 | Выданный отчет комиссионера             | commissionReportOut       | OPERATION  | `<commissionReportOut>...</commissionReportOut>`             |
 | Выплаты                                 | retailDrawerCashOut       | OPERATION  | `<retailDrawerCashOut>...</retailDrawerCashOut>`             |
 | Выполнение этапов                       | productionStageCompletion | DICTIONARY | `<productionStageCompletion>...</productionStageCompletion>` |
 | Договоры                                | contract                  | DICTIONARY | `<contract>...</contract>`                                   |
 | Единицы измерения                       | uom                       | BASE       | `<uom>...</uom>`                                             |
+| Заказ кодов маркировки                  | emissionOrder             | DICTIONARY | `<emissionOrder>...</emissionOrder>`                         |
 | Заказы на производство                  | processingOrder           | OPERATION  | `<processingOrder>...</processingOrder>`                     |
 | Заказы покупателей                      | customerOrder             | OPERATION  | `<customerOrder>...</customerOrder>`                         |
 | Заказы поставщикам                      | purchaseOrder             | OPERATION  | `<purchaseOrder>...</purchaseOrder>`                         |
@@ -239,6 +242,7 @@
 
 Примечания:
 
+* Право `editDocumentsOfRestrictedPeriod` снимает только ограничение закрытого периода. Оно не заменяет права на просмотр, создание, изменение, удаление и проведение документов: необходимые сущности и действия указываются отдельно.
 * Имеются два ограничения на сочетания пермиссий сущностей:
   * уровень доступа `<view/>` необходим, если есть другие уровни;
   * уровень доступа `<update/>` необходим, если требуется уровень `<delete/>`.
@@ -277,7 +281,8 @@
       <viewAudit/>
       <viewProductCostAndProfit/>
       <useOwnWebhooks/>
-      <useAllAttributeMetadata/>      
+      <editDocumentsOfRestrictedPeriod/>
+      <useAllAttributeMetadata/>
       <customerOrder>
         <view/>
         <create/>
@@ -290,6 +295,11 @@
         <view/>
         <create/>
       </company>
+      <emissionOrder>
+        <view/>
+        <create/>
+        <update/>
+      </emissionOrder>
     </permissions>
   </access>
 </ServerApplication>

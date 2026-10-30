@@ -1,5 +1,14 @@
 ## Список последних изменений
 
+### 27-10-2026
+**Добавлено**
+- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлено право редактировать документы закрытого периода: `editDocumentsOfRestrictedPeriod`.
+
+### 23-10-2026
+**Добавлено**
+- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлено право для работы с выводом кодов маркировки из оборота: `retireOrder`.
+- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлено право для работы с заказами кодов маркировки: `emissionOrder`.
+
 ### 14-10-2026
 **Изменено**
 - В [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya) уточнено, что тег `permissions` для уровня доступа `custom` должен содержать хотя бы одно право.

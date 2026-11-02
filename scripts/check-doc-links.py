@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Check documentation links in the built Middleman site."""
+"""Check links in the built site or external links in React Markdown."""
 
 from __future__ import annotations
 
 import argparse
 import re
 import sys
+import time
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
@@ -28,9 +29,16 @@ REQUEST_HEADERS = {
     "Accept": "*/*",
     "Accept-Encoding": "gzip",
 }
+REQUEST_ATTEMPTS = 2
 
 LINK_RE = re.compile(r"<\s*a\b.*?</a\s*>", re.IGNORECASE | re.DOTALL)
 HREF_RE = re.compile(r"\bhref\s*=\s*([\"'])(.*?)\1", re.IGNORECASE | re.DOTALL)
+MARKDOWN_LINK_RE = re.compile(
+    r"(?<!!)\[[^\]]+]\(\s*(https?://[^\s)]+)\s*(?:[\"'][^)]*[\"'])?\)",
+    re.IGNORECASE,
+)
+MARKDOWN_AUTOLINK_RE = re.compile(r"<(https?://[^>\s]+)>", re.IGNORECASE)
+FENCE_RE = re.compile(r"^\s*(```|~~~)")
 
 
 @dataclass
@@ -74,7 +82,12 @@ class ExternalLinkResult:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Check links in the built documentation site.")
-    parser.add_argument("--site-dir", default="build", help="Path to the built documentation output.")
+    source = parser.add_mutually_exclusive_group()
+    source.add_argument("--site-dir", help="Path to the built documentation output.")
+    source.add_argument(
+        "--markdown-dir",
+        help="Path to React Markdown. In this mode only external links are checked.",
+    )
     parser.add_argument("--link-timeout", type=int, default=12, help="Seconds per external HTTP request.")
     parser.add_argument(
         "--skip-external",
@@ -130,24 +143,65 @@ def encode_url_for_request(url: str) -> str:
 
 def request_url(url: str, timeout: int) -> Tuple[bool, Optional[str], Optional[str]]:
     request = Request(encode_url_for_request(url), headers=REQUEST_HEADERS)
-    try:
-        with urlopen(request, timeout=timeout) as response:
-            status = getattr(response, "status", 200)
-            if 200 <= status < 400:
-                return True, None, response.geturl()
-            return False, f"HTTP {status}", response.geturl()
-    except HTTPError as error:
-        final_url = getattr(error, "url", url)
-        if 300 <= error.code < 400:
-            return True, None, final_url
-        return False, f"HTTP {error.code}: {error.reason}", final_url
-    except (URLError, TimeoutError, OSError, UnicodeError) as error:
-        return False, str(error), url
+
+    for attempt in range(1, REQUEST_ATTEMPTS + 1):
+        try:
+            with urlopen(request, timeout=timeout) as response:
+                status = getattr(response, "status", 200)
+                if 200 <= status < 400:
+                    return True, None, response.geturl()
+                return False, f"HTTP {status}", response.geturl()
+        except HTTPError as error:
+            final_url = getattr(error, "url", url)
+            if 300 <= error.code < 400:
+                return True, None, final_url
+            return False, f"HTTP {error.code}: {error.reason}", final_url
+        except (URLError, TimeoutError, OSError, UnicodeError) as error:
+            if attempt == REQUEST_ATTEMPTS:
+                return False, str(error), url
+            time.sleep(attempt)
+
+    raise AssertionError("unreachable")
 
 
 def iter_links(content: str) -> Iterable[str]:
     for match in LINK_RE.finditer(content):
         yield match.group(0)
+
+
+def without_fenced_code(content: str) -> str:
+    visible_lines: List[str] = []
+    fence_marker: Optional[str] = None
+
+    for line in content.splitlines():
+        match = FENCE_RE.match(line)
+        if match:
+            marker = match.group(1)
+            if fence_marker is None:
+                fence_marker = marker
+            elif marker == fence_marker:
+                fence_marker = None
+            visible_lines.append("")
+            continue
+
+        visible_lines.append("" if fence_marker else line)
+
+    return "\n".join(visible_lines)
+
+
+def iter_markdown_external_links(content: str) -> Iterable[Tuple[str, str]]:
+    visible_content = without_fenced_code(content)
+
+    for match in MARKDOWN_LINK_RE.finditer(visible_content):
+        yield match.group(0), match.group(1)
+
+    for link in iter_links(visible_content):
+        href = extract_value(link, HREF_RE)
+        if href and urlparse(href).scheme.lower() in {"http", "https"}:
+            yield link, href
+
+    for match in MARKDOWN_AUTOLINK_RE.finditer(visible_content):
+        yield match.group(0), match.group(1)
 
 
 def extract_value(markup: str, pattern: re.Pattern[str]) -> Optional[str]:
@@ -433,9 +487,82 @@ def check_links_for_page(
     return errors, infos, len(links), skipped
 
 
+def check_markdown_links(
+    markdown_dir: Path,
+    args: argparse.Namespace,
+    external_allowlist: Set[str],
+) -> Tuple[List[CheckError], List[CheckInfo], int, int]:
+    errors: List[CheckError] = []
+    infos: List[CheckInfo] = []
+    external_cache: Dict[str, ExternalLinkResult] = {}
+    checked_links = 0
+    checked_files = 0
+
+    markdown_files = sorted(path for path in markdown_dir.rglob("*.md") if path.is_file())
+    if not markdown_files:
+        raise RuntimeError(f"No Markdown files found under: {markdown_dir}")
+
+    for markdown_file in markdown_files:
+        checked_files += 1
+        content = markdown_file.read_text(encoding="utf-8", errors="replace")
+
+        for markup, url in iter_markdown_external_links(content):
+            checked_links += 1
+            if args.skip_external:
+                continue
+            error, info = check_external_link(
+                url,
+                f"{markdown_file.relative_to(markdown_dir)}: {markup}",
+                args.link_timeout,
+                external_cache,
+                external_allowlist,
+            )
+            if error:
+                errors.append(error)
+            if info:
+                infos.append(info)
+            if args.verbose_check:
+                result = str(error) if error else (str(info) if info else "OK")
+                print(f"{markdown_file.relative_to(markdown_dir)}: {markup} - {result}")
+
+    log(f"Checked Markdown files: {checked_files}")
+    log(
+        "Checked external links: "
+        f"total={checked_links}, unique={len(external_cache)}, "
+        f"infos={len(infos)}, errors={len(errors)}"
+    )
+    return errors, infos, checked_links, checked_files
+
+
 def main() -> int:
     args = parse_args()
-    site_dir = Path(args.site_dir)
+    external_allowlist = load_external_allowlist(args.external_allowlist)
+
+    if args.markdown_dir:
+        markdown_dir = Path(args.markdown_dir)
+        if not markdown_dir.exists():
+            raise RuntimeError(f"Markdown directory does not exist: {markdown_dir}")
+        if not markdown_dir.is_dir():
+            raise RuntimeError(f"Markdown path is not a directory: {markdown_dir}")
+
+        log("Check external links in " + str(markdown_dir))
+        errors, infos, _, _ = check_markdown_links(markdown_dir, args, external_allowlist)
+
+        if infos:
+            print("INFO FOUND: " + str(len(infos)))
+            for info in infos:
+                print(info)
+
+        if not errors:
+            print("There is no errors found")
+            return 0
+
+        print("ERRORS FOUND: " + str(len(errors)))
+        for error in errors:
+            print(error)
+        return 1
+
+    site_dir = Path(args.site_dir or "build")
 
     if not site_dir.exists():
         raise RuntimeError(f"Site directory does not exist: {site_dir}")
@@ -449,7 +576,6 @@ def main() -> int:
     log("Check links in " + str(site_dir))
     page_cache: Dict[Path, Page] = {}
     external_cache: Dict[str, ExternalLinkResult] = {}
-    external_allowlist = load_external_allowlist(args.external_allowlist)
     errors: List[CheckError] = []
     infos: List[CheckInfo] = []
     total_links = 0

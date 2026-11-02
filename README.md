@@ -1,108 +1,67 @@
-[![Build Status](https://travis-ci.org/moysklad/api-vendor-1.0-doc.svg?branch=master)](https://travis-ci.org/moysklad/api-vendor-1.0-doc)
+# Документация Vendor API
 
-Запуск локальной версии документации
-------------
+Публичная версия: https://dev.moysklad.ru/doc/api/vendor/1.0/
 
-_Чтобы локально развернуть копию документации:_
+## Структура
 
-1. Установить Docker и Docker Compose, следуя инструкциям на https://docs.docker.com/ для своей ОС
-2. Склонировать репозиторий `https://github.com/moysklad/api-vendor-1.0-doc.git`
-3. В командной строке, перейдите в папку репозитория.
-4. Выполнить команды `docker compose build` и `docker compose up`
+- `md/` — тексты разделов. Файл раздела называется `_имя.md` и лежит в каталоге раздела.
+- `config.json` — оглавление. Поле `folderPath` указывает на файл в `md/`.
+- `site.json` — название документации и путь к логотипу.
+- `hash-redirect-map.json` — соответствие старых адресов Middleman новым адресам React-документации.
+- `images/` — изображения, на которые ссылаются файлы в `md/`.
 
-Локальная версия документации будет доступна по адресу `http://localhost:4567`
+## Новый раздел
 
-Основная версия документации доступна по адресу https://dev.moysklad.ru/doc/api/vendor/1.0/
+1. Создайте файл, например `md/new_section/_new_section.md`.
+2. Добавьте пункт в `config.json`:
 
-## Описание репозитория и структуры документации
+```json
+{
+  "title": "Название раздела",
+  "level": 1,
+  "folderPath": "./new_section/_new_section.md",
+  "children": []
+}
+```
 
-В ветке `master` находится версия документации, развернутая на продуктовом сервере. После мерджа измений в мастер необходимо запустить скрипт `deploy.sh`, чтобы сделанные изменения стали доступны пользователям.
+3. Положите картинки в `images/` и вставляйте их так: `![описание](./images/file.png)`.
 
-Для ручного запуска без Docker могут потребоваться зависимости:
+Вложенный пункт задаётся в `children` с `level` больше 1. `folderPath` может указывать на тот же файл, если несколько пунктов открывают разные заголовки одного раздела.
+
+## Локальный запуск
+
 ```bash
-sudo apt install ruby
-sudo apt install ruby-dev
-sudo apt install zlib1g-dev
-sudo gem install bundler -v '1.16.6'
-bundle install
+docker compose up
 ```
 
-В папке `source/includes` находятся .md-файлы документации.
+Документация откроется по адресу http://localhost:4567. Изменения в `md/` подхватываются без перезапуска. После правки `config.json` или заголовков, которые должны появиться в поиске, перезапустите контейнер.
 
-## Оформление нового раздела
+## Проверки
 
-Для добавления нового раздела необходимо создать .md-файл в папке `source/includes`. Имя файла должно начинаться с `_`. Для отображения нового раздела в боковом меню в `source/index.html.md` в раздел `includes` нужно прописать название нового раздела (должно совпадать с названием .md-файла).
+В GitHub Actions на pull request и после merge в `master` запускаются две проверки:
 
-Пример разметки страницы:
-```
-## Заголовок раздела
-
-### Название сущности
-Описание сущности
-
-#### Атрибуты сущности
-Описание аттрибутов сущности
-+ **attribute** - описание аттрибута
-
-#### Атрибуты доступные для фильтрации
-При необходимости
-
-#### Атрибуты доступные для сортировки
-При необходимости
-
-### Получить Сущности
-
-**Параметры**
-
-| Параметр | Описание  |
-| --- |:---|
-|parameter |  Описание параметра |
-
-> Получить Сущности
-
-> **`GET`**
-> http://example.com/api/moysklad/vendor/1.0/retaildemand/recalc
-
-> **Request**
-
-> Headers
-
-> Body
-
-> **Response**
-> 200 (application/json)
-
-Успешный запрос. Результат - JSON представление списка Сущностей
-
-JSON ответа от сервера
-
-```
-
-## Ссылки
-При добавлении ссылки учитывать:
- 1. Если ссылаемая страница находится на текущим хосте, то ссылку добавляем без хоста. Например, мы хотим добавить ссылку 'https://dev.moysklad.ru/doc/api/vendor/1.0/#lichnyj-kabinet-razrabotchika', в этом случае добавляем не полную ссылку, а только часть после хэша: '#lichnyj-kabinet-razrabotchika'
-2. Если же, ссылаемая страница находится на другом хосте, то добавляем полностью. Например: https://online.moysklad.ru/app/#apps
-
-При клике на ссылки, если ссылка без хоста (1-пункт) то страница открывается на текущей вкладке. Иначе (2-пункт), на новой вкладке. 
-Есть скрипт, который генерирует относительную ссылку также, как основной механизм. 
-Вставьте в файл [test_translit.rb](lib%2Ftest_translit.rb) нужные заголовки и запустите находясь в папке /lib ```ruby test_translit.rb```
-
-## Проверка битых ссылок
-
-Перед проверкой сначала соберите документацию:
 ```bash
-docker compose build
-docker compose run --rm app bundle exec middleman build --clean
-python3 scripts/check-doc-links.py --site-dir build
+npm install --no-save --package-lock=false slugify@1.6.6
+python3 scripts/build_hash_redirect_map.py --check
+python3 scripts/check-doc-links.py --markdown-dir md
 ```
 
-По умолчанию чекер также проверяет внешние ссылки `http/https`.
-Для быстрой локальной проверки используйте `--skip-external`.
-Внешние URL, проверенные вручную и недоступные из сети CI, можно добавить в
-`scripts/check-doc-links-allowlist.txt`. Они будут выведены как `INFO` и не
-будут прерывать проверку CI.
-Ссылки на API endpoint, например `https://api.moysklad.ru/api/remap/1.2` и
-`https://apps-api.moysklad.ru/api/vendor/1.0`, считаются справочными ссылками
-и не проверяются по HTTP.
+Первая сверяет внутренние ссылки и старые адреса. Вторая проверяет внешние ссылки `http` и `https` в Markdown. Для локального прогона без сети добавьте `--skip-external`.
 
-В GitHub Actions эта проверка запускается на `pull_request` до мержа.
+Адреса API `https://api.moysklad.ru/api/remap/1.2` и `https://apps-api.moysklad.ru/api/vendor/1.0` не проверяются по HTTP. Внешний адрес, который недоступен из CI, но проверен вручную, можно добавить в `scripts/check-doc-links-allowlist.txt`: он будет отмечен как `INFO`.
+
+Правила оформления Markdown (`test:md`) выполняются при сборке в [remap-deployer](https://git.company.lognex/moysklad/remap-deployer), а не в GitHub Actions.
+
+## Публикация
+
+Preview ветки собирается вручную в remap-deployer. Параметры: `api=vendor_10` и `branch` — имя ветки этого репозитория.
+
+[Запустить preview](https://git.company.lognex/moysklad/remap-deployer/-/pipelines/new?ref=master&var%5Bapi%5D=vendor_10&var%5Bbranch%5D=)
+
+Адрес результата: `https://moysklad.pages.lognex/remap-deployer/vendor_10/<ветка>/`.
+
+Production-выкладка тоже запускается вручную. Параметр `deploy_target=vendor-api`. `source_sha` можно не указывать: тогда берётся текущий `master`. Если к моменту выкладки `master` уже другой, запуск пропускается.
+
+[Запустить production](https://git.company.lognex/moysklad/remap-deployer/-/pipelines/new?ref=master&var%5Bdeploy_target%5D=vendor-api)
+
+Подробности обеих схем — в [README remap-deployer](https://git.company.lognex/moysklad/remap-deployer/-/blob/master/README.md).

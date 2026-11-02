@@ -1,4 +1,4 @@
 interface:
   display_name: "Check Doc Links"
-  short_description: "Check built documentation links"
-  default_prompt: "Use $check-doc-links to build the docs if needed and run the site-based link checker."
+  short_description: "Check Vendor API documentation links"
+  default_prompt: "Use $check-doc-links to verify Vendor API Markdown links and legacy redirects."

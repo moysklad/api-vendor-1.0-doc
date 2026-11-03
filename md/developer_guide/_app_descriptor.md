@@ -565,6 +565,9 @@
           <validation-feedback/>
         </change-handler>
       </supports>
+      <uses>
+        <standard-dialogs/>
+      </uses>
     </document.customerorder.create>
   
     <document.customerorder.edit useContextKey="false">
@@ -666,9 +669,11 @@
   МойСклад в новой вкладке. Параметры у протокола отсутствуют. Подробнее о протоколе читайте в
   разделе [Протокол навигации](#/developer-guide/host-window-services#3-protokol-navigacii).
 * **user-context** позволяет виджетам, главному окну, окну чатов и модальным окнам запросить у хост-окна одноразовый токен
-  контекста пользователя. Параметры у протокола отсутствуют. Протокол поддерживается в том числе виджетами на страницах
-  создания, например в точке встраивания `document.customerorder.create`. Подробнее о протоколе читайте в
+  контекста пользователя. Параметры у протокола отсутствуют. Подробнее о протоколе читайте в
   разделе [Протокол контекста пользователя](#/developer-guide/host-window-services#3-protokol-konteksta-polzovatelya).
+
+Все сервисные протоколы доступны во всех точках встраивания виджетов, в том числе на страницах создания, например в точке
+встраивания `document.customerorder.create`.
 
 ### Блок popups
 

@@ -1,12 +1,12 @@
 ## Список последних изменений
 
+### 05-11-2026
+**Добавлено**
+- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлено право «Редактирование курса валюты документа»: `editCurrencyRateOfDocument`.
+
 ### 27-10-2026
 **Добавлено**
 - В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлено право редактировать документы закрытого периода: `editDocumentsOfRestrictedPeriod`.
-
-### 26-10-2026
-**Добавлено**
-- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлено право «Редактирование курса валюты документа»: `editCurrencyRateOfDocument`.
 
 ### 23-10-2026
 **Добавлено**

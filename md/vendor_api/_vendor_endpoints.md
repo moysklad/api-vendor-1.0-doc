@@ -1,0 +1,723 @@
+## REST-эндпоинты на стороне разработчика решений
+
+Rest-эндпоинты на стороне разработчика позволяют МоемуСкладу передавать состояние установки решения для конкретного аккаунта, а также обрабатывать дополнительные события.
+
+Базовый URL REST-эндпоинтов со стороны разработчика указывется в блоке vendorApi [дескриптора решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya) и должен быть доступен по протоколу **HTTPS**.
+
+Список эндпоинтов, обязательных к реализации:
+
++ [Активация решения на аккаунте](#/vendor-api/vendor-endpoints#3-aktivaciya-resheniya-na-akkaunte) 
++ [Деактивация решения на аккаунте](#/vendor-api/vendor-endpoints#3-deaktivaciya-resheniya-na-akkaunte) 
+
+Следующие эндпоинты могут быть реализованы опционально для поддержки дополнительных функций:
+
++ [Проверка статуса активации решения в системе разработчика](#/vendor-api/vendor-endpoints#3-proverka-statusa-aktivacii-resheniya-v-sisteme-razrabotchika)
++ [Обработка дополнительных событий](#/vendor-api/vendor-endpoints#3-obrabotka-dopolnitelnyh-sobytij)
++ [Обработка нажатия на кастомную кнопку](#/vendor-api/vendor-endpoints#3-obrabotka-nazhatiya-na-kastomnuyu-knopku)
++ [Обработка действия в сценарии](#/vendor-api/vendor-endpoints#3-obrabotka-dejstviya-v-scenarii)
+
+Во всех запросах передаются следующие заголовки:
+
++ **Authorization**: `Bearer <token>` - заголовок авторизации c JWT-токеном
++ **X_Lognex_RequestId**: `<requestId>` - уникальный ID запроса. Отправляется повторно только при срабатывании механизма [Retry](#/vendor-api/retry#2-mehanizm-retry).
+
+### Активация решения на аккаунте
+
+Для обработки установки (возобновления) решения на аккаунте пользователя МоегоСклада требуется реализовать на сервере разработчика эндпоинт с адресом:
+
+`https://{endpointBase}/api/moysklad/vendor/1.0/apps/{appId}/{accountId}`
+
+Здесь:
+
+- **endpointBase** — URL, указанный в блоке vendorApi в [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya);
+- **appId** `UUID` — идентификатор решения в каталоге решений;
+- **accountId** `UUID` — идентификатор аккаунта в МоемСкладе.
+
+Запрос должен обрабатываться сервером идемпотентно. МойСклад может повторять/дублировать запросы в соответствии со своей внутренней логикой. Например, при работе механизма [Retry](#/vendor-api/retry#2-mehanizm-retry).
+
+<u>HTTP-метод</u>: **PUT**
+
+<u>Content-Type</u>: **application/json**
+
+В <u>теле запроса</u> передается:
+
++ **appUid** `String` решения. Может быть полезно видеть не только UUID решения, но и его *appUid*. Например, для разбора непонятных ситуаций и/или логирования. appUid состоит из _алиас\_решения.алиас\_разработчика_, например **egais-integration.moysklad**
++ **accountName** `String` — имя аккаунта, на который осуществляется подключение решения. Полезно видеть не
+ только UUID аккаунта, но и *accountName*.
++ **cause** `String` — причина активации. Возможные значения:
+    + **Install** — установка решения на аккаунт
+    + **Resume** — возобновление решения на аккаунте
+    + **TariffChanged** — изменение параметров подписки. Это событие вы получите в следующих случаях:
+      + смена тарифа на другой
+      + смена периода (например, с 1 месяца на 12 месяцев) в рамках одного и того же тарифа
+      + продление триала через ЛКВ
+      + переход с триального периода на платный
+    + **Autoprolongation** — автоматическое продление тарифа подписки
++ **access** `Array`— доступы к ресурсам, указанным в [дескрипторе решения](#/developer-guide/app-descriptor#3-blok-access). Сейчас из ресурсов для решений доступно 
+    только [JSON API 1.2](https://dev.moysklad.ru/doc/api/remap/1.2). Если ваше решение не требует доступа к API, то данный объект не придет. Не включается в тело для (`"Cause": "TariffChanged" | "Autoprolongation"`). Атрибуты:
+    + **resource** `String` — ресурс, к которому предоставлен доступ; 
+    + **scope** `Array` — какие права предоставлены на доступ данному ресурсу. На данный момент доступ предоставляется в двух вариантах — с правами администратора (`"scope": ["admin"]`) и явно указанным набором прав (`"scope": ["custom"]`);
+    + **permissions** `Array` — к каким объектам решение может получить доступ. Включается в тело только для (`"scope": ["custom"]`). Соответствует ответу в запросе на [получение списка прав Сотрудника](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#sushhnosti-sotrudnik-poluchit-informaciju-o-pravah-sotrudnika);
+    + **access_token** `String` — Bearer токен доступа к данному ресурсу. 
++ **subscription** — объект, описывающий параметры текущей подписки. Поля:
+    + **tariffId** `UUID` — идентификатор тарифа, на котором приобретена подписка;
+    + **trial** `Boolean` — признак пробной подписки;
+    + **tariffName** `String` — название тарифа (не обязательный);
+    + **expiryMoment** `String` — дата окончания подписки в формате [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) (не обязательный);
+    + **notForResale** `Boolean` — признак установки с аккаунта партнера МоегоСклада;
+    + **partner** `Boolean` — признак установки при помощи партнера МоегоСклада;
++ **additional** — опциональный объект, описывающий дополнительные параметры, необходимые для работы решения. Поля:
+    + **fiscalApi** — объект с параметрами для работы Fiscal API. Заполняется только для решений с блоком `fiscalApi` в [дескрипторе](#/developer-guide/app-descriptor#3-blok-fiscalapi);
+      + **id** `UUID` — идентификатор регистрации установки на аккаунт;
+      + **token** `String` — токен доступа, которым будут подписаны запросы от МоегоСклада к разработчику.
+
+В <u>теле ответа</u> ожидаем получить следующую JSON-структуру
+(обратите внимание, в ответе обязательно требуется 
+HTTP-заголовок `Content-Type: application/json`, смотрите примеры ниже):
+
++ **status** `String` — статус активации решения. Возможные значения: **Activating**, **SettingsRequired**, **Activated**.
+
+| Статус               | Описание                                                          | Дальнейшие действия разработчика                                                                                                                                               | Отображаемый пользователю статус решения в каталоге решений |
+|----------------------|-------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| **Activating**       | Решение в процессе активации                                      | Разработчик оповестит МойСклад по [эндпоинту обратного вызова об изменении статуса решения](#/vendor-api/moysklad-endpoints#3-izmenenie-statusa-resheniya-na-akkaunte) на **SettingsRequired** или **Activated** | Решение подключается                                        |
+| **SettingsRequired** | Требуется настройка решения пользователем                         | Разработчик оповестит МойСклад об изменении статуса на **Activated**, когда пользователь выполнит настройку решения через главный iframe                                       | Решение требует настройки                                   |
+| **Activated**        | Решение на аккаунте полностью активировано и начало свою работу   | Действий разработчика не требуется (не следует дополнительно делать вызов об изменении статуса решения)                                                                        | Решение подключено                                          |
+
+<u>HTTP status codes</u>:
+
++ **200 OK** — система разработчика успешно обработала запрос на активацию решения и вернула статус активации 
+решения на аккаунте в теле ответа.
++ статусы **4хх** обрабатываются как ошибка — система разработчика не смогла выполнить активацию решения.
+  для аккаунта. Решение остается не установленным на аккаунт и переходит в специальное состояние **ActivationFailed**.
++ **551 Lifecycle Processing Failed** (кастомный статус) — система разработчика не смогла выполнить активацию решения 
+  для аккаунта по независящим от пользователя причинам.  Решение остается не установленным на аккаунт и переходит в состояние **ActivationFailed**.
++ прочие статусы **5хх** обрабатываются как ошибка — запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
++ **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
+
+> Пример запроса при установке решения на аккаунт
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "dummyaccount",
+  "cause": "Install",
+  "access": [
+    {
+      "resource": "https://api.moysklad.ru/api/remap/1.2",
+      "scope": [
+        "admin"
+      ],
+      "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
+    }
+  ],
+  "subscription": {
+    "tariffId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "trial": true,
+    "tariffName": "Basic",
+    "expiryMoment": "2024-01-19T18:50:12+03:00",
+    "notForResale": false,
+    "partner": false
+  }
+}'
+```
+
+> Пример активации при возобновлении работы решения на аккаунте после поступления оплаты
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "dummyaccount",
+  "cause": "Resume",
+  "access": [
+    {
+      "resource": "https://api.moysklad.ru/api/remap/1.2",
+      "scope": [
+        "admin"
+      ],
+      "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
+    }
+  ],
+  "subscription": {
+    "tariffId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "trial": false,
+    "tariffName": "Basic",
+    "expiryMoment": "2024-01-19T18:50:12+03:00",
+    "notForResale": false,
+    "partner": false
+  }
+}'
+```
+
+> Пример активации решения с блоком permissions (гибким набором прав)
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "account-test",
+  "access": [
+    {
+      "resource": "https://api.moysklad.ru/api/remap/1.2",
+      "scope": [
+        "custom"
+      ],
+      "permissions": {
+        "supply": {
+          "view": "ALL",
+          "update": "ALL"
+        },
+        "viewDashboard": true,
+        "viewAudit": true
+      },
+      "access_token": "test-token"
+    }
+  ],
+  "cause": "Install"
+}'
+```
+
+> Пример запроса при изменении тарифа подписки
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "dummyaccount",
+  "cause": "TariffChanged",
+  "subscription": {
+    "tariffId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "trial": false,
+    "tariffName": "Basic",
+    "expiryMoment": "2024-01-19T18:50:12+03:00",
+    "notForResale": false,
+    "partner": false
+  }
+}'
+```
+
+> Пример запроса при автопродлении тарифа подписки
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "dummyaccount",
+  "cause": "Autoprolongation",
+  "subscription": {
+    "tariffId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "trial": false,
+    "tariffName": "Basic",
+    "expiryMoment": "2024-02-19T18:50:12+03:00",
+    "notForResale": false,
+    "partner": false
+  }
+}'
+```
+
+> Пример запроса при установке решения c Fiscal API на аккаунт
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "dummyaccount",
+  "cause": "Install",
+  "access": [
+    {
+      "resource": "https://api.moysklad.ru/api/remap/1.2",
+      "scope": [
+        "admin"
+      ],
+      "access_token": "6ab89be1ae6ff147755625ee8da948e42612233b"
+    }
+  ],
+  "additional": {
+    "fiscalApi": {
+      "id": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+      "token": "asdfasdfgaerdfgqawefgqaergqa"
+    }
+  }
+}'
+```
+
+Примеры ответов
+
+> Требуется настройка
+
+```json
+{
+  "status": "SettingsRequired"
+}
+```
+
+> Решение готово к работе
+
+```json
+{
+  "status": "Activated"
+}
+```
+
+### Деактивация решения на аккаунте
+
+Для обработки удаления (приостановки) решения на аккаунте пользователя МоегоСклада требуется реализовать на сервере разработчика эндпоинт с адресом:
+
+`https://{endpointBase}/api/moysklad/vendor/1.0/apps/{appId}/{accountId}`
+
+Здесь:
+
+- **endpointBase** — URL, указанный в блоке vendorApi в [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya);
+- **appId** `UUID` — идентификатор решения в каталоге решений;
+- **accountId** `UUID` — идентификатор аккаунта в МоемСкладе.
+
+Запрос должен обрабатываться сервером идемпотентно. МойСклад может повторять/дублировать запросы в соответствии со своей внутренней логикой. Например, при работе механизма [Retry](#/vendor-api/retry#2-mehanizm-retry).
+
+<u>HTTP-метод</u>: **DELETE**
+
+<u>Тело запроса</u>: 
+
++ **cause** `String` — причина деактивации. Возможные значения:
+    + **Uninstall** — удаление решения на аккаунте;
+    + **Suspend** (возможно только у платных решений) — приостановка работы решения на аккаунте. 
+
+**Важно:** обрабатывайте `Suspend` и `Uninstall` по-разному.
+
+`Suspend` означает временную приостановку решения. При обработке такого запроса нужно сохранить настройки и конфигурацию установки для последующего восстановления. После получения запроса на активацию с причиной `Resume` нужно вернуть статус **Activated**, если решение может продолжить работу с ранее сохраненными настройками. Возвращайте **SettingsRequired**, только когда пользователю действительно необходимо повторно настроить решение.
+
+`Uninstall` означает удаление решения с аккаунта. Оно может быть временным, например для переустановки решения, поэтому данные установки рекомендуется сохранить, чтобы пользователю не пришлось настраивать решение заново. Используйте этот вариант, если он соответствует вашей политике хранения данных. Подробнее — в разделе [Сохранение настроек при приостановке решения](#/vendor-api/suspend-and-resume#3-sohranenie-nastroek-pri-priostanovke-resheniya).
+
+<u>Тело ответа</u>: **пустое**
+
+<u>HTTP status codes</u>:
+
++ **200 OK** — решение успешно отключено (деактивировано) во внешней системе разработчика.
++ **204 No Content** — решение отключено или никогда не было подключено (никогда не активировалось) для данного аккаунта.
++ статусы **4хх** обрабатываются как ошибка — переход в состояние **DeactivationFailed**.
++ **551 Lifecycle Processing Failed** (кастомный статус) — внешняя система не смогла выполнить деактивацию решения для аккаунта (происходит переход в состояние **DeactivationFailed**).
++ прочие статусы **5хх** обрабатываются как ошибка — запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
++ **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, запускается механизм [Retry](#/vendor-api/retry#2-mehanizm-retry).
+
+> Пример деактивации решения при удалении с аккаунта
+
+```shell
+curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "account-test",
+  "cause": "Uninstall"
+}'
+```
+
+> Пример деактивации платного решения при приостановке решения на аккаунте (при отсутствии оплаты решения)
+
+```shell
+curl -X DELETE "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "account-test",
+  "cause": "Suspend"
+}'
+```
+
+> Response 200 (application/json). Успешный запрос
+
+```text
+<Response body is empty>
+```
+
+### Проверка статуса активации решения в системе разработчика
+
+Ранее этот эндпоинт был необходим для механизма Retry. В настоящий момент не используется.
+
+<u>HTTP-метод</u>: **GET**
+
+<u>Content-Type</u>: **application/json**
+
+<u>Тело запроса</u>: **пустое**
+
+<u>Тело ответа</u>:
+
++ **status** `String` — статус активации решения. Возможные значения: **Activating**, **SettingsRequired**, **Activated**.
+
+<u>HTTP status codes</u>:
+
++ **200 OK** — решение активировано или активируется во внешней системе. Статус активации — в теле ответа;
++ **404 Not Found** — решение отключено или никогда не было подключено для данного аккаунта.
+
+> Пример запроса на проверку статуса активации
+
+```shell
+curl "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..."
+```
+
+> Response 200 (application/json). Успешный запрос
+
+```json
+{
+  "status": "SettingsRequired"
+}
+```
+
+### Обработка дополнительных событий
+
+URL для приёма дополнительных событий -
+
+`https://{endpointBase}/api/vendor/1.0/apps/{appId}/{accountId}/event`
+
+МойСклад отправит на эндпоинт **PUT** запрос аналогичный запросу активации решения с блоком permissions.
+
+Обратите внимание - поле `subscription` и `access_token` в этом случае не заполняются.
+
+Полный список дополнительных событий см. в разделе [уведомления о дополнительных событиях](#/vendor-api/additional-events#2-uvedomleniya-o-dopolnitelnyh-sobytiyah).
+
+> Пример события при изменении набора прав
+
+```shell
+curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/event" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "appUid": "example-app.example-vendor",
+  "accountName": "account-test",
+  "access": [
+    {
+      "resource": "https://api.moysklad.ru/api/remap/1.2",
+      "scope": [
+        "custom"
+      ],
+      "permissions": {
+        "supply": {
+          "view": "ALL",
+          "update": "ALL"
+        },
+        "viewDashboard": true,
+        "viewAudit": true
+      }
+    }
+  ],
+  "cause": "PermissionsChanged"
+}'
+```
+
+### Обработка нажатия на кастомную кнопку
+
+Эндпоинт необходим для обработки нажатия на кастомную кнопку на странице документа МоегоСклада и должен иметь адрес: 
+
+`https://{endpointBase}/api/moysklad/vendor/1.0/apps/{appId}/{accountId}/button`
+
+Здесь:
+
+- **endpointBase** — URL, указанный в блоке vendorApi в [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya);
+- **appId** `UUID` — идентификатор решения в каталоге решений;
+- **accountId** `UUID` — идентификатор аккаунта в МоемСкладе.
+
+<u>HTTP-метод</u>: **POST**
+
+<u>Content-Type</u>: **application/json**
+
+В <u>теле запроса</u> передается:
+
++ **buttonName** `String` — имя кнопки, указанное в дескрипторе решения;  
++ **extensionPoint** `String` — точка встраивания (страница документа);
++ **objectId** `UUID` — идентификатор сущности или документа, в котором кнопка была нажата. Соответствует коду uuidHref в JSON API. Не заполняется для точек встраивания `*.create, *.list`;
++ **selected** `Object[]` — список сущностей или документов в списке, для которых кнопка была нажата. Не заполняется для точек встраивания `*.create, *.edit`, а также для `*.list` с атрибутом у кнопки `useSelected=false`. Поля:
+    + **id** `UUID` — идентификатор сущности или документа. Соответствует коду uuidHref в JSON API;
+    + **type** `String` — тип сущности или документа. Соответствует наименованию (коду) сущности в JSON API. 
++ **user** — объект, описывающий данные текущего пользователя. Поля:
+  + **employeeId** `UUID` — идентификатор сотрудника, который нажал кнопку;
+  + **role** `String` — название роли сотрудника. Возможные значения: `admin`, `cashier`, `worker`, `individual`. 
+
+В <u>теле ответа</u> ожидаем получить следующую JSON-структуру:
+
++ **action** `String` — действие, которое нужно произвести в МоемСкладе. Список возможных значений приведен в таблице ниже.
++ **async** `Boolean` — признак асинхронного процесса (опционально, по умолчанию `false`). При установке в `true` требуется заполнить `params.asyncProcessId` 
+  и по окончании операции вызвать эндпоинт [Завершения асинхронной обработки нажатия на кастомную кнопку](#/vendor-api/moysklad-endpoints#3-zavershenie-asinhronnoj-obrabotki-nazhatiya-na-kastomnuyu-knopku)
+  на стороне МоегоСклада.
++ **params** — опциональный объект, описывающий дополнительные параметры действия. Поля:
+  + **asyncProcessId** `UUID` — идентификатор асинхронного процесса (опционально). Обязателен для `async=true`;
+  + **text** `String` — текст уведомления (опционально). Обязателен для `action=showNotification`;
+  + **url** `String` — URL для открытия (опционально). Обязателен для `action=navigateTo`;
+  + **popupName** `String` — имя открываемого кастомного модального окна (опционально). Обязателен для `action=showPopup`;
+  + **popupParameters** `Any` — параметры, передаваемые кастомному модальному окну (опционально). Используется для `action=showPopup`;
++ **error** — опциональный объект, описывающий ошибку, которую необходимо отобразить пользователю. Поля:
+  + **code** `Integer` — опциональный код ошибки;
+  + **errorMessage** `String` — сообщение, отображаемое пользователю.
+
+Список возможных значений **action**:
+
+| Имя                  | Действие                                                      | Дополнительные параметры                   | 
+|----------------------|---------------------------------------------------------------|--------------------------------------------|
+| **showNotification** | Отобразить всплывающее уведомление                            | `params.text`                              |
+| **navigateTo**       | Открыть URL в новом окне                                      | `params.url`                               |
+| **showPopup**        | Открыть [кастомное модальное окно](#/developer-guide/custom-popups#2-kastomnye-modalnye-okna) | `params.popupName, params.popupParameters` |
+
+<u>HTTP status codes</u>:
+
++ **200 OK** — система разработчика успешно обработала запрос нажатия на кнопку и вернула одно из действий в теле ответа.
++ **400 Bad Request** — система разработчика не смогла обработать запрос по причине невалидных данных, например недопустимых полей в документе. 
+В этом случае требуется заполнить в теле ответа объект `error` (со строковым полем `errorMessage` и опциональным полем `code`).
++ **5хх** — сетевая ошибка или система разработчика не смогла обработать запрос: на странице МоегоСклада выводится сообщение об ошибке с просьбой повторить действие позже.
++ **Прочие статусы** обрабатываются как ошибка — на странице МоегоСклада выводится сообщение об ошибке.
++ **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, обработка будет считаться неуспешной и пользователю будет выведена ошибка. 
+Если ожидается, что обработка будет длиться дольше 5 сек, рекомендуется использовать асинхронную обработку нажатия (см. параметр `async` выше). 
+
+Если решению для обработки действия требуется дополнительная информация о сотруднике, то ее необходимо запросить в JSON API через эндпоинты [получения информации о сотруднике](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sotrudnik-poluchit-sotrudnika) или [получения прав сотрудника](https://dev.moysklad.ru/doc/api/remap/1.2/dictionaries/#suschnosti-sotrudnik-poluchit-informaciu-o-prawah-sotrudnika).
+При обработке действия в списках нужно учитывать массовый характер операции и [ограничения](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-ogranicheniq) JSON API.
+
+> Пример запроса при нажатии кнопки в Заказе покупателя
+
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "buttonName": "button1",
+  "extensionPoint": "document.customerorder.edit",
+  "objectId": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
+  "user": {
+    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "role": "admin"
+  }
+}'
+```
+
+> Пример запроса при нажатии кнопки в списке Контрагентов
+
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "buttonName": "button1",
+  "extensionPoint": "entity.counterparty.list",
+  "selected": [
+    {
+      "id": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
+      "type": "counterparty"
+    },
+    {
+      "id": "123c5489-6a17-48b7-9fe5-b2000eb80765",
+      "type": "counterparty"
+    }
+  ],
+  "user": {
+    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "role": "admin"
+  }
+}'
+```
+
+Примеры ответов
+
+> Отобразить уведомление 
+
+```json
+{
+  "action": "showNotification",
+  "params": {
+    "text": "Документ успешно подписан"
+  }
+}
+```
+
+> Открыть новую страницу
+
+```json
+{
+  "action": "navigateTo",
+  "params": {
+    "url": "https://api.whatsapp.com/send/?phone=%2B79127775533"
+  }
+}
+```
+
+> Открыть модальное окно
+
+```json
+{
+  "action": "showPopup",
+  "params": {
+    "popupName": "somePopup",
+    "popupParameters": "hello"
+  }
+}
+```
+
+> Вернуть ошибку (Response code 400)
+
+```json
+{
+  "error": {
+    "code": 1234,
+    "errorMessage": "Необходимо заполнить склад в документе Перемещение"
+  }
+}
+```
+
+Примеры ответов для асинхронной обработки
+
+> Отобразить уведомление
+
+```json
+{
+  "action": "showNotification",
+  "async": true,
+  "params": {
+    "text": "Документ подписывается. Ожидайте уведомления...",
+    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7"
+  }
+}
+```
+
+> Открыть новую страницу
+
+```json
+{
+  "action": "navigateTo",
+  "async": true,
+  "params": {
+    "url": "https://test.vendor.com/showStatus/072f8047-83dc-4374-8c22-73e965ffebf7",
+    "asyncProcessId": "072f8047-83dc-4374-8c22-73e965ffebf7"
+  }
+}
+```
+
+> Открыть модальное окно
+
+```json
+{
+  "action": "showPopup",
+  "async": true,
+  "params": {
+    "popupName": "statusPopup",
+    "popupParameters": {
+      "processId": "0a20070f-2fb6-4857-9158-3d7971531517"
+    },
+    "asyncProcessId": "0a20070f-2fb6-4857-9158-3d7971531517"
+  }
+}
+```
+
+Подробнее о работе с кастомными кнопками читайте в разделе [Кастомные кнопки](#/developer-guide/custom-buttons#2-kastomnye-knopki).
+
+### Обработка действия в сценарии
+
+Эндпоинт необходим для обработки действий из сценариев МоегоСклада и должен иметь адрес: 
+
+`https://{endpointBase}/api/moysklad/vendor/1.0/apps/{appId}/{accountId}/scenario`
+
+Здесь:
+
+- **endpointBase** — URL, указанный в блоке vendorApi в [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya);
+- **appId** `UUID` — идентификатор решения в каталоге решений;
+- **accountId** `UUID` — идентификатор аккаунта в МоемСкладе.
+
+<u>HTTP-метод</u>: **POST**
+
+<u>Content-Type</u>: **application/json**
+
+В <u>теле запроса</u> передается:
+
++ **actionName** `String` — имя действия, указанное в дескрипторе решения;  
++ **objectId** `UUID` — идентификатор объекта (сущности или документа), для которого сработал сценарий. Соответствует коду uuidHref в JSON API;
++ **objectType** `String` — тип объекта. Соответствует наименованию (коду) сущности в JSON API.
++ **actionType** `String` — тип события. Значения:
+  + `ADD` - объект создан
+  + `MODIFY` - объект изменен
+  + `CHANGE_STATUS` - статус объекта изменен
+  + `OVERDUE` - срок объекта истек
+  + `CHANGE_PRODUCTION_STATE` - состояние производства изменено 
+
+В <u>теле ответа</u> ожидаем получить следующую JSON-структуру:
+
++ **error** — опциональный объект, описывающий ошибку, которую необходимо отобразить пользователю. Поля:
+  + **code** `Integer` — опциональный код ошибки;
+  + **errorMessage** `String` — сообщение, отображаемое пользователю.
+
+<u>HTTP status codes</u>:
+
++ **200 OK** — система разработчика успешно обработала действие. Тело ответа не ожидается.
++ **400 Bad Request** — система разработчика не смогла обработать действие по зависящей от пользователя причине, например в случае некорректного состояния. 
+В этом случае требуется заполнить в теле ответа объект `error` (со строковым полем `errorMessage` и опциональным полем `code`).
++ **5хх** — сетевая ошибка или система разработчика не смогла обработать запрос: будет выполнена еще одна попытка в соответствии с [политиками Retry](#/vendor-api/retry#2-mehanizm-retry).
++ **Таймаут обработки:** если система разработчика не ответила в течение **10 сек**, обработка будет считаться неуспешной и будет выполнена еще одна попытка.
+
+> Пример запроса при срабатывании сценария на создание Заказа покупателя
+
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/scenario" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "actionName": "send_telegram_message",
+  "actionType": "ADD",
+  "objectId": "624b7f4d-9c1b-11ef-0a83-18f5000001ec",
+  "objectType": "CustomerOrder"
+}'
+```
+
+Примеры ответов
+
+> Response 200 (application/json). Успешный запрос
+
+```text
+<Response body is empty>
+```
+
+> Response 400 (application/json).
+
+```json
+{
+  "error": {
+    "code": 1244,
+    "errorMessage": "Не найден контакт для контрагента"
+  }
+}
+```
+
+Подробнее о работе со сценариями читайте в разделе [Действия в сценариях](#/developer-guide/scenario-actions#2-dejstviya-v-scenariyah).

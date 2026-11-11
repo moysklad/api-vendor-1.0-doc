@@ -47,7 +47,7 @@
 </ServerApplication>
 ```
 
-> Дескриптор для серверных решений с виджетом в карточке Контрагента
+> Дескриптор для серверных решений с виджетами на страницах создания и редактирования Контрагента
 
 ```xml
 
@@ -66,6 +66,12 @@
     <scope>admin</scope>
   </access>
   <widgets>
+    <entity.counterparty.create>
+      <sourceUrl>https://example.com/dummy-app/widget.php</sourceUrl>
+      <height>
+        <fixed>150px</fixed>
+      </height>
+    </entity.counterparty.create>
     <entity.counterparty.edit>
       <sourceUrl>https://example.com/dummy-app/widget.php</sourceUrl>
       <height>

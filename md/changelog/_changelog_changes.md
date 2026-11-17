@@ -1,6 +1,6 @@
 ## Список последних изменений
 
-### 11-11-2026
+### 16-11-2026
 **Добавлено**
 - В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлена новая точка встраивания [виджетов](#/developer-guide/widgets#2-vidzhety): карточка нового Контрагента (`entity.counterparty.create`).
 

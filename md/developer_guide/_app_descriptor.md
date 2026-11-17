@@ -478,6 +478,7 @@
 
 Сейчас доступны следующие точки расширения:
 
+- **entity.counterparty.create** — карточка нового Контрагента (до первого сохранения)
 - **entity.counterparty.edit** — карточка Контрагента
 - **entity.product.edit** — карточка Товара
 - **entity.variant.edit** — карточка Модификации
@@ -542,13 +543,24 @@
 
 Виджет можно скрыть, установив `height/fixed = 0px`. Скрытые виджеты не отображаются на страницах МоегоСклада, но могут использовать все допустимые [протоколы](#/developer-guide/widgets#3-protokoly-vidzhetov).
 
-> Блок widgets с точками расширения в карточке Контрагента и документе Заказ покупателя
+> Блок widgets с точками расширения на страницах создания и редактирования Контрагента и в документе Заказ покупателя
 
 ```xml
 <ServerApplication ...>
   <vendorApi>...</vendorApi>
   <access>...</access>
   <widgets>
+    <entity.counterparty.create>
+      <sourceUrl>https://example.com/dummy-app/widget-counterparty.php</sourceUrl>
+      <height>
+        <fixed>200px</fixed>
+      </height>
+      <uses>
+        <good-folder-selector/>
+        <standard-dialogs/>
+      </uses>
+    </entity.counterparty.create>
+
     <entity.counterparty.edit>
       <sourceUrl>https://example.com/dummy-app/widget-counterparty.php</sourceUrl>
       <height>
@@ -614,6 +626,7 @@
 
 | Точка встраивания                   | open-feedback | save-handler | dirty-state | change-handler | validation-feedback | update-provider |
 |:------------------------------------|:-------------:|:------------:|:-----------:|:--------------:|:-------------------:|:---------------:|
+| _entity.counterparty.create_        |       ⬜       |      ⬜       |      ⬜      |       ⬜        |          ⬜          |        ⬜        |
 | _entity.counterparty.edit_          |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
 | _entity.product.edit_               |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |
 | _entity.variant.edit_               |       ✅       |      ✅       |      ✅      |       ⬜        |          ⬜          |        ⬜        |

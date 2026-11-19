@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 19-11-2026
+**Добавлено**
+- В разделе «Визуальные материалы решения» появился подраздел [Промты для генерации визуальных материалов](#/getting-started/visual-material-prompts#2-promty-dlya-generacii-vizualnyh-materialov) с готовыми промтами для создания иконки, изображений страницы решения, обложки видео и баннера.
+
 ### 16-11-2026
 **Добавлено**
 - В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлена новая точка встраивания [виджетов](#/developer-guide/widgets#2-vidzhety): карточка нового Контрагента (`entity.counterparty.create`).

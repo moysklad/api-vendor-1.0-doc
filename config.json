@@ -58,6 +58,12 @@
         "level": 2,
         "folderPath": "./getting_started/_user_manual.md",
         "children": []
+      },
+      {
+        "title": "Промты для генерации визуальных материалов",
+        "level": 2,
+        "folderPath": "./getting_started/_visual_material_prompts.md",
+        "children": []
       }
     ]
   },

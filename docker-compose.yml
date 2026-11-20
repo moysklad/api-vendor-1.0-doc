@@ -1,7 +1,6 @@
 services:
   docs:
-#    image: docker.infra.lognex/react-doc-engine:1.20-release
-    image: docker.infra.lognex/react-doc-engine:AS-4708-498510
+    image: docker.infra.lognex/react-doc-engine:1.20-release
     ports:
       - "4567:4567"
     volumes:

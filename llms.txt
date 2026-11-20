@@ -1,0 +1,27 @@
+# Документация разработчика решений МоегоСклада
+
+> Документация для разработчиков, которые создают, интегрируют и публикуют решения для МоегоСклада. Здесь описаны Vendor API 1.0, XML-дескриптор решения и подключение к JSON API 1.2.
+
+- **Назначение API.** Vendor API 1.0 используется для управления жизненным циклом решения и получения контекста пользователя. JSON API 1.2 используется для чтения и изменения данных аккаунта, например товаров и заказов.
+- **Типы решений.** Серверные решения используют Vendor API и могут получать доступ к JSON API 1.2. Решения телефонии интегрируются по Phone API. Приватное решение — вариант размещения серверного решения.
+- **Авторизация.** Запросы Vendor API в обе стороны подписываются JWT с алгоритмом `HS256` и ключом `secretKey`. Для JSON API 1.2 используется отдельный Bearer-токен `access_token`, который МойСклад передаёт серверному решению при активации на аккаунте.
+
+## Создание решения
+
+- [Быстрый старт](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/getting_started/_quick_start.md): порядок действий от черновика до публикации.
+- [Типы решений](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/app_types/_app_types.md): выбор типа и проверка доступных функций.
+- [Дескриптор решения](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/developer_guide/_app_descriptor.md): структура XML и настройки интеграции.
+- [Примеры дескрипторов](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/developer_guide/_descriptor_examples.md): готовые XML-примеры для серверных решений и телефонии.
+
+## Эндпоинты и токены
+
+- [Аутентификация Vendor API](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/vendor_api/_authentication.md): подпись и проверка JWT для каждого направления запросов.
+- [Эндпоинты разработчика](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/vendor_api/_vendor_endpoints.md): обработка активации, деактивации, событий и действий на сервере решения.
+- [Эндпоинты МоегоСклада](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/vendor_api/_moysklad_endpoints.md): запросы от сервера решения для работы со статусом установки и контекстом пользователя.
+- [Токен JSON API 1.2](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/developer_guide/_json_api_token_access.md): получение, использование и отзыв `access_token`.
+
+## Встраивание в интерфейс МоегоСклада
+
+- [Окна (iframes)](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/developer_guide/_iframes.md): подключение главного окна, окна чатов и мобильного окна решения.
+- [Виджеты](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/developer_guide/_widgets.md): встраивание виджета на страницу и работа с протоколами виджетов.
+- [Кастомные кнопки](https://raw.githubusercontent.com/moysklad/api-vendor-1.0-doc/master/md/developer_guide/_custom_buttons.md): добавление кнопок в карточки и списки и обработка нажатий.

@@ -10,6 +10,7 @@ services:
       - ./hash-redirect-map.json:/src/assets/hash-redirect-map.json:ro
       - ./site.json:/src/assets/site.json:ro
       - ./images:/public/images:ro
+      - ./llms.txt:/public/doc/api/vendor/1.0/llms.txt:ro
     command:
       - sh
       - -c

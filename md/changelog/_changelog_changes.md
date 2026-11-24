@@ -2,7 +2,7 @@
 
 ### 23-11-2026
 **Добавлено**
-- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлена новая точка встраивания для [Глобальных кастомных кнопок](#/developer-guide/custom-buttons#3-globalnye-knopki): `global.application.menu`.
+- В [блок `buttons` дескриптора](#/developer-guide/app-descriptor#3-blok-buttons) добавлена точка встраивания для [Глобальных кастомных кнопок](#/developer-guide/custom-buttons#3-globalnye-knopki): `global.application.menu`.
 
 ### 19-11-2026
 **Добавлено**

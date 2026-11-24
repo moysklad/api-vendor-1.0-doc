@@ -1,5 +1,13 @@
 ## Список последних изменений
 
+### 19-11-2026
+**Добавлено**
+- В разделе «Визуальные материалы решения» появился подраздел [Промты для генерации визуальных материалов](#/getting-started/visual-material-prompts#2-promty-dlya-generacii-vizualnyh-materialov) с готовыми промтами для создания иконки, изображений страницы решения, обложки видео и баннера.
+
+### 16-11-2026
+**Добавлено**
+- В [дескриптор решений](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлена новая точка встраивания [виджетов](#/developer-guide/widgets#2-vidzhety): карточка нового Контрагента (`entity.counterparty.create`).
+
 ### 06-11-2026
 **Добавлено**
 - В [дескрипторе решения](#/developer-guide/app-descriptor#2-deskriptor-resheniya) добавлена поддержка [сервисных протоколов](#/developer-guide/app-descriptor#3-blok-servisnyh-protokolov-uses) [good-folder-selector](#/developer-guide/host-window-services#3-selektor-gruppy-tovarov), [standard-dialogs](#/developer-guide/host-window-services#3-standartnye-dialogi) и [navigation-service](#/developer-guide/host-window-services#3-protokol-navigacii) для [виджетов на страницах создания документов](#/developer-guide/widgets#3-protokoly-vidzhetov) (точки встраивания `document.*.create`).

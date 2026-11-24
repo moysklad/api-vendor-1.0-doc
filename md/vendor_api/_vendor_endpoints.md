@@ -440,7 +440,7 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 
 ### Обработка нажатия на кастомную кнопку
 
-Эндпоинт необходим для обработки нажатия на кастомную кнопку на странице документа МоегоСклада и должен иметь адрес: 
+МойСклад отправляет запрос на этот адрес при нажатии локальной или глобальной кастомной кнопки.
 
 `https://{endpointBase}/api/moysklad/vendor/1.0/apps/{appId}/{accountId}/button`
 
@@ -454,12 +454,14 @@ curl -X PUT "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489
 
 <u>Content-Type</u>: **application/json**
 
+Запросы подписываются JWT по [правилам аутентификации исходящих запросов](#/vendor-api/authentication#3-ishodyashie-zaprosy-mojsklad-razrabotchik).
+
 В <u>теле запроса</u> передается:
 
 + **buttonName** `String` — имя кнопки, указанное в дескрипторе решения;  
-+ **extensionPoint** `String` — точка встраивания (страница документа);
-+ **objectId** `UUID` — идентификатор сущности или документа, в котором кнопка была нажата. Соответствует коду uuidHref в JSON API. Не заполняется для точек встраивания `*.create, *.list`;
-+ **selected** `Object[]` — список сущностей или документов в списке, для которых кнопка была нажата. Не заполняется для точек встраивания `*.create, *.edit`, а также для `*.list` с атрибутом у кнопки `useSelected=false`. Поля:
++ **extensionPoint** `String` — точка встраивания кнопки. Для глобальной кнопки используется `global.application.menu`;
++ **objectId** `UUID` — идентификатор сущности или документа, в котором кнопка была нажата. Соответствует коду uuidHref в JSON API. Не заполняется для точек встраивания `global.application.menu, *.create, *.list`;
++ **selected** `Object[]` — список сущностей или документов в списке, для которых кнопка была нажата. Не заполняется для точек встраивания `global.application.menu, *.create, *.edit`, а также для `*.list` с атрибутом у кнопки `useSelected=false`. Поля:
     + **id** `UUID` — идентификатор сущности или документа. Соответствует коду uuidHref в JSON API;
     + **type** `String` — тип сущности или документа. Соответствует наименованию (коду) сущности в JSON API. 
 + **user** — объект, описывающий данные текущего пользователя. Поля:
@@ -543,6 +545,24 @@ curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c548
       "type": "counterparty"
     }
   ],
+  "user": {
+    "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
+    "role": "admin"
+  }
+}'
+```
+
+> Пример запроса при нажатии глобальной кнопки
+
+```shell
+curl -X POST "https://example.com/dummy-app/api/moysklad/vendor/1.0/apps/5f3c5489-6a17-48b7-9fe5-b2000eb807fe/f088b0a7-9490-4a57-b804-393163e7680f/button" \
+-H "Content-Type: application/json" \
+-H "Accept: application/json" \
+-H "Authorization: Bearer ..." \
+-H "X_Lognex_RequestId: ..." \
+-d '{
+  "buttonName": "import-orders",
+  "extensionPoint": "global.application.menu",
   "user": {
     "employeeId": "23ca69d4-2657-40c4-8ba1-6ce24ddeac2e",
     "role": "admin"

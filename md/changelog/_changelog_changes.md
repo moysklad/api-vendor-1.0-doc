@@ -1,5 +1,9 @@
 ## Список последних изменений
 
+### 23-11-2026
+**Добавлено**
+- В [блок `buttons` дескриптора](#/developer-guide/app-descriptor#3-blok-buttons) добавлена точка встраивания для [Глобальных кастомных кнопок](#/developer-guide/custom-buttons#3-globalnye-knopki): `global.application.menu`.
+
 ### 19-11-2026
 **Добавлено**
 - В разделе «Визуальные материалы решения» появился подраздел [Промты для генерации визуальных материалов](#/getting-started/visual-material-prompts#2-promty-dlya-generacii-vizualnyh-materialov) с готовыми промтами для создания иконки, изображений страницы решения, обложки видео и баннера.
